@@ -75,6 +75,10 @@ function init(){
     document.getElementById("harness-filter").value="";
     hiddenGroups.clear();
     document.querySelectorAll(".grp-btn").forEach(b=>b.classList.add("active"));
+    sortCol=null;sortDir=1;page=0;filterAndRender();
+  });
+  document.getElementById("btn-cost").addEventListener("click",()=>sortBy("score_per_cost","higher"));
+  document.getElementById("btn-speed").addEventListener("click",()=>sortBy("score_per_minute","higher"));
   document.getElementById("btn-eff").addEventListener("click",()=>sortBy("token_efficiency","higher"));
   filterAndRender();
 }
