@@ -1,0 +1,95 @@
+name: Scrape Coding Agents Leaderboard
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: '0 0 * * 0'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scrape-coding-agents
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run scraper
+        run: |
+          mkdir -p data docs
+          python main.py
+
+      - name: Build GitHub Pages site
+        run: python build_site.py
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git add data docs
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push updates
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: update coding-agents leaderboard ($(date -u +%Y-%m-%d))"
+          git push
+
+      - name: Upload artifacts (no changes)
+        if: steps.changes.outputs.changed == 'false'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coding-agents-data
+          path: |
+            data/artificial_analysis_coding_agents.csv
+            data/artificial_analysis_coding_agents.xlsx
+          if-no-files-found: warn
+
+  deploy-pages:
+    needs: scrape
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
