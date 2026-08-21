@@ -4,6 +4,10 @@ The page is a Next.js App Router app. The full leaderboard dataset is embedded
 in the React Server Components (RSC) flight payload as ``self.__next_f.push([1,"..."])``
 chunks. We extract the ``benchmarkRows`` array directly from that payload — no
 browser/JS rendering required. This is faster, lighter, and works on any system.
+
+Note: the main ``benchmarkRows`` array contains 9 RSC cycle-references
+(``$d:props:...:rows:N``) that point to a separate top-level ``"rows":[...]``
+array. Both sources are merged (deduped by ``id``) so all agents are captured.
 """
 
 import json
@@ -67,18 +71,61 @@ def _extract_benchmark_rows(html: str) -> list[dict]:
     return []
 
 
+def _extract_rows_array(html: str) -> list[dict]:
+    """Fallback: some agents live in a separate top-level ``"rows":[...]`` array."""
+    pushes = re.findall(r'self\.__next_f\.push\(\[1,"(.*?)"\]\)', html)
+    rows: list[dict] = []
+    for block in pushes:
+        decoded = block.encode().decode("unicode_escape")
+        for m in re.finditer(r'"rows":\s*\[', decoded):
+            start = m.end() - 1
+            depth = 0
+            end = start
+            for i, ch in enumerate(decoded[start:], start):
+                if ch == "[":
+                    depth += 1
+                elif ch == "]":
+                    depth -= 1
+                    if depth == 0:
+                        end = i + 1
+                        break
+            try:
+                arr = json.loads(decoded[start:end])
+            except json.JSONDecodeError:
+                continue
+            if isinstance(arr, list):
+                for item in arr:
+                    if isinstance(item, dict) and "agentName" in item and "indexScore" in item:
+                        rows.append(item)
+    return rows
+
+
+def _merge_rows(*sources: list) -> list[dict]:
+    """Concatenate agent dicts, dedupe by ``id`` (keeps first occurrence)."""
+    seen: set[str] = set()
+    merged: list[dict] = []
+    for source in sources:
+        for row in source:
+            if not isinstance(row, dict):
+                continue
+            rid = row.get("id")
+            if rid and rid in seen:
+                continue
+            if rid:
+                seen.add(rid)
+            merged.append(row)
+    return merged
+
+
 def parse_agents(html: str) -> list[dict]:
     """Parse the raw HTML into a flat list of normalized agent records."""
-    rows = _extract_benchmark_rows(html)
-    if not rows:
-        logger.error("No benchmarkRows found in page payload")
+    merged = _merge_rows(_extract_benchmark_rows(html), _extract_rows_array(html))
+    if not merged:
+        logger.error("No agent rows found in page payload")
         return []
 
     agents = []
-    for row in rows:
-        if not isinstance(row, dict):
-            # RSC $d reference placeholder — skip
-            continue
+    for row in merged:
         evals = {e["datasetIndexName"]: e for e in row.get("evals", [])}
         mean = row.get("mean") or {}
 
