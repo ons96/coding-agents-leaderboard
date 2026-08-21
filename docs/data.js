@@ -5,4 +5,4 @@ const HIGHLIGHTS={"index_score": "higher", "deepswe": "higher", "terminal_bench_
 const COL_GROUPS={"identity": ["harness", "model", "creator", "provider"], "core": ["index_score", "deepswe", "terminal_bench_v2_1", "swe_atlas_qna"], "cost_time": ["cost_per_task_usd", "avg_execution_time_sec", "mean_steps", "total_tokens", "input_tokens", "output_tokens", "cache_hit_rate"], "derived": ["score_per_cost", "score_per_1000_tokens", "score_per_minute", "score_per_sec", "cost_per_score", "token_efficiency"]};
 const GROUP_ORDER=["identity", "core", "cost_time", "derived"];
 const GROUP_LABELS={"identity": "Identity", "core": "Benchmarks", "cost_time": "Cost & Time", "derived": "Derived Value"};
-const META={"url": "https://artificialanalysis.ai/agents/coding-agents", "scrape_date": "2026-08-21T17:04:47.855468+00:00", "row_count": 55, "column_count": 16};
+const META={"url": "https://artificialanalysis.ai/agents/coding-agents", "scrape_date": "2026-08-21T19:51:33.854542+00:00", "row_count": 55, "column_count": 16};
