@@ -2,11 +2,19 @@
 
 Derived columns let you compare cost / time / score across harnesses and models:
 
+Cost-aware:
 - score_per_cost        = index_score / cost_per_task   (higher = better value)
 - score_per_1000_tokens = index_score / (total_tokens/1000)
-- score_per_minute      = index_score / (avg_exec_time/60)
 - cost_per_score        = cost_per_task / index_score   (lower = better value)
-- token_efficiency      = total_tokens / avg_exec_time  (throughput)
+
+Time / perf ratio (the index-score-to-execution-time family):
+- score_per_minute      = index_score / (avg_exec_time/60)   [Score/min]
+- score_per_sec         = index_score / avg_exec_time         [Score/sec, raw ratio]
+
+Throughput:
+- token_efficiency      = total_tokens / avg_exec_time
+                          NOTE: total_tokens includes cache reads (cache-hit rate is
+                          ~97%), so this is not pure generation speed.
 """
 
 import json
@@ -36,19 +44,22 @@ DERIVED_LABELS = {
     "input_tokens": "Input Tokens",
     "output_tokens": "Output Tokens",
     "cache_hit_rate": "Cache Hit Rate",
-    # derived
+    # cost-aware derived
     "score_per_cost": "Score/$",
     "score_per_1000_tokens": "Score/1k Tok",
     "score_per_minute": "Score/min",
     "cost_per_score": "$/Score",
-    "token_efficiency": "Tokens/s",
+    # index/time ratio
+    "score_per_sec": "Score/sec",
+    # throughput
+    "token_efficiency": "Tokens/s (incl. cache)",
 }
 
 HIGHLIGHT = {
     "index_score": "higher", "deepswe": "higher", "terminal_bench_v2_1": "higher",
     "swe_atlas_qna": "higher", "cost_per_task_usd": "lower",
     "avg_execution_time_sec": "lower", "total_tokens": "lower",
-    "score_per_cost": "higher", "score_per_minute": "higher",
+    "score_per_cost": "higher", "score_per_minute": "higher", "score_per_sec": "higher",
     "cost_per_score": "lower", "token_efficiency": "higher",
 }
 
@@ -58,7 +69,7 @@ COL_GROUPS = {
     "cost_time": ["cost_per_task_usd", "avg_execution_time_sec", "mean_steps",
                   "total_tokens", "input_tokens", "output_tokens", "cache_hit_rate"],
     "derived": ["score_per_cost", "score_per_1000_tokens", "score_per_minute",
-                "cost_per_score", "token_efficiency"],
+                "score_per_sec", "cost_per_score", "token_efficiency"],
 }
 GROUP_ORDER = ["identity", "core", "cost_time", "derived"]
 GROUP_LABELS = {"identity": "Identity", "core": "Benchmarks",
@@ -82,6 +93,8 @@ def add_derived(df: pd.DataFrame) -> pd.DataFrame:
         lambda r: _safe_div(r["index_score"], (r["total_tokens"] or 0) / 1000), axis=1)
     df["score_per_minute"] = df.apply(
         lambda r: _safe_div(r["index_score"], (r["avg_execution_time_sec"] or 0) / 60), axis=1)
+    df["score_per_sec"] = df.apply(
+        lambda r: _safe_div(r["index_score"], r["avg_execution_time_sec"]), axis=1)
     df["cost_per_score"] = df.apply(
         lambda r: _safe_div(r["cost_per_task_usd"], r["index_score"]), axis=1)
     df["token_efficiency"] = df.apply(
@@ -109,7 +122,6 @@ def save_outputs(df: pd.DataFrame, output_dir: Path, csv_name: str, xlsx_name: s
     with pd.ExcelWriter(xlsx_path, engine="openpyxl") as writer:
         df.to_excel(writer, index=False, sheet_name="Coding Agents")
 
-    # Machine-readable metadata + chart-ready JSON for the site
     meta_path = output_dir / "scrape_meta.json"
     meta_path.write_text(json.dumps(meta, indent=2))
 
