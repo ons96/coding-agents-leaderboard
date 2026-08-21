@@ -74,11 +74,7 @@ function init(){
     document.getElementById("search").value="";
     document.getElementById("harness-filter").value="";
     hiddenGroups.clear();
-    document.querySelectorAll(".grp-btn").forEach(b=>b.classList.remove("active"));
-    sortCol=null;sortDir=1;page=0;filterAndRender();
-  });
-  document.getElementById("btn-cost").addEventListener("click",()=>sortBy("score_per_cost","higher"));
-  document.getElementById("btn-speed").addEventListener("click",()=>sortBy("score_per_minute","higher"));
+    document.querySelectorAll(".grp-btn").forEach(b=>b.classList.add("active"));
   document.getElementById("btn-eff").addEventListener("click",()=>sortBy("token_efficiency","higher"));
   filterAndRender();
 }
@@ -89,11 +85,11 @@ function sortBy(col,dir){sortCol=col;sortDir=HIGHLIGHTS[col]==="lower"?-1:1;page
 function buildGroupToggles(){
   const el=document.getElementById("group-toggles");
   GROUP_ORDER.forEach(g=>{
-    const b=document.createElement("button");b.className="grp-btn";
+    const b=document.createElement("button");b.className="grp-btn active";
     b.textContent=GROUP_LABELS[g];b.dataset.group=g;
     b.addEventListener("click",()=>{
-      if(hiddenGroups.has(g)){hiddenGroups.delete(g);b.classList.remove("active")}
-      else{hiddenGroups.add(g);b.classList.add("active")}
+      if(hiddenGroups.has(g)){hiddenGroups.delete(g);b.classList.add("active")}
+      else{hiddenGroups.add(g);b.classList.remove("active")}
       buildHeader();renderRows();
     });
     el.appendChild(b);
