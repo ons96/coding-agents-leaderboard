@@ -5,4 +5,4 @@ const HIGHLIGHTS={"intelligence_index": "higher", "headline_value": "higher", "i
 const COL_GROUPS={"identity": ["slug", "model", "short_name", "creator", "creator_slug", "release_date", "size_class", "is_reasoning", "is_open_weights"], "core": ["intelligence_index", "headline_value"], "cost_time": ["cost_per_task_usd", "cost_input_usd", "cost_output_usd", "cost_reasoning_usd", "avg_execution_time_sec", "output_tokens", "answer_tokens", "reasoning_tokens", "eval_cost_usd"], "derived": ["score_per_cost", "score_per_minute", "score_per_sec", "cost_per_score", "tokens_per_sec", "score_per_1k_output_tokens"]};
 const GROUP_ORDER=["identity", "core", "cost_time", "derived"];
 const GROUP_LABELS={"identity": "Identity", "core": "Capability", "cost_time": "Cost & Time", "derived": "Derived Value"};
-const META={"url": "https://artificialanalysis.ai/models/capabilities/agentic", "scrape_date": "2026-08-26T22:24:36.242887+00:00", "row_count": 28, "column_count": 21};
+const META={"url": "https://artificialanalysis.ai/models/capabilities/agentic", "scrape_date": "2026-08-26T22:51:56.798258+00:00", "row_count": 28, "column_count": 21};
