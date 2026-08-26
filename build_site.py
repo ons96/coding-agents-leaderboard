@@ -6,6 +6,7 @@ for the first tab, docs/<id>.html for the rest) so the single-page design is
 preserved per dataset. Pages link to each other via a small nav bar.
 """
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -70,6 +71,21 @@ def _render(tab_id: str, block: dict) -> Path:
         f'["sb-{i}", "{col}"]' for i, (_label, col) in enumerate(pres["sort_buttons"])
     ) + "\n]"
 
+    js = []
+    js.append("const TABLE_DATA=" + json.dumps(block["rows"]) + ";")
+    js.append("const COLUMNS=" + json.dumps(block["columns"]) + ";")
+    js.append("const LABELS=" + json.dumps(block["labels"]) + ";")
+    js.append("const HIGHLIGHTS=" + json.dumps(block["highlights"]) + ";")
+    js.append("const COL_GROUPS=" + json.dumps(block["col_groups"]) + ";")
+    js.append("const GROUP_ORDER=" + json.dumps(block["group_order"]) + ";")
+    js.append("const GROUP_LABELS=" + json.dumps(block["group_labels"]) + ";")
+    js.append("const META=" + json.dumps(block["meta"]) + ";")
+    js_text = "\n".join(js) + "\n"
+    # Content-addressed cache bust: the URL changes only when the data changes,
+    # so the Pages CDN / browser cache is refreshed on every real update and
+    # reused when the data is unchanged. Prevents stale data.js on mobile.
+    js_hash = hashlib.sha1(js_text.encode()).hexdigest()[:8]
+
     replace = {
         "__TITLE__": pres["title"],
         "__ENTITY_LABEL__": json.dumps(pres["entity"]),
@@ -81,25 +97,15 @@ def _render(tab_id: str, block: dict) -> Path:
         "__FOOTER_URL__": pres["footer_url"],
         "__SORT_BUTTONS__": sort_btns_html,
         "__SORT_ACTIONS__": sort_actions,
-        "__SCRIPT_SRC__": f"{tab_id}.data.js",
+        "__SCRIPT_SRC__": f"{tab_id}.data.js?v={js_hash}",
     }
     for tok, val in replace.items():
         html = html.replace(tok, val)
 
-    js = []
-    js.append("const TABLE_DATA=" + json.dumps(block["rows"]) + ";")
-    js.append("const COLUMNS=" + json.dumps(block["columns"]) + ";")
-    js.append("const LABELS=" + json.dumps(block["labels"]) + ";")
-    js.append("const HIGHLIGHTS=" + json.dumps(block["highlights"]) + ";")
-    js.append("const COL_GROUPS=" + json.dumps(block["col_groups"]) + ";")
-    js.append("const GROUP_ORDER=" + json.dumps(block["group_order"]) + ";")
-    js.append("const GROUP_LABELS=" + json.dumps(block["group_labels"]) + ";")
-    js.append("const META=" + json.dumps(block["meta"]) + ";")
-
     first = tab_id == payload["tabs"][0]["id"]
     out_name = "index.html" if first else f"{tab_id}.html"
     out_path = SITE_DIR / out_name
-    (SITE_DIR / f"{tab_id}.data.js").write_text("\n".join(js) + "\n")
+    (SITE_DIR / f"{tab_id}.data.js").write_text(js_text)
     out_path.write_text(html)
     print(f"Built {out_path} ({len(block['rows'])} rows)")
     return out_path
