@@ -32,12 +32,18 @@ def load_config(path: Path | None = None) -> dict:
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
     )
+    config.setdefault("agentic_target_url", "https://artificialanalysis.ai/models/capabilities/agentic")
+    config.setdefault("agentic_output_csv_name", "artificial_analysis_agentic_models.csv")
+    config.setdefault("agentic_output_xlsx_name", "artificial_analysis_agentic_models.xlsx")
 
     env_map = {
         "target_url": "AA_TARGET_URL",
         "output_dir": "AA_OUTPUT_DIR",
         "output_csv_name": "AA_OUTPUT_CSV",
         "output_xlsx_name": "AA_OUTPUT_XLSX",
+        "agentic_target_url": "AA_AGENTIC_URL",
+        "agentic_output_csv_name": "AA_AGENTIC_CSV",
+        "agentic_output_xlsx_name": "AA_AGENTIC_XLSX",
     }
     for key, env_var in env_map.items():
         val = os.environ.get(env_var)

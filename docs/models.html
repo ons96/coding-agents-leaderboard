@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>__TITLE__</title>
+<title>Agentic Models Leaderboard</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:13px;background:#f8f9fa;color:#212529}
@@ -37,15 +37,15 @@ tbody tr:hover{background:#e7f5ff}
 </head>
 <body>
 <div class="header">
-__NAV__
-<h1>__TITLE__</h1>
+<div class="nav"><a class="nav-link" href="index.html">agents</a></div>
+<h1>Agentic Models Leaderboard</h1>
 <div class="meta" id="meta-info">Loading...</div>
 </div>
 <div class="controls">
-<input type="text" id="search" placeholder="__FILTER_PLACEHOLDER__">
-<select id="__FILTER_ID__"><option value="">All</option></select>
+<input type="text" id="search" placeholder="Search model, creator...">
+<select id="creator-filter"><option value="">All</option></select>
 <button id="btn-reset">Reset</button>
-__SORT_BUTTONS__
+<button id="sb-0" class="sort-btn">Score / $</button><button id="sb-1" class="sort-btn">Score / min</button><button id="sb-2" class="sort-btn">Output Tok/s</button>
 <div class="group-toggles" id="group-toggles"></div>
 </div>
 <div class="table-wrap">
@@ -53,30 +53,34 @@ __SORT_BUTTONS__
 </div>
 <div class="paging" id="paging"></div>
 <div class="footer">
-Data from <a href="__FOOTER_URL__">artificialanalysis.ai</a> |
+Data from <a href="https://artificialanalysis.ai/models/capabilities/agentic">artificialanalysis.ai</a> |
 Updated: <span id="update-date">-</span>
 </div>
-<script src="__SCRIPT_SRC__"></script>
+<script src="models.data.js"></script>
 <script>
 const PS=100;
 let filtered=[...TABLE_DATA],sortCol=null,sortDir=1,hiddenGroups=new Set(),page=0;
-const TXT_COLS=new Set(__TXT_COLS__);
-const FILTER_FIELD=__FILTER_FIELD__;
-const SORT_ACTIONS=__SORT_ACTIONS__;
+const TXT_COLS=new Set(["short_name", "model", "creator"]);
+const FILTER_FIELD="creator";
+const SORT_ACTIONS=[
+["sb-0", "score_per_cost"],
+["sb-1", "score_per_minute"],
+["sb-2", "tokens_per_sec"]
+];
 
 function init(){
-  document.getElementById("meta-info").textContent=META.row_count+" "+__ENTITY_LABEL__+" | "+META.scrape_date.slice(0,10)+" | artificialanalysis.ai";
+  document.getElementById("meta-info").textContent=META.row_count+" "+"models"+" | "+META.scrape_date.slice(0,10)+" | artificialanalysis.ai";
   document.getElementById("update-date").textContent=META.scrape_date.slice(0,10);
-  const hf=document.getElementById("__FILTER_ID__");
+  const hf=document.getElementById("creator-filter");
   [...new Set(TABLE_DATA.map(r=>r[FILTER_FIELD]).filter(Boolean))].sort().forEach(h=>{
     const o=document.createElement("option");o.value=h;o.textContent=h;hf.appendChild(o);
   });
   buildGroupToggles();
   document.getElementById("search").addEventListener("input",debounce(filterAndRender,200));
-  document.getElementById("__FILTER_ID__").addEventListener("change",filterAndRender);
+  document.getElementById("creator-filter").addEventListener("change",filterAndRender);
   document.getElementById("btn-reset").addEventListener("click",()=>{
     document.getElementById("search").value="";
-    document.getElementById("__FILTER_ID__").value="";
+    document.getElementById("creator-filter").value="";
     hiddenGroups.clear();
     document.querySelectorAll(".grp-btn").forEach(b=>b.classList.add("active"));
     sortCol=null;sortDir=1;page=0;filterAndRender();
@@ -133,7 +137,7 @@ function buildHeader(){
 
 function filterAndRender(){
   const q=document.getElementById("search").value.toLowerCase();
-  const hF=document.getElementById("__FILTER_ID__").value;
+  const hF=document.getElementById("creator-filter").value;
   filtered=TABLE_DATA.filter(r=>{
     if(q){
       const h=[...TXT_COLS].map(c=>r[c]).filter(Boolean).join(" ").toLowerCase();

@@ -8,8 +8,11 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:13px;background:#f8f9fa;color:#212529}
 .header{background:#1a1a2e;color:#fff;padding:16px 24px;position:sticky;top:0;z-index:100}
-.header h1{font-size:18px;font-weight:600}
+.header h1{font-size:18px;font-weight:600;display:inline-block}
 .header .meta{font-size:11px;color:#adb5bd;margin-top:4px}
+.nav{float:right;font-size:12px;margin-top:2px}
+.nav a{color:#8ecae6;text-decoration:none;margin-left:12px}
+.nav a:hover{text-decoration:underline}
 .controls{background:#fff;border-bottom:1px solid #dee2e6;padding:8px 24px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;position:sticky;top:56px;z-index:99}
 .controls input{padding:6px 10px;border:1px solid #ced4da;border-radius:4px;font-size:13px;width:280px}
 .controls select{padding:6px 8px;border:1px solid #ced4da;border-radius:4px;font-size:13px}
@@ -34,16 +37,15 @@ tbody tr:hover{background:#e7f5ff}
 </head>
 <body>
 <div class="header">
+<div class="nav"><a class="nav-link" href="models.html">models</a></div>
 <h1>Coding Agents Leaderboard</h1>
 <div class="meta" id="meta-info">Loading...</div>
 </div>
 <div class="controls">
 <input type="text" id="search" placeholder="Search harness, model, creator...">
-<select id="harness-filter"><option value="">All harnesses</option></select>
+<select id="harness-filter"><option value="">All</option></select>
 <button id="btn-reset">Reset</button>
-<button id="btn-cost">Cost vs Score</button>
-<button id="btn-speed">Speed vs Score</button>
-<button id="btn-eff">Token Efficiency</button>
+<button id="sb-0" class="sort-btn">Cost vs Score</button><button id="sb-1" class="sort-btn">Speed vs Score</button><button id="sb-2" class="sort-btn">Token Efficiency</button>
 <div class="group-toggles" id="group-toggles"></div>
 </div>
 <div class="table-wrap">
@@ -54,17 +56,23 @@ tbody tr:hover{background:#e7f5ff}
 Data from <a href="https://artificialanalysis.ai/agents/coding-agents">artificialanalysis.ai</a> |
 Updated: <span id="update-date">-</span>
 </div>
-<script src="data.js"></script>
+<script src="agents.data.js"></script>
 <script>
 const PS=100;
 let filtered=[...TABLE_DATA],sortCol=null,sortDir=1,hiddenGroups=new Set(),page=0;
-const TXT_COLS=new Set(["harness","model","creator","provider"]);
+const TXT_COLS=new Set(["harness", "model", "creator", "provider"]);
+const FILTER_FIELD="harness";
+const SORT_ACTIONS=[
+["sb-0", "score_per_cost"],
+["sb-1", "score_per_minute"],
+["sb-2", "token_efficiency"]
+];
 
 function init(){
-  document.getElementById("meta-info").textContent=META.row_count+" agents | "+META.scrape_date.slice(0,10)+" | artificialanalysis.ai";
+  document.getElementById("meta-info").textContent=META.row_count+" "+"agents"+" | "+META.scrape_date.slice(0,10)+" | artificialanalysis.ai";
   document.getElementById("update-date").textContent=META.scrape_date.slice(0,10);
   const hf=document.getElementById("harness-filter");
-  [...new Set(TABLE_DATA.map(r=>r.harness).filter(Boolean))].sort().forEach(h=>{
+  [...new Set(TABLE_DATA.map(r=>r[FILTER_FIELD]).filter(Boolean))].sort().forEach(h=>{
     const o=document.createElement("option");o.value=h;o.textContent=h;hf.appendChild(o);
   });
   buildGroupToggles();
@@ -77,9 +85,9 @@ function init(){
     document.querySelectorAll(".grp-btn").forEach(b=>b.classList.add("active"));
     sortCol=null;sortDir=1;page=0;filterAndRender();
   });
-  document.getElementById("btn-cost").addEventListener("click",()=>sortBy("score_per_cost","higher"));
-  document.getElementById("btn-speed").addEventListener("click",()=>sortBy("score_per_minute","higher"));
-  document.getElementById("btn-eff").addEventListener("click",()=>sortBy("token_efficiency","higher"));
+  SORT_ACTIONS.forEach(([id,col])=>{
+    document.getElementById(id).addEventListener("click",()=>sortBy(col,"higher"));
+  });
   filterAndRender();
 }
 
@@ -132,10 +140,10 @@ function filterAndRender(){
   const hF=document.getElementById("harness-filter").value;
   filtered=TABLE_DATA.filter(r=>{
     if(q){
-      const h=[r.harness,r.model,r.creator,r.provider].filter(Boolean).join(" ").toLowerCase();
+      const h=[...TXT_COLS].map(c=>r[c]).filter(Boolean).join(" ").toLowerCase();
       if(!h.includes(q))return false;
     }
-    if(hF&&r.harness!==hF)return false;
+    if(hF&&r[FILTER_FIELD]!==hF)return false;
     return true;
   });
   if(sortCol){

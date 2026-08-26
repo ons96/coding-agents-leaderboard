@@ -125,7 +125,7 @@ def save_outputs(df: pd.DataFrame, output_dir: Path, csv_name: str, xlsx_name: s
     meta_path = output_dir / "scrape_meta.json"
     meta_path.write_text(json.dumps(meta, indent=2))
 
-    site_data = {
+    agents_site = {
         "columns": ordered_columns(),
         "labels": DERIVED_LABELS,
         "highlights": HIGHLIGHT,
@@ -135,7 +135,169 @@ def save_outputs(df: pd.DataFrame, output_dir: Path, csv_name: str, xlsx_name: s
         "meta": meta,
         "rows": df.where(pd.notnull(df), None).to_dict(orient="records"),
     }
-    (output_dir / "site_data.json").write_text(json.dumps(site_data, indent=2))
+    # Emit a unified (multi-tab) site payload. The agentic-models tab is added
+    # later by save_agentic_outputs if that scrape succeeds; if it does not run,
+    # the site still renders the agents tab standalone.
+    unified = {"tabs": [{"id": "agents", "label": "Coding Agents", "data": agents_site}]}
+    (output_dir / "site_data.json").write_text(json.dumps(unified, indent=2))
+
+    logger.info(f"Wrote {csv_path} ({len(df)} rows, {len(df.columns)} cols)")
+    logger.info(f"Wrote {xlsx_path}")
+    return csv_path, xlsx_path
+
+# --------------------------------------------------------------------------- #
+# Agentic *models* (capabilities) dataset — separate from agents leaderboard
+# --------------------------------------------------------------------------- #
+
+# These mirror the agent leaderboard so the two tabs read consistently, but
+# the models dataset has no harness/provider/eval-reward columns; instead it
+# carries per-model capability metrics (intelligence index, cost/time/token
+# breakdowns) straight from the capabilities/agentic page.
+MODEL_LABELS = {
+    "id": "ID",
+    "slug": "Slug",
+    "model": "Model",
+    "short_name": "Short Name",
+    "creator": "Creator",
+    "creator_slug": "Creator Slug",
+    "intelligence_index": "Agentic Index",
+    "headline_value": "Headline Value",
+    "is_reasoning": "Reasoning",
+    "release_date": "Released",
+    "size_class": "Size Class",
+    "is_open_weights": "Open Weights",
+    "cost_per_task_usd": "Cost per Task ($)",
+    "cost_input_usd": "Input Cost ($)",
+    "cost_output_usd": "Output Cost ($)",
+    "cost_reasoning_usd": "Reasoning Cost ($)",
+    "output_tokens": "Output Tokens",
+    "answer_tokens": "Answer Tokens",
+    "reasoning_tokens": "Reasoning Tokens",
+    "eval_cost_usd": "Eval Cost ($)",
+    "avg_execution_time_sec": "Avg Exec Time (s)",
+    # derived value metrics (parallel to agents)
+    "score_per_cost": "Score/$",
+    "score_per_minute": "Score/min",
+    "score_per_sec": "Score/sec",
+    "cost_per_score": "$/Score",
+    "tokens_per_sec": "Output Tok/s",
+    "score_per_1k_output_tokens": "Score/1k Out Tok",
+}
+
+MODEL_HIGHLIGHT = {
+    "intelligence_index": "higher", "headline_value": "higher",
+    "is_reasoning": "higher", "is_open_weights": "higher",
+    "cost_per_task_usd": "lower", "cost_input_usd": "lower",
+    "cost_output_usd": "lower", "cost_reasoning_usd": "lower",
+    "avg_execution_time_sec": "lower", "eval_cost_usd": "lower",
+    "score_per_cost": "higher", "score_per_minute": "higher", "score_per_sec": "higher",
+    "cost_per_score": "lower", "tokens_per_sec": "higher",
+    "score_per_1k_output_tokens": "higher",
+}
+
+MODEL_COL_GROUPS = {
+    "identity": ["slug", "model", "short_name", "creator", "creator_slug",
+                 "release_date", "size_class", "is_reasoning", "is_open_weights"],
+    "core": ["intelligence_index", "headline_value"],
+    "cost_time": ["cost_per_task_usd", "cost_input_usd", "cost_output_usd",
+                  "cost_reasoning_usd", "avg_execution_time_sec", "output_tokens",
+                  "answer_tokens", "reasoning_tokens", "eval_cost_usd"],
+    "derived": ["score_per_cost", "score_per_minute", "score_per_sec",
+                "cost_per_score", "tokens_per_sec", "score_per_1k_output_tokens"],
+}
+MODEL_GROUP_ORDER = ["identity", "core", "cost_time", "derived"]
+MODEL_GROUP_LABELS = {"identity": "Identity", "core": "Capability",
+                       "cost_time": "Cost & Time", "derived": "Derived Value"}
+
+
+def add_model_derived(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+    df["score_per_cost"] = df.apply(
+        lambda r: _safe_div(r["intelligence_index"], r["cost_per_task_usd"]), axis=1)
+    df["score_per_minute"] = df.apply(
+        lambda r: _safe_div(r["intelligence_index"], (r["avg_execution_time_sec"] or 0) / 60), axis=1)
+    df["score_per_sec"] = df.apply(
+        lambda r: _safe_div(r["intelligence_index"], r["avg_execution_time_sec"]), axis=1)
+    df["cost_per_score"] = df.apply(
+        lambda r: _safe_div(r["cost_per_task_usd"], r["intelligence_index"]), axis=1)
+    df["tokens_per_sec"] = df.apply(
+        lambda r: _safe_div(r["output_tokens"], r["avg_execution_time_sec"]), axis=1)
+    df["score_per_1k_output_tokens"] = df.apply(
+        lambda r: _safe_div(r["intelligence_index"], (r["output_tokens"] or 0) / 1000), axis=1)
+    return df
+
+
+def model_ordered_columns() -> list[str]:
+    cols = []
+    for g in MODEL_GROUP_ORDER:
+        cols.extend(MODEL_COL_GROUPS[g])
+    return cols
+
+
+def _site_block(df, columns, labels, highlights, col_groups, group_order,
+                group_labels, meta):
+    rows = (
+        [] if df is None
+        else df.where(pd.notnull(df), None).to_dict(orient="records")
+    )
+    return {
+        "columns": columns,
+        "labels": labels,
+        "highlights": highlights,
+        "col_groups": col_groups,
+        "group_order": group_order,
+        "group_labels": group_labels,
+        "meta": meta,
+        "rows": rows,
+    }
+
+
+def save_agentic_outputs(df: pd.DataFrame, output_dir: Path, csv_name: str,
+                         xlsx_name: str, meta: dict, agents_meta: dict) -> tuple[Path, Path]:
+    """Export the agentic-models dataset and merge into a unified site payload.
+
+    ``agents_meta`` is the agents-leaderboard scrape meta; we keep both datasets
+    in one ``site_data.json`` so the single-page site can render two tabs.
+    """
+    output_dir.mkdir(parents=True, exist_ok=True)
+    df = add_model_derived(df)
+    cols = model_ordered_columns()
+    df = df[cols]
+
+    csv_path = output_dir / csv_name
+    df.to_csv(csv_path, index=False)
+
+    xlsx_path = output_dir / xlsx_name
+    with pd.ExcelWriter(xlsx_path, engine="openpyxl") as writer:
+        df.to_excel(writer, index=False, sheet_name="Agentic Models")
+
+    # agents tab default; overwritten by the tab written by save_outputs
+    agents_site = _site_block(
+        None, ordered_columns(), DERIVED_LABELS, HIGHLIGHT, COL_GROUPS,
+        GROUP_ORDER, GROUP_LABELS, agents_meta)
+    existing = output_dir / "site_data.json"
+    if existing.exists():
+        prior = json.loads(existing.read_text())
+        if "tabs" in prior:
+            for t in prior["tabs"]:
+                if t.get("id") == "agents":
+                    agents_site = t["data"]
+                    break
+        else:
+            # legacy flat payload (older save_outputs)
+            agents_site.update({k: prior.get(k, agents_site.get(k)) for k in agents_site})
+
+    models_site = _site_block(
+        df, cols, MODEL_LABELS, MODEL_HIGHLIGHT, MODEL_COL_GROUPS,
+        MODEL_GROUP_ORDER, MODEL_GROUP_LABELS, meta)
+
+    unified = {
+        "tabs": [
+            {"id": "agents", "label": "Coding Agents", "data": agents_site},
+            {"id": "models", "label": "Agentic Models", "data": models_site},
+        ],
+    }
+    (output_dir / "site_data.json").write_text(json.dumps(unified, indent=2))
 
     logger.info(f"Wrote {csv_path} ({len(df)} rows, {len(df.columns)} cols)")
     logger.info(f"Wrote {xlsx_path}")

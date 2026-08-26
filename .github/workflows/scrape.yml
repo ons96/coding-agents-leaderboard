@@ -44,12 +44,13 @@ jobs:
         run: |
           python - <<'PY'
           import re, pathlib
-          html = pathlib.Path("docs/index.html").read_text()
-          scripts = re.findall(r"<script>(.*?)</script>", html, re.DOTALL)
-          if not scripts:
-              raise SystemExit("No inline <script> found in docs/index.html")
-          pathlib.Path("/tmp/site_check.js").write_text(scripts[-1])
-          print(f"Extracted inline script: {len(scripts[-1])} bytes")
+          for f in ("docs/index.html", "docs/models.html"):
+              html = pathlib.Path(f).read_text()
+              scripts = re.findall(r"<script>(.*?)</script>", html, re.DOTALL)
+              if not scripts:
+                  raise SystemExit(f"No inline <script> found in {f}")
+              pathlib.Path("/tmp/site_check.js").write_text(scripts[-1])
+              print(f"{f}: extracted inline script {len(scripts[-1])} bytes")
           PY
           node --check /tmp/site_check.js
 
@@ -79,6 +80,8 @@ jobs:
           path: |
             data/artificial_analysis_coding_agents.csv
             data/artificial_analysis_coding_agents.xlsx
+            data/artificial_analysis_agentic_models.csv
+            data/artificial_analysis_agentic_models.xlsx
           if-no-files-found: warn
 
   deploy-pages:

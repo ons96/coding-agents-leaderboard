@@ -2,6 +2,9 @@ target_url: "https://artificialanalysis.ai/agents/coding-agents"
 output_dir: "data"
 output_csv_name: "artificial_analysis_coding_agents.csv"
 output_xlsx_name: "artificial_analysis_coding_agents.xlsx"
+agentic_target_url: "https://artificialanalysis.ai/models/capabilities/agentic"
+agentic_output_csv_name: "artificial_analysis_agentic_models.csv"
+agentic_output_xlsx_name: "artificial_analysis_agentic_models.xlsx"
 request_timeout_seconds: 30
 request_retries: 3
 request_backoff_seconds: 2
