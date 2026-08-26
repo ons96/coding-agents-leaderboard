@@ -236,9 +236,12 @@ def model_ordered_columns() -> list[str]:
 
 def _site_block(df, columns, labels, highlights, col_groups, group_order,
                 group_labels, meta):
+    # astype(object) first: DataFrame.where(cond, None) coerces None back to
+    # NaN in float columns, which json.dumps then writes as a literal NaN
+    # (invalid strict JSON). Object dtype lets None survive.
     rows = (
         [] if df is None
-        else df.where(pd.notnull(df), None).to_dict(orient="records")
+        else df.astype(object).where(pd.notnull(df), None).to_dict(orient="records")
     )
     return {
         "columns": columns,
