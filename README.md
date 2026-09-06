@@ -66,3 +66,16 @@ python build_site.py   # optional: regenerate docs/ site
 
 `workflow_dispatch` + weekly `cron: '0 0 * * 0'`. On change it commits via
 `github-actions[bot]` and deploys `docs/` to GitHub Pages.
+
+## Estimate calibration
+
+`est_cost_per_task_usd` / `est_time_per_task_sec` in
+`data/artificial_analysis_intelligence_index_full.csv` are ESTIMATES from
+public suite token totals x list pricing, not AA-measured values (AA ships no
+measured per-task cost/time for these models). Calibrated 2026-09-06 against
+measured coding-agents values (`python calibrate_estimates.py`, n=40 matched
+models): cost measured/est median 34.4x (IQR 23.5-55.6), time 13.0x (IQR
+7.7-18.9), cost-rank Spearman 0.80. Rule of thumb: multiply est cost by ~30
+for agentic-task spend; ranking models by est cost is reliable. Rerun
+`calibrate_estimates.py` after any fresh scrape (new models, price or suite
+changes) to confirm the factors still hold.
