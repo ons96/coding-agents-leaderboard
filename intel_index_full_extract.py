@@ -27,6 +27,53 @@ def get(url: str) -> bytes:
     return urllib.request.urlopen(req, timeout=60).read()
 
 
+# Public eval suite sizes (tasks per suite). Proprietary AA suites
+# (omniscience, gdpval, lcr, critpt, tau*, terminalbench*, agent gyms)
+# excluded — N unknown, would corrupt the per-task mean.
+KNOWN_SIZES = {"hle": 3000, "gpqa": 448, "ifbench": 500,
+               "mmmuPro": 1730, "scicode": 80}
+
+
+def est_cost_time(m: dict) -> tuple:
+    """Estimate per-task cost/time from canonical token counts + pricing.
+
+    Mean over KNOWN-SIZE evals of (suite_tokens*price/N).
+    cost = (input*pIn + (answer+reasoning)*pOut)/1e6/N.
+    time = (answer+reasoning)/output_speed/N. Rough: ignores prefill
+    speed, retries, infra variance, caching. Empty when no data.
+    """
+    try:
+        pin = float(m.get("price1mInputTokens") or 0)
+        pout = float(m.get("price1mOutputTokens") or 0)
+        spd = float(m.get("medianCanonicalAnswerOutputSpeed") or 0)
+    except (TypeError, ValueError):
+        return "", ""
+    if not (pin or pout):
+        return "", ""
+    tc = m.get("canonicalEvalTokenCounts") or {}
+    costs, times = [], []
+    for ev_name, ev in tc.items():
+        n = KNOWN_SIZES.get(ev_name)
+        if not n or not isinstance(ev, dict):
+            continue
+        try:
+            i = float(ev.get("input") or 0)
+            a = float(ev.get("answer") or 0)
+            r = float(ev.get("reasoning") or 0)
+        except (TypeError, ValueError):
+            continue
+        if not (i or a or r):
+            continue
+        costs.append((i * pin + (a + r) * pout) / 1e6 / n)
+        if spd > 0 and (a or r):
+            times.append((a + r) / spd / n)
+    if not costs:
+        return "", ""
+    c = sum(costs) / len(costs)
+    t = (sum(times) / len(times)) if times else ""
+    return round(c, 4), (round(t, 1) if t != "" else "")
+
+
 def main() -> None:
     page_url = sys.argv[sys.argv.index("--page-url") + 1] if "--page-url" in sys.argv else DEFAULT_URL
     out = sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv else "/tmp/opencode/aa-intel-630.csv"
@@ -56,13 +103,17 @@ def main() -> None:
             if k not in seen:
                 seen.add(k)
                 extra.append(k)
-    cols += sorted(extra)
+    cols += sorted(extra) + ["est_cost_per_task_usd", "est_time_per_task_sec"]
     with open(out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         w.writeheader()
         for r in models:
-            w.writerow({k: ("" if v is None else (json.dumps(v) if isinstance(v, (dict, list)) else v))
-                        for k, v in r.items()})
+            cost, secs = est_cost_time(r)
+            row = {k: ("" if v is None else (json.dumps(v) if isinstance(v, (dict, list)) else v))
+                   for k, v in r.items()}
+            row["est_cost_per_task_usd"] = cost
+            row["est_time_per_task_sec"] = secs
+            w.writerow(row)
     print(f"wrote {out}", file=sys.stderr)
 
 
