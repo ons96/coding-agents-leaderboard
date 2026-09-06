@@ -110,7 +110,7 @@
         },
         "meta": {
           "url": "https://artificialanalysis.ai/agents/coding-agents?agents=claude-code-fable-5-1-max-with-fallback%2Ccodex-gpt-5-5-xhigh%2Ckimi-code-cli-kimi-k3%2Cclaude-code-opus-4-8-xhigh%2Ccodex-gpt-5-5-medium%2Cclaude-code-opus-5-low%2Cclaude-code-glm-5-2%2Cmuse-code-muse-spark-1-3-max%2Ccodex-gpt-5-6-terra-low%2Ccodex-deepseek-v4-flash-0731-max%2Ccodex-gpt-5-6-terra-none%2Ccodex-gpt-5-6-luna-high%2Cclaude-code-opus-5-xhigh%2Cclaude-code-qwen3-7-plus-thinking%2Ccodex-gpt-5-6-luna-none%2Cclaude-code-opus-4-8-high%2Cdevin-cli-swe-1-7-lightning-max%2Ccursor-cli-opus-4-7-medium%2Copencode-gemini-3-6-flash-high%2Cclaude-code-fable-5-low-with-fallback%2Copencode-muse-spark-1-2-xhigh%2Cantigravity-sdk-gemini-3-8-flash-high%2Copencode-opus-4-7-medium%2Cclaude-code-opus-4-8-low%2Copencode-gemini-3-8-flash-high%2Cclaude-code-fable-5-xhigh-with-fallback%2Cgrok-build-grok-4-5-high%2Ccodex-gpt-5-6-sol-none%2Ccodex-gpt-5-6-sol-xhigh%2Cclaude-code-qwen3-8-max%2Ccodex-gpt-5-6-luna-low%2Ccodex-gpt-5-6-terra-medium%2Cclaude-code-fable-5-medium-with-fallback%2Ccodex-gpt-5-6-terra-xhigh%2Ccodex-gpt-5-6-sol-high%2Ccodex-gpt-6-astra-max%2Cclaude-code-opus-4-8-max%2Cclaude-code-opus-4-8-medium%2Cclaude-code-opus-5-none%2Ccodex-gpt-5-6-sol-low%2Cclaude-code-opus-4-7-medium%2Cclaude-code-fable-5-max-with-fallback%2Ccodex-gpt-5-6-terra-max%2Ccodex-gpt-5-6-sol-max%2Cclaude-code-kimi-k2-6%2Cmuse-code-muse-spark-1-3-xhigh%2Ccodex-gpt-5-6-luna-max%2Ccodex-gpt-5-6-luna-xhigh%2Ccodex-gpt-5-6-terra-max%2Ccursor-cli-composer-2-5-fast%2Cclaude-code-deepseek-v4-pro-high%2Cclaude-code-opus-5-high%2Ccursor-cli-composer-2-5%2Cgemini-cli-gemini-3-1-pro-high%2Cclaude-code-fable-5-high-with-fallback%2Ccodex-deepseek-v4-pro-0813-max%2Ccodex-gpt-5-6-terra-high%2Cclaude-code-opus-4-7-max%2Cclaude-code-opus-5-medium%2Cmuse-code-muse-spark-1-2-xhigh",
-          "scrape_date": "2026-09-05T22:58:17.917686+00:00",
+          "scrape_date": "2026-09-06T03:39:28.430301+00:00",
           "row_count": 68,
           "column_count": 16
         },
@@ -1811,7 +1811,7 @@
         },
         "meta": {
           "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?models=claude-fable-5-1%2Cclaude-opus-5%2Cclaude-fable-5-1-xhigh%2Cclaude-opus-5-xhigh%2Cclaude-fable-5%2Cclaude-opus-5-high%2Cclaude-fable-5-1-high%2Cclaude-fable-5-1-medium%2Cclaude-opus-5-medium%2Cclaude-fable-5-1-low%2Cclaude-opus-4-8%2Cclaude-sonnet-5%2Cclaude-opus-4-7%2Cclaude-opus-5-low%2Cclaude-sonnet-4-6-adaptive%2Cclaude-opus-4-6-adaptive%2Cclaude-opus-4-7-non-reasoning%2Cclaude-opus-4-5-thinking%2Cclaude-sonnet-5-non-reasoning%2Cclaude-opus-4-6%2Cclaude-4-5-sonnet-thinking%2Cclaude-sonnet-4-6%2Cclaude-opus-4-5%2Cclaude-sonnet-4-6-non-reasoning-low-effort%2Cclaude-4-1-opus-thinking%2Cclaude-4-opus-thinking%2Cclaude-4-5-sonnet%2Cclaude-4-5-haiku-reasoning%2Cclaude-4-sonnet-thinking%2Cclaude-4-1-opus%2Cclaude-3-7-sonnet-thinking%2Cclaude-4-opus%2Cclaude-4-sonnet%2Cclaude-4-5-haiku%2Cclaude-3-7-sonnet%2Cclaude-3-5-haiku%2Cclaude-3-opus%2Cclaude-35-sonnet%2Cclaude-35-sonnet-june-24%2Cclaude-3-haiku%2Cclaude-instant%2Cclaude-21%2Cclaude-3-sonnet%2Cclaude-2%2Cgpt-6-astra%2Cgpt-6-astra-xhigh%2Cgpt-6-astra-high%2Cgpt-6-astra-medium%2Cgpt-5-6-sol%2Cgpt-5-6-sol-xhigh%2Cgpt-6-astra-low%2Cgpt-5-6-sol-high%2Cgpt-6-astra-non-reasoning%2Cgpt-5-6-terra%2Cgpt-5-6-sol-medium%2Cgpt-5-5%2Cgpt-5-6-terra-xhigh%2Cgpt-5-5-high%2Cgpt-5-6-luna%2Cgpt-5-4%2Cgpt-5-5-medium%2Cgpt-5-6-luna-xhigh%2Cgpt-5-6-terra-high%2Cgpt-5-6-sol-low%2Cgpt-5-6-luna-high%2Cgpt-5-6-terra-medium%2Cgpt-5-3-codex%2Cgpt-5-5-low%2Cgpt-5-2%2Cgpt-5-2-codex%2Cgpt-5-6-sol-non-reasoning%2Cgpt-5-6-terra-low%2Cgpt-5-4-low%2Cgpt-5-4-mini%2Cgpt-5-4-nano%2Cgpt-5-2-medium%2Cgpt-5-6-luna-medium%2Cgpt-5-codex%2Cgpt-5-1%2Cgpt-5-1-codex%2Cgpt-5-5-non-reasoning%2Cgpt-5%2Cgpt-5-medium%2Cgpt-5-5-instant-05-26%2Cgpt-5-6-terra-non-reasoning%2Cgpt-5-6-luna-low%2Co3-pro%2Cgpt-5-low%2Cgpt-5-mini-medium%2Cgpt-5-1-codex-mini%2Co3%2Cgpt-5-4-nano-medium%2Cgpt-5-4-mini-medium%2Cgpt-5-5-instant-06-26%2Cgpt-5-4-non-reasoning%2Cgpt-5-2-non-reasoning%2Cgpt-5-6-luna-non-reasoning%2Co4-mini%2Cgpt-5-mini%2Co1%2Cgpt-oss-120b%2Cgpt-5-1-non-reasoning%2Cgpt-5-nano%2Cgpt-4-1%2Cgpt-5-nano-medium%2Co3-mini%2Co1-pro%2Cgpt-5-4-nano-non-reasoning%2Cgpt-5-minimal%2Co1-preview%2Cgpt-5-4-mini-non-reasoning%2Co3-mini-high%2Cgpt-5-chatgpt%2Cgpt-oss-20b%2Cgpt-oss-120b-low%2Cgpt-4-1-mini%2Cgpt-oss-20b-low%2Cgpt-5-mini-minimal%2Co1-mini%2Cgpt-4-5%2Cgpt-4o-chatgpt-03-25%2Cgpt-4o%2Cgpt-4-1-nano%2Cgpt-4o-2024-08-06%2Cgpt-4o-2024-05-13%2Cgpt-4o-chatgpt%2Cgpt-5-nano-minimal%2Cgpt-4-turbo%2Cgpt-4%2Cgpt-4o-mini%2Cgpt-35-turbo%2Cmuse-spark-1-3%2Cmuse-spark-1-3-xhigh%2Cmuse-spark-1-2%2Cmuse-spark-1-1%2Cmuse-spark%2Cmuse-glimmer%2Cllama-4-maverick%2Cllama-4-scout%2Cllama-3-3-instruct-70b%2Cllama-3-1-instruct-405b%2Cllama-3-1-instruct-8b%2Cllama-3-1-instruct-70b%2Cllama-2-chat-70b%2Cllama-3-2-instruct-11b-vision%2Cllama-2-chat-13b%2Cllama-3-2-instruct-3b%2Cllama-3-2-instruct-1b%2Cllama-3-instruct-8b%2Cllama-3-2-instruct-90b-vision%2Cllama-3-instruct-70b%2Cllama-65b%2Cllama-2-chat-7b%2Cgrok-4-6%2Cgrok-4-6-xhigh%2Cgrok-4-6-medium%2Cgrok-4-5%2Cgrok-4-6-low%2Cgrok-build-0-1-06-16%2Cgrok-4-20%2Cgrok-4-20-0309%2Cgrok-4-3%2Cgrok-4-3-medium%2Cgrok-4-3-low%2Cgrok-4%2Cgrok-4-1-fast-reasoning%2Cgrok-4-fast-reasoning%2Cgrok-4-3-non-reasoning%2Cgrok-3-mini-reasoning%2Cgrok-4-20-0309-non-reasoning%2Cgrok-4-20-non-reasoning%2Cgrok-code-fast-1%2Cgrok-3%2Cgrok-4-1-fast%2Cgrok-4-fast%2Cgrok-3-reasoning%2Cgrok-2-1212%2Cgrok-beta%2Cgrok-1%2Ckimi-k3%2Ckimi-k3-low%2Ckimi-k2-6%2Ckimi-k2-7-code%2Ckimi-k2-6-non-reasoning%2Ckimi-k2-5%2Ckimi-k2-thinking%2Ckimi-k2-5-non-reasoning%2Ckimi-k2-0905%2Ckimi-k2%2Ckimi-linear-48b-a3b-instruct%2Cglm-5-3%2Cglm-5-3-flash%2Cglm-5-2%2Cglm-5%2Cglm-5-1%2Cglm-5-turbo%2Cglm-5-1-non-reasoning%2Cglm-5v-turbo%2Cglm-5-2-non-reasoning%2Cglm-4-7%2Cglm-5-non-reasoning%2Cglm-4-6-reasoning%2Cglm-4-7-non-reasoning%2Cglm-4-6%2Cglm-4-7-flash%2Cglm-4.5%2Cglm-4-6v-reasoning%2Cglm-4-5-air%2Cglm-4-7-flash-non-reasoning%2Cglm-4-6v%2Cglm-4-5v-reasoning%2Cglm-4-5v%2Cgemini-3-8-flash%2Cgemini-3-8-flash-medium%2Cgemini-3-7-flash%2Cgemini-3-7-flash-medium%2Cgemini-3-8-flash-low%2Cgemini-3-7-flash-low%2Cgemini-3-6-flash%2Cgemini-3-5-flash%2Cgemini-3-5-flash-medium%2Cgemini-3-1-pro-preview%2Cgemini-3-pro%2Cgemini-3-flash-reasoning%2Cgemini-3-5-flash-minimal%2Cgemini-3-5-flash-lite%2Cgemini-3-pro-low%2Cgemma-4-31b%2Cgemini-3-flash%2Cgemma-4-26b-a4b%2Cgemini-2-5-pro%2Cgemini-3-1-flash-lite-preview%2Cgemini-2-5-flash-preview-09-2025-reasoning%2Cgemini-2-5-pro-03-25%2Cgemini-2-5-pro-05-06%2Cgemma-4-12b%2Cgemma-4-31b-non-reasoning%2Cgemma-4-26b-a4b-non-reasoning%2Cgemini-2-5-flash-reasoning%2Cgemini-2-5-flash-preview-09-2025%2Cgemini-2-5-flash-reasoning-04-2025%2Cgemini-2-5-flash-lite-preview-09-2025-reasoning%2Cgemini-2-5-flash%2Cdiffusiongemma-26b-a4b%2Cgemini-2-0-flash-thinking-exp-0121%2Cgemma-4-12b-non-reasoning%2Cgemini-2-5-flash-lite-preview-09-2025%2Cgemini-2-0-flash%2Cgemma-4-e4b%2Cgemini-2-0-pro-experimental-02-05%2Cgemini-2-5-flash-04-2025%2Cgemini-2-5-flash-lite-reasoning%2Cgemini-2-0-flash-experimental%2Cgemini-1-5-pro%2Cgemma-4-e2b%2Cgemma-4-e4b-non-reasoning%2Cgemini-2-0-flash-lite-001%2Cgemini-2-0-flash-lite-preview%2Cgemini-1-5-flash%2Cgemma-3-27b%2Cgemini-2-5-flash-lite%2Cgemini-2-0-flash-thinking-exp-1219%2Cgemma-3-270m%2Cgemini-1-5-pro-may-2024%2Cgemma-3-4b%2Cgemini-1-0-ultra%2Cgemma-3-12b%2Cpalm-2%2Cgemma-4-e2b-non-reasoning%2Cgemini-1-0-pro%2Cgemini-1-5-flash-8b%2Cgemma-3n-e4b%2Cgemma-3n-e2b%2Cgemini-1-5-flash-may-2024%2Cgemma-3n-e4b-preview-0520%2Cgemma-3-1b%2Cqwen3-8-max%2Cqwen3-8-2-4t-a95b%2Cqwen3-8-flash-next%2Cqwen3-8-27b%2Cqwen3-7-max%2Cqwen3-8-27b-medium%2Cqwen3-8-27b-low%2Cqwen3-6-max%2Cqwen3-6-plus%2Cqwen3-7-plus%2Cqwen3-6-27b%2Cqwen3-5-27b%2Cqwen3-8-27b-non-reasoning%2Cqwen3-6-35b-a3b%2Cqwen3-5-397b-a17b%2Cqwen3-5-397b-a17b-non-reasoning%2Cqwen3-max-thinking%2Cqwen3-5-122b-a10b%2Cqwen3-5-omni-plus%2Cqwen3-6-27b-non-reasoning%2Cqwen3-5-27b-non-reasoning%2Cqwen3-5-35b-a3b%2Cqwen3-5-122b-a10b-non-reasoning%2Cqwen3-max-thinking-preview%2Cqwen3-max%2Cqwen3-6-35b-a3b-non-reasoning%2Cqwen3-5-35b-a3b-non-reasoning%2Cqwen3-5-9b%2Cqwen3-vl-235b-a22b-reasoning%2Cqwen3-coder-next%2Cqwen3-5-9b-non-reasoning%2Cqwen3-5-4b%2Cqwen3-235b-a22b-instruct-2507-reasoning%2Cqwen3-max-preview%2Cqwen3-5-omni-flash%2Cqwen3-235b-a22b-instruct-2507%2Cqwen3-coder-480b-a35b-instruct%2Cqwen3-vl-32b-reasoning%2Cqwen3-next-80b-a3b-reasoning%2Cqwen3-5-4b-non-reasoning%2Cqwen3-30b-a3b-2507-reasoning%2Cqwen3-vl-235b-a22b-instruct%2Cqwen3-next-80b-a3b-instruct%2Cqwen3-coder-30b-a3b-instruct%2Cqwen3-235b-a22b-instruct-reasoning%2Cqwq-32b%2Cqwen3-vl-30b-a3b-reasoning%2Cqwen3-4b-2507-instruct-reasoning%2Cqwen3-32b-instruct%2Cqwen3-vl-32b-instruct%2Cqwen3-235b-a22b-instruct%2Cqwen3-vl-8b-reasoning%2Cqwen3-14b-instruct-reasoning%2Cqwen-2-5-max%2Cqwen3-vl-30b-a3b-instruct%2Cqwen3-omni-30b-a3b-reasoning%2Cqwen2-5-72b-instruct%2Cqwen3-30b-a3b-instruct-reasoning%2CQwQ-32B-Preview%2Cqwen3-30b-a3b-2507%2Cqwen3-32b-instruct%2Cqwen3-8b-instruct-reasoning%2Cqwen3-vl-8b-instruct%2Cqwen3-4b-instruct-reasoning%2Cqwen3-vl-4b-reasoning%2Cqwen3-5-2b%2Cqwen2-5-32b-instruct%2Cqwen3-4b-2507-instruct%2Cqwen2-5-coder-32b-instruct%2Cqwen3-14b-instruct%2Cqwen3-30b-a3b-instruct%2Cqwen3-4b-instruct%2Cqwen3-5-2b-non-reasoning%2Cqwen3-omni-30b-a3b-instruct%2Cqwen3-0.6b-instruct%2Cqwen3-1.7b-instruct%2Cqwen-turbo%2Cqwen3-5-0-8b-non-reasoning%2Cqwen-chat-72b%2Cqwen3-0.6b-instruct-reasoning%2Cqwen3-1.7b-instruct-reasoning%2Cqwen2-72b-instruct%2Cqwen3-5-0-8b%2Cqwen3-8b-instruct%2Cqwen-chat-14b%2Cqwen1.5-110b-chat%2Cqwen2-5-coder-7b-instruct%2Cqwen3-vl-4b-instruct%2Cdeepseek-v4-pro%2Cdeepseek-v4-flash-vision%2Cdeepseek-v4-flash%2Cdeepseek-v4-pro-0424%2Cdeepseek-v4-flash-0420%2Cdeepseek-v4-pro-0424-high%2Cdeepseek-v4-flash-0420-high%2Cdeepseek-v3-2-reasoning%2Cdeepseek-v4-pro-0424-non-reasoning%2Cdeepseek-v3-1-terminus-reasoning%2Cdeepseek-v4-flash-non-reasoning%2Cdeepseek-v3-2-reasoning-0925%2Cdeepseek-v3-2%2Cdeepseek-v3-2-speciale%2Cdeepseek-v3-1-terminus%2Cdeepseek-v3-2-0925%2Cdeepseek-v3-1%2Cdeepseek-v3-1-reasoning%2Cdeepseek-r1%2Cdeepseek-r1-0120%2Cdeepseek-v3-0324%2Cdeepseek-v3%2Cdeepseek-r1-distill-qwen-32b%2Cdeepseek-r1-qwen3-8b%2Cdeepseek-r1-distill-llama-70b%2Cdeepseek-r1-distill-qwen-14b%2Cdeepseek-v2-5%2Cdeepseek-v2-5-sep-2024%2Cdeepseek-r1-distill-llama-8b%2Cdeepseek-v2%2Cdeepseek-r1-distill-qwen-1-5b%2Cdeepseek-llm-67b-chat%2Cdeepseek-coder-v2%2Cdeepseek-coder-v2-lite%2Cagnes-2-5-pro-beta%2Cagnes-2-5-pro-alpha%2Cmotif-3%2Cmotif-0714%2Cmotif-2-12-7b%2Ck2-horizon-375b-a23b%2Ck2-think-v2%2Ck2-v2%2Ck2-v2-medium%2Ck2-v2-low%2Cminimax-m3%2Cminimax-m2-7%2Cminimax-m2-5%2Cminimax-m2-1%2Cminimax-m2%2Cminimax-m1-80k%2Cminimax-m1-40k%2Capodex-1-1%2Cquasar-438b%2Chypernova-60b%2Chy3%2Chy3-preview%2Chy3-non-reasoning%2Cmimo-v2-pro%2Cmimo-v2-5-pro%2Cmimo-v2-5-0424%2Cmimo-v2-omni-0327%2Cmimo-v2-0206%2Cmimo-v2-flash-reasoning%2Cmimo-v2-5-pro-non-reasoning%2Cmimo-v2-flash%2Cnex-n2-pro%2Csolar-pro4%2Csolar-open2-250b%2Csolar-open-100b-reasoning%2Csolar-pro-3%2Csolar-pro-2-preview-reasoning%2Csolar-pro-2-preview%2Csolar-pro-2-reasoning%2Csolar-pro-2%2Csolar-mini%2Cinkling-small%2Cinkling%2Cjt-4-1-flash-236b-a21b%2Cjt-35b-flash%2Cjt-mini%2Cnvidia-nemotron-3-ultra-550b-a55b%2Cnvidia-nemotron-3-super-120b-a12b%2Cnemotron-3-5-lightning%2Cnemotron-cascade-2-30b-a3b%2Cnemotron-3-nano-omni-30b-a3b%2Cnvidia-nemotron-3-nano-30b-a3b-reasoning%2Cllama-nemotron-super-49b-v1-5-reasoning%2Cllama-3-3-nemotron-super-49b-reasoning%2Cllama-3-1-nemotron-ultra-253b-v1-reasoning%2Cnvidia-nemotron-nano-12b-v2-vl-reasoning%2Cnvidia-nemotron-nano-9b-v2-reasoning%2Cnvidia-nemotron-3-nano-4b%2Cllama-nemotron-super-49b-v1-5%2Cllama-3-1-nemotron-nano-4b-reasoning%2Cllama-3-3-nemotron-super-49b%2Cllama-3-1-nemotron-instruct-70b%2Cnvidia-nemotron-3-nano-30b-a3b%2Cnvidia-nemotron-nano-9b-v2%2Cnvidia-nemotron-nano-12b-v2-vl%2Cling-3-0-flash%2Cring-2-6-1t%2Cling-2-6-1t%2Cling-3-0-tiny%2Cring-1t%2Cling-2-6-flash%2Cling-1t%2Cling-flash-2-0%2Cling-flash-2-0%2Cling-mini-2-0%2Ca-x-k2%2Clongcat-2-0%2Clongcat-flash-lite%2Cg9v3-39a5b%2Cg9v3-3b%2Ckat-coder-pro-v2%2Ckat-coder-pro-v1%2Ck-exaone-2-0-0803%2Ck-exaone%2Cexaone-4-5-33b%2Ck-exaone-non-reasoning%2Cexaone-4-0-32b-reasoning%2Cexaone-4-0-32b%2Cexaone-4-0-1-2b%2Cexaone-4-0-1-2b-reasoning%2Cstep-3-7-flash%2Cstep-3-5-flash%2Cstep-3-5-flash-0202%2Cstep-3-vl-10b%2Cmistral-medium-3-5%2Cmistral-small-4%2Cdevstral-2%2Cmagistral-medium-2509%2Cdevstral-small-2%2Cmistral-large-3%2Cmistral-small-3-1%2Cmistral-medium-3-1%2Cmagistral-medium%2Cmistral-medium-3%2Cdevstral-medium%2Cmistral-small-4-non-reasoning%2Cdevstral-small-2505%2Cmagistral-small-2509%2Cministral-3-14b%2Cmistral-small-3-2%2Cmagistral-small%2Cdevstral-small%2Cmistral-large-2%2Cministral-3-8b%2Cpixtral-large-2411%2Cministral-3-3b%2Cmistral-large-2407%2Cmistral-small-3%2Cmistral-medium%2Cmistral-7b-instruct%2Cmistral-small-2402%2Cmixtral-8x7b-instruct%2Cmistral-large%2Cmistral-saba%2Cmistral-small%2Cmistral-8x22b-instruct%2Cdoubao-seed-code%2Cseed-oss-36b-instruct%2Cgranite-4-2-30b%2Cgranite-4-2-8b%2Cgranite-4-2-3b%2Cgranite-4-1-30b%2Cgranite-4-1-8b%2Cgranite-4-0-micro%2Cgranite-3-3-8b-instruct%2Cgranite-4-0-350m%2Cgranite-4-0-h-small%2Cgranite-4-1-3b%2Cgranite-4-0-nano-1b%2Cgranite-4-0-h-350m%2Cgranite-4-0-h-nano-1b%2Cernie-5-0-thinking-preview%2Cernie-4-5-300b-a47b%2Ccommand-a-plus%2Cnorth-mini-code%2Ccommand-a%2Ccommand-r-plus-04-2024%2Ctiny-aya-global%2Ccommand-r-03-2024%2Cnova-2-0-pro-reasoning-medium%2Cnova-2-0-omni-reasoning-medium%2Cnova-2-0-lite-reasoning%2Cnova-2-0-pro-reasoning-low%2Cnova-2-0-lite-reasoning-medium%2Cnova-2-0-lite-reasoning-low%2Cnova-2-0-omni-reasoning-low%2Cnova-2-0-pro%2Cnova-premier%2Cnova-2-0-lite%2Cnova-2-0-omni%2Cnova-pro%2Cnova-lite%2Cnova-micro%2Capriel-v1-5-15b-thinker%2Capriel-v1-6-15b-thinker%2Cmercury-2%2Ctrinity-large-thinking%2Csonar-reasoning-pro%2Csonar-reasoning%2Csonar%2Csonar-pro%2Cr1-1776%2Chyperclova-x-seed-think-32b%2Cmi-dm-k-2-5-pro-dec28%2Cintellect-3%2Ctri-21b-think-preview%2Ctri-21b-think-v0-5%2Cceleris-1%2Cminicpm5-1b%2Cminicpm5-1b-non-reasoning%2Cminicpm-v4-6-1-3b%2Csarvam-105b%2Csarvam-30b%2Csarvam-m-reasoning%2Cnanbeige4-1-3b%2Clfm2-5-2-6b%2Clfm2-5-8b-a1b%2Clfm2-1-2b%2Clfm-40b%2Clfm2-5-vl-1-6b%2Clfm2-5-1-2b-instruct%2Clfm2-5-1-2b-thinking%2Clfm2-8b-a1b%2Clfm2-2-6b%2Clfm2-24b-a2b%2Chermes-4-llama-3-1-70b-reasoning%2Chermes-4-llama-3-1-405b-reasoning%2Chermes-4-llama-3-1-405b%2Chermes-4-llama-3-1-70b%2Chermes-3-llama-3-1-70b%2Cdeephermes-3-mistral-24b-preview%2Cdeephermes-3-llama-3-1-8b-preview%2Cfalcon-h1r-7b%2Ctulu3-405b%2Colmo-3-1-32b-think%2Colmo-3-7b-think%2Cmolmo2-8b%2Colmo-2-32b%2Colmo-3-7b-instruct%2Colmo-3-1-32b-instruct%2Cmolmo-7b-d%2Colmo-3-32b-think%2Colmo-2-7b%2Cdbrx%2Cphi-4-multimodal%2Cphi-4-mini%2Cphi-3-mini%2Cphi-4%2Capertus-70b-instruct%2Capertus-8b-instruct%2Cjamba-1-5-mini%2Cjamba-1-7-large%2Cjamba-1-6-large%2Cjamba-1-5-large%2Cjamba-1-7-mini%2Cjamba-1-6-mini%2Cjamba-reasoning-3b%2Creka-flash%2Creka-flash-3%2Carctic-instruct%2Copenchat-35",
-          "scrape_date": "2026-09-05T22:58:17.917686+00:00",
+          "scrape_date": "2026-09-06T03:39:28.430301+00:00",
           "row_count": 27,
           "column_count": 21
         },
@@ -2703,12 +2703,12 @@
             "intelligenceIndex": 54.6573323423926,
             "price1mInputTokens": 10.0,
             "price1mOutputTokens": 50.0,
-            "medianCanonicalAnswerOutputSpeed": 65.9431352804807,
+            "medianCanonicalAnswerOutputSpeed": 69.6527710720454,
             "est_cost_per_task_usd": 0.3034,
-            "est_time_per_task_sec": 85.1,
+            "est_time_per_task_sec": 80.5,
             "idx_per_dollar": 180.14941444427356,
-            "idx_per_min": 38.53630952460113,
-            "idx_per_sec": 0.6422718254100188
+            "idx_per_min": 40.738384354578336,
+            "idx_per_sec": 0.6789730725763056
           },
           {
             "slug": "gpt-6-astra-xhigh",
@@ -2721,12 +2721,12 @@
             "intelligenceIndex": 54.3148645943349,
             "price1mInputTokens": 10.0,
             "price1mOutputTokens": 50.0,
-            "medianCanonicalAnswerOutputSpeed": 60.6330080233878,
+            "medianCanonicalAnswerOutputSpeed": 64.2456101198114,
             "est_cost_per_task_usd": 0.1725,
-            "est_time_per_task_sec": 49.3,
+            "est_time_per_task_sec": 46.5,
             "idx_per_dollar": 314.86878025701395,
-            "idx_per_min": 66.10328348194916,
-            "idx_per_sec": 1.1017213913658195
+            "idx_per_min": 70.08369625075471,
+            "idx_per_sec": 1.168061604179245
           },
           {
             "slug": "claude-opus-5",
@@ -2757,12 +2757,12 @@
             "intelligenceIndex": 53.8031695908873,
             "price1mInputTokens": 10.0,
             "price1mOutputTokens": 50.0,
-            "medianCanonicalAnswerOutputSpeed": 103.806832649801,
+            "medianCanonicalAnswerOutputSpeed": 100.831183010759,
             "est_cost_per_task_usd": 0.557,
-            "est_time_per_task_sec": 98.0,
+            "est_time_per_task_sec": 100.9,
             "idx_per_dollar": 96.59455940913338,
-            "idx_per_min": 32.94071607605345,
-            "idx_per_sec": 0.5490119346008908
+            "idx_per_min": 31.99395614918967,
+            "idx_per_sec": 0.5332326024864945
           },
           {
             "slug": "claude-opus-5-xhigh",
@@ -2775,12 +2775,12 @@
             "intelligenceIndex": 53.3699026217041,
             "price1mInputTokens": 5.0,
             "price1mOutputTokens": 25.0,
-            "medianCanonicalAnswerOutputSpeed": 91.16147046553,
+            "medianCanonicalAnswerOutputSpeed": 91.8063933008149,
             "est_cost_per_task_usd": 0.1775,
-            "est_time_per_task_sec": 69.8,
+            "est_time_per_task_sec": 69.3,
             "idx_per_dollar": 300.67550772791043,
-            "idx_per_min": 45.87670712467401,
-            "idx_per_sec": 0.7646117854112335
+            "idx_per_min": 46.207707897579304,
+            "idx_per_sec": 0.7701284649596551
           },
           {
             "slug": "gpt-6-astra-high",
@@ -2793,7 +2793,7 @@
             "intelligenceIndex": 53.3589099296435,
             "price1mInputTokens": 10.0,
             "price1mOutputTokens": 50.0,
-            "medianCanonicalAnswerOutputSpeed": 59.2218650521634,
+            "medianCanonicalAnswerOutputSpeed": 59.2784523099704,
             "est_cost_per_task_usd": 0.1018,
             "est_time_per_task_sec": 26.7,
             "idx_per_dollar": 524.1543215092682,
@@ -2847,12 +2847,12 @@
             "intelligenceIndex": 52.2467486663733,
             "price1mInputTokens": 10.0,
             "price1mOutputTokens": 50.0,
-            "medianCanonicalAnswerOutputSpeed": 57.8207314642603,
+            "medianCanonicalAnswerOutputSpeed": 58.6601395675468,
             "est_cost_per_task_usd": 0.0704,
-            "est_time_per_task_sec": 16.5,
+            "est_time_per_task_sec": 16.3,
             "idx_per_dollar": 742.1413162837116,
-            "idx_per_min": 189.98817696863017,
-            "idx_per_sec": 3.166469616143836
+            "idx_per_min": 192.3193202443189,
+            "idx_per_sec": 3.2053220040719816
           },
           {
             "slug": "claude-opus-5-high",
@@ -2883,12 +2883,12 @@
             "intelligenceIndex": 51.6714916304855,
             "price1mInputTokens": 10.0,
             "price1mOutputTokens": 50.0,
-            "medianCanonicalAnswerOutputSpeed": 91.1368852165317,
+            "medianCanonicalAnswerOutputSpeed": 91.9643431107786,
             "est_cost_per_task_usd": 0.2146,
-            "est_time_per_task_sec": 37.3,
+            "est_time_per_task_sec": 36.9,
             "idx_per_dollar": 240.78048290067798,
-            "idx_per_min": 83.11768090694719,
-            "idx_per_sec": 1.3852946817824532
+            "idx_per_min": 84.0186855780252,
+            "idx_per_sec": 1.4003114263004202
           },
           {
             "slug": "muse-spark-1-3-xhigh",
@@ -2901,12 +2901,12 @@
             "intelligenceIndex": 51.5529761088958,
             "price1mInputTokens": 1.25,
             "price1mOutputTokens": 4.25,
-            "medianCanonicalAnswerOutputSpeed": 136.911407707557,
+            "medianCanonicalAnswerOutputSpeed": 142.276721012321,
             "est_cost_per_task_usd": 0.0611,
-            "est_time_per_task_sec": 99.1,
+            "est_time_per_task_sec": 95.4,
             "idx_per_dollar": 843.7475631570506,
-            "idx_per_min": 31.212699965022683,
-            "idx_per_sec": 0.5202116660837114
+            "idx_per_min": 32.42325541439987,
+            "idx_per_sec": 0.5403875902399978
           },
           {
             "slug": "gpt-5-6-sol",
@@ -2919,12 +2919,12 @@
             "intelligenceIndex": 51.2551933761681,
             "price1mInputTokens": 4.0,
             "price1mOutputTokens": 20.0,
-            "medianCanonicalAnswerOutputSpeed": 91.2712405848484,
+            "medianCanonicalAnswerOutputSpeed": 92.2162653213458,
             "est_cost_per_task_usd": 0.1267,
-            "est_time_per_task_sec": 65.2,
+            "est_time_per_task_sec": 64.6,
             "idx_per_dollar": 404.53980565247116,
-            "idx_per_min": 47.16735586763936,
-            "idx_per_sec": 0.7861225977939893
+            "idx_per_min": 47.60544276424282,
+            "idx_per_sec": 0.7934240460707137
           },
           {
             "slug": "grok-4-6",
@@ -2955,12 +2955,12 @@
             "intelligenceIndex": 50.2337145305853,
             "price1mInputTokens": 3.0,
             "price1mOutputTokens": 15.0,
-            "medianCanonicalAnswerOutputSpeed": 43.8167721909904,
+            "medianCanonicalAnswerOutputSpeed": 44.4989061181632,
             "est_cost_per_task_usd": 0.1633,
-            "est_time_per_task_sec": 237.2,
+            "est_time_per_task_sec": 233.5,
             "idx_per_dollar": 307.6161330715573,
-            "idx_per_min": 12.706673152761882,
-            "idx_per_sec": 0.2117778858793647
+            "idx_per_min": 12.908020864390227,
+            "idx_per_sec": 0.21513368107317046
           },
           {
             "slug": "claude-fable-5-1-medium",
@@ -2991,12 +2991,12 @@
             "intelligenceIndex": 49.8448226160266,
             "price1mInputTokens": 4.0,
             "price1mOutputTokens": 20.0,
-            "medianCanonicalAnswerOutputSpeed": 80.6239191685605,
+            "medianCanonicalAnswerOutputSpeed": 81.088409093208,
             "est_cost_per_task_usd": 0.0692,
-            "est_time_per_task_sec": 38.0,
+            "est_time_per_task_sec": 37.8,
             "idx_per_dollar": 720.3009048558757,
-            "idx_per_min": 78.70235149898937,
-            "idx_per_sec": 1.3117058583164893
+            "idx_per_min": 79.11876605718507,
+            "idx_per_sec": 1.3186461009530848
           },
           {
             "slug": "claude-opus-5-medium",
@@ -3045,12 +3045,12 @@
             "intelligenceIndex": 49.3199050865629,
             "price1mInputTokens": 10.0,
             "price1mOutputTokens": 50.0,
-            "medianCanonicalAnswerOutputSpeed": 57.4360312338055,
+            "medianCanonicalAnswerOutputSpeed": 57.7729520382241,
             "est_cost_per_task_usd": 0.0502,
-            "est_time_per_task_sec": 9.7,
+            "est_time_per_task_sec": 9.6,
             "idx_per_dollar": 982.4682288159939,
-            "idx_per_min": 305.07157785502824,
-            "idx_per_sec": 5.084526297583804
+            "idx_per_min": 308.2494067910181,
+            "idx_per_sec": 5.1374901131836355
           },
           {
             "slug": "glm-5-3",
@@ -3099,12 +3099,12 @@
             "intelligenceIndex": 48.2978520993393,
             "price1mInputTokens": 4.0,
             "price1mOutputTokens": 20.0,
-            "medianCanonicalAnswerOutputSpeed": 71.1119609631583,
+            "medianCanonicalAnswerOutputSpeed": 75.7235885777675,
             "est_cost_per_task_usd": 0.0483,
-            "est_time_per_task_sec": 28.5,
+            "est_time_per_task_sec": 26.8,
             "idx_per_dollar": 999.9555300070248,
-            "idx_per_min": 101.67968863018801,
-            "idx_per_sec": 1.6946614771698
+            "idx_per_min": 108.1295196253865,
+            "idx_per_sec": 1.8021586604231081
           },
           {
             "slug": "gpt-6-astra-non-reasoning",
@@ -3135,12 +3135,12 @@
             "intelligenceIndex": 47.77680274381,
             "price1mInputTokens": 10.0,
             "price1mOutputTokens": 50.0,
-            "medianCanonicalAnswerOutputSpeed": 91.6223683233648,
+            "medianCanonicalAnswerOutputSpeed": 92.4071335422612,
             "est_cost_per_task_usd": 0.1158,
-            "est_time_per_task_sec": 15.8,
+            "est_time_per_task_sec": 15.7,
             "idx_per_dollar": 412.5803345752159,
-            "idx_per_min": 181.430896495481,
-            "idx_per_sec": 3.0238482749246836
+            "idx_per_min": 182.58650730118472,
+            "idx_per_sec": 3.0431084550197456
           },
           {
             "slug": "gemini-3-8-flash",
@@ -3153,12 +3153,12 @@
             "intelligenceIndex": 47.0713231150669,
             "price1mInputTokens": 0.75,
             "price1mOutputTokens": 3.75,
-            "medianCanonicalAnswerOutputSpeed": 259.784552764476,
+            "medianCanonicalAnswerOutputSpeed": 310.827246073754,
             "est_cost_per_task_usd": 0.0931,
-            "est_time_per_task_sec": 93.5,
+            "est_time_per_task_sec": 78.2,
             "idx_per_dollar": 505.5996038138228,
-            "idx_per_min": 30.20619665137983,
-            "idx_per_sec": 0.5034366108563305
+            "idx_per_min": 36.116104691867186,
+            "idx_per_sec": 0.6019350781977865
           },
           {
             "slug": "qwen3-8-max",
@@ -3171,12 +3171,12 @@
             "intelligenceIndex": 46.9057464193788,
             "price1mInputTokens": 2.0,
             "price1mOutputTokens": 6.0,
-            "medianCanonicalAnswerOutputSpeed": 55.8785535907341,
+            "medianCanonicalAnswerOutputSpeed": 55.8133511356123,
             "est_cost_per_task_usd": 0.1524,
-            "est_time_per_task_sec": 433.0,
+            "est_time_per_task_sec": 433.5,
             "idx_per_dollar": 307.78048831613387,
-            "idx_per_min": 6.499641536172582,
-            "idx_per_sec": 0.1083273589362097
+            "idx_per_min": 6.492144833132015,
+            "idx_per_sec": 0.10820241388553356
           },
           {
             "slug": "muse-spark-1-2",
@@ -3189,12 +3189,12 @@
             "intelligenceIndex": 46.837245485457,
             "price1mInputTokens": 1.25,
             "price1mOutputTokens": 4.25,
-            "medianCanonicalAnswerOutputSpeed": 295.710673239155,
+            "medianCanonicalAnswerOutputSpeed": 301.576976810677,
             "est_cost_per_task_usd": 0.1025,
-            "est_time_per_task_sec": 77.4,
+            "est_time_per_task_sec": 75.9,
             "idx_per_dollar": 456.9487364434829,
-            "idx_per_min": 36.30794223678837,
-            "idx_per_sec": 0.6051323706131394
+            "idx_per_min": 37.02549050233754,
+            "idx_per_sec": 0.6170915083722924
           },
           {
             "slug": "gemini-3-8-flash-medium",
@@ -3261,12 +3261,12 @@
             "intelligenceIndex": 46.437468542272,
             "price1mInputTokens": 5.0,
             "price1mOutputTokens": 25.0,
-            "medianCanonicalAnswerOutputSpeed": 97.4592779858002,
+            "medianCanonicalAnswerOutputSpeed": 97.8304327381796,
             "est_cost_per_task_usd": 0.4478,
-            "est_time_per_task_sec": 176.7,
+            "est_time_per_task_sec": 176.0,
             "idx_per_dollar": 103.70135895996428,
-            "idx_per_min": 15.768240591603396,
-            "idx_per_sec": 0.2628040098600566
+            "idx_per_min": 15.830955184865456,
+            "idx_per_sec": 0.2638492530810909
           },
           {
             "slug": "glm-5-3-flash",
@@ -3297,12 +3297,12 @@
             "intelligenceIndex": 45.9687360226153,
             "price1mInputTokens": 4.0,
             "price1mOutputTokens": 20.0,
-            "medianCanonicalAnswerOutputSpeed": 73.250872510719,
+            "medianCanonicalAnswerOutputSpeed": 76.3477509194588,
             "est_cost_per_task_usd": 0.0338,
-            "est_time_per_task_sec": 17.7,
+            "est_time_per_task_sec": 17.0,
             "idx_per_dollar": 1360.0217758170209,
-            "idx_per_min": 155.82622380547562,
-            "idx_per_sec": 2.59710373009126
+            "idx_per_min": 162.24259772687753,
+            "idx_per_sec": 2.704043295447959
           },
           {
             "slug": "gpt-5-5",
@@ -3405,12 +3405,12 @@
             "intelligenceIndex": 44.3904127497752,
             "price1mInputTokens": 2.0,
             "price1mOutputTokens": 12.0,
-            "medianCanonicalAnswerOutputSpeed": 94.5598619361633,
+            "medianCanonicalAnswerOutputSpeed": 97.9279350600506,
             "est_cost_per_task_usd": 0.0484,
-            "est_time_per_task_sec": 39.3,
+            "est_time_per_task_sec": 38.0,
             "idx_per_dollar": 917.157288218496,
-            "idx_per_min": 67.77162251874077,
-            "idx_per_sec": 1.1295270419790129
+            "idx_per_min": 70.0901253943819,
+            "idx_per_sec": 1.1681687565730317
           },
           {
             "slug": "claude-opus-4-7",
@@ -3441,12 +3441,12 @@
             "intelligenceIndex": 44.1091727838995,
             "price1mInputTokens": 5.0,
             "price1mOutputTokens": 30.0,
-            "medianCanonicalAnswerOutputSpeed": 82.7288211794751,
+            "medianCanonicalAnswerOutputSpeed": 85.0571238890892,
             "est_cost_per_task_usd": 0.0747,
-            "est_time_per_task_sec": 29.5,
+            "est_time_per_task_sec": 28.7,
             "idx_per_dollar": 590.48424074832,
-            "idx_per_min": 89.7135717638634,
-            "idx_per_sec": 1.49522619606439
+            "idx_per_min": 92.21429850292579,
+            "idx_per_sec": 1.5369049750487631
           },
           {
             "slug": "claude-opus-5-low",
@@ -3477,12 +3477,12 @@
             "intelligenceIndex": 43.4414655969671,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 1.2,
-            "medianCanonicalAnswerOutputSpeed": 126.939421068725,
+            "medianCanonicalAnswerOutputSpeed": 127.666269366717,
             "est_cost_per_task_usd": 0.0164,
-            "est_time_per_task_sec": 103.8,
+            "est_time_per_task_sec": 103.2,
             "idx_per_dollar": 2648.869853473603,
-            "idx_per_min": 25.110673755472313,
-            "idx_per_sec": 0.4185112292578719
+            "idx_per_min": 25.256666044748314,
+            "idx_per_sec": 0.42094443407913856
           },
           {
             "slug": "gemini-3-7-flash-medium",
@@ -3495,12 +3495,12 @@
             "intelligenceIndex": 43.3776287488272,
             "price1mInputTokens": 0.75,
             "price1mOutputTokens": 3.75,
-            "medianCanonicalAnswerOutputSpeed": 321.969901225791,
+            "medianCanonicalAnswerOutputSpeed": 334.187623819878,
             "est_cost_per_task_usd": 0.0124,
-            "est_time_per_task_sec": 8.7,
+            "est_time_per_task_sec": 8.4,
             "idx_per_dollar": 3498.1958668409034,
-            "idx_per_min": 299.1560603367393,
-            "idx_per_sec": 4.985934338945656
+            "idx_per_min": 309.84020534876566,
+            "idx_per_sec": 5.1640034224794285
           },
           {
             "slug": "muse-spark-1-1",
@@ -3549,12 +3549,12 @@
             "intelligenceIndex": 42.5399256126965,
             "price1mInputTokens": 1.4,
             "price1mOutputTokens": 4.4,
-            "medianCanonicalAnswerOutputSpeed": 81.2792625174472,
+            "medianCanonicalAnswerOutputSpeed": 80.2272328322109,
             "est_cost_per_task_usd": 0.096,
-            "est_time_per_task_sec": 259.3,
+            "est_time_per_task_sec": 262.7,
             "idx_per_dollar": 443.1242251322552,
-            "idx_per_min": 9.843407392062437,
-            "idx_per_sec": 0.16405678986770728
+            "idx_per_min": 9.716008895172402,
+            "idx_per_sec": 0.1619334815862067
           },
           {
             "slug": "gemini-3-8-flash-low",
@@ -3621,12 +3621,12 @@
             "intelligenceIndex": 41.596166684506,
             "price1mInputTokens": 5.0,
             "price1mOutputTokens": 30.0,
-            "medianCanonicalAnswerOutputSpeed": 73.0302558353445,
+            "medianCanonicalAnswerOutputSpeed": 74.5571485150907,
             "est_cost_per_task_usd": 0.0787,
-            "est_time_per_task_sec": 31.2,
+            "est_time_per_task_sec": 30.5,
             "idx_per_dollar": 528.5408727383227,
-            "idx_per_min": 79.99262823943462,
-            "idx_per_sec": 1.3332104706572436
+            "idx_per_min": 81.82852462525771,
+            "idx_per_sec": 1.3638087437542952
           },
           {
             "slug": "gpt-5-6-luna-xhigh",
@@ -3639,12 +3639,12 @@
             "intelligenceIndex": 41.5752269630656,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 1.2,
-            "medianCanonicalAnswerOutputSpeed": 116.657078686917,
+            "medianCanonicalAnswerOutputSpeed": 118.550984924573,
             "est_cost_per_task_usd": 0.0086,
-            "est_time_per_task_sec": 58.1,
+            "est_time_per_task_sec": 57.1,
             "idx_per_dollar": 4834.328716635535,
-            "idx_per_min": 42.93482991022265,
-            "idx_per_sec": 0.7155804985037109
+            "idx_per_min": 43.68675337625107,
+            "idx_per_sec": 0.7281125562708511
           },
           {
             "slug": "deepseek-v4-flash-vision",
@@ -3675,12 +3675,12 @@
             "intelligenceIndex": 41.4059480116377,
             "price1mInputTokens": 0.5,
             "price1mOutputTokens": 3.0,
-            "medianCanonicalAnswerOutputSpeed": 59.6137841010003,
+            "medianCanonicalAnswerOutputSpeed": 61.6252768139328,
             "est_cost_per_task_usd": 0.0906,
-            "est_time_per_task_sec": 496.0,
+            "est_time_per_task_sec": 479.8,
             "idx_per_dollar": 457.0192937266854,
-            "idx_per_min": 5.00878403366585,
-            "idx_per_sec": 0.08347973389443084
+            "idx_per_min": 5.177900960188124,
+            "idx_per_sec": 0.08629834933646872
           },
           {
             "slug": "gpt-5-6-terra-high",
@@ -3729,12 +3729,12 @@
             "intelligenceIndex": 40.8432310270633,
             "price1mInputTokens": 4.0,
             "price1mOutputTokens": 20.0,
-            "medianCanonicalAnswerOutputSpeed": 70.3470839401689,
+            "medianCanonicalAnswerOutputSpeed": 72.7535307505822,
             "est_cost_per_task_usd": 0.0252,
-            "est_time_per_task_sec": 12.4,
+            "est_time_per_task_sec": 12.0,
             "idx_per_dollar": 1620.7631359945754,
-            "idx_per_min": 197.62853722772564,
-            "idx_per_sec": 3.293808953795427
+            "idx_per_min": 204.21615513531648,
+            "idx_per_sec": 3.403602585588608
           },
           {
             "slug": "deepseek-v4-flash",
@@ -3783,12 +3783,12 @@
             "intelligenceIndex": 39.7284418922047,
             "price1mInputTokens": 1.5,
             "price1mOutputTokens": 9.0,
-            "medianCanonicalAnswerOutputSpeed": 217.310461680711,
+            "medianCanonicalAnswerOutputSpeed": 221.467548297321,
             "est_cost_per_task_usd": 0.0871,
-            "est_time_per_task_sec": 42.9,
+            "est_time_per_task_sec": 42.1,
             "idx_per_dollar": 456.1244763743364,
-            "idx_per_min": 55.56425439469189,
-            "idx_per_sec": 0.9260709065781981
+            "idx_per_min": 56.62010720979292,
+            "idx_per_sec": 0.9436684534965486
           },
           {
             "slug": "agnes-2-5-pro-beta",
@@ -3819,12 +3819,12 @@
             "intelligenceIndex": 38.8112888101035,
             "price1mInputTokens": 3.0,
             "price1mOutputTokens": 15.0,
-            "medianCanonicalAnswerOutputSpeed": 40.8684229230553,
+            "medianCanonicalAnswerOutputSpeed": 41.4407766448399,
             "est_cost_per_task_usd": 0.0268,
-            "est_time_per_task_sec": 32.0,
+            "est_time_per_task_sec": 31.6,
             "idx_per_dollar": 1448.1824182874439,
-            "idx_per_min": 72.77116651894406,
-            "idx_per_sec": 1.2128527753157343
+            "idx_per_min": 73.69232052551297,
+            "idx_per_sec": 1.2282053420918828
           },
           {
             "slug": "claude-sonnet-4-6-adaptive",
@@ -3837,12 +3837,12 @@
             "intelligenceIndex": 38.4673692543638,
             "price1mInputTokens": 3.0,
             "price1mOutputTokens": 15.0,
-            "medianCanonicalAnswerOutputSpeed": 71.725953543126,
+            "medianCanonicalAnswerOutputSpeed": 71.3335744679099,
             "est_cost_per_task_usd": 0.3272,
-            "est_time_per_task_sec": 303.7,
+            "est_time_per_task_sec": 305.3,
             "idx_per_dollar": 117.56530945710209,
-            "idx_per_min": 7.599743678833811,
-            "idx_per_sec": 0.12666239464723017
+            "idx_per_min": 7.559915346419351,
+            "idx_per_sec": 0.1259985891069892
           },
           {
             "slug": "gemini-3-5-flash-medium",
@@ -3927,12 +3927,12 @@
             "intelligenceIndex": 37.2268865753408,
             "price1mInputTokens": 2.0,
             "price1mOutputTokens": 12.0,
-            "medianCanonicalAnswerOutputSpeed": 88.0303062367494,
+            "medianCanonicalAnswerOutputSpeed": 92.2717937518341,
             "est_cost_per_task_usd": 0.0094,
-            "est_time_per_task_sec": 8.4,
+            "est_time_per_task_sec": 8.1,
             "idx_per_dollar": 3960.307082483064,
-            "idx_per_min": 265.90633268100567,
-            "idx_per_sec": 4.431772211350095
+            "idx_per_min": 275.75471537289485,
+            "idx_per_sec": 4.59591192288158
           },
           {
             "slug": "qwen3-7-max",
@@ -3945,12 +3945,12 @@
             "intelligenceIndex": 36.983347426267,
             "price1mInputTokens": 2.5,
             "price1mOutputTokens": 7.5,
-            "medianCanonicalAnswerOutputSpeed": 217.52203304544,
+            "medianCanonicalAnswerOutputSpeed": 207.019057074041,
             "est_cost_per_task_usd": 0.1128,
-            "est_time_per_task_sec": 65.6,
+            "est_time_per_task_sec": 68.9,
             "idx_per_dollar": 327.86655519740253,
-            "idx_per_min": 33.82623240207348,
-            "idx_per_sec": 0.5637705400345581
+            "idx_per_min": 32.20610806351262,
+            "idx_per_sec": 0.5367684677252105
           },
           {
             "slug": "gpt-5-3-codex",
@@ -4071,12 +4071,12 @@
             "intelligenceIndex": 35.752264605813,
             "price1mInputTokens": 0.435,
             "price1mOutputTokens": 0.87,
-            "medianCanonicalAnswerOutputSpeed": 69.9560495038541,
+            "medianCanonicalAnswerOutputSpeed": 79.2831445203296,
             "est_cost_per_task_usd": 0.0228,
-            "est_time_per_task_sec": 357.7,
+            "est_time_per_task_sec": 315.6,
             "idx_per_dollar": 1568.0817809567104,
-            "idx_per_min": 5.997025094628962,
-            "idx_per_sec": 0.09995041824381604
+            "idx_per_min": 6.797008480192584,
+            "idx_per_sec": 0.11328347466987641
           },
           {
             "slug": "minimax-m3",
@@ -4107,7 +4107,7 @@
             "intelligenceIndex": 35.4264750240067,
             "price1mInputTokens": 5.0,
             "price1mOutputTokens": 25.0,
-            "medianCanonicalAnswerOutputSpeed": 77.0585262562241,
+            "medianCanonicalAnswerOutputSpeed": 77.367534820545,
             "est_cost_per_task_usd": 0.0225,
             "est_time_per_task_sec": 10.9,
             "idx_per_dollar": 1574.5100010669644,
@@ -4125,12 +4125,12 @@
             "intelligenceIndex": 35.2592426203873,
             "price1mInputTokens": 5.0,
             "price1mOutputTokens": 30.0,
-            "medianCanonicalAnswerOutputSpeed": 77.1646801118764,
+            "medianCanonicalAnswerOutputSpeed": 78.819139386212,
             "est_cost_per_task_usd": 0.0168,
-            "est_time_per_task_sec": 6.7,
+            "est_time_per_task_sec": 6.5,
             "idx_per_dollar": 2098.76444168972,
-            "idx_per_min": 315.7544115258564,
-            "idx_per_sec": 5.262573525430939
+            "idx_per_min": 325.4699318804981,
+            "idx_per_sec": 5.424498864674969
           },
           {
             "slug": "qwen3-8-27b-medium",
@@ -4197,12 +4197,12 @@
             "intelligenceIndex": 34.6476263740095,
             "price1mInputTokens": 0.435,
             "price1mOutputTokens": 0.87,
-            "medianCanonicalAnswerOutputSpeed": 88.0152041576021,
+            "medianCanonicalAnswerOutputSpeed": 93.4008968564729,
             "est_cost_per_task_usd": 0.009,
-            "est_time_per_task_sec": 116.6,
+            "est_time_per_task_sec": 109.8,
             "idx_per_dollar": 3849.7362637788333,
-            "idx_per_min": 17.82896725935309,
-            "idx_per_sec": 0.29714945432255147
+            "idx_per_min": 18.93312916612541,
+            "idx_per_sec": 0.3155521527687568
           },
           {
             "slug": "quasar-438b",
@@ -4215,12 +4215,12 @@
             "intelligenceIndex": 33.9250344264797,
             "price1mInputTokens": 0.6,
             "price1mOutputTokens": 1.8,
-            "medianCanonicalAnswerOutputSpeed": 215.167802559482,
+            "medianCanonicalAnswerOutputSpeed": 199.699089436785,
             "est_cost_per_task_usd": 0.0982,
-            "est_time_per_task_sec": 241.7,
+            "est_time_per_task_sec": 260.5,
             "idx_per_dollar": 345.46878234704377,
-            "idx_per_min": 8.421605567185692,
-            "idx_per_sec": 0.14036009278642822
+            "idx_per_min": 7.813827507058663,
+            "idx_per_sec": 0.13023045845097772
           },
           {
             "slug": "kimi-k2-7-code",
@@ -4233,12 +4233,12 @@
             "intelligenceIndex": 33.8552519144942,
             "price1mInputTokens": 0.95,
             "price1mOutputTokens": 4.0,
-            "medianCanonicalAnswerOutputSpeed": 49.4026225445659,
+            "medianCanonicalAnswerOutputSpeed": 49.7955177767042,
             "est_cost_per_task_usd": 0.0481,
-            "est_time_per_task_sec": 232.8,
+            "est_time_per_task_sec": 230.9,
             "idx_per_dollar": 703.8513911537256,
-            "idx_per_min": 8.725580390333555,
-            "idx_per_sec": 0.14542633983889258
+            "idx_per_min": 8.797380315589656,
+            "idx_per_sec": 0.1466230052598276
           },
           {
             "slug": "qwen3-8-27b-low",
@@ -4287,12 +4287,12 @@
             "intelligenceIndex": 33.4890585105916,
             "price1mInputTokens": 2.0,
             "price1mOutputTokens": 10.0,
-            "medianCanonicalAnswerOutputSpeed": 105.578285253946,
+            "medianCanonicalAnswerOutputSpeed": 107.72865567418,
             "est_cost_per_task_usd": 0.0078,
-            "est_time_per_task_sec": 6.7,
+            "est_time_per_task_sec": 6.5,
             "idx_per_dollar": 4293.469039819436,
-            "idx_per_min": 299.90201651276055,
-            "idx_per_sec": 4.998366941879342
+            "idx_per_min": 309.12977086699937,
+            "idx_per_sec": 5.152162847783322
           },
           {
             "slug": "hy3",
@@ -4305,12 +4305,12 @@
             "intelligenceIndex": 33.2451220391876,
             "price1mInputTokens": 0.136,
             "price1mOutputTokens": 0.554,
-            "medianCanonicalAnswerOutputSpeed": 102.690625718754,
+            "medianCanonicalAnswerOutputSpeed": 102.938381656183,
             "est_cost_per_task_usd": 0.0146,
-            "est_time_per_task_sec": 249.3,
+            "est_time_per_task_sec": 248.7,
             "idx_per_dollar": 2277.0631533690134,
-            "idx_per_min": 8.001232741080047,
-            "idx_per_sec": 0.1333538790180008
+            "idx_per_min": 8.020536077005453,
+            "idx_per_sec": 0.1336756012834242
           },
           {
             "slug": "mimo-v2-pro",
@@ -4395,12 +4395,12 @@
             "intelligenceIndex": 32.862858923424,
             "price1mInputTokens": 4.0,
             "price1mOutputTokens": 20.0,
-            "medianCanonicalAnswerOutputSpeed": 68.8223684009774,
+            "medianCanonicalAnswerOutputSpeed": 69.9290695077864,
             "est_cost_per_task_usd": 0.0032,
-            "est_time_per_task_sec": 1.5,
+            "est_time_per_task_sec": 1.4,
             "idx_per_dollar": 10269.64341357,
-            "idx_per_min": 1314.51435693696,
-            "idx_per_sec": 21.908572615616
+            "idx_per_min": 1408.4082395753144,
+            "idx_per_sec": 23.47347065958857
           },
           {
             "slug": "nex-n2-pro",
@@ -4413,12 +4413,12 @@
             "intelligenceIndex": 32.7272224126929,
             "price1mInputTokens": 0.5,
             "price1mOutputTokens": 2.5,
-            "medianCanonicalAnswerOutputSpeed": 139.71699348805,
+            "medianCanonicalAnswerOutputSpeed": 139.332788201344,
             "est_cost_per_task_usd": 0.0311,
-            "est_time_per_task_sec": 85.4,
+            "est_time_per_task_sec": 85.7,
             "idx_per_dollar": 1052.3222640737267,
-            "idx_per_min": 22.99336469275848,
-            "idx_per_sec": 0.38322274487930796
+            "idx_per_min": 22.912874501301914,
+            "idx_per_sec": 0.38188124168836524
           },
           {
             "slug": "solar-pro4",
@@ -4431,12 +4431,12 @@
             "intelligenceIndex": 32.6981175204431,
             "price1mInputTokens": 0.3,
             "price1mOutputTokens": 1.2,
-            "medianCanonicalAnswerOutputSpeed": 80.156691933491,
+            "medianCanonicalAnswerOutputSpeed": 88.8226397411404,
             "est_cost_per_task_usd": 0.0291,
-            "est_time_per_task_sec": 293.6,
+            "est_time_per_task_sec": 265.0,
             "idx_per_dollar": 1123.646650187048,
-            "idx_per_min": 6.682176604995183,
-            "idx_per_sec": 0.11136961008325305
+            "idx_per_min": 7.403347363119192,
+            "idx_per_sec": 0.1233891227186532
           },
           {
             "slug": "mimo-v2-5-pro",
@@ -4485,12 +4485,12 @@
             "intelligenceIndex": 32.4032567592107,
             "price1mInputTokens": 2.0,
             "price1mOutputTokens": 12.0,
-            "medianCanonicalAnswerOutputSpeed": 87.9111914571372,
+            "medianCanonicalAnswerOutputSpeed": 89.9349819573285,
             "est_cost_per_task_usd": 0.0058,
-            "est_time_per_task_sec": 5.0,
+            "est_time_per_task_sec": 4.9,
             "idx_per_dollar": 5586.768406760466,
-            "idx_per_min": 388.8390811105284,
-            "idx_per_sec": 6.480651351842139
+            "idx_per_min": 396.7745725617636,
+            "idx_per_sec": 6.612909542696061
           },
           {
             "slug": "glm-5",
@@ -4539,12 +4539,12 @@
             "intelligenceIndex": 32.1665277396553,
             "price1mInputTokens": 1.0,
             "price1mOutputTokens": 4.05,
-            "medianCanonicalAnswerOutputSpeed": 69.1166655943375,
+            "medianCanonicalAnswerOutputSpeed": 69.9568074070397,
             "est_cost_per_task_usd": 0.0947,
-            "est_time_per_task_sec": 329.8,
+            "est_time_per_task_sec": 325.8,
             "idx_per_dollar": 339.66766356552586,
-            "idx_per_min": 5.852006259488532,
-            "idx_per_sec": 0.09753343765814221
+            "idx_per_min": 5.923854095700792,
+            "idx_per_sec": 0.0987309015950132
           },
           {
             "slug": "gpt-5-4-low",
@@ -4557,12 +4557,12 @@
             "intelligenceIndex": 32.0521122079501,
             "price1mInputTokens": 2.5,
             "price1mOutputTokens": 15.0,
-            "medianCanonicalAnswerOutputSpeed": 96.736350056251,
+            "medianCanonicalAnswerOutputSpeed": 99.1183023015518,
             "est_cost_per_task_usd": 0.012,
-            "est_time_per_task_sec": 7.8,
+            "est_time_per_task_sec": 7.6,
             "idx_per_dollar": 2671.0093506625085,
-            "idx_per_min": 246.55470929192387,
-            "idx_per_sec": 4.109245154865397
+            "idx_per_min": 253.04299111539558,
+            "idx_per_sec": 4.217383185256593
           },
           {
             "slug": "gpt-5-4-mini",
@@ -4575,12 +4575,12 @@
             "intelligenceIndex": 31.9166948925393,
             "price1mInputTokens": 0.75,
             "price1mOutputTokens": 4.5,
-            "medianCanonicalAnswerOutputSpeed": 150.437310572359,
+            "medianCanonicalAnswerOutputSpeed": 147.759039355304,
             "est_cost_per_task_usd": 0.0605,
-            "est_time_per_task_sec": 89.1,
+            "est_time_per_task_sec": 90.7,
             "idx_per_dollar": 527.5486759097405,
-            "idx_per_min": 21.4927238333598,
-            "idx_per_sec": 0.35821206388933
+            "idx_per_min": 21.113579862760286,
+            "idx_per_sec": 0.35189299771267146
           },
           {
             "slug": "glm-5-1",
@@ -4629,12 +4629,12 @@
             "intelligenceIndex": 31.6733177422575,
             "price1mInputTokens": 1.0,
             "price1mOutputTokens": 2.0,
-            "medianCanonicalAnswerOutputSpeed": 119.43167270842,
+            "medianCanonicalAnswerOutputSpeed": 124.745637567603,
             "est_cost_per_task_usd": 0.025,
-            "est_time_per_task_sec": 103.1,
+            "est_time_per_task_sec": 98.7,
             "idx_per_dollar": 1266.9327096902998,
-            "idx_per_min": 18.43258064534869,
-            "idx_per_sec": 0.3072096774224782
+            "idx_per_min": 19.254296499852583,
+            "idx_per_sec": 0.3209049416642097
           },
           {
             "slug": "qwen3-6-plus",
@@ -4701,12 +4701,12 @@
             "intelligenceIndex": 30.922613544722,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 1.25,
-            "medianCanonicalAnswerOutputSpeed": 166.261148360052,
+            "medianCanonicalAnswerOutputSpeed": 168.486791914439,
             "est_cost_per_task_usd": 0.0154,
-            "est_time_per_task_sec": 73.8,
+            "est_time_per_task_sec": 72.8,
             "idx_per_dollar": 2007.9619184884416,
-            "idx_per_min": 25.14033621522114,
-            "idx_per_sec": 0.419005603587019
+            "idx_per_min": 25.485670503891757,
+            "idx_per_sec": 0.42476117506486266
           },
           {
             "slug": "gpt-5-2-medium",
@@ -4737,7 +4737,7 @@
             "intelligenceIndex": 30.8083865582658,
             "price1mInputTokens": 0.4,
             "price1mOutputTokens": 1.6,
-            "medianCanonicalAnswerOutputSpeed": 58.9739392281213,
+            "medianCanonicalAnswerOutputSpeed": 58.9729595980819,
             "est_cost_per_task_usd": 0.0235,
             "est_time_per_task_sec": 241.1,
             "idx_per_dollar": 1310.9951726921615,
@@ -4755,12 +4755,12 @@
             "intelligenceIndex": 30.7655424820489,
             "price1mInputTokens": 5.0,
             "price1mOutputTokens": 25.0,
-            "medianCanonicalAnswerOutputSpeed": 44.5510542761797,
+            "medianCanonicalAnswerOutputSpeed": 46.133657375749,
             "est_cost_per_task_usd": 0.0159,
-            "est_time_per_task_sec": 13.1,
+            "est_time_per_task_sec": 12.7,
             "idx_per_dollar": 1934.9397787452137,
-            "idx_per_min": 140.91088159717054,
-            "idx_per_sec": 2.348514693286176
+            "idx_per_min": 145.34901960023103,
+            "idx_per_sec": 2.4224836600038504
           },
           {
             "slug": "gemini-3-flash-reasoning",
@@ -4773,12 +4773,12 @@
             "intelligenceIndex": 30.737645218059,
             "price1mInputTokens": 0.5,
             "price1mOutputTokens": 3.0,
-            "medianCanonicalAnswerOutputSpeed": 212.733051295313,
+            "medianCanonicalAnswerOutputSpeed": 213.931167649531,
             "est_cost_per_task_usd": 0.0234,
-            "est_time_per_task_sec": 36.2,
+            "est_time_per_task_sec": 36.0,
             "idx_per_dollar": 1313.5745819683334,
-            "idx_per_min": 50.94637328960055,
-            "idx_per_sec": 0.8491062214933425
+            "idx_per_min": 51.229408696765006,
+            "idx_per_sec": 0.8538234782794167
           },
           {
             "slug": "deepseek-v4-flash-0420-high",
@@ -4845,12 +4845,12 @@
             "intelligenceIndex": 30.0166884,
             "price1mInputTokens": 1.25,
             "price1mOutputTokens": 2.5,
-            "medianCanonicalAnswerOutputSpeed": 105.170219876985,
+            "medianCanonicalAnswerOutputSpeed": 107.362393798024,
             "est_cost_per_task_usd": 0.0153,
-            "est_time_per_task_sec": 57.1,
+            "est_time_per_task_sec": 55.9,
             "idx_per_dollar": 1961.8750588235296,
-            "idx_per_min": 31.54117870402802,
-            "idx_per_sec": 0.5256863117338003
+            "idx_per_min": 32.21827019677996,
+            "idx_per_sec": 0.5369711699463328
           },
           {
             "slug": "nvidia-nemotron-3-ultra-550b-a55b",
@@ -4863,12 +4863,12 @@
             "intelligenceIndex": 29.5512201741193,
             "price1mInputTokens": 0.6,
             "price1mOutputTokens": 2.6,
-            "medianCanonicalAnswerOutputSpeed": 162.882989673177,
+            "medianCanonicalAnswerOutputSpeed": 172.880678385655,
             "est_cost_per_task_usd": 0.0343,
-            "est_time_per_task_sec": 77.3,
+            "est_time_per_task_sec": 72.8,
             "idx_per_dollar": 861.5516085749068,
-            "idx_per_min": 22.93755770306802,
-            "idx_per_sec": 0.38229262838446704
+            "idx_per_min": 24.355401242406018,
+            "idx_per_sec": 0.4059233540401003
           },
           {
             "slug": "grok-4-20-0309",
@@ -5025,12 +5025,12 @@
             "intelligenceIndex": 29.0027349276747,
             "price1mInputTokens": 0.6,
             "price1mOutputTokens": 3.6,
-            "medianCanonicalAnswerOutputSpeed": 64.6291841004509,
+            "medianCanonicalAnswerOutputSpeed": 65.7900006101061,
             "est_cost_per_task_usd": 0.0379,
-            "est_time_per_task_sec": 162.1,
+            "est_time_per_task_sec": 159.2,
             "idx_per_dollar": 765.2436656378549,
-            "idx_per_min": 10.735127055277497,
-            "idx_per_sec": 0.17891878425462493
+            "idx_per_min": 10.930678992842225,
+            "idx_per_sec": 0.18217798321403708
           },
           {
             "slug": "claude-4-5-sonnet-thinking",
@@ -5061,12 +5061,12 @@
             "intelligenceIndex": 28.9598773998519,
             "price1mInputTokens": 3.0,
             "price1mOutputTokens": 15.0,
-            "medianCanonicalAnswerOutputSpeed": 50.0731100386379,
+            "medianCanonicalAnswerOutputSpeed": 50.9881070001,
             "est_cost_per_task_usd": 0.0084,
-            "est_time_per_task_sec": 10.1,
+            "est_time_per_task_sec": 9.9,
             "idx_per_dollar": 3447.604452363322,
-            "idx_per_min": 172.03887564268456,
-            "idx_per_sec": 2.8673145940447426
+            "idx_per_min": 175.51440848395092,
+            "idx_per_sec": 2.9252401413991818
           },
           {
             "slug": "grok-4-3-low",
@@ -5097,12 +5097,12 @@
             "intelligenceIndex": 28.4656271244138,
             "price1mInputTokens": 1.38,
             "price1mOutputTokens": 4.4,
-            "medianCanonicalAnswerOutputSpeed": 48.7033276717809,
+            "medianCanonicalAnswerOutputSpeed": 48.1232201397929,
             "est_cost_per_task_usd": 0.0648,
-            "est_time_per_task_sec": 301.6,
+            "est_time_per_task_sec": 305.3,
             "idx_per_dollar": 439.2843692039167,
-            "idx_per_min": 5.66292316798683,
-            "idx_per_sec": 0.0943820527997805
+            "idx_per_min": 5.594292916687939,
+            "idx_per_sec": 0.09323821527813232
           },
           {
             "slug": "mimo-v2-omni",
@@ -5133,7 +5133,7 @@
             "intelligenceIndex": 28.0263066683505,
             "price1mInputTokens": 1.5,
             "price1mOutputTokens": 9.0,
-            "medianCanonicalAnswerOutputSpeed": 194.697530850448,
+            "medianCanonicalAnswerOutputSpeed": 196.498815968552,
             "est_cost_per_task_usd": 0.0053,
             "est_time_per_task_sec": 2.6,
             "idx_per_dollar": 5287.982390254811,
@@ -5169,7 +5169,7 @@
             "intelligenceIndex": 27.8348673725617,
             "price1mInputTokens": 5.0,
             "price1mOutputTokens": 25.0,
-            "medianCanonicalAnswerOutputSpeed": 54.9545395825632,
+            "medianCanonicalAnswerOutputSpeed": 55.0191038339764,
             "est_cost_per_task_usd": 0.0115,
             "est_time_per_task_sec": 7.4,
             "idx_per_dollar": 2420.423249787974,
@@ -5241,12 +5241,12 @@
             "intelligenceIndex": 27.5743377606185,
             "price1mInputTokens": 0.3,
             "price1mOutputTokens": 2.5,
-            "medianCanonicalAnswerOutputSpeed": 378.630122484227,
+            "medianCanonicalAnswerOutputSpeed": 401.403539246048,
             "est_cost_per_task_usd": 0.0192,
-            "est_time_per_task_sec": 19.5,
+            "est_time_per_task_sec": 18.4,
             "idx_per_dollar": 1436.1634250322138,
-            "idx_per_min": 84.84411618651846,
-            "idx_per_sec": 1.4140686031086411
+            "idx_per_min": 89.91631878462556,
+            "idx_per_sec": 1.4986053130770927
           },
           {
             "slug": "claude-sonnet-4-6-non-reasoning-low-effort",
@@ -5259,12 +5259,12 @@
             "intelligenceIndex": 27.4091459254881,
             "price1mInputTokens": 3.0,
             "price1mOutputTokens": 15.0,
-            "medianCanonicalAnswerOutputSpeed": 50.3449928225185,
+            "medianCanonicalAnswerOutputSpeed": 51.1929851499366,
             "est_cost_per_task_usd": 0.0055,
-            "est_time_per_task_sec": 6.3,
+            "est_time_per_task_sec": 6.2,
             "idx_per_dollar": 4983.481077361474,
-            "idx_per_min": 261.0394850046486,
-            "idx_per_sec": 4.35065808341081
+            "idx_per_min": 265.2497992789171,
+            "idx_per_sec": 4.420829987981952
           },
           {
             "slug": "ling-3-0-flash",
@@ -5295,7 +5295,7 @@
             "intelligenceIndex": 27.2930169913912,
             "price1mInputTokens": 5.0,
             "price1mOutputTokens": 30.0,
-            "medianCanonicalAnswerOutputSpeed": 76.9663212431037,
+            "medianCanonicalAnswerOutputSpeed": 77.5677912722469,
             "est_cost_per_task_usd": 0.0072,
             "est_time_per_task_sec": 2.5,
             "idx_per_dollar": 3790.696804359889,
@@ -5385,12 +5385,12 @@
             "intelligenceIndex": 26.8282582278546,
             "price1mInputTokens": 0.3,
             "price1mOutputTokens": 1.2,
-            "medianCanonicalAnswerOutputSpeed": 109.588962055878,
+            "medianCanonicalAnswerOutputSpeed": 112.194365632338,
             "est_cost_per_task_usd": 0.007,
-            "est_time_per_task_sec": 52.6,
+            "est_time_per_task_sec": 51.4,
             "idx_per_dollar": 3832.6083182649427,
-            "idx_per_min": 30.60257592530943,
-            "idx_per_sec": 0.5100429320884905
+            "idx_per_min": 31.317032950803036,
+            "idx_per_sec": 0.5219505491800506
           },
           {
             "slug": "hy3-preview",
@@ -5475,12 +5475,12 @@
             "intelligenceIndex": 26.4538356689947,
             "price1mInputTokens": 1.4,
             "price1mOutputTokens": 4.4,
-            "medianCanonicalAnswerOutputSpeed": 121.56224483429,
+            "medianCanonicalAnswerOutputSpeed": 123.019390101246,
             "est_cost_per_task_usd": 0.0061,
-            "est_time_per_task_sec": 11.0,
+            "est_time_per_task_sec": 10.9,
             "idx_per_dollar": 4336.694371966344,
-            "idx_per_min": 144.29364910360746,
-            "idx_per_sec": 2.4048941517267908
+            "idx_per_min": 145.6174440495121,
+            "idx_per_sec": 2.4269574008252017
           },
           {
             "slug": "qwen3-8-27b-non-reasoning",
@@ -5529,12 +5529,12 @@
             "intelligenceIndex": 26.2984313884158,
             "price1mInputTokens": 2.0,
             "price1mOutputTokens": 12.0,
-            "medianCanonicalAnswerOutputSpeed": 84.6909489214419,
+            "medianCanonicalAnswerOutputSpeed": 86.7875320475954,
             "est_cost_per_task_usd": 0.0018,
-            "est_time_per_task_sec": 1.2,
+            "est_time_per_task_sec": 1.1,
             "idx_per_dollar": 14610.239660231,
-            "idx_per_min": 1314.9215694207899,
-            "idx_per_sec": 21.9153594903465
+            "idx_per_min": 1434.459893913589,
+            "idx_per_sec": 23.907664898559815
           },
           {
             "slug": "gemini-3-pro-low",
@@ -5565,12 +5565,12 @@
             "intelligenceIndex": 26.2290803070548,
             "price1mInputTokens": 0.6,
             "price1mOutputTokens": 2.2,
-            "medianCanonicalAnswerOutputSpeed": 110.738848716591,
+            "medianCanonicalAnswerOutputSpeed": 111.037933537436,
             "est_cost_per_task_usd": 0.0221,
-            "est_time_per_task_sec": 90.5,
+            "est_time_per_task_sec": 90.3,
             "idx_per_dollar": 1186.836212988905,
-            "idx_per_min": 17.389445507439646,
-            "idx_per_sec": 0.28982409179066076
+            "idx_per_min": 17.42796033691349,
+            "idx_per_sec": 0.29046600561522484
           },
           {
             "slug": "qwen3-6-35b-a3b",
@@ -5583,12 +5583,12 @@
             "intelligenceIndex": 26.2072276,
             "price1mInputTokens": 0.375,
             "price1mOutputTokens": 2.25,
-            "medianCanonicalAnswerOutputSpeed": 148.17241263777,
+            "medianCanonicalAnswerOutputSpeed": 146.629439577203,
             "est_cost_per_task_usd": 0.0363,
-            "est_time_per_task_sec": 108.5,
+            "est_time_per_task_sec": 109.7,
             "idx_per_dollar": 721.9621928374655,
-            "idx_per_min": 14.492476092165898,
-            "idx_per_sec": 0.24154126820276497
+            "idx_per_min": 14.333943992707383,
+            "idx_per_sec": 0.23889906654512305
           },
           {
             "slug": "qwen3-5-397b-a17b",
@@ -5601,12 +5601,12 @@
             "intelligenceIndex": 26.1483447909371,
             "price1mInputTokens": 0.6,
             "price1mOutputTokens": 3.6,
-            "medianCanonicalAnswerOutputSpeed": 102.433139226958,
+            "medianCanonicalAnswerOutputSpeed": 103.204665180758,
             "est_cost_per_task_usd": 0.0278,
-            "est_time_per_task_sec": 75.0,
+            "est_time_per_task_sec": 74.5,
             "idx_per_dollar": 940.5879421200395,
-            "idx_per_min": 20.918675832749678,
-            "idx_per_sec": 0.34864459721249463
+            "idx_per_min": 21.05906963028491,
+            "idx_per_sec": 0.35098449383808183
           },
           {
             "slug": "kimi-k2-thinking",
@@ -5637,12 +5637,12 @@
             "intelligenceIndex": 25.8458275725582,
             "price1mInputTokens": 0.75,
             "price1mOutputTokens": 2.95,
-            "medianCanonicalAnswerOutputSpeed": 55.0539639006222,
+            "medianCanonicalAnswerOutputSpeed": 56.2655542240598,
             "est_cost_per_task_usd": 0.0846,
-            "est_time_per_task_sec": 458.3,
+            "est_time_per_task_sec": 448.4,
             "idx_per_dollar": 305.5062360822482,
-            "idx_per_min": 3.3836998785806065,
-            "idx_per_sec": 0.05639499797634344
+            "idx_per_min": 3.4584069008775473,
+            "idx_per_sec": 0.057640115014625785
           },
           {
             "slug": "gpt-5-6-luna-low",
@@ -5709,12 +5709,12 @@
             "intelligenceIndex": 25.6441668952499,
             "price1mInputTokens": 1.0,
             "price1mOutputTokens": 3.2,
-            "medianCanonicalAnswerOutputSpeed": 62.3581098964366,
+            "medianCanonicalAnswerOutputSpeed": 60.775600839223,
             "est_cost_per_task_usd": 0.0026,
-            "est_time_per_task_sec": 12.2,
+            "est_time_per_task_sec": 12.5,
             "idx_per_dollar": 9863.141113557655,
-            "idx_per_min": 126.11885358319624,
-            "idx_per_sec": 2.1019808930532706
+            "idx_per_min": 123.09200109719951,
+            "idx_per_sec": 2.051533351619992
           },
           {
             "slug": "kat-coder-pro-v2",
@@ -5763,12 +5763,12 @@
             "intelligenceIndex": 25.2331083697057,
             "price1mInputTokens": 0.6,
             "price1mOutputTokens": 3.6,
-            "medianCanonicalAnswerOutputSpeed": 92.8701742365354,
+            "medianCanonicalAnswerOutputSpeed": 93.5938903451076,
             "est_cost_per_task_usd": 0.007,
-            "est_time_per_task_sec": 20.4,
+            "est_time_per_task_sec": 20.3,
             "idx_per_dollar": 3604.729767100814,
-            "idx_per_min": 74.21502461678148,
-            "idx_per_sec": 1.236917076946358
+            "idx_per_min": 74.58061587105134,
+            "idx_per_sec": 1.243010264517522
           },
           {
             "slug": "qwen3-max-thinking",
@@ -5799,12 +5799,12 @@
             "intelligenceIndex": 24.8251152638151,
             "price1mInputTokens": 0.4,
             "price1mOutputTokens": 3.2,
-            "medianCanonicalAnswerOutputSpeed": 144.115353265325,
+            "medianCanonicalAnswerOutputSpeed": 144.840801866733,
             "est_cost_per_task_usd": 0.0283,
-            "est_time_per_task_sec": 61.1,
+            "est_time_per_task_sec": 60.8,
             "idx_per_dollar": 877.2125534916996,
-            "idx_per_min": 24.378181928460002,
-            "idx_per_sec": 0.406303032141
+            "idx_per_min": 24.49846901034385,
+            "idx_per_sec": 0.40830781683906414
           },
           {
             "slug": "minimax-m2-1",
@@ -6033,7 +6033,7 @@
             "intelligenceIndex": 23.5024162050598,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 1.25,
-            "medianCanonicalAnswerOutputSpeed": 157.042370900183,
+            "medianCanonicalAnswerOutputSpeed": 157.979219832335,
             "est_cost_per_task_usd": 0.0022,
             "est_time_per_task_sec": 11.1,
             "idx_per_dollar": 10682.916456845362,
@@ -6069,12 +6069,12 @@
             "intelligenceIndex": 23.3097565232913,
             "price1mInputTokens": 0.6,
             "price1mOutputTokens": 3.6,
-            "medianCanonicalAnswerOutputSpeed": 59.5910237907988,
+            "medianCanonicalAnswerOutputSpeed": 60.3340949962988,
             "est_cost_per_task_usd": 0.0091,
-            "est_time_per_task_sec": 41.8,
+            "est_time_per_task_sec": 41.3,
             "idx_per_dollar": 2561.5117058561864,
-            "idx_per_min": 33.458980655442055,
-            "idx_per_sec": 0.5576496775907009
+            "idx_per_min": 33.864053060471626,
+            "idx_per_sec": 0.5644008843411937
           },
           {
             "slug": "gpt-5-4-mini-medium",
@@ -6087,12 +6087,12 @@
             "intelligenceIndex": 23.1718301726829,
             "price1mInputTokens": 0.75,
             "price1mOutputTokens": 4.5,
-            "medianCanonicalAnswerOutputSpeed": 177.540805870602,
+            "medianCanonicalAnswerOutputSpeed": 173.378652410819,
             "est_cost_per_task_usd": 0.0103,
-            "est_time_per_task_sec": 12.6,
+            "est_time_per_task_sec": 12.9,
             "idx_per_dollar": 2249.692249775039,
-            "idx_per_min": 110.34204844134715,
-            "idx_per_sec": 1.839034140689119
+            "idx_per_min": 107.77595429154837,
+            "idx_per_sec": 1.7962659048591394
           },
           {
             "slug": "k-exaone-2-0-0803",
@@ -6159,12 +6159,12 @@
             "intelligenceIndex": 22.6942840025185,
             "price1mInputTokens": 0.3,
             "price1mOutputTokens": 2.4,
-            "medianCanonicalAnswerOutputSpeed": 89.6488890343765,
+            "medianCanonicalAnswerOutputSpeed": 90.712615709153,
             "est_cost_per_task_usd": 0.0059,
-            "est_time_per_task_sec": 27.3,
+            "est_time_per_task_sec": 27.0,
             "idx_per_dollar": 3846.4888139861864,
-            "idx_per_min": 49.87754725828242,
-            "idx_per_sec": 0.831292454304707
+            "idx_per_min": 50.43174222781889,
+            "idx_per_sec": 0.8405290371303148
           },
           {
             "slug": "claude-4-5-sonnet",
@@ -6177,12 +6177,12 @@
             "intelligenceIndex": 22.6629669883242,
             "price1mInputTokens": 3.0,
             "price1mOutputTokens": 15.0,
-            "medianCanonicalAnswerOutputSpeed": 49.8268107292505,
+            "medianCanonicalAnswerOutputSpeed": 50.6695307236052,
             "est_cost_per_task_usd": 0.0059,
-            "est_time_per_task_sec": 6.9,
+            "est_time_per_task_sec": 6.7,
             "idx_per_dollar": 3841.1808454786783,
-            "idx_per_min": 197.06927815934085,
-            "idx_per_sec": 3.2844879693223477
+            "idx_per_min": 202.9519431790227,
+            "idx_per_sec": 3.382532386317045
           },
           {
             "slug": "mistral-medium-3-5",
@@ -6195,12 +6195,12 @@
             "intelligenceIndex": 22.6614150548601,
             "price1mInputTokens": 1.5,
             "price1mOutputTokens": 7.5,
-            "medianCanonicalAnswerOutputSpeed": 154.991664425038,
+            "medianCanonicalAnswerOutputSpeed": 162.962045260871,
             "est_cost_per_task_usd": 0.1082,
-            "est_time_per_task_sec": 91.2,
+            "est_time_per_task_sec": 86.8,
             "idx_per_dollar": 209.4400652020342,
-            "idx_per_min": 14.908825693986907,
-            "idx_per_sec": 0.2484804282331151
+            "idx_per_min": 15.664572618566892,
+            "idx_per_sec": 0.26107621030944816
           },
           {
             "slug": "qwen3-5-35b-a3b",
@@ -6213,12 +6213,12 @@
             "intelligenceIndex": 22.6451019372217,
             "price1mInputTokens": 0.25,
             "price1mOutputTokens": 2.0,
-            "medianCanonicalAnswerOutputSpeed": 164.439980594717,
+            "medianCanonicalAnswerOutputSpeed": 166.133591191494,
             "est_cost_per_task_usd": 0.0192,
-            "est_time_per_task_sec": 58.3,
+            "est_time_per_task_sec": 57.7,
             "idx_per_dollar": 1179.4323925636304,
-            "idx_per_min": 23.305422233847377,
-            "idx_per_sec": 0.3884237038974563
+            "idx_per_min": 23.54776631253556,
+            "idx_per_sec": 0.3924627718755927
           },
           {
             "slug": "claude-4-5-haiku-reasoning",
@@ -6231,12 +6231,12 @@
             "intelligenceIndex": 22.4647968372621,
             "price1mInputTokens": 1.0,
             "price1mOutputTokens": 5.0,
-            "medianCanonicalAnswerOutputSpeed": 127.599101030728,
+            "medianCanonicalAnswerOutputSpeed": 123.705244745884,
             "est_cost_per_task_usd": 0.0736,
-            "est_time_per_task_sec": 111.6,
+            "est_time_per_task_sec": 115.1,
             "idx_per_dollar": 305.22821789758285,
-            "idx_per_min": 12.077847761968872,
-            "idx_per_sec": 0.20129746269948118
+            "idx_per_min": 11.71058045382907,
+            "idx_per_sec": 0.1951763408971512
           },
           {
             "slug": "gemma-4-31b",
@@ -6321,12 +6321,12 @@
             "intelligenceIndex": 21.7452326454289,
             "price1mInputTokens": 0.3,
             "price1mOutputTokens": 1.2,
-            "medianCanonicalAnswerOutputSpeed": 107.710867574381,
+            "medianCanonicalAnswerOutputSpeed": 108.199031934944,
             "est_cost_per_task_usd": 0.0087,
-            "est_time_per_task_sec": 67.0,
+            "est_time_per_task_sec": 66.7,
             "idx_per_dollar": 2499.4520282102185,
-            "idx_per_min": 19.473342667548266,
-            "idx_per_sec": 0.32455571112580445
+            "idx_per_min": 19.560928916427795,
+            "idx_per_sec": 0.32601548194046326
           },
           {
             "slug": "kat-coder-pro-v1",
@@ -6375,12 +6375,12 @@
             "intelligenceIndex": 21.6526160643915,
             "price1mInputTokens": 0.55,
             "price1mOutputTokens": 2.2,
-            "medianCanonicalAnswerOutputSpeed": 56.9419926754661,
+            "medianCanonicalAnswerOutputSpeed": 57.9717986756384,
             "est_cost_per_task_usd": 0.0145,
-            "est_time_per_task_sec": 115.4,
+            "est_time_per_task_sec": 113.4,
             "idx_per_dollar": 1493.2838665097584,
-            "idx_per_min": 11.257859305576169,
-            "idx_per_sec": 0.18763098842626946
+            "idx_per_min": 11.456410616080158,
+            "idx_per_sec": 0.19094017693466928
           },
           {
             "slug": "gpt-5-5-instant-06-26",
@@ -6411,12 +6411,12 @@
             "intelligenceIndex": 21.3092933422289,
             "price1mInputTokens": 0.435,
             "price1mOutputTokens": 0.87,
-            "medianCanonicalAnswerOutputSpeed": 33.3902679267629,
+            "medianCanonicalAnswerOutputSpeed": 33.7313143588352,
             "est_cost_per_task_usd": 0.0015,
-            "est_time_per_task_sec": 47.2,
+            "est_time_per_task_sec": 46.7,
             "idx_per_dollar": 14206.195561485934,
-            "idx_per_min": 27.088084757070636,
-            "idx_per_sec": 0.4514680792845106
+            "idx_per_min": 27.37810707781015,
+            "idx_per_sec": 0.4563017846301692
           },
           {
             "slug": "gpt-5-4-non-reasoning",
@@ -6429,12 +6429,12 @@
             "intelligenceIndex": 21.1387824070291,
             "price1mInputTokens": 2.5,
             "price1mOutputTokens": 15.0,
-            "medianCanonicalAnswerOutputSpeed": 95.2797884690378,
+            "medianCanonicalAnswerOutputSpeed": 97.7215354679734,
             "est_cost_per_task_usd": 0.0043,
-            "est_time_per_task_sec": 2.6,
+            "est_time_per_task_sec": 2.5,
             "idx_per_dollar": 4915.995908611419,
-            "idx_per_min": 487.8180555468254,
-            "idx_per_sec": 8.130300925780423
+            "idx_per_min": 507.33077776869845,
+            "idx_per_sec": 8.45551296281164
           },
           {
             "slug": "grok-4-fast-reasoning",
@@ -6465,7 +6465,7 @@
             "intelligenceIndex": 20.8414142253403,
             "price1mInputTokens": 0.5,
             "price1mOutputTokens": 3.0,
-            "medianCanonicalAnswerOutputSpeed": 202.470279593639,
+            "medianCanonicalAnswerOutputSpeed": 205.265957094141,
             "est_cost_per_task_usd": 0.0011,
             "est_time_per_task_sec": 1.4,
             "idx_per_dollar": 18946.740204854817,
@@ -6483,12 +6483,12 @@
             "intelligenceIndex": 20.618968096842,
             "price1mInputTokens": 0.4,
             "price1mOutputTokens": 3.2,
-            "medianCanonicalAnswerOutputSpeed": 154.323659860852,
+            "medianCanonicalAnswerOutputSpeed": 153.883199715055,
             "est_cost_per_task_usd": 0.0093,
-            "est_time_per_task_sec": 18.6,
+            "est_time_per_task_sec": 18.7,
             "idx_per_dollar": 2217.093343746452,
-            "idx_per_min": 66.51280031239355,
-            "idx_per_sec": 1.1085466718732258
+            "idx_per_min": 66.1571168882631,
+            "idx_per_sec": 1.102618614804385
           },
           {
             "slug": "claude-3-7-sonnet-thinking",
@@ -6519,12 +6519,12 @@
             "intelligenceIndex": 20.0720170236944,
             "price1mInputTokens": 0.6,
             "price1mOutputTokens": 2.2,
-            "medianCanonicalAnswerOutputSpeed": 103.757728525512,
+            "medianCanonicalAnswerOutputSpeed": 105.453864464626,
             "est_cost_per_task_usd": 0.0021,
-            "est_time_per_task_sec": 9.0,
+            "est_time_per_task_sec": 8.9,
             "idx_per_dollar": 9558.103344616382,
-            "idx_per_min": 133.81344682462935,
-            "idx_per_sec": 2.230224113743822
+            "idx_per_min": 135.31696869906335,
+            "idx_per_sec": 2.255282811651056
           },
           {
             "slug": "hy3-non-reasoning",
@@ -6627,7 +6627,7 @@
             "intelligenceIndex": 19.3173460238908,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 1.2,
-            "medianCanonicalAnswerOutputSpeed": 110.542155086801,
+            "medianCanonicalAnswerOutputSpeed": 111.77133610266,
             "est_cost_per_task_usd": 0.0002,
             "est_time_per_task_sec": 0.9,
             "idx_per_dollar": 96586.73011945399,
@@ -6663,12 +6663,12 @@
             "intelligenceIndex": 19.1143554978096,
             "price1mInputTokens": 1.1,
             "price1mOutputTokens": 4.4,
-            "medianCanonicalAnswerOutputSpeed": 157.650737337644,
+            "medianCanonicalAnswerOutputSpeed": 158.021568434913,
             "est_cost_per_task_usd": 0.0218,
-            "est_time_per_task_sec": 31.2,
+            "est_time_per_task_sec": 31.1,
             "idx_per_dollar": 876.8052980646606,
-            "idx_per_min": 36.75837595732615,
-            "idx_per_sec": 0.6126395992887693
+            "idx_per_min": 36.87657009223717,
+            "idx_per_sec": 0.6146095015372862
           },
           {
             "slug": "step-3-5-flash-0202",
@@ -6753,12 +6753,12 @@
             "intelligenceIndex": 18.9744199218293,
             "price1mInputTokens": 1.25,
             "price1mOutputTokens": 10.0,
-            "medianCanonicalAnswerOutputSpeed": 134.448065777288,
+            "medianCanonicalAnswerOutputSpeed": 136.018164190556,
             "est_cost_per_task_usd": 0.0509,
-            "est_time_per_task_sec": 37.6,
+            "est_time_per_task_sec": 37.2,
             "idx_per_dollar": 372.7783874622652,
-            "idx_per_min": 30.278329662493558,
-            "idx_per_sec": 0.504638827708226
+            "idx_per_min": 30.603903099724675,
+            "idx_per_sec": 0.5100650516620778
           },
           {
             "slug": "gemini-3-1-flash-lite-preview",
@@ -6771,12 +6771,12 @@
             "intelligenceIndex": 18.7073948943034,
             "price1mInputTokens": 0.25,
             "price1mOutputTokens": 1.5,
-            "medianCanonicalAnswerOutputSpeed": 303.588552233731,
+            "medianCanonicalAnswerOutputSpeed": 313.152065833697,
             "est_cost_per_task_usd": 0.0201,
-            "est_time_per_task_sec": 42.9,
+            "est_time_per_task_sec": 41.6,
             "idx_per_dollar": 930.7161638956915,
-            "idx_per_min": 26.164188663361397,
-            "idx_per_sec": 0.43606981105602327
+            "idx_per_min": 26.981819559091438,
+            "idx_per_sec": 0.44969699265152396
           },
           {
             "slug": "nvidia-nemotron-3-super-120b-a12b",
@@ -6789,12 +6789,12 @@
             "intelligenceIndex": 18.6402290916385,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 0.8,
-            "medianCanonicalAnswerOutputSpeed": 161.036118953993,
+            "medianCanonicalAnswerOutputSpeed": 160.199824305612,
             "est_cost_per_task_usd": 0.0104,
-            "est_time_per_task_sec": 80.8,
+            "est_time_per_task_sec": 81.2,
             "idx_per_dollar": 1792.3297203498557,
-            "idx_per_min": 13.841754275969182,
-            "idx_per_sec": 0.23069590459948638
+            "idx_per_min": 13.773568294314163,
+            "idx_per_sec": 0.22955947157190268
           },
           {
             "slug": "qwen3-max-thinking-preview",
@@ -6825,12 +6825,12 @@
             "intelligenceIndex": 18.4192265191045,
             "price1mInputTokens": 0.25,
             "price1mOutputTokens": 2.0,
-            "medianCanonicalAnswerOutputSpeed": 104.671984049407,
+            "medianCanonicalAnswerOutputSpeed": 106.289253910795,
             "est_cost_per_task_usd": 0.0111,
-            "est_time_per_task_sec": 53.0,
+            "est_time_per_task_sec": 52.2,
             "idx_per_dollar": 1659.389776495901,
-            "idx_per_min": 20.851954549929626,
-            "idx_per_sec": 0.3475325758321604
+            "idx_per_min": 21.171524734602876,
+            "idx_per_sec": 0.3528587455767146
           },
           {
             "slug": "mimo-v2-flash",
@@ -6879,12 +6879,12 @@
             "intelligenceIndex": 17.6494849026878,
             "price1mInputTokens": 1.2,
             "price1mOutputTokens": 6.0,
-            "medianCanonicalAnswerOutputSpeed": 51.5523281127116,
+            "medianCanonicalAnswerOutputSpeed": 52.002115045762,
             "est_cost_per_task_usd": 0.0082,
-            "est_time_per_task_sec": 26.1,
+            "est_time_per_task_sec": 25.9,
             "idx_per_dollar": 2152.3762076448534,
-            "idx_per_min": 40.57352851192598,
-            "idx_per_sec": 0.6762254751987662
+            "idx_per_min": 40.88683761240417,
+            "idx_per_sec": 0.6814472935400695
           },
           {
             "slug": "grok-4-3-non-reasoning",
@@ -6897,12 +6897,12 @@
             "intelligenceIndex": 17.4898187034516,
             "price1mInputTokens": 1.25,
             "price1mOutputTokens": 2.5,
-            "medianCanonicalAnswerOutputSpeed": 102.660354346138,
+            "medianCanonicalAnswerOutputSpeed": 102.890865484358,
             "est_cost_per_task_usd": 0.0017,
-            "est_time_per_task_sec": 5.2,
+            "est_time_per_task_sec": 5.1,
             "idx_per_dollar": 10288.128649089178,
-            "idx_per_min": 201.80560042444154,
-            "idx_per_sec": 3.363426673740692
+            "idx_per_min": 205.76257298178356,
+            "idx_per_sec": 3.429376216363059
           },
           {
             "slug": "gemini-2-5-flash-preview-09-2025-reasoning",
@@ -6987,12 +6987,12 @@
             "intelligenceIndex": 17.1426898273546,
             "price1mInputTokens": 0.375,
             "price1mOutputTokens": 2.25,
-            "medianCanonicalAnswerOutputSpeed": 144.547942692195,
+            "medianCanonicalAnswerOutputSpeed": 146.156435017298,
             "est_cost_per_task_usd": 0.0086,
-            "est_time_per_task_sec": 26.2,
+            "est_time_per_task_sec": 25.9,
             "idx_per_dollar": 1993.3360264365815,
-            "idx_per_min": 39.258068306918936,
-            "idx_per_sec": 0.6543011384486489
+            "idx_per_min": 39.71279496684464,
+            "idx_per_sec": 0.6618799161140774
           },
           {
             "slug": "o1",
@@ -7077,12 +7077,12 @@
             "intelligenceIndex": 16.5784173630612,
             "price1mInputTokens": 0.07,
             "price1mOutputTokens": 0.4,
-            "medianCanonicalAnswerOutputSpeed": 97.7920506519681,
+            "medianCanonicalAnswerOutputSpeed": 100.990019158396,
             "est_cost_per_task_usd": 0.0023,
-            "est_time_per_task_sec": 58.2,
+            "est_time_per_task_sec": 56.4,
             "idx_per_dollar": 7208.007549157043,
-            "idx_per_min": 17.091151920681646,
-            "idx_per_sec": 0.2848525320113608
+            "idx_per_min": 17.636614216022554,
+            "idx_per_sec": 0.29394357026704254
           },
           {
             "slug": "granite-4-2-30b",
@@ -7095,12 +7095,12 @@
             "intelligenceIndex": 16.5466908219051,
             "price1mInputTokens": 0.16,
             "price1mOutputTokens": 0.65,
-            "medianCanonicalAnswerOutputSpeed": 97.9839956553186,
+            "medianCanonicalAnswerOutputSpeed": 95.465101951569,
             "est_cost_per_task_usd": 0.0105,
-            "est_time_per_task_sec": 157.7,
+            "est_time_per_task_sec": 161.9,
             "idx_per_dollar": 1575.875316371914,
-            "idx_per_min": 6.295506970921408,
-            "idx_per_sec": 0.10492511618202346
+            "idx_per_min": 6.132189310156306,
+            "idx_per_sec": 0.10220315516927175
           },
           {
             "slug": "nemotron-3-5-lightning",
@@ -7113,12 +7113,12 @@
             "intelligenceIndex": 16.3764752409185,
             "price1mInputTokens": 0.06,
             "price1mOutputTokens": 0.2,
-            "medianCanonicalAnswerOutputSpeed": 326.56133788431,
+            "medianCanonicalAnswerOutputSpeed": 327.116945970924,
             "est_cost_per_task_usd": 0.0056,
-            "est_time_per_task_sec": 80.4,
+            "est_time_per_task_sec": 80.2,
             "idx_per_dollar": 2924.370578735446,
-            "idx_per_min": 12.221250179789923,
-            "idx_per_sec": 0.20368750299649874
+            "idx_per_min": 12.251727112906607,
+            "idx_per_sec": 0.2041954518817768
           },
           {
             "slug": "grok-3-mini-reasoning",
@@ -7131,12 +7131,12 @@
             "intelligenceIndex": 16.207393,
             "price1mInputTokens": 0.3,
             "price1mOutputTokens": 0.5,
-            "medianCanonicalAnswerOutputSpeed": 120.817964413121,
+            "medianCanonicalAnswerOutputSpeed": 125.850416560935,
             "est_cost_per_task_usd": 0.0027,
-            "est_time_per_task_sec": 43.5,
+            "est_time_per_task_sec": 41.7,
             "idx_per_dollar": 6002.738148148148,
-            "idx_per_min": 22.355024827586206,
-            "idx_per_sec": 0.37258374712643677
+            "idx_per_min": 23.319989928057552,
+            "idx_per_sec": 0.3886664988009592
           },
           {
             "slug": "grok-4-20-0309-non-reasoning",
@@ -7221,7 +7221,7 @@
             "intelligenceIndex": 15.6823593961676,
             "price1mInputTokens": 0.0,
             "price1mOutputTokens": 0.0,
-            "medianCanonicalAnswerOutputSpeed": 166.195584814602,
+            "medianCanonicalAnswerOutputSpeed": 154.774650717236,
             "est_cost_per_task_usd": null,
             "est_time_per_task_sec": null,
             "idx_per_dollar": null,
@@ -7275,12 +7275,12 @@
             "intelligenceIndex": 15.5768061258328,
             "price1mInputTokens": 1.25,
             "price1mOutputTokens": 2.5,
-            "medianCanonicalAnswerOutputSpeed": 102.477181590809,
+            "medianCanonicalAnswerOutputSpeed": 106.631341536217,
             "est_cost_per_task_usd": 0.0114,
-            "est_time_per_task_sec": 42.9,
+            "est_time_per_task_sec": 41.2,
             "idx_per_dollar": 1366.386502266035,
-            "idx_per_min": 21.785742833332588,
-            "idx_per_sec": 0.36309571388887646
+            "idx_per_min": 22.684669115290482,
+            "idx_per_sec": 0.37807781858817474
           },
           {
             "slug": "gpt-oss-120b",
@@ -7293,12 +7293,12 @@
             "intelligenceIndex": 15.5719877600873,
             "price1mInputTokens": 0.15,
             "price1mOutputTokens": 0.595,
-            "medianCanonicalAnswerOutputSpeed": 213.848741159497,
+            "medianCanonicalAnswerOutputSpeed": 215.54800326922,
             "est_cost_per_task_usd": 0.0073,
-            "est_time_per_task_sec": 53.6,
+            "est_time_per_task_sec": 53.2,
             "idx_per_dollar": 2133.149008231137,
-            "idx_per_min": 17.431329582187278,
-            "idx_per_sec": 0.29052215970312123
+            "idx_per_min": 17.562392210624772,
+            "idx_per_sec": 0.2927065368437462
           },
           {
             "slug": "gemma-4-12b",
@@ -7329,12 +7329,12 @@
             "intelligenceIndex": 15.5078598717258,
             "price1mInputTokens": 1.25,
             "price1mOutputTokens": 10.0,
-            "medianCanonicalAnswerOutputSpeed": 115.265419592145,
+            "medianCanonicalAnswerOutputSpeed": 117.097784294376,
             "est_cost_per_task_usd": 0.0352,
-            "est_time_per_task_sec": 30.2,
+            "est_time_per_task_sec": 29.8,
             "idx_per_dollar": 440.56420090130115,
-            "idx_per_min": 30.810317625945302,
-            "idx_per_sec": 0.513505293765755
+            "idx_per_min": 31.22387893636067,
+            "idx_per_sec": 0.5203979822726779
           },
           {
             "slug": "grok-code-fast-1",
@@ -7365,12 +7365,12 @@
             "intelligenceIndex": 15.1782637596707,
             "price1mInputTokens": 0.14,
             "price1mOutputTokens": 0.4,
-            "medianCanonicalAnswerOutputSpeed": 57.0852111217688,
+            "medianCanonicalAnswerOutputSpeed": 60.4235157788617,
             "est_cost_per_task_usd": 0.0003,
-            "est_time_per_task_sec": 9.6,
+            "est_time_per_task_sec": 9.1,
             "idx_per_dollar": 50594.21253223567,
-            "idx_per_min": 94.86414849794188,
-            "idx_per_sec": 1.5810691416323648
+            "idx_per_min": 100.07646434947715,
+            "idx_per_sec": 1.667941072491286
           },
           {
             "slug": "deepseek-v3-1-terminus",
@@ -7473,12 +7473,12 @@
             "intelligenceIndex": 14.7630204171375,
             "price1mInputTokens": 0.135,
             "price1mOutputTokens": 0.2,
-            "medianCanonicalAnswerOutputSpeed": 99.8850112389037,
+            "medianCanonicalAnswerOutputSpeed": 99.341694012477,
             "est_cost_per_task_usd": 0.0028,
-            "est_time_per_task_sec": 136.9,
+            "est_time_per_task_sec": 137.6,
             "idx_per_dollar": 5272.507291834821,
-            "idx_per_min": 6.4702792186139515,
-            "idx_per_sec": 0.1078379869768992
+            "idx_per_min": 6.437363553984375,
+            "idx_per_sec": 0.10728939256640625
           },
           {
             "slug": "nova-2-0-omni-reasoning-medium",
@@ -7581,12 +7581,12 @@
             "intelligenceIndex": 14.3026626,
             "price1mInputTokens": 0.3,
             "price1mOutputTokens": 2.5,
-            "medianCanonicalAnswerOutputSpeed": 159.244378534909,
+            "medianCanonicalAnswerOutputSpeed": 168.078758203153,
             "est_cost_per_task_usd": 0.0656,
-            "est_time_per_task_sec": 164.5,
+            "est_time_per_task_sec": 155.8,
             "idx_per_dollar": 218.0283932926829,
-            "idx_per_min": 5.216776632218845,
-            "idx_per_sec": 0.08694627720364742
+            "idx_per_min": 5.508085725288832,
+            "idx_per_sec": 0.09180142875481385
           },
           {
             "slug": "gpt-5-1-non-reasoning",
@@ -7653,12 +7653,12 @@
             "intelligenceIndex": 13.9427142047999,
             "price1mInputTokens": 0.06,
             "price1mOutputTokens": 0.25,
-            "medianCanonicalAnswerOutputSpeed": 161.621482662317,
+            "medianCanonicalAnswerOutputSpeed": 158.884207266135,
             "est_cost_per_task_usd": 0.0051,
-            "est_time_per_task_sec": 121.4,
+            "est_time_per_task_sec": 123.4,
             "idx_per_dollar": 2733.8655303529213,
-            "idx_per_min": 6.890962539439818,
-            "idx_per_sec": 0.1148493756573303
+            "idx_per_min": 6.779277571215511,
+            "idx_per_sec": 0.1129879595202585
           },
           {
             "slug": "gemma-4-26b-a4b-non-reasoning",
@@ -7671,12 +7671,12 @@
             "intelligenceIndex": 13.9181422209043,
             "price1mInputTokens": 0.13,
             "price1mOutputTokens": 0.4,
-            "medianCanonicalAnswerOutputSpeed": 81.1158743830707,
+            "medianCanonicalAnswerOutputSpeed": 85.3495749838892,
             "est_cost_per_task_usd": 0.0005,
-            "est_time_per_task_sec": 14.0,
+            "est_time_per_task_sec": 13.3,
             "idx_per_dollar": 27836.284441808602,
-            "idx_per_min": 59.64918094673271,
-            "idx_per_sec": 0.9941530157788786
+            "idx_per_min": 62.78861152287654,
+            "idx_per_sec": 1.046476858714609
           },
           {
             "slug": "qwen3-5-4b",
@@ -7689,12 +7689,12 @@
             "intelligenceIndex": 13.9093195169643,
             "price1mInputTokens": 0.03,
             "price1mOutputTokens": 0.15,
-            "medianCanonicalAnswerOutputSpeed": 28.6128730043284,
+            "medianCanonicalAnswerOutputSpeed": 29.3962988325178,
             "est_cost_per_task_usd": 0.0015,
-            "est_time_per_task_sec": 353.7,
+            "est_time_per_task_sec": 344.3,
             "idx_per_dollar": 9272.8796779762,
-            "idx_per_min": 2.3595113684417814,
-            "idx_per_sec": 0.03932518947402969
+            "idx_per_min": 2.423930209171821,
+            "idx_per_sec": 0.040398836819530354
           },
           {
             "slug": "deepseek-r1",
@@ -7725,12 +7725,12 @@
             "intelligenceIndex": 13.8795115175554,
             "price1mInputTokens": 0.3,
             "price1mOutputTokens": 2.5,
-            "medianCanonicalAnswerOutputSpeed": 231.281452152472,
+            "medianCanonicalAnswerOutputSpeed": 233.174729444109,
             "est_cost_per_task_usd": 0.0135,
-            "est_time_per_task_sec": 23.0,
+            "est_time_per_task_sec": 22.8,
             "idx_per_dollar": 1028.111964263363,
-            "idx_per_min": 36.20742135014452,
-            "idx_per_sec": 0.6034570225024087
+            "idx_per_min": 36.52503030935632,
+            "idx_per_sec": 0.6087505051559385
           },
           {
             "slug": "gpt-5-nano",
@@ -7743,12 +7743,12 @@
             "intelligenceIndex": 13.6982548591943,
             "price1mInputTokens": 0.05,
             "price1mOutputTokens": 0.4,
-            "medianCanonicalAnswerOutputSpeed": 149.685557838376,
+            "medianCanonicalAnswerOutputSpeed": 151.808008361527,
             "est_cost_per_task_usd": 0.0038,
-            "est_time_per_task_sec": 63.5,
+            "est_time_per_task_sec": 62.6,
             "idx_per_dollar": 3604.8039103142896,
-            "idx_per_min": 12.943232937821385,
-            "idx_per_sec": 0.21572054896368978
+            "idx_per_min": 13.129317756416262,
+            "idx_per_sec": 0.2188219626069377
           },
           {
             "slug": "north-mini-code",
@@ -7761,7 +7761,7 @@
             "intelligenceIndex": 13.4531447792081,
             "price1mInputTokens": 0.0,
             "price1mOutputTokens": 0.0,
-            "medianCanonicalAnswerOutputSpeed": 59.8112144694087,
+            "medianCanonicalAnswerOutputSpeed": 57.5320507952574,
             "est_cost_per_task_usd": null,
             "est_time_per_task_sec": null,
             "idx_per_dollar": null,
@@ -7779,7 +7779,7 @@
             "intelligenceIndex": 13.3502974,
             "price1mInputTokens": 1.25,
             "price1mOutputTokens": 10.0,
-            "medianCanonicalAnswerOutputSpeed": 119.001870383531,
+            "medianCanonicalAnswerOutputSpeed": 119.557647662435,
             "est_cost_per_task_usd": 0.0114,
             "est_time_per_task_sec": 9.2,
             "idx_per_dollar": 1171.0787192982457,
@@ -7833,7 +7833,7 @@
             "intelligenceIndex": 13.2142957730466,
             "price1mInputTokens": 2.0,
             "price1mOutputTokens": 8.0,
-            "medianCanonicalAnswerOutputSpeed": 164.852413331094,
+            "medianCanonicalAnswerOutputSpeed": 167.763971471659,
             "est_cost_per_task_usd": 0.0034,
             "est_time_per_task_sec": 2.3,
             "idx_per_dollar": 3886.557580307824,
@@ -7923,12 +7923,12 @@
             "intelligenceIndex": 12.8604110280646,
             "price1mInputTokens": 0.1,
             "price1mOutputTokens": 0.8,
-            "medianCanonicalAnswerOutputSpeed": 240.704563987656,
+            "medianCanonicalAnswerOutputSpeed": 248.101263021128,
             "est_cost_per_task_usd": 0.0015,
-            "est_time_per_task_sec": 7.8,
+            "est_time_per_task_sec": 7.6,
             "idx_per_dollar": 8573.607352043067,
-            "idx_per_min": 98.92623867742,
-            "idx_per_sec": 1.6487706446236667
+            "idx_per_min": 101.52956074787843,
+            "idx_per_sec": 1.6921593457979738
           },
           {
             "slug": "o3-mini",
@@ -7941,12 +7941,12 @@
             "intelligenceIndex": 12.8551127125614,
             "price1mInputTokens": 1.1,
             "price1mOutputTokens": 4.4,
-            "medianCanonicalAnswerOutputSpeed": 209.129151411356,
+            "medianCanonicalAnswerOutputSpeed": 205.287472154482,
             "est_cost_per_task_usd": 0.0094,
-            "est_time_per_task_sec": 10.1,
+            "est_time_per_task_sec": 10.2,
             "idx_per_dollar": 1367.565182187383,
-            "idx_per_min": 76.36700621323604,
-            "idx_per_sec": 1.2727834368872675
+            "idx_per_min": 75.6183100738906,
+            "idx_per_sec": 1.2603051678981765
           },
           {
             "slug": "mistral-small-4",
@@ -7959,12 +7959,12 @@
             "intelligenceIndex": 12.8397154220633,
             "price1mInputTokens": 0.15,
             "price1mOutputTokens": 0.6,
-            "medianCanonicalAnswerOutputSpeed": 139.242461343176,
+            "medianCanonicalAnswerOutputSpeed": 146.616993437399,
             "est_cost_per_task_usd": 0.0033,
-            "est_time_per_task_sec": 39.5,
+            "est_time_per_task_sec": 37.5,
             "idx_per_dollar": 3890.822855170697,
-            "idx_per_min": 19.503365198070835,
-            "idx_per_sec": 0.3250560866345139
+            "idx_per_min": 20.54354467530128,
+            "idx_per_sec": 0.34239241125502134
           },
           {
             "slug": "o1-pro",
@@ -8013,7 +8013,7 @@
             "intelligenceIndex": 12.664753129049,
             "price1mInputTokens": 0.0,
             "price1mOutputTokens": 0.0,
-            "medianCanonicalAnswerOutputSpeed": 120.631142499137,
+            "medianCanonicalAnswerOutputSpeed": 131.227258980843,
             "est_cost_per_task_usd": null,
             "est_time_per_task_sec": null,
             "idx_per_dollar": null,
@@ -8067,12 +8067,12 @@
             "intelligenceIndex": 12.2411494980014,
             "price1mInputTokens": 0.21,
             "price1mOutputTokens": 0.57,
-            "medianCanonicalAnswerOutputSpeed": 36.4455669465423,
+            "medianCanonicalAnswerOutputSpeed": 36.8343014916468,
             "est_cost_per_task_usd": 0.0031,
-            "est_time_per_task_sec": 149.8,
+            "est_time_per_task_sec": 148.2,
             "idx_per_dollar": 3948.757902581097,
-            "idx_per_min": 4.9029971287055,
-            "idx_per_sec": 0.08171661881175835
+            "idx_per_min": 4.95593097085077,
+            "idx_per_sec": 0.08259884951417949
           },
           {
             "slug": "qwen3-235b-a22b-instruct-2507",
@@ -8085,12 +8085,12 @@
             "intelligenceIndex": 12.0702619779631,
             "price1mInputTokens": 0.23,
             "price1mOutputTokens": 0.92,
-            "medianCanonicalAnswerOutputSpeed": 61.5402375940964,
+            "medianCanonicalAnswerOutputSpeed": 62.096852679479,
             "est_cost_per_task_usd": 0.0016,
-            "est_time_per_task_sec": 27.5,
+            "est_time_per_task_sec": 27.3,
             "idx_per_dollar": 7543.913736226937,
-            "idx_per_min": 26.335117042828582,
-            "idx_per_sec": 0.43891861738047633
+            "idx_per_min": 26.528048303215602,
+            "idx_per_sec": 0.4421341383869267
           },
           {
             "slug": "deepseek-r1-0120",
@@ -8121,12 +8121,12 @@
             "intelligenceIndex": 11.9816540827048,
             "price1mInputTokens": 0.25,
             "price1mOutputTokens": 0.9,
-            "medianCanonicalAnswerOutputSpeed": 312.052642664329,
+            "medianCanonicalAnswerOutputSpeed": 322.609963718597,
             "est_cost_per_task_usd": 0.0148,
-            "est_time_per_task_sec": 52.6,
+            "est_time_per_task_sec": 50.9,
             "idx_per_dollar": 809.5712218043783,
-            "idx_per_min": 13.667286025899012,
-            "idx_per_sec": 0.22778810043165018
+            "idx_per_min": 14.123757268414304,
+            "idx_per_sec": 0.23539595447357173
           },
           {
             "slug": "qwen3-coder-480b-a35b-instruct",
@@ -8139,12 +8139,12 @@
             "intelligenceIndex": 11.9054090743871,
             "price1mInputTokens": 1.5,
             "price1mOutputTokens": 7.5,
-            "medianCanonicalAnswerOutputSpeed": 62.4614537341141,
+            "medianCanonicalAnswerOutputSpeed": 63.6985753840256,
             "est_cost_per_task_usd": 0.0032,
-            "est_time_per_task_sec": 6.4,
+            "est_time_per_task_sec": 6.2,
             "idx_per_dollar": 3720.4403357459687,
-            "idx_per_min": 111.61321007237905,
-            "idx_per_sec": 1.8602201678729842
+            "idx_per_min": 115.21363620374613,
+            "idx_per_sec": 1.9202272700624354
           },
           {
             "slug": "qwen3-vl-32b-reasoning",
@@ -8157,12 +8157,12 @@
             "intelligenceIndex": 11.8567423835397,
             "price1mInputTokens": 0.16,
             "price1mOutputTokens": 0.64,
-            "medianCanonicalAnswerOutputSpeed": 93.3635518872744,
+            "medianCanonicalAnswerOutputSpeed": 93.2090255857252,
             "est_cost_per_task_usd": 0.0043,
-            "est_time_per_task_sec": 71.6,
+            "est_time_per_task_sec": 71.7,
             "idx_per_dollar": 2757.3819496603955,
-            "idx_per_min": 9.935817639837738,
-            "idx_per_sec": 0.16559696066396232
+            "idx_per_min": 9.921960153589707,
+            "idx_per_sec": 0.16536600255982845
           },
           {
             "slug": "magistral-medium-2509",
@@ -8211,12 +8211,12 @@
             "intelligenceIndex": 11.7450651432172,
             "price1mInputTokens": 0.3,
             "price1mOutputTokens": 2.5,
-            "medianCanonicalAnswerOutputSpeed": 161.797032042632,
+            "medianCanonicalAnswerOutputSpeed": 165.024137812341,
             "est_cost_per_task_usd": 0.0035,
-            "est_time_per_task_sec": 8.4,
+            "est_time_per_task_sec": 8.2,
             "idx_per_dollar": 3355.7328980620573,
-            "idx_per_min": 83.89332245155143,
-            "idx_per_sec": 1.3982220408591903
+            "idx_per_min": 85.93950104793073,
+            "idx_per_sec": 1.4323250174655124
           },
           {
             "slug": "hypernova-60b",
@@ -8373,12 +8373,12 @@
             "intelligenceIndex": 11.1363932352756,
             "price1mInputTokens": 1.25,
             "price1mOutputTokens": 10.0,
-            "medianCanonicalAnswerOutputSpeed": 80.5294956167708,
+            "medianCanonicalAnswerOutputSpeed": 87.8183322055531,
             "est_cost_per_task_usd": 0.0025,
-            "est_time_per_task_sec": 2.6,
+            "est_time_per_task_sec": 2.4,
             "idx_per_dollar": 4454.55729411024,
-            "idx_per_min": 256.9936900448215,
-            "idx_per_sec": 4.283228167413692
+            "idx_per_min": 278.40983088189,
+            "idx_per_sec": 4.6401638480315
           },
           {
             "slug": "mistral-large-3",
@@ -8391,7 +8391,7 @@
             "intelligenceIndex": 11.1335262865373,
             "price1mInputTokens": 0.5,
             "price1mOutputTokens": 1.5,
-            "medianCanonicalAnswerOutputSpeed": 78.9333618573654,
+            "medianCanonicalAnswerOutputSpeed": 79.1698232303673,
             "est_cost_per_task_usd": 0.0021,
             "est_time_per_task_sec": 9.1,
             "idx_per_dollar": 5301.679184065381,
@@ -8463,12 +8463,12 @@
             "intelligenceIndex": 10.7332919151523,
             "price1mInputTokens": 0.3,
             "price1mOutputTokens": 0.9,
-            "medianCanonicalAnswerOutputSpeed": 70.3917681372695,
+            "medianCanonicalAnswerOutputSpeed": 67.7168489498278,
             "est_cost_per_task_usd": 0.0052,
-            "est_time_per_task_sec": 80.1,
+            "est_time_per_task_sec": 83.3,
             "idx_per_dollar": 2064.09459906775,
-            "idx_per_min": 8.039919037567266,
-            "idx_per_sec": 0.1339986506261211
+            "idx_per_min": 7.731062603951237,
+            "idx_per_sec": 0.1288510433991873
           },
           {
             "slug": "k-exaone-non-reasoning",
@@ -8499,12 +8499,12 @@
             "intelligenceIndex": 10.7011607338822,
             "price1mInputTokens": 0.03,
             "price1mOutputTokens": 0.12,
-            "medianCanonicalAnswerOutputSpeed": 390.987890995267,
+            "medianCanonicalAnswerOutputSpeed": 380.388354727708,
             "est_cost_per_task_usd": 0.0028,
-            "est_time_per_task_sec": 56.9,
+            "est_time_per_task_sec": 58.5,
             "idx_per_dollar": 3821.843119243643,
-            "idx_per_min": 11.284176520789664,
-            "idx_per_sec": 0.18806960867982775
+            "idx_per_min": 10.97554947064841,
+            "idx_per_sec": 0.18292582451080683
           },
           {
             "slug": "qwen3-next-80b-a3b-reasoning",
@@ -8571,12 +8571,12 @@
             "intelligenceIndex": 10.5098706910398,
             "price1mInputTokens": 0.17,
             "price1mOutputTokens": 0.98,
-            "medianCanonicalAnswerOutputSpeed": 72.6806648048526,
+            "medianCanonicalAnswerOutputSpeed": 71.2880505193586,
             "est_cost_per_task_usd": 0.0073,
-            "est_time_per_task_sec": 102.4,
+            "est_time_per_task_sec": 104.4,
             "idx_per_dollar": 1439.7083138410685,
-            "idx_per_min": 6.158127358031133,
-            "idx_per_sec": 0.10263545596718555
+            "idx_per_min": 6.040155569563104,
+            "idx_per_sec": 0.10066925949271839
           },
           {
             "slug": "grok-4-fast",
@@ -8841,12 +8841,12 @@
             "intelligenceIndex": 8.99626682832265,
             "price1mInputTokens": 0.075,
             "price1mOutputTokens": 0.3,
-            "medianCanonicalAnswerOutputSpeed": 412.764803119986,
+            "medianCanonicalAnswerOutputSpeed": 409.540218018804,
             "est_cost_per_task_usd": 0.003,
-            "est_time_per_task_sec": 24.1,
+            "est_time_per_task_sec": 24.3,
             "idx_per_dollar": 2998.7556094408833,
-            "idx_per_min": 22.39734480080328,
-            "idx_per_sec": 0.37328908001338795
+            "idx_per_min": 22.213004514376912,
+            "idx_per_sec": 0.3702167419062819
           },
           {
             "slug": "gpt-oss-120b-low",
@@ -8859,12 +8859,12 @@
             "intelligenceIndex": 8.92188068882254,
             "price1mInputTokens": 0.15,
             "price1mOutputTokens": 0.5449999999999999,
-            "medianCanonicalAnswerOutputSpeed": 231.492286713332,
+            "medianCanonicalAnswerOutputSpeed": 241.842102549205,
             "est_cost_per_task_usd": 0.0003,
-            "est_time_per_task_sec": 2.4,
+            "est_time_per_task_sec": 2.3,
             "idx_per_dollar": 29739.602296075136,
-            "idx_per_min": 223.0470172205635,
-            "idx_per_sec": 3.7174502870093917
+            "idx_per_min": 232.74471362145758,
+            "idx_per_sec": 3.8790785603576263
           },
           {
             "slug": "gpt-4-1-mini",
@@ -8895,12 +8895,12 @@
             "intelligenceIndex": 8.5991948981521,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 2.4,
-            "medianCanonicalAnswerOutputSpeed": 200.703393794567,
+            "medianCanonicalAnswerOutputSpeed": 196.623435204783,
             "est_cost_per_task_usd": 0.0107,
-            "est_time_per_task_sec": 22.1,
+            "est_time_per_task_sec": 22.6,
             "idx_per_dollar": 803.6630745936542,
-            "idx_per_min": 23.34623049272063,
-            "idx_per_sec": 0.38910384154534383
+            "idx_per_min": 22.829720968545395,
+            "idx_per_sec": 0.3804953494757566
           },
           {
             "slug": "mistral-small-3-1",
@@ -8913,12 +8913,12 @@
             "intelligenceIndex": 8.5724746604049,
             "price1mInputTokens": 0.1,
             "price1mOutputTokens": 0.3,
-            "medianCanonicalAnswerOutputSpeed": 159.675638061996,
+            "medianCanonicalAnswerOutputSpeed": 162.422635450463,
             "est_cost_per_task_usd": 0.0001,
-            "est_time_per_task_sec": 2.0,
+            "est_time_per_task_sec": 1.9,
             "idx_per_dollar": 85724.746604049,
-            "idx_per_min": 257.174239812147,
-            "idx_per_sec": 4.28623733020245
+            "idx_per_min": 270.7097261180495,
+            "idx_per_sec": 4.5118287686341585
           },
           {
             "slug": "nvidia-nemotron-3-nano-30b-a3b-reasoning",
@@ -8931,12 +8931,12 @@
             "intelligenceIndex": 8.56678627847797,
             "price1mInputTokens": 0.05,
             "price1mOutputTokens": 0.2,
-            "medianCanonicalAnswerOutputSpeed": 172.157608925916,
+            "medianCanonicalAnswerOutputSpeed": 170.897020079854,
             "est_cost_per_task_usd": 0.0023,
-            "est_time_per_task_sec": 65.2,
+            "est_time_per_task_sec": 65.7,
             "idx_per_dollar": 3724.6896862947697,
-            "idx_per_min": 7.883545655041076,
-            "idx_per_sec": 0.13139242758401795
+            "idx_per_min": 7.82354911276527,
+            "idx_per_sec": 0.13039248521275448
           },
           {
             "slug": "solar-pro-3",
@@ -9003,12 +9003,12 @@
             "intelligenceIndex": 8.45107658639981,
             "price1mInputTokens": 1.25,
             "price1mOutputTokens": 10.0,
-            "medianCanonicalAnswerOutputSpeed": 102.602007384169,
+            "medianCanonicalAnswerOutputSpeed": 104.306456021357,
             "est_cost_per_task_usd": 0.0047,
-            "est_time_per_task_sec": 4.5,
+            "est_time_per_task_sec": 4.4,
             "idx_per_dollar": 1798.1014013616614,
-            "idx_per_min": 112.68102115199746,
-            "idx_per_sec": 1.8780170191999577
+            "idx_per_min": 115.2419534509065,
+            "idx_per_sec": 1.9206992241817746
           },
           {
             "slug": "gpt-oss-20b-low",
@@ -9021,12 +9021,12 @@
             "intelligenceIndex": 8.43956989517517,
             "price1mInputTokens": 0.07,
             "price1mOutputTokens": 0.2,
-            "medianCanonicalAnswerOutputSpeed": 233.699884399039,
+            "medianCanonicalAnswerOutputSpeed": 224.198458520357,
             "est_cost_per_task_usd": 0.0002,
-            "est_time_per_task_sec": 4.8,
+            "est_time_per_task_sec": 5.0,
             "idx_per_dollar": 42197.849475875846,
-            "idx_per_min": 105.49462368968962,
-            "idx_per_sec": 1.7582437281614938
+            "idx_per_min": 101.27483874210205,
+            "idx_per_sec": 1.687913979035034
           },
           {
             "slug": "qwen3-vl-235b-a22b-instruct",
@@ -9057,12 +9057,12 @@
             "intelligenceIndex": 8.35190459974275,
             "price1mInputTokens": 0.4,
             "price1mOutputTokens": 2.0,
-            "medianCanonicalAnswerOutputSpeed": 139.55447639165,
+            "medianCanonicalAnswerOutputSpeed": 143.759770061063,
             "est_cost_per_task_usd": 0.0016,
-            "est_time_per_task_sec": 5.3,
+            "est_time_per_task_sec": 5.1,
             "idx_per_dollar": 5219.940374839219,
-            "idx_per_min": 94.54986339331415,
-            "idx_per_sec": 1.575831056555236
+            "idx_per_min": 98.25770117344413,
+            "idx_per_sec": 1.6376283528907356
           },
           {
             "slug": "gpt-5-mini-minimal",
@@ -9075,7 +9075,7 @@
             "intelligenceIndex": 8.35107998295429,
             "price1mInputTokens": 0.25,
             "price1mOutputTokens": 2.0,
-            "medianCanonicalAnswerOutputSpeed": 100.379189208194,
+            "medianCanonicalAnswerOutputSpeed": 100.804666013534,
             "est_cost_per_task_usd": 0.0005,
             "est_time_per_task_sec": 2.4,
             "idx_per_dollar": 16702.15996590858,
@@ -9129,12 +9129,12 @@
             "intelligenceIndex": 8.24698237718683,
             "price1mInputTokens": 0.3,
             "price1mOutputTokens": 2.5,
-            "medianCanonicalAnswerOutputSpeed": 222.213988462989,
+            "medianCanonicalAnswerOutputSpeed": 224.084883906288,
             "est_cost_per_task_usd": 0.0043,
-            "est_time_per_task_sec": 7.6,
+            "est_time_per_task_sec": 7.5,
             "idx_per_dollar": 1917.9028784155419,
-            "idx_per_min": 65.10775560936972,
-            "idx_per_sec": 1.085129260156162
+            "idx_per_min": 65.97585901749464,
+            "idx_per_sec": 1.0995976502915774
           },
           {
             "slug": "o1-mini",
@@ -9273,12 +9273,12 @@
             "intelligenceIndex": 7.57081873648422,
             "price1mInputTokens": 0.7,
             "price1mOutputTokens": 8.4,
-            "medianCanonicalAnswerOutputSpeed": 69.3709384851447,
+            "medianCanonicalAnswerOutputSpeed": 69.6156062331219,
             "est_cost_per_task_usd": 0.0298,
-            "est_time_per_task_sec": 50.9,
+            "est_time_per_task_sec": 50.7,
             "idx_per_dollar": 254.054320016249,
-            "idx_per_min": 8.92434428662187,
-            "idx_per_sec": 0.14873907144369786
+            "idx_per_min": 8.95954880057304,
+            "idx_per_sec": 0.14932581334288403
           },
           {
             "slug": "qwq-32b",
@@ -9309,12 +9309,12 @@
             "intelligenceIndex": 7.47986286490746,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 2.4,
-            "medianCanonicalAnswerOutputSpeed": 114.7223254849,
+            "medianCanonicalAnswerOutputSpeed": 114.314455106539,
             "est_cost_per_task_usd": 0.0097,
-            "est_time_per_task_sec": 35.2,
+            "est_time_per_task_sec": 35.3,
             "idx_per_dollar": 771.1198829801505,
-            "idx_per_min": 12.749766247001352,
-            "idx_per_sec": 0.21249610411668918
+            "idx_per_min": 12.71364792902118,
+            "idx_per_sec": 0.211894132150353
           },
           {
             "slug": "gemini-2-0-flash-thinking-exp-0121",
@@ -9345,12 +9345,12 @@
             "intelligenceIndex": 7.33662344462502,
             "price1mInputTokens": 0.1,
             "price1mOutputTokens": 0.3,
-            "medianCanonicalAnswerOutputSpeed": 113.649908104881,
+            "medianCanonicalAnswerOutputSpeed": 114.223369068278,
             "est_cost_per_task_usd": 0.0005,
-            "est_time_per_task_sec": 12.8,
+            "est_time_per_task_sec": 12.7,
             "idx_per_dollar": 14673.24688925004,
-            "idx_per_min": 34.39042239667978,
-            "idx_per_sec": 0.5731737066113296
+            "idx_per_min": 34.66121312421269,
+            "idx_per_sec": 0.5776868854035448
           },
           {
             "slug": "gemini-2-5-flash-lite-preview-09-2025",
@@ -9417,12 +9417,12 @@
             "intelligenceIndex": 6.89974867333486,
             "price1mInputTokens": 2.5,
             "price1mOutputTokens": 12.5,
-            "medianCanonicalAnswerOutputSpeed": 35.5401866271102,
+            "medianCanonicalAnswerOutputSpeed": 35.9325440448449,
             "est_cost_per_task_usd": 0.0034,
-            "est_time_per_task_sec": 7.0,
+            "est_time_per_task_sec": 6.9,
             "idx_per_dollar": 2029.3378450984883,
-            "idx_per_min": 59.1407029142988,
-            "idx_per_sec": 0.9856783819049799
+            "idx_per_min": 59.99781455073791,
+            "idx_per_sec": 0.9999635758456318
           },
           {
             "slug": "solar-pro-2-preview-reasoning",
@@ -9471,12 +9471,12 @@
             "intelligenceIndex": 6.67646592794924,
             "price1mInputTokens": 0.4,
             "price1mOutputTokens": 2.0,
-            "medianCanonicalAnswerOutputSpeed": 145.488352215095,
+            "medianCanonicalAnswerOutputSpeed": 150.224199372416,
             "est_cost_per_task_usd": 0.0007,
-            "est_time_per_task_sec": 2.3,
+            "est_time_per_task_sec": 2.2,
             "idx_per_dollar": 9537.808468498915,
-            "idx_per_min": 174.16867638128454,
-            "idx_per_sec": 2.9028112730214093
+            "idx_per_min": 182.08543439861566,
+            "idx_per_sec": 3.034757239976927
           },
           {
             "slug": "k2-v2-medium",
@@ -9543,12 +9543,12 @@
             "intelligenceIndex": 6.56061703801807,
             "price1mInputTokens": 0.15,
             "price1mOutputTokens": 0.6,
-            "medianCanonicalAnswerOutputSpeed": 154.138238551772,
+            "medianCanonicalAnswerOutputSpeed": 158.528118910437,
             "est_cost_per_task_usd": 0.0002,
-            "est_time_per_task_sec": 2.0,
+            "est_time_per_task_sec": 1.9,
             "idx_per_dollar": 32803.08519009035,
-            "idx_per_min": 196.8185111405421,
-            "idx_per_sec": 3.280308519009035
+            "idx_per_min": 207.1773801479391,
+            "idx_per_sec": 3.4529563357989845
           },
           {
             "slug": "tri-21b-think-v0-5",
@@ -9669,7 +9669,7 @@
             "intelligenceIndex": 6.25795322458302,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 0.7,
-            "medianCanonicalAnswerOutputSpeed": 2105.82671700195,
+            "medianCanonicalAnswerOutputSpeed": 2159.65803428137,
             "est_cost_per_task_usd": 0.0023,
             "est_time_per_task_sec": 1.0,
             "idx_per_dollar": 2720.849228079574,
@@ -9759,7 +9759,7 @@
             "intelligenceIndex": 6.04381335065615,
             "price1mInputTokens": 0.3,
             "price1mOutputTokens": 2.5,
-            "medianCanonicalAnswerOutputSpeed": 156.147959370845,
+            "medianCanonicalAnswerOutputSpeed": 157.497053790191,
             "est_cost_per_task_usd": 0.0027,
             "est_time_per_task_sec": 6.6,
             "idx_per_dollar": 2238.4493891319075,
@@ -9903,12 +9903,12 @@
             "intelligenceIndex": 5.64766426185684,
             "price1mInputTokens": 0.1,
             "price1mOutputTokens": 0.4,
-            "medianCanonicalAnswerOutputSpeed": 416.489747672113,
+            "medianCanonicalAnswerOutputSpeed": 426.520502287566,
             "est_cost_per_task_usd": 0.003,
-            "est_time_per_task_sec": 17.8,
+            "est_time_per_task_sec": 17.4,
             "idx_per_dollar": 1882.55475395228,
-            "idx_per_min": 19.037070545584854,
-            "idx_per_sec": 0.31728450909308087
+            "idx_per_min": 19.474704351230486,
+            "idx_per_sec": 0.3245784058538414
           },
           {
             "slug": "ministral-3-14b",
@@ -9921,12 +9921,12 @@
             "intelligenceIndex": 5.54860427915402,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 0.2,
-            "medianCanonicalAnswerOutputSpeed": 93.9211391082823,
+            "medianCanonicalAnswerOutputSpeed": 94.7261860451587,
             "est_cost_per_task_usd": 0.0002,
-            "est_time_per_task_sec": 9.7,
+            "est_time_per_task_sec": 9.6,
             "idx_per_dollar": 27743.021395770098,
-            "idx_per_min": 34.321263582396,
-            "idx_per_sec": 0.5720210597066
+            "idx_per_min": 34.67877674471262,
+            "idx_per_sec": 0.5779796124118771
           },
           {
             "slug": "gpt-4o",
@@ -9975,7 +9975,7 @@
             "intelligenceIndex": 5.3141428348005,
             "price1mInputTokens": 0.0,
             "price1mOutputTokens": 0.0,
-            "medianCanonicalAnswerOutputSpeed": 204.47151762884,
+            "medianCanonicalAnswerOutputSpeed": 204.323064011906,
             "est_cost_per_task_usd": null,
             "est_time_per_task_sec": null,
             "idx_per_dollar": null,
@@ -9993,12 +9993,12 @@
             "intelligenceIndex": 5.31394794118437,
             "price1mInputTokens": 0.16,
             "price1mOutputTokens": 0.64,
-            "medianCanonicalAnswerOutputSpeed": 75.4009416427739,
+            "medianCanonicalAnswerOutputSpeed": 73.206873720094,
             "est_cost_per_task_usd": 0.0009,
-            "est_time_per_task_sec": 17.8,
+            "est_time_per_task_sec": 18.4,
             "idx_per_dollar": 5904.386601315967,
-            "idx_per_min": 17.91218407140799,
-            "idx_per_sec": 0.29853640119013314
+            "idx_per_min": 17.32809111255773,
+            "idx_per_sec": 0.2888015185426288
           },
           {
             "slug": "deepseek-r1-distill-qwen-32b",
@@ -10065,7 +10065,7 @@
             "intelligenceIndex": 5.0124303495611,
             "price1mInputTokens": 0.1,
             "price1mOutputTokens": 0.3,
-            "medianCanonicalAnswerOutputSpeed": 150.896516626612,
+            "medianCanonicalAnswerOutputSpeed": 152.202639099907,
             "est_cost_per_task_usd": 0.0001,
             "est_time_per_task_sec": 2.2,
             "idx_per_dollar": 50124.303495611,
@@ -10137,12 +10137,12 @@
             "intelligenceIndex": 4.85530675546747,
             "price1mInputTokens": 0.18,
             "price1mOutputTokens": 2.1,
-            "medianCanonicalAnswerOutputSpeed": 118.537314740157,
+            "medianCanonicalAnswerOutputSpeed": 118.212793018552,
             "est_cost_per_task_usd": 0.0105,
-            "est_time_per_task_sec": 42.1,
+            "est_time_per_task_sec": 42.2,
             "idx_per_dollar": 462.410167187378,
-            "idx_per_min": 6.919677086176916,
-            "idx_per_sec": 0.11532795143628194
+            "idx_per_min": 6.903279747110146,
+            "idx_per_sec": 0.11505466245183577
           },
           {
             "slug": "qwen3-14b-instruct-reasoning",
@@ -10155,7 +10155,7 @@
             "intelligenceIndex": 4.81655736287005,
             "price1mInputTokens": 0.35,
             "price1mOutputTokens": 4.2,
-            "medianCanonicalAnswerOutputSpeed": 64.3133202771209,
+            "medianCanonicalAnswerOutputSpeed": 64.38585945318,
             "est_cost_per_task_usd": 0.0109,
             "est_time_per_task_sec": 40.3,
             "idx_per_dollar": 441.88599659358255,
@@ -10209,7 +10209,7 @@
             "intelligenceIndex": 4.64476747899327,
             "price1mInputTokens": 0.19,
             "price1mOutputTokens": 0.6799999999999999,
-            "medianCanonicalAnswerOutputSpeed": 89.1716292090856,
+            "medianCanonicalAnswerOutputSpeed": 89.3108880568991,
             "est_cost_per_task_usd": 0.0003,
             "est_time_per_task_sec": 5.3,
             "idx_per_dollar": 15482.5582633109,
@@ -10263,12 +10263,12 @@
             "intelligenceIndex": 4.27414180378378,
             "price1mInputTokens": 0.13,
             "price1mOutputTokens": 0.4,
-            "medianCanonicalAnswerOutputSpeed": 89.8529646397188,
+            "medianCanonicalAnswerOutputSpeed": 89.4446313016733,
             "est_cost_per_task_usd": 0.0026,
-            "est_time_per_task_sec": 71.6,
+            "est_time_per_task_sec": 72.0,
             "idx_per_dollar": 1643.9006937629924,
-            "idx_per_min": 3.5816830757964646,
-            "idx_per_sec": 0.05969471792994107
+            "idx_per_min": 3.5617848364864835,
+            "idx_per_sec": 0.059363080608108056
           },
           {
             "slug": "gemini-1-5-pro",
@@ -10317,12 +10317,12 @@
             "intelligenceIndex": 4.23539663117768,
             "price1mInputTokens": 0.7,
             "price1mOutputTokens": 1.1,
-            "medianCanonicalAnswerOutputSpeed": 20.1428085963605,
+            "medianCanonicalAnswerOutputSpeed": 20.4754739910374,
             "est_cost_per_task_usd": 0.0025,
-            "est_time_per_task_sec": 106.7,
+            "est_time_per_task_sec": 105.0,
             "idx_per_dollar": 1694.1586524710717,
-            "idx_per_min": 2.3816663343079734,
-            "idx_per_sec": 0.03969443890513289
+            "idx_per_min": 2.4202266463872455,
+            "idx_per_sec": 0.04033711077312076
           },
           {
             "slug": "claude-35-sonnet",
@@ -10389,12 +10389,12 @@
             "intelligenceIndex": 4.07958926331894,
             "price1mInputTokens": 0.1,
             "price1mOutputTokens": 0.4,
-            "medianCanonicalAnswerOutputSpeed": 133.966637919322,
+            "medianCanonicalAnswerOutputSpeed": 123.989519681577,
             "est_cost_per_task_usd": 0.0002,
-            "est_time_per_task_sec": 2.2,
+            "est_time_per_task_sec": 2.4,
             "idx_per_dollar": 20397.9463165947,
-            "idx_per_min": 111.26152536324383,
-            "idx_per_sec": 1.8543587560540638
+            "idx_per_min": 101.9897315829735,
+            "idx_per_sec": 1.6998288597162252
           },
           {
             "slug": "ling-flash-2-0",
@@ -10407,12 +10407,12 @@
             "intelligenceIndex": 4.05622925143976,
             "price1mInputTokens": 0.14,
             "price1mOutputTokens": 0.57,
-            "medianCanonicalAnswerOutputSpeed": 57.059485568962,
+            "medianCanonicalAnswerOutputSpeed": 58.0899494505868,
             "est_cost_per_task_usd": 0.0014,
-            "est_time_per_task_sec": 43.7,
+            "est_time_per_task_sec": 43.0,
             "idx_per_dollar": 2897.306608171257,
-            "idx_per_min": 5.569193480237656,
-            "idx_per_sec": 0.09281989133729426
+            "idx_per_min": 5.659854769450828,
+            "idx_per_sec": 0.09433091282418046
           },
           {
             "slug": "gemma-4-e2b",
@@ -10443,7 +10443,7 @@
             "intelligenceIndex": 3.95220298399413,
             "price1mInputTokens": 0.25,
             "price1mOutputTokens": 0.97,
-            "medianCanonicalAnswerOutputSpeed": 103.200211700454,
+            "medianCanonicalAnswerOutputSpeed": 103.10393084658,
             "est_cost_per_task_usd": 0.004,
             "est_time_per_task_sec": 39.1,
             "idx_per_dollar": 988.0507459985324,
@@ -10461,12 +10461,12 @@
             "intelligenceIndex": 3.90494221357866,
             "price1mInputTokens": 2.5,
             "price1mOutputTokens": 10.0,
-            "medianCanonicalAnswerOutputSpeed": 93.3270667945392,
+            "medianCanonicalAnswerOutputSpeed": 96.796168196932,
             "est_cost_per_task_usd": 0.0031,
-            "est_time_per_task_sec": 2.6,
+            "est_time_per_task_sec": 2.5,
             "idx_per_dollar": 1259.6587785737613,
-            "idx_per_min": 90.11405108258445,
-            "idx_per_sec": 1.5019008513764076
+            "idx_per_min": 93.71861312588784,
+            "idx_per_sec": 1.561976885431464
           },
           {
             "slug": "qwen2-5-72b-instruct",
@@ -10551,12 +10551,12 @@
             "intelligenceIndex": 3.64922811584259,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 2.4,
-            "medianCanonicalAnswerOutputSpeed": 112.262564314472,
+            "medianCanonicalAnswerOutputSpeed": 112.511179619222,
             "est_cost_per_task_usd": 0.0072,
-            "est_time_per_task_sec": 26.8,
+            "est_time_per_task_sec": 26.7,
             "idx_per_dollar": 506.83723831147086,
-            "idx_per_min": 8.169913692184904,
-            "idx_per_sec": 0.13616522820308172
+            "idx_per_min": 8.200512619870988,
+            "idx_per_sec": 0.13667521033118316
           },
           {
             "slug": "sonar-pro",
@@ -10659,12 +10659,12 @@
             "intelligenceIndex": 3.46981386963215,
             "price1mInputTokens": 0.15,
             "price1mOutputTokens": 0.15,
-            "medianCanonicalAnswerOutputSpeed": 102.003931024264,
+            "medianCanonicalAnswerOutputSpeed": 103.493931755268,
             "est_cost_per_task_usd": 0.0002,
-            "est_time_per_task_sec": 11.3,
+            "est_time_per_task_sec": 11.1,
             "idx_per_dollar": 17349.06934816075,
-            "idx_per_min": 18.423790458223802,
-            "idx_per_sec": 0.3070631743037301
+            "idx_per_min": 18.75575064666027,
+            "idx_per_sec": 0.31259584411100455
           },
           {
             "slug": "llama-3-1-nemotron-ultra-253b-v1-reasoning",
@@ -10677,12 +10677,12 @@
             "intelligenceIndex": 3.42481887269517,
             "price1mInputTokens": 0.6,
             "price1mOutputTokens": 1.8,
-            "medianCanonicalAnswerOutputSpeed": 52.881289648312,
+            "medianCanonicalAnswerOutputSpeed": 52.7770534849853,
             "est_cost_per_task_usd": 0.0054,
-            "est_time_per_task_sec": 56.1,
+            "est_time_per_task_sec": 56.3,
             "idx_per_dollar": 634.2257171657722,
-            "idx_per_min": 3.6629078852354757,
-            "idx_per_sec": 0.0610484647539246
+            "idx_per_min": 3.6498957790712296,
+            "idx_per_sec": 0.06083159631785382
           },
           {
             "slug": "qwen3-30b-a3b-2507",
@@ -10695,12 +10695,12 @@
             "intelligenceIndex": 3.41016300611684,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 0.8,
-            "medianCanonicalAnswerOutputSpeed": 152.84913101849,
+            "medianCanonicalAnswerOutputSpeed": 154.233720055368,
             "est_cost_per_task_usd": 0.0014,
-            "est_time_per_task_sec": 10.9,
+            "est_time_per_task_sec": 10.8,
             "idx_per_dollar": 2435.830718654886,
-            "idx_per_min": 18.771539483211964,
-            "idx_per_sec": 0.31285899138686607
+            "idx_per_min": 18.945350033982443,
+            "idx_per_sec": 0.3157558338997074
           },
           {
             "slug": "ernie-4-5-300b-a47b",
@@ -10767,12 +10767,12 @@
             "intelligenceIndex": 3.31144325721889,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 0.6,
-            "medianCanonicalAnswerOutputSpeed": 30.5305913944484,
+            "medianCanonicalAnswerOutputSpeed": 37.0439090567903,
             "est_cost_per_task_usd": 0.0034,
-            "est_time_per_task_sec": 179.5,
+            "est_time_per_task_sec": 148.0,
             "idx_per_dollar": 973.9538991820265,
-            "idx_per_min": 1.106889111048097,
-            "idx_per_sec": 0.018448151850801616
+            "idx_per_min": 1.3424769961698202,
+            "idx_per_sec": 0.022374616602830338
           },
           {
             "slug": "gemma-4-e4b-non-reasoning",
@@ -10821,7 +10821,7 @@
             "intelligenceIndex": 3.19834184630581,
             "price1mInputTokens": 0.04,
             "price1mOutputTokens": 0.16,
-            "medianCanonicalAnswerOutputSpeed": 93.4894479394425,
+            "medianCanonicalAnswerOutputSpeed": 93.2792776267049,
             "est_cost_per_task_usd": 0.0004,
             "est_time_per_task_sec": 29.2,
             "idx_per_dollar": 7995.854615764524,
@@ -10893,12 +10893,12 @@
             "intelligenceIndex": 3.04915229049223,
             "price1mInputTokens": 0.4,
             "price1mOutputTokens": 0.4,
-            "medianCanonicalAnswerOutputSpeed": 20.6832746044934,
+            "medianCanonicalAnswerOutputSpeed": 21.074183509377,
             "est_cost_per_task_usd": 0.0002,
-            "est_time_per_task_sec": 21.6,
+            "est_time_per_task_sec": 21.2,
             "idx_per_dollar": 15245.76145246115,
-            "idx_per_min": 8.469867473589527,
-            "idx_per_sec": 0.1411644578931588
+            "idx_per_min": 8.629676293845934,
+            "idx_per_sec": 0.1438279382307656
           },
           {
             "slug": "qwen3-32b-instruct",
@@ -10911,7 +10911,7 @@
             "intelligenceIndex": 3.00249773459903,
             "price1mInputTokens": 0.16,
             "price1mOutputTokens": 0.64,
-            "medianCanonicalAnswerOutputSpeed": 108.953668265305,
+            "medianCanonicalAnswerOutputSpeed": 108.993280770616,
             "est_cost_per_task_usd": 0.0003,
             "est_time_per_task_sec": 3.3,
             "idx_per_dollar": 10008.325781996768,
@@ -10929,7 +10929,7 @@
             "intelligenceIndex": 2.97314426325893,
             "price1mInputTokens": 5.0,
             "price1mOutputTokens": 15.0,
-            "medianCanonicalAnswerOutputSpeed": 106.46244317459,
+            "medianCanonicalAnswerOutputSpeed": 107.953313054502,
             "est_cost_per_task_usd": 0.0046,
             "est_time_per_task_sec": 2.3,
             "idx_per_dollar": 646.3357094041153,
@@ -11037,12 +11037,12 @@
             "intelligenceIndex": 2.84394865393907,
             "price1mInputTokens": 0.18,
             "price1mOutputTokens": 2.1,
-            "medianCanonicalAnswerOutputSpeed": 41.3092134080688,
+            "medianCanonicalAnswerOutputSpeed": 40.5274648240606,
             "est_cost_per_task_usd": 0.0075,
-            "est_time_per_task_sec": 86.0,
+            "est_time_per_task_sec": 87.6,
             "idx_per_dollar": 379.1931538585427,
-            "idx_per_min": 1.984150223678421,
-            "idx_per_sec": 0.03306917039464035
+            "idx_per_min": 1.9479100369445685,
+            "idx_per_sec": 0.03246516728240948
           },
           {
             "slug": "llama-3-3-nemotron-super-49b",
@@ -11109,7 +11109,7 @@
             "intelligenceIndex": 2.70320413279288,
             "price1mInputTokens": 0.0,
             "price1mOutputTokens": 0.0,
-            "medianCanonicalAnswerOutputSpeed": 339.658415409961,
+            "medianCanonicalAnswerOutputSpeed": 340.067278101601,
             "est_cost_per_task_usd": null,
             "est_time_per_task_sec": null,
             "idx_per_dollar": null,
@@ -11307,7 +11307,7 @@
             "intelligenceIndex": 2.29210400791931,
             "price1mInputTokens": 10.0,
             "price1mOutputTokens": 30.0,
-            "medianCanonicalAnswerOutputSpeed": 33.084202595192,
+            "medianCanonicalAnswerOutputSpeed": 33.0297476132353,
             "est_cost_per_task_usd": 0.0105,
             "est_time_per_task_sec": 8.3,
             "idx_per_dollar": 218.29561980183902,
@@ -11361,12 +11361,12 @@
             "intelligenceIndex": 2.08650704758077,
             "price1mInputTokens": 2.5,
             "price1mOutputTokens": 10.0,
-            "medianCanonicalAnswerOutputSpeed": 61.807659732377,
+            "medianCanonicalAnswerOutputSpeed": 63.016083213693,
             "est_cost_per_task_usd": 0.0035,
-            "est_time_per_task_sec": 5.1,
+            "est_time_per_task_sec": 5.0,
             "idx_per_dollar": 596.1448707373629,
-            "idx_per_min": 24.547141736244356,
-            "idx_per_sec": 0.4091190289374059
+            "idx_per_min": 25.038084570969243,
+            "idx_per_sec": 0.417301409516154
           },
           {
             "slug": "qwen3-5-2b",
@@ -11415,7 +11415,7 @@
             "intelligenceIndex": 2.0266540717697,
             "price1mInputTokens": 0.02,
             "price1mOutputTokens": 0.05,
-            "medianCanonicalAnswerOutputSpeed": 143.38732004758,
+            "medianCanonicalAnswerOutputSpeed": 143.236044336559,
             "est_cost_per_task_usd": 0.0,
             "est_time_per_task_sec": 3.7,
             "idx_per_dollar": null,
@@ -11523,12 +11523,12 @@
             "intelligenceIndex": 1.72956180789232,
             "price1mInputTokens": 0.1,
             "price1mOutputTokens": 0.1,
-            "medianCanonicalAnswerOutputSpeed": 202.866800603165,
+            "medianCanonicalAnswerOutputSpeed": 209.286014110266,
             "est_cost_per_task_usd": 0.0001,
-            "est_time_per_task_sec": 5.9,
+            "est_time_per_task_sec": 5.8,
             "idx_per_dollar": 17295.6180789232,
-            "idx_per_min": 17.58876414805749,
-            "idx_per_sec": 0.29314606913429153
+            "idx_per_min": 17.892018702334347,
+            "idx_per_sec": 0.29820031170557243
           },
           {
             "slug": "mistral-large-2407",
@@ -11649,7 +11649,7 @@
             "intelligenceIndex": 1.38068483529018,
             "price1mInputTokens": 0.1,
             "price1mOutputTokens": 0.3,
-            "medianCanonicalAnswerOutputSpeed": 150.972688032716,
+            "medianCanonicalAnswerOutputSpeed": 152.824015934472,
             "est_cost_per_task_usd": 0.0001,
             "est_time_per_task_sec": 2.4,
             "idx_per_dollar": 13806.8483529018,
@@ -11667,12 +11667,12 @@
             "intelligenceIndex": 1.37399181740648,
             "price1mInputTokens": 0.1,
             "price1mOutputTokens": 0.4,
-            "medianCanonicalAnswerOutputSpeed": 327.34071122629,
+            "medianCanonicalAnswerOutputSpeed": 333.120934328089,
             "est_cost_per_task_usd": 0.0021,
-            "est_time_per_task_sec": 16.1,
+            "est_time_per_task_sec": 15.9,
             "idx_per_dollar": 654.2818178126096,
-            "idx_per_min": 5.120466400272596,
-            "idx_per_sec": 0.08534110667120993
+            "idx_per_min": 5.184874782665962,
+            "idx_per_sec": 0.08641457971109937
           },
           {
             "slug": "nova-lite",
@@ -11721,12 +11721,12 @@
             "intelligenceIndex": 1.34820119253478,
             "price1mInputTokens": 0.13,
             "price1mOutputTokens": 0.4,
-            "medianCanonicalAnswerOutputSpeed": 82.8799698258675,
+            "medianCanonicalAnswerOutputSpeed": 86.0194364365348,
             "est_cost_per_task_usd": 0.0001,
-            "est_time_per_task_sec": 3.4,
+            "est_time_per_task_sec": 3.3,
             "idx_per_dollar": 13482.0119253478,
-            "idx_per_min": 23.79178575061377,
-            "idx_per_sec": 0.3965297625102295
+            "idx_per_min": 24.51274895517782,
+            "idx_per_sec": 0.40854581591963035
           },
           {
             "slug": "qwen3-30b-a3b-instruct",
@@ -11811,12 +11811,12 @@
             "intelligenceIndex": 1.13154093563413,
             "price1mInputTokens": 0.05,
             "price1mOutputTokens": 0.1,
-            "medianCanonicalAnswerOutputSpeed": 116.166816828027,
+            "medianCanonicalAnswerOutputSpeed": 115.686079874252,
             "est_cost_per_task_usd": 0.0,
-            "est_time_per_task_sec": 3.3,
+            "est_time_per_task_sec": 3.4,
             "idx_per_dollar": null,
-            "idx_per_min": 20.57347155698418,
-            "idx_per_sec": 0.34289119261640305
+            "idx_per_min": 19.968369452367,
+            "idx_per_sec": 0.33280615753945
           },
           {
             "slug": "sarvam-30b",
@@ -12135,7 +12135,7 @@
             "intelligenceIndex": 1.0,
             "price1mInputTokens": 0.25,
             "price1mOutputTokens": 0.25,
-            "medianCanonicalAnswerOutputSpeed": 105.379672599004,
+            "medianCanonicalAnswerOutputSpeed": 104.361553966313,
             "est_cost_per_task_usd": 0.0001,
             "est_time_per_task_sec": 2.8,
             "idx_per_dollar": 10000.0,
@@ -12351,7 +12351,7 @@
             "intelligenceIndex": 1.0,
             "price1mInputTokens": 0.05,
             "price1mOutputTokens": 0.2,
-            "medianCanonicalAnswerOutputSpeed": 110.12597120641,
+            "medianCanonicalAnswerOutputSpeed": 110.38378230327,
             "est_cost_per_task_usd": 0.0001,
             "est_time_per_task_sec": 2.4,
             "idx_per_dollar": 10000.0,
@@ -12369,12 +12369,12 @@
             "intelligenceIndex": 1.0,
             "price1mInputTokens": 0.15,
             "price1mOutputTokens": 0.6,
-            "medianCanonicalAnswerOutputSpeed": 147.842229920987,
+            "medianCanonicalAnswerOutputSpeed": 154.141698857915,
             "est_cost_per_task_usd": 0.0001,
-            "est_time_per_task_sec": 0.7,
+            "est_time_per_task_sec": 0.6,
             "idx_per_dollar": 10000.0,
-            "idx_per_min": 85.71428571428572,
-            "idx_per_sec": 1.4285714285714286
+            "idx_per_min": 100.0,
+            "idx_per_sec": 1.6666666666666667
           },
           {
             "slug": "lfm2-5-vl-1-6b",
@@ -12387,7 +12387,7 @@
             "intelligenceIndex": 1.0,
             "price1mInputTokens": 0.0,
             "price1mOutputTokens": 0.0,
-            "medianCanonicalAnswerOutputSpeed": 438.882746179347,
+            "medianCanonicalAnswerOutputSpeed": null,
             "est_cost_per_task_usd": null,
             "est_time_per_task_sec": null,
             "idx_per_dollar": null,
@@ -12765,12 +12765,12 @@
             "intelligenceIndex": 1.0,
             "price1mInputTokens": 0.345,
             "price1mOutputTokens": 0.345,
-            "medianCanonicalAnswerOutputSpeed": 26.0556262800764,
+            "medianCanonicalAnswerOutputSpeed": 24.2718524265033,
             "est_cost_per_task_usd": 0.0003,
-            "est_time_per_task_sec": 28.2,
+            "est_time_per_task_sec": 30.3,
             "idx_per_dollar": 3333.3333333333335,
-            "idx_per_min": 2.127659574468085,
-            "idx_per_sec": 0.03546099290780142
+            "idx_per_min": 1.9801980198019802,
+            "idx_per_sec": 0.033003300330033
           },
           {
             "slug": "lfm2-8b-a1b",
@@ -12963,7 +12963,7 @@
             "intelligenceIndex": 1.0,
             "price1mInputTokens": 0.2,
             "price1mOutputTokens": 0.6,
-            "medianCanonicalAnswerOutputSpeed": 148.402228910721,
+            "medianCanonicalAnswerOutputSpeed": 149.660946107397,
             "est_cost_per_task_usd": 0.0001,
             "est_time_per_task_sec": 1.1,
             "idx_per_dollar": 10000.0,
@@ -13269,7 +13269,7 @@
             "intelligenceIndex": 1.0,
             "price1mInputTokens": 0.0,
             "price1mOutputTokens": 0.0,
-            "medianCanonicalAnswerOutputSpeed": 45.4836450508352,
+            "medianCanonicalAnswerOutputSpeed": 45.499675427252,
             "est_cost_per_task_usd": null,
             "est_time_per_task_sec": null,
             "idx_per_dollar": null,
@@ -13503,12 +13503,12 @@
             "intelligenceIndex": 1.0,
             "price1mInputTokens": 0.18,
             "price1mOutputTokens": 0.7,
-            "medianCanonicalAnswerOutputSpeed": 41.5143506376191,
+            "medianCanonicalAnswerOutputSpeed": 41.3660771697569,
             "est_cost_per_task_usd": 0.0009,
-            "est_time_per_task_sec": 30.2,
+            "est_time_per_task_sec": 30.3,
             "idx_per_dollar": 1111.111111111111,
-            "idx_per_min": 1.9867549668874174,
-            "idx_per_sec": 0.033112582781456956
+            "idx_per_min": 1.9801980198019802,
+            "idx_per_sec": 0.033003300330033
           },
           {
             "slug": "claude-3-sonnet",
@@ -13899,7 +13899,7 @@
             "intelligenceIndex": 1.0,
             "price1mInputTokens": 0.125,
             "price1mOutputTokens": 0.5,
-            "medianCanonicalAnswerOutputSpeed": 40.5009418215269,
+            "medianCanonicalAnswerOutputSpeed": 40.6241756632612,
             "est_cost_per_task_usd": 0.0002,
             "est_time_per_task_sec": 8.1,
             "idx_per_dollar": 5000.0,
@@ -14025,7 +14025,7 @@
             "intelligenceIndex": null,
             "price1mInputTokens": 2.0,
             "price1mOutputTokens": 10.0,
-            "medianCanonicalAnswerOutputSpeed": 104.539392851793,
+            "medianCanonicalAnswerOutputSpeed": 107.102238017322,
             "est_cost_per_task_usd": null,
             "est_time_per_task_sec": null,
             "idx_per_dollar": null,
@@ -14115,7 +14115,7 @@
             "intelligenceIndex": null,
             "price1mInputTokens": 2.0,
             "price1mOutputTokens": 10.0,
-            "medianCanonicalAnswerOutputSpeed": 138.115860971635,
+            "medianCanonicalAnswerOutputSpeed": 136.959993287208,
             "est_cost_per_task_usd": null,
             "est_time_per_task_sec": null,
             "idx_per_dollar": null,
