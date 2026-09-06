@@ -20,43 +20,63 @@ logger = setup_logger()
 
 
 def _extract_initial_models(html: str) -> list[dict]:
-    """Pull the ``initialModels`` array from the RSC flight payload."""
+    """Pull the ``initialModels`` array from the RSC flight payload.
+
+    This function specifically handles the key used in:
+    https://artificialanalysis.ai/models/capabilities/agentic
+    AND
+    https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index
+    """
     pushes = re.findall(r'self\.__next_f\.push\(\[1,"(.*?)"\]\)', html)
     for block in pushes:
         decoded = block.encode().decode("unicode_escape")
-        for m in re.finditer(r'"initialModels":\s*\[', decoded):
-            start = m.end() - 1
-            depth = 0
-            end = start
-            for i, ch in enumerate(decoded[start:], start):
-                if ch == "[":
-                    depth += 1
-                elif ch == "]":
-                    depth -= 1
-                    if depth == 0:
-                        end = i + 1
-                        break
-            try:
-                arr = json.loads(decoded[start:end])
-            except json.JSONDecodeError:
-                continue
-            if isinstance(arr, list) and arr and isinstance(arr[0], dict) \
-                    and "costPerTask" in arr[0]:
-                return arr
+        # Check for 'initialModels' or 'models' as the primary data array key
+        for key in ["initialModels", "models"]:
+            for m in re.finditer(f'"{key}":\\s*\\[', decoded):
+                start = m.end() - 1
+                depth = 0
+                end = start
+                for i, ch in enumerate(decoded[start:], start):
+                    if ch == "[":
+                        depth += 1
+                    elif ch == "]":
+                        depth -= 1
+                        if depth == 0:
+                            end = i + 1
+                            break
+                try:
+                    arr = json.loads(decoded[start:end])
+                except json.JSONDecodeError:
+                    continue
+                if isinstance(arr, list) and arr and isinstance(arr[0], dict):
+                    # The intelligence index models might not have 'costPerTask'
+                    # but they will have 'id' and 'slug'.
+                    # We'll accept any array of dicts with 'id' and 'slug'.
+                    if "id" in arr[0] and "slug" in arr[0]:
+                        return arr
     return []
 
 
 def parse_models(html: str) -> list[dict]:
-    """Parse the raw HTML into a flat list of normalized model records."""
+    """Parse the raw HTML into a flat list of normalized model records.
+
+    Handles both 'capabilities' pages (with cost/token metrics)
+    and 'intelligence-index' pages (which may have less detailed metrics).
+    """
     raw = _extract_initial_models(html)
     if not raw:
-        logger.error("No model rows found in agentic page payload")
+        logger.error("No model rows found in page payload")
         return []
 
     models = []
     for row in raw:
+        # Intelligence index might not have these nested objects.
+        # We use .get() with empty dict fallback.
         cost = row.get("costPerTask") or {}
         tokens = row.get("outputTokensPerTask") or {}
+
+        # Intelligence index might use 'intelligenceIndex' directly or in a different field.
+        # We attempt to normalize.
         models.append(
             {
                 "id": row.get("id"),
@@ -83,5 +103,7 @@ def parse_models(html: str) -> list[dict]:
             }
         )
 
-    logger.info(f"Parsed {len(models)} model rows from agentic capabilities page")
+    logger.info(f"Parsed {len(models)} model rows from page payload")
     return models
+
+
