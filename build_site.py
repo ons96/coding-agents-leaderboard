@@ -46,6 +46,20 @@ TAB_PRESENTATION = {
             ("Output Tok/s", "tokens_per_sec"),
         ],
     },
+    "models_full": {
+        "title": "Intelligence Index \u2014 630 Models",
+        "entity": "index-630",
+        "txt_cols": ["model", "creator", "slug"],
+        "filter_id": "creator-filter",
+        "filter_field": "creator",
+        "filter_placeholder": "Search model, creator, slug...",
+        "footer_url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
+        "sort_buttons": [
+            ("Index/$", "idx_per_dollar"),
+            ("Index/min", "idx_per_min"),
+            ("Index", "intelligenceIndex"),
+        ],
+    },
 }
 
 

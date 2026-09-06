@@ -37,6 +37,9 @@ jobs:
           mkdir -p data docs
           python main.py
 
+      - name: Run intelligence-index extractor (630 models)
+        run: python intel_index_full_extract.py --out data/artificial_analysis_intelligence_index_full.csv && python build_index_tab.py
+
       - name: Build GitHub Pages site
         run: python build_site.py
 
@@ -44,7 +47,7 @@ jobs:
         run: |
           python - <<'PY'
           import re, pathlib
-          for f in ("docs/index.html", "docs/models.html"):
+          for f in ("docs/index.html", "docs/models.html", "docs/models_full.html"):
               html = pathlib.Path(f).read_text()
               scripts = re.findall(r"<script>(.*?)</script>", html, re.DOTALL)
               if not scripts:
