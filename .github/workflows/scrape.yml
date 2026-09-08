@@ -32,13 +32,16 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Run intelligence-index extractor (630 models)
+        run: python intel_index_full_extract.py --out data/artificial_analysis_intelligence_index_full.csv
+
       - name: Run scraper
         run: |
           mkdir -p data docs
           python main.py
 
-      - name: Run intelligence-index extractor (630 models)
-        run: python intel_index_full_extract.py --out data/artificial_analysis_intelligence_index_full.csv && python build_index_tab.py
+      - name: Merge intelligence-index tab into site payload
+        run: python build_index_tab.py
 
       - name: Build GitHub Pages site
         run: python build_site.py

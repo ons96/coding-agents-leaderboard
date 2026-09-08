@@ -65,8 +65,9 @@ const FILTER_FIELD=__FILTER_FIELD__;
 const SORT_ACTIONS=__SORT_ACTIONS__;
 
 function init(){
-  document.getElementById("meta-info").textContent=META.row_count+" "+__ENTITY_LABEL__+" | "+META.scrape_date.slice(0,10)+" | artificialanalysis.ai";
-  document.getElementById("update-date").textContent=META.scrape_date.slice(0,10);
+  const scrapeDay=META.scrape_date?META.scrape_date.slice(0,10):"";
+  document.getElementById("meta-info").textContent=META.row_count+" "+__ENTITY_LABEL__+" | "+(scrapeDay||"artificialanalysis.ai");
+  document.getElementById("update-date").textContent=scrapeDay||"—";
   const hf=document.getElementById("__FILTER_ID__");
   [...new Set(TABLE_DATA.map(r=>r[FILTER_FIELD]).filter(Boolean))].sort().forEach(h=>{
     const o=document.createElement("option");o.value=h;o.textContent=h;hf.appendChild(o);

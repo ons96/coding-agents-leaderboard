@@ -13,6 +13,48 @@ from .scraper import fetch_html, parse_agents
 logger = setup_logger()
 
 
+def _backfill_models_from_index(df: pd.DataFrame) -> pd.DataFrame:
+    """Fill missing agentic cost/time/token columns from the intelligence-index
+    full extract.
+
+    The old source page (models/capabilities/agentic) is gone (404); the
+    fallback page carries no costPerTask/timePerTaskSeconds. We estimate them
+    from the encrypted-dataset canonical token counts + published pricing
+    (same x~30 methodology as intel_index_full_extract.py, see README).
+    """
+    csv_path = Path("data/artificial_analysis_intelligence_index_full.csv")
+    if not csv_path.exists():
+        logger.warning("No intelligence-index CSV; models tab stays estimate-free")
+        return df
+    idx = pd.read_csv(csv_path, low_memory=False)
+    est_cols = {
+        "cost_per_task_usd": "est_cost_per_task_usd",
+        "cost_input_usd": "est_cost_input_usd",
+        "cost_output_usd": "est_cost_output_usd",
+        "cost_reasoning_usd": "est_cost_reasoning_usd",
+        "avg_execution_time_sec": "est_time_per_task_sec",
+        "output_tokens": "est_output_tokens_per_task",
+        "answer_tokens": "est_answer_tokens_per_task",
+        "reasoning_tokens": "est_reasoning_tokens_per_task",
+    }
+    filled = df.copy()
+    matched = 0
+    for i, row in filled.iterrows():
+        if any(pd.notna(row.get(c)) for c in est_cols):
+            continue  # real measured values win over estimates
+        src = idx.loc[idx["slug"] == row.get("slug")]
+        if src.empty:
+            continue
+        s = src.iloc[0]
+        for col, est_col in est_cols.items():
+            v = s.get(est_col)
+            if col in filled.columns and pd.notna(v) and v != "":
+                filled.at[i, col] = float(v)
+        matched += 1
+    logger.info(f"Backfilled {matched}/{len(filled)} model rows from intelligence-index estimates")
+    return filled
+
+
 def run(config: dict | None = None) -> dict:
     config = config or load_config()
     url = config["target_url"]
@@ -72,7 +114,7 @@ def run(config: dict | None = None) -> dict:
         if not models:
             logger.warning("No model rows parsed from agentic page; site keeps agents tab only")
         else:
-            mdf = pd.DataFrame(models)
+            mdf = _backfill_models_from_index(pd.DataFrame(models))
             a_meta = {
                 "url": agentic_url,
                 "scrape_date": scrape_date,

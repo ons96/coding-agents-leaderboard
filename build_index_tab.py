@@ -11,6 +11,7 @@ Run after intel_index_full_extract.py, before build_site.py.
 import csv
 import json
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
@@ -125,9 +126,13 @@ def main() -> None:
     payload = json.loads(SITE.read_text())
     tabs = [t for t in payload.get("tabs", []) if t.get("id") != TAB_ID]
     df = pd.DataFrame(rows_out, columns=COLUMNS)
+    csv_mtime = CSV.stat().st_mtime
     meta = {
         "row_count": len(rows_out),
         "scored": scored,
+        # template does META.scrape_date.slice(0,10); use the extract's mtime
+        # (UTC ISO) since the encrypted dataset carries no timestamp field
+        "scrape_date": datetime.fromtimestamp(csv_mtime, tz=timezone.utc).isoformat(),
         "estimates_note": "est_* are per-task estimates (x~30 rule, see README); "
                           "idx_per_* ratios derive from them, not AA-measured values",
     }

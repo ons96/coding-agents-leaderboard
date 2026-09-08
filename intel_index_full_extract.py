@@ -34,24 +34,27 @@ KNOWN_SIZES = {"hle": 3000, "gpqa": 448, "ifbench": 500,
                "mmmuPro": 1730, "scicode": 80}
 
 
-def est_cost_time(m: dict) -> tuple:
-    """Estimate per-task cost/time from canonical token counts + pricing.
+def est_metrics(m: dict) -> dict:
+    """Per-task cost/time/token estimates from canonical token counts + pricing.
 
     Mean over KNOWN-SIZE evals of (suite_tokens*price/N).
-    cost = (input*pIn + (answer+reasoning)*pOut)/1e6/N.
-    time = (answer+reasoning)/output_speed/N. Rough: ignores prefill
-    speed, retries, infra variance, caching. Empty when no data.
+    cost = (input*pIn + (answer+reasoning)*pOut)/1e6/N, split into
+    input/output/reasoning parts. time = (answer+reasoning)/speed/N.
+    tokens = (answer+reasoning)/N mean. Rough: ignores prefill speed,
+    retries, infra variance, caching. Empty strings when no data.
     """
+    out = {"cost": "", "input": "", "output": "", "reasoning": "", "time": "",
+           "out_tok": "", "ans_tok": "", "rea_tok": ""}
     try:
         pin = float(m.get("price1mInputTokens") or 0)
         pout = float(m.get("price1mOutputTokens") or 0)
         spd = float(m.get("medianCanonicalAnswerOutputSpeed") or 0)
     except (TypeError, ValueError):
-        return "", ""
+        return out
     if not (pin or pout):
-        return "", ""
+        return out
     tc = m.get("canonicalEvalTokenCounts") or {}
-    costs, times = [], []
+    costs, ins, outs, reas, times, ots, ats, rts = [], [], [], [], [], [], [], []
     for ev_name, ev in tc.items():
         n = KNOWN_SIZES.get(ev_name)
         if not n or not isinstance(ev, dict):
@@ -65,13 +68,27 @@ def est_cost_time(m: dict) -> tuple:
         if not (i or a or r):
             continue
         costs.append((i * pin + (a + r) * pout) / 1e6 / n)
+        ins.append(i * pin / 1e6 / n)
+        outs.append(a * pout / 1e6 / n)
+        reas.append(r * pout / 1e6 / n)
+        ots.append((a + r) / n)
+        ats.append(a / n)
+        rts.append(r / n)
         if spd > 0 and (a or r):
             times.append((a + r) / spd / n)
     if not costs:
-        return "", ""
-    c = sum(costs) / len(costs)
-    t = (sum(times) / len(times)) if times else ""
-    return round(c, 4), (round(t, 1) if t != "" else "")
+        return out
+    mean = lambda xs: sum(xs) / len(xs)
+    out["cost"] = round(mean(costs), 6)
+    out["input"] = round(mean(ins), 6)
+    out["output"] = round(mean(outs), 6)
+    out["reasoning"] = round(mean(reas), 6)
+    out["out_tok"] = round(mean(ots), 1)
+    out["ans_tok"] = round(mean(ats), 1)
+    out["rea_tok"] = round(mean(rts), 1)
+    if times:
+        out["time"] = round(mean(times), 1)
+    return out
 
 
 def main() -> None:
@@ -103,16 +120,27 @@ def main() -> None:
             if k not in seen:
                 seen.add(k)
                 extra.append(k)
-    cols += sorted(extra) + ["est_cost_per_task_usd", "est_time_per_task_sec"]
+    cols += sorted(extra) + [
+        "est_cost_per_task_usd", "est_cost_input_usd", "est_cost_output_usd",
+        "est_cost_reasoning_usd", "est_time_per_task_sec",
+        "est_output_tokens_per_task", "est_answer_tokens_per_task",
+        "est_reasoning_tokens_per_task",
+    ]
     with open(out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         w.writeheader()
         for r in models:
-            cost, secs = est_cost_time(r)
+            est = est_metrics(r)
             row = {k: ("" if v is None else (json.dumps(v) if isinstance(v, (dict, list)) else v))
                    for k, v in r.items()}
-            row["est_cost_per_task_usd"] = cost
-            row["est_time_per_task_sec"] = secs
+            row["est_cost_per_task_usd"] = est["cost"]
+            row["est_cost_input_usd"] = est["input"]
+            row["est_cost_output_usd"] = est["output"]
+            row["est_cost_reasoning_usd"] = est["reasoning"]
+            row["est_time_per_task_sec"] = est["time"]
+            row["est_output_tokens_per_task"] = est["out_tok"]
+            row["est_answer_tokens_per_task"] = est["ans_tok"]
+            row["est_reasoning_tokens_per_task"] = est["rea_tok"]
             w.writerow(row)
     print(f"wrote {out}", file=sys.stderr)
 
