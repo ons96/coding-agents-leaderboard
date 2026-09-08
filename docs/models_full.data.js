@@ -5,4 +5,4 @@ const HIGHLIGHTS={"intelligenceIndex": "higher", "medianCanonicalAnswerOutputSpe
 const COL_GROUPS={"identity": ["slug", "model", "creator", "releaseDate", "sizeClass", "isReasoning", "isOpenWeights"], "core": ["intelligenceIndex"], "price": ["price1mInputTokens", "price1mOutputTokens", "medianCanonicalAnswerOutputSpeed"], "est": ["est_cost_per_task_usd", "est_time_per_task_sec"], "derived": ["idx_per_dollar", "idx_per_min", "idx_per_sec"]};
 const GROUP_ORDER=["identity", "core", "price", "est", "derived"];
 const GROUP_LABELS={"identity": "Identity", "core": "Benchmark", "price": "Pricing & Speed", "est": "Per-Task Estimates", "derived": "Perf-per-Cost/Time"};
-const META={"row_count": 644, "scored": 633, "scrape_date": "2026-09-08T06:13:59.681602+00:00", "estimates_note": "est_* are per-task estimates (x~30 rule, see README); idx_per_* ratios derive from them, not AA-measured values"};
+const META={"row_count": 644, "scored": 633, "scrape_date": "2026-09-08T06:17:09.622377+00:00", "estimates_note": "est_* are per-task estimates (x~30 rule, see README); idx_per_* ratios derive from them, not AA-measured values"};
