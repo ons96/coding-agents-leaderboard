@@ -279,13 +279,15 @@ def save_agentic_outputs(df: pd.DataFrame, output_dir: Path, csv_name: str,
         None, ordered_columns(), DERIVED_LABELS, HIGHLIGHT, COL_GROUPS,
         GROUP_ORDER, GROUP_LABELS, agents_meta)
     existing = output_dir / "site_data.json"
+    extra_tabs = []
     if existing.exists():
         prior = json.loads(existing.read_text())
         if "tabs" in prior:
             for t in prior["tabs"]:
                 if t.get("id") == "agents":
                     agents_site = t["data"]
-                    break
+                elif t.get("id") != "models":
+                    extra_tabs.append(t)
         else:
             # legacy flat payload (older save_outputs)
             agents_site.update({k: prior.get(k, agents_site.get(k)) for k in agents_site})
@@ -298,6 +300,7 @@ def save_agentic_outputs(df: pd.DataFrame, output_dir: Path, csv_name: str,
         "tabs": [
             {"id": "agents", "label": "Coding Agents", "data": agents_site},
             {"id": "models", "label": "Agentic Models", "data": models_site},
+            *extra_tabs,
         ],
     }
     (output_dir / "site_data.json").write_text(json.dumps(unified, indent=2))

@@ -138,6 +138,23 @@ def run(config: dict | None = None) -> dict:
                 cstr = f" | $/task={c:.2f}" if isinstance(c, (int, float)) else ""
                 tstr = f" | t={t:.0f}s" if isinstance(t, (int, float)) else ""
                 print(f"  {name:42s} | idx={idx:.2f}{cstr}{tstr}")
+    # Full intelligence index (630 models) extraction
+    # This runs the separate intelligence extractor and tab builder
+    # to ensure the site includes the full intelligence index dataset.
+    import subprocess
+    import sys
+
+    extract_script = Path(__file__).parent.parent / "intel_index_full_extract.py"
+    tab_builder = Path(__file__).parent.parent / "build_index_tab.py"
+    out_csv = Path(config["output_dir"]) / "artificial_analysis_intelligence_index_full.csv"
+
+    if extract_script.exists() and tab_builder.exists():
+        logger.info("Running full intelligence index extractor...")
+        subprocess.run([sys.executable, str(extract_script), "--out", str(out_csv)], check=True)
+        logger.info("Building models_full tab...")
+        subprocess.run([sys.executable, str(tab_builder)], check=True)
+    else:
+        logger.warning("Full intelligence index scripts not found; skipping full index tab")
     return meta
 
 

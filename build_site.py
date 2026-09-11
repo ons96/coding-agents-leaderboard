@@ -20,6 +20,7 @@ TEMPLATE = ROOT / "site_template.html"
 TAB_PRESENTATION = {
     "agents": {
         "title": "Coding Agents Leaderboard",
+        "nav_label": "Coding Agents",
         "entity": "agents",
         "txt_cols": ["harness", "model", "creator", "provider"],
         "filter_id": "harness-filter",
@@ -34,6 +35,7 @@ TAB_PRESENTATION = {
     },
     "models": {
         "title": "Agentic Models Leaderboard",
+        "nav_label": "Agentic Models",
         "entity": "models",
         "txt_cols": ["short_name", "model", "creator"],
         "filter_id": "creator-filter",
@@ -48,6 +50,7 @@ TAB_PRESENTATION = {
     },
     "models_full": {
         "title": "Intelligence Index \u2014 630 Models",
+        "nav_label": "Intelligence Index (630)",
         "entity": "index-630",
         "txt_cols": ["model", "creator", "slug"],
         "filter_id": "creator-filter",
@@ -72,7 +75,7 @@ def _render(tab_id: str, block: dict) -> Path:
     for other in payload["tabs"]:
         if other["id"] == tab_id:
             continue
-        label = TAB_PRESENTATION.get(other["id"], {}).get("entity", other["id"])
+        label = TAB_PRESENTATION.get(other["id"], {}).get("nav_label") or TAB_PRESENTATION.get(other["id"], {}).get("entity", other["id"])
         href = "index.html" if other["id"] == payload["tabs"][0]["id"] else f"{other['id']}.html"
         nav_links.append(f'<a class="nav-link" href="{href}">{label}</a>')
     nav = '<div class="nav">' + " | ".join(nav_links) + "</div>"
