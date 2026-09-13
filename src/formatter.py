@@ -65,15 +65,16 @@ HIGHLIGHT = {
 
 COL_GROUPS = {
     "identity": ["harness", "model", "creator", "provider"],
-    "core": ["index_score", "deepswe", "terminal_bench_v2_1", "swe_atlas_qna"],
+    "core": ["index_score", "score_per_minute", "deepswe",
+             "terminal_bench_v2_1", "swe_atlas_qna"],
     "cost_time": ["cost_per_task_usd", "avg_execution_time_sec", "mean_steps",
                   "total_tokens", "input_tokens", "output_tokens", "cache_hit_rate"],
-    "derived": ["score_per_cost", "score_per_1000_tokens", "score_per_minute",
+    "derived": ["score_per_cost", "score_per_1000_tokens",
                 "score_per_sec", "cost_per_score", "token_efficiency"],
 }
-GROUP_ORDER = ["identity", "core", "cost_time", "derived"]
 GROUP_LABELS = {"identity": "Identity", "core": "Benchmarks",
                 "cost_time": "Cost & Time", "derived": "Derived Value"}
+GROUP_ORDER = ["identity", "core", "cost_time", "derived"]
 
 
 def _safe_div(a, b):
@@ -133,7 +134,7 @@ def save_outputs(df: pd.DataFrame, output_dir: Path, csv_name: str, xlsx_name: s
         "group_order": GROUP_ORDER,
         "group_labels": GROUP_LABELS,
         "meta": meta,
-        "rows": df.where(pd.notnull(df), None).to_dict(orient="records"),
+        "rows": df.astype(object).where(pd.notnull(df), None).to_dict(orient="records"),
     }
     # Emit a unified (multi-tab) site payload. The agentic-models tab is added
     # later by save_agentic_outputs if that scrape succeeds; if it does not run,
@@ -198,11 +199,11 @@ MODEL_HIGHLIGHT = {
 MODEL_COL_GROUPS = {
     "identity": ["slug", "model", "short_name", "creator", "creator_slug",
                  "release_date", "size_class", "is_reasoning", "is_open_weights"],
-    "core": ["intelligence_index", "headline_value"],
+    "core": ["intelligence_index", "score_per_minute", "headline_value"],
     "cost_time": ["cost_per_task_usd", "cost_input_usd", "cost_output_usd",
                   "cost_reasoning_usd", "avg_execution_time_sec", "output_tokens",
                   "answer_tokens", "reasoning_tokens", "eval_cost_usd"],
-    "derived": ["score_per_cost", "score_per_minute", "score_per_sec",
+    "derived": ["score_per_cost", "score_per_sec",
                 "cost_per_score", "tokens_per_sec", "score_per_1k_output_tokens"],
 }
 MODEL_GROUP_ORDER = ["identity", "core", "cost_time", "derived"]

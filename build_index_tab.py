@@ -28,10 +28,11 @@ TAB_ID = "models_full"
 COLUMNS = [
     "slug", "model", "creator", "releaseDate", "sizeClass",
     "isReasoning", "isOpenWeights", "intelligenceIndex",
+    "score_per_minute",
     "price1mInputTokens", "price1mOutputTokens",
     "medianCanonicalAnswerOutputSpeed",
     "est_cost_per_task_usd", "est_time_per_task_sec",
-    "idx_per_dollar", "idx_per_min", "idx_per_sec",
+    "score_per_cost", "score_per_sec",
 ]
 
 LABELS = {
@@ -48,9 +49,9 @@ LABELS = {
     "medianCanonicalAnswerOutputSpeed": "Median Out Tok/s",
     "est_cost_per_task_usd": "Est Cost/Task ($)",
     "est_time_per_task_sec": "Est Time/Task (s)",
-    "idx_per_dollar": "Index/$ (est)",
-    "idx_per_min": "Index/min (est)",
-    "idx_per_sec": "Index/sec (est)",
+    "score_per_cost": "Score/$",
+    "score_per_minute": "Score/min",
+    "score_per_sec": "Score/sec",
 }
 
 HIGHLIGHTS = {
@@ -60,19 +61,19 @@ HIGHLIGHTS = {
     "est_time_per_task_sec": "lower",
     "price1mInputTokens": "lower",
     "price1mOutputTokens": "lower",
-    "idx_per_dollar": "higher",
-    "idx_per_min": "higher",
-    "idx_per_sec": "higher",
+    "score_per_cost": "higher",
+    "score_per_minute": "higher",
+    "score_per_sec": "higher",
 }
 
 GROUPS = {
     "identity": ["slug", "model", "creator", "releaseDate", "sizeClass",
                  "isReasoning", "isOpenWeights"],
-    "core": ["intelligenceIndex"],
+    "core": ["intelligenceIndex", "score_per_minute"],
     "price": ["price1mInputTokens", "price1mOutputTokens",
               "medianCanonicalAnswerOutputSpeed"],
     "est": ["est_cost_per_task_usd", "est_time_per_task_sec"],
-    "derived": ["idx_per_dollar", "idx_per_min", "idx_per_sec"],
+    "derived": ["score_per_cost", "score_per_sec"],
 }
 ORDER = ["identity", "core", "price", "est", "derived"]
 GROUP_LABELS = {"identity": "Identity", "core": "Benchmark",
@@ -95,6 +96,19 @@ def boolean(v):
     return {"true": True, "false": False}.get(str(v).strip().lower())
 
 
+def creator_name(v):
+    # Upstream CSV embeds creator as a JSON blob; show the plain name.
+    if not v:
+        return None
+    s = str(v).strip()
+    if s.startswith("{"):
+        try:
+            return json.loads(s).get("name") or None
+        except (ValueError, AttributeError):
+            return None
+    return s or None
+
+
 def main() -> None:
     rows_out, scored = [], 0
     with open(CSV, newline="", encoding="utf-8") as f:
@@ -107,7 +121,7 @@ def main() -> None:
             rows_out.append({
                 "slug": r.get("slug") or None,
                 "model": r.get("shortName") or r.get("name"),
-                "creator": r.get("creator") or None,
+                "creator": creator_name(r.get("creator")),
                 "releaseDate": r.get("releaseDate") or None,
                 "sizeClass": r.get("sizeClass") or None,
                 "isReasoning": boolean(r.get("isReasoning")),
@@ -119,9 +133,9 @@ def main() -> None:
                     num(r.get("medianCanonicalAnswerOutputSpeed")),
                 "est_cost_per_task_usd": cost,
                 "est_time_per_task_sec": secs,
-                "idx_per_dollar": _safe_div(idx, cost),
-                "idx_per_min": _safe_div(idx, secs / 60 if secs else None),
-                "idx_per_sec": _safe_div(idx, secs),
+                "score_per_cost": _safe_div(idx, cost),
+                "score_per_minute": _safe_div(idx, secs / 60 if secs else None),
+                "score_per_sec": _safe_div(idx, secs),
             })
     payload = json.loads(SITE.read_text())
     tabs = [t for t in payload.get("tabs", []) if t.get("id") != TAB_ID]
@@ -134,7 +148,7 @@ def main() -> None:
         # (UTC ISO) since the encrypted dataset carries no timestamp field
         "scrape_date": datetime.fromtimestamp(csv_mtime, tz=timezone.utc).isoformat(),
         "estimates_note": "est_* are per-task estimates (x~30 rule, see README); "
-                          "idx_per_* ratios derive from them, not AA-measured values",
+                          "score_per_* ratios derive from them, not AA-measured values",
     }
     tabs.append({"id": TAB_ID, "label": "Index 630",
                  "data": _site_block(df, COLUMNS, LABELS, HIGHLIGHTS,

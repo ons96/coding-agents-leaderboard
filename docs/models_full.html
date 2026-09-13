@@ -43,9 +43,9 @@ tbody tr:hover{background:#e7f5ff}
 </div>
 <div class="controls">
 <input type="text" id="search" placeholder="Search model, creator, slug...">
-<select id="creator-filter"><option value="">All</option></select>
+<select id="__FILTER_ID__"><option value="">All</option></select>
 <button id="btn-reset">Reset</button>
-<button id="sb-0" class="sort-btn">Index/$</button><button id="sb-1" class="sort-btn">Index/min</button><button id="sb-2" class="sort-btn">Index</button>
+<button id="sb-0" class="sort-btn">Score/min</button><button id="sb-1" class="sort-btn">Score/$</button><button id="sb-2" class="sort-btn">Score</button>
 <div class="group-toggles" id="group-toggles"></div>
 </div>
 <div class="table-wrap">
@@ -56,15 +56,15 @@ tbody tr:hover{background:#e7f5ff}
 Data from <a href="https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index">artificialanalysis.ai</a> |
 Updated: <span id="update-date">-</span>
 </div>
-<script src="models_full.data.js?v=28aca571"></script>
+<script src="models_full.data.js?v=eb1cb1a6"></script>
 <script>
 const PS=100;
-let filtered=[...TABLE_DATA],sortCol=null,sortDir=1,hiddenGroups=new Set(),page=0;
+let filtered=[...TABLE_DATA],sortCol="score_per_minute",sortDir=1,hiddenGroups=new Set(),page=0;
 const TXT_COLS=new Set(["model", "creator", "slug"]);
-const FILTER_FIELD="creator";
+const FILTER_FIELD=__FILTER_FIELD__;
 const SORT_ACTIONS=[
-["sb-0", "idx_per_dollar"],
-["sb-1", "idx_per_min"],
+["sb-0", "score_per_minute"],
+["sb-1", "score_per_cost"],
 ["sb-2", "intelligenceIndex"]
 ];
 
@@ -72,19 +72,23 @@ function init(){
   const scrapeDay=META.scrape_date?META.scrape_date.slice(0,10):"";
   document.getElementById("meta-info").textContent=META.row_count+" "+"index-630"+" | "+(scrapeDay||"artificialanalysis.ai");
   document.getElementById("update-date").textContent=scrapeDay||"—";
-  const hf=document.getElementById("creator-filter");
+  const hf=document.getElementById("__FILTER_ID__");
   [...new Set(TABLE_DATA.map(r=>r[FILTER_FIELD]).filter(Boolean))].sort().forEach(h=>{
     const o=document.createElement("option");o.value=h;o.textContent=h;hf.appendChild(o);
   });
   buildGroupToggles();
+  if(!COLUMNS.includes(sortCol))sortCol=null;
+  if(sortCol)sortDir=HIGHLIGHTS[sortCol]==="lower"?1:-1;
   document.getElementById("search").addEventListener("input",debounce(filterAndRender,200));
-  document.getElementById("creator-filter").addEventListener("change",filterAndRender);
+  document.getElementById("__FILTER_ID__").addEventListener("change",filterAndRender);
   document.getElementById("btn-reset").addEventListener("click",()=>{
     document.getElementById("search").value="";
-    document.getElementById("creator-filter").value="";
+    document.getElementById("__FILTER_ID__").value="";
     hiddenGroups.clear();
     document.querySelectorAll(".grp-btn").forEach(b=>b.classList.add("active"));
-    sortCol=null;sortDir=1;page=0;filterAndRender();
+    sortCol=COLUMNS.includes("score_per_minute")?"score_per_minute":null;
+    sortDir=(sortCol&&HIGHLIGHTS[sortCol]==="lower")?1:-1;
+    page=0;filterAndRender();
   });
   SORT_ACTIONS.forEach(([id,col])=>{
     document.getElementById(id).addEventListener("click",()=>sortBy(col,"higher"));
@@ -139,7 +143,7 @@ function buildHeader(){
 
 function filterAndRender(){
   const q=document.getElementById("search").value.toLowerCase();
-  const hF=document.getElementById("creator-filter").value;
+  const hF=document.getElementById("__FILTER_ID__").value;
   filtered=TABLE_DATA.filter(r=>{
     if(q){
       const h=[...TXT_COLS].map(c=>r[c]).filter(Boolean).join(" ").toLowerCase();

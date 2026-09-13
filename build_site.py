@@ -28,10 +28,11 @@ TAB_PRESENTATION = {
         "filter_placeholder": "Search harness, model, creator...",
         "footer_url": "https://artificialanalysis.ai/agents/coding-agents",
         "sort_buttons": [
+            ("Score / min", "score_per_minute"),
             ("Cost vs Score", "score_per_cost"),
-            ("Speed vs Score", "score_per_minute"),
             ("Token Efficiency", "token_efficiency"),
         ],
+        "default_sort": "score_per_minute",
     },
     "models": {
         "title": "Agentic Models Leaderboard",
@@ -43,10 +44,11 @@ TAB_PRESENTATION = {
         "filter_placeholder": "Search model, creator...",
         "footer_url": "https://artificialanalysis.ai/models/capabilities/agentic",
         "sort_buttons": [
-            ("Score / $", "score_per_cost"),
             ("Score / min", "score_per_minute"),
+            ("Score / $", "score_per_cost"),
             ("Output Tok/s", "tokens_per_sec"),
         ],
+        "default_sort": "score_per_minute",
     },
     "models_full": {
         "title": "Intelligence Index \u2014 630 Models",
@@ -58,10 +60,11 @@ TAB_PRESENTATION = {
         "filter_placeholder": "Search model, creator, slug...",
         "footer_url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
         "sort_buttons": [
-            ("Index/$", "idx_per_dollar"),
-            ("Index/min", "idx_per_min"),
-            ("Index", "intelligenceIndex"),
+            ("Score/min", "score_per_minute"),
+            ("Score/$", "score_per_cost"),
+            ("Score", "intelligenceIndex"),
         ],
+        "default_sort": "score_per_minute",
     },
 }
 
@@ -108,13 +111,12 @@ def _render(tab_id: str, block: dict) -> Path:
         "__ENTITY_LABEL__": json.dumps(pres["entity"]),
         "__NAV__": nav,
         "__TXT_COLS__": json.dumps(pres["txt_cols"]),
-        "__FILTER_ID__": pres["filter_id"],
-        "__FILTER_FIELD__": json.dumps(pres["filter_field"]),
         "__FILTER_PLACEHOLDER__": pres["filter_placeholder"],
         "__FOOTER_URL__": pres["footer_url"],
         "__SORT_BUTTONS__": sort_btns_html,
         "__SORT_ACTIONS__": sort_actions,
         "__SCRIPT_SRC__": f"{tab_id}.data.js?v={js_hash}",
+        "DEFAULT_SORT": json.dumps(pres["default_sort"]),
     }
     for tok, val in replace.items():
         html = html.replace(tok, val)
