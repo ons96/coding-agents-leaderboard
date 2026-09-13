@@ -37,13 +37,13 @@ tbody tr:hover{background:#e7f5ff}
 </head>
 <body>
 <div class="header">
-<div class="nav"><a class="nav-link" href="models.html">Agentic Models</a> | <a class="nav-link" href="models_full.html">Intelligence Index (630)</a></div>
+<div class="nav"><a class="nav-link" href="models.html">Agentic Models</a> | <a class="nav-link" href="models_full.html">Intelligence Index (All)</a></div>
 <h1>Coding Agents Leaderboard</h1>
 <div class="meta" id="meta-info">Loading...</div>
 </div>
 <div class="controls">
 <input type="text" id="search" placeholder="Search harness, model, creator...">
-<select id="__FILTER_ID__"><option value="">All</option></select>
+<select id="harness-filter"><option value="">All</option></select>
 <button id="btn-reset">Reset</button>
 <button id="sb-0" class="sort-btn">Score / min</button><button id="sb-1" class="sort-btn">Cost vs Score</button><button id="sb-2" class="sort-btn">Token Efficiency</button>
 <div class="group-toggles" id="group-toggles"></div>
@@ -56,12 +56,12 @@ tbody tr:hover{background:#e7f5ff}
 Data from <a href="https://artificialanalysis.ai/agents/coding-agents">artificialanalysis.ai</a> |
 Updated: <span id="update-date">-</span>
 </div>
-<script src="agents.data.js?v=bbf1ae63"></script>
+<script src="agents.data.js?v=ad1fcbf1"></script>
 <script>
 const PS=100;
 let filtered=[...TABLE_DATA],sortCol="score_per_minute",sortDir=1,hiddenGroups=new Set(),page=0;
 const TXT_COLS=new Set(["harness", "model", "creator", "provider"]);
-const FILTER_FIELD=__FILTER_FIELD__;
+const FILTER_FIELD="harness";
 const SORT_ACTIONS=[
 ["sb-0", "score_per_minute"],
 ["sb-1", "score_per_cost"],
@@ -72,7 +72,7 @@ function init(){
   const scrapeDay=META.scrape_date?META.scrape_date.slice(0,10):"";
   document.getElementById("meta-info").textContent=META.row_count+" "+"agents"+" | "+(scrapeDay||"artificialanalysis.ai");
   document.getElementById("update-date").textContent=scrapeDay||"—";
-  const hf=document.getElementById("__FILTER_ID__");
+  const hf=document.getElementById("harness-filter");
   [...new Set(TABLE_DATA.map(r=>r[FILTER_FIELD]).filter(Boolean))].sort().forEach(h=>{
     const o=document.createElement("option");o.value=h;o.textContent=h;hf.appendChild(o);
   });
@@ -80,10 +80,10 @@ function init(){
   if(!COLUMNS.includes(sortCol))sortCol=null;
   if(sortCol)sortDir=HIGHLIGHTS[sortCol]==="lower"?1:-1;
   document.getElementById("search").addEventListener("input",debounce(filterAndRender,200));
-  document.getElementById("__FILTER_ID__").addEventListener("change",filterAndRender);
+  document.getElementById("harness-filter").addEventListener("change",filterAndRender);
   document.getElementById("btn-reset").addEventListener("click",()=>{
     document.getElementById("search").value="";
-    document.getElementById("__FILTER_ID__").value="";
+    document.getElementById("harness-filter").value="";
     hiddenGroups.clear();
     document.querySelectorAll(".grp-btn").forEach(b=>b.classList.add("active"));
     sortCol=COLUMNS.includes("score_per_minute")?"score_per_minute":null;
@@ -143,7 +143,7 @@ function buildHeader(){
 
 function filterAndRender(){
   const q=document.getElementById("search").value.toLowerCase();
-  const hF=document.getElementById("__FILTER_ID__").value;
+  const hF=document.getElementById("harness-filter").value;
   filtered=TABLE_DATA.filter(r=>{
     if(q){
       const h=[...TXT_COLS].map(c=>r[c]).filter(Boolean).join(" ").toLowerCase();
@@ -200,7 +200,7 @@ function renderRows(){
   });
   const pEl=document.getElementById("paging"),total=filtered.length;
   const pages=Math.ceil(total/PS)||1;
-  pEl.innerHTML='<span>'+total+' agents</span><span>Page '+(page+1)+'/'+pages+'</span><span>'+
+  pEl.innerHTML='<span>'+total+' '+"agents"+'</span><span>Page '+(page+1)+'/'+pages+'</span><span>'+
     '<button onclick="page=Math.max(0,page-1);renderRows()">Prev</button> '+
     '<button onclick="page=Math.min('+(pages-1)+',page+1);renderRows()">Next</button></span>';
 }

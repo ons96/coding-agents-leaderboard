@@ -196,7 +196,7 @@ function renderRows(){
   });
   const pEl=document.getElementById("paging"),total=filtered.length;
   const pages=Math.ceil(total/PS)||1;
-  pEl.innerHTML='<span>'+total+' agents</span><span>Page '+(page+1)+'/'+pages+'</span><span>'+
+  pEl.innerHTML='<span>'+total+' '+__ENTITY_LABEL__+'</span><span>Page '+(page+1)+'/'+pages+'</span><span>'+
     '<button onclick="page=Math.max(0,page-1);renderRows()">Prev</button> '+
     '<button onclick="page=Math.min('+(pages-1)+',page+1);renderRows()">Next</button></span>';
 }

@@ -150,7 +150,7 @@ def main() -> None:
         "estimates_note": "est_* are per-task estimates (x~30 rule, see README); "
                           "score_per_* ratios derive from them, not AA-measured values",
     }
-    tabs.append({"id": TAB_ID, "label": "Index 630",
+    tabs.append({"id": TAB_ID, "label": "Full Index",
                  "data": _site_block(df, COLUMNS, LABELS, HIGHLIGHTS,
                                      GROUPS, ORDER, GROUP_LABELS, meta)})
     payload["tabs"] = tabs
