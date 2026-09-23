@@ -64,8 +64,14 @@ python build_site.py   # optional: regenerate docs/ site
 
 ## Schedule
 
-`workflow_dispatch` + weekly `cron: '0 0 * * 0'`. On change it commits via
-`github-actions[bot]` and deploys `docs/` to GitHub Pages.
+Daily `cron: '0 6 * * *'` runs `check_aa_change.py --mode check`, which hashes
+only the embedded dataset payload of the 3 AA source pages (ignores HTML-shell
+churn like build IDs). The full scrape + Pages deploy runs only when the hash
+differs from `data/aa_source_hashes.json` — so new-model releases land on the
+site within ~24h instead of waiting for Sunday. Weekly Sunday cron + manual
+`workflow_dispatch` (with `force_full` to bypass the gate) remain as backstop.
+On change it commits via `github-actions[bot]` (data + new baseline hashes)
+and deploys `docs/` to GitHub Pages.
 
 ## Estimate calibration
 

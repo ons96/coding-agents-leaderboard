@@ -1,9 +1,15 @@
 name: Scrape Coding Agents Leaderboard
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      force_full:
+        description: "Skip change gate, run full scrape"
+        type: boolean
+        default: false
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: '0 6 * * *' # daily change check (scrapes only when AA data moved)
+    - cron: '0 0 * * 0' # weekly backstop (also gated; force via dispatch if needed)
 
 permissions:
   contents: write
@@ -13,7 +19,25 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      changed: ${{ steps.gate.outputs.changed }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: ${{ github.ref }}
+
+      - name: Check AA source pages for changes
+        id: gate
+        run: python check_aa_change.py --mode check
+
   scrape:
+    needs: check
+    if: needs.check.outputs.changed == 'true' || inputs.force_full == true
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -45,6 +69,9 @@ jobs:
 
       - name: Build GitHub Pages site
         run: python build_site.py
+
+      - name: Record new AA source baseline
+        run: python check_aa_change.py --mode record
 
       - name: Validate site JS (fail if broken)
         run: |
