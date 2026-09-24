@@ -33,6 +33,7 @@ COLUMNS = [
     "medianCanonicalAnswerOutputSpeed",
     "est_cost_per_task_usd", "est_time_per_task_sec",
     "score_per_cost", "score_per_sec",
+    "has_free_api", "pareto_keep",
 ]
 
 LABELS = {
@@ -52,6 +53,8 @@ LABELS = {
     "score_per_cost": "Score/$",
     "score_per_minute": "Score/min",
     "score_per_sec": "Score/sec",
+    "has_free_api": "Free API",
+    "pareto_keep": "Pareto",
 }
 
 HIGHLIGHTS = {
@@ -64,6 +67,8 @@ HIGHLIGHTS = {
     "score_per_cost": "higher",
     "score_per_minute": "higher",
     "score_per_sec": "higher",
+    "has_free_api": "higher",
+    "pareto_keep": "higher",
 }
 
 GROUPS = {
@@ -73,7 +78,8 @@ GROUPS = {
     "price": ["price1mInputTokens", "price1mOutputTokens",
               "medianCanonicalAnswerOutputSpeed"],
     "est": ["est_cost_per_task_usd", "est_time_per_task_sec"],
-    "derived": ["score_per_cost", "score_per_sec"],
+    "derived": ["score_per_cost", "score_per_sec",
+                "has_free_api", "pareto_keep"],
 }
 ORDER = ["identity", "core", "price", "est", "derived"]
 GROUP_LABELS = {"identity": "Identity", "core": "Benchmark",
@@ -136,6 +142,10 @@ def main() -> None:
                 "score_per_cost": _safe_div(idx, cost),
                 "score_per_minute": _safe_div(idx, secs / 60 if secs else None),
                 "score_per_sec": _safe_div(idx, secs),
+                # free-API flags merged by scripts/build_has_free_api_draft.py
+                # --apply; None until merged so fresh scrapes stay honest.
+                "has_free_api": None,
+                "pareto_keep": None,
             })
     payload = json.loads(SITE.read_text())
     tabs = [t for t in payload.get("tabs", []) if t.get("id") != TAB_ID]

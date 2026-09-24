@@ -49,6 +49,9 @@ DERIVED_LABELS = {
     "score_per_1000_tokens": "Score/1k Tok",
     "score_per_minute": "Score/min",
     "cost_per_score": "$/Score",
+    # free-API flags (merged from draft join by --apply; None until merged)
+    "has_free_api": "Free API",
+    "pareto_keep": "Pareto",
     # index/time ratio
     "score_per_sec": "Score/sec",
     # throughput
@@ -61,6 +64,7 @@ HIGHLIGHT = {
     "avg_execution_time_sec": "lower", "total_tokens": "lower",
     "score_per_cost": "higher", "score_per_minute": "higher", "score_per_sec": "higher",
     "cost_per_score": "lower", "token_efficiency": "higher",
+    "has_free_api": "higher", "pareto_keep": "higher",
 }
 
 COL_GROUPS = {
@@ -70,7 +74,8 @@ COL_GROUPS = {
     "cost_time": ["cost_per_task_usd", "avg_execution_time_sec", "mean_steps",
                   "total_tokens", "input_tokens", "output_tokens", "cache_hit_rate"],
     "derived": ["score_per_cost", "score_per_1000_tokens",
-                "score_per_sec", "cost_per_score", "token_efficiency"],
+                "score_per_sec", "cost_per_score", "token_efficiency",
+                "has_free_api", "pareto_keep"],
 }
 GROUP_LABELS = {"identity": "Identity", "core": "Benchmarks",
                 "cost_time": "Cost & Time", "derived": "Derived Value"}
@@ -100,6 +105,10 @@ def add_derived(df: pd.DataFrame) -> pd.DataFrame:
         lambda r: _safe_div(r["cost_per_task_usd"], r["index_score"]), axis=1)
     df["token_efficiency"] = df.apply(
         lambda r: _safe_div(r["total_tokens"], r["avg_execution_time_sec"]), axis=1)
+    # free-API flags merged later by build_has_free_api_draft.py --apply
+    for c in ("has_free_api", "pareto_keep"):
+        if c not in df.columns:
+            df[c] = None
     return df
 
 
@@ -183,6 +192,9 @@ MODEL_LABELS = {
     "cost_per_score": "$/Score",
     "tokens_per_sec": "Output Tok/s",
     "score_per_1k_output_tokens": "Score/1k Out Tok",
+    # free-API flags (merged from draft join by --apply; None until merged)
+    "has_free_api": "Free API",
+    "pareto_keep": "Pareto",
 }
 
 MODEL_HIGHLIGHT = {
@@ -194,6 +206,7 @@ MODEL_HIGHLIGHT = {
     "score_per_cost": "higher", "score_per_minute": "higher", "score_per_sec": "higher",
     "cost_per_score": "lower", "tokens_per_sec": "higher",
     "score_per_1k_output_tokens": "higher",
+    "has_free_api": "higher", "pareto_keep": "higher",
 }
 
 MODEL_COL_GROUPS = {
@@ -204,7 +217,8 @@ MODEL_COL_GROUPS = {
                   "cost_reasoning_usd", "avg_execution_time_sec", "output_tokens",
                   "answer_tokens", "reasoning_tokens", "eval_cost_usd"],
     "derived": ["score_per_cost", "score_per_sec",
-                "cost_per_score", "tokens_per_sec", "score_per_1k_output_tokens"],
+                "cost_per_score", "tokens_per_sec", "score_per_1k_output_tokens",
+                "has_free_api", "pareto_keep"],
 }
 MODEL_GROUP_ORDER = ["identity", "core", "cost_time", "derived"]
 MODEL_GROUP_LABELS = {"identity": "Identity", "core": "Capability",
@@ -225,6 +239,10 @@ def add_model_derived(df: pd.DataFrame) -> pd.DataFrame:
         lambda r: _safe_div(r["output_tokens"], r["avg_execution_time_sec"]), axis=1)
     df["score_per_1k_output_tokens"] = df.apply(
         lambda r: _safe_div(r["intelligence_index"], (r["output_tokens"] or 0) / 1000), axis=1)
+    # free-API flags merged later by build_has_free_api_draft.py --apply
+    for c in ("has_free_api", "pareto_keep"):
+        if c not in df.columns:
+            df[c] = None
     return df
 
 
