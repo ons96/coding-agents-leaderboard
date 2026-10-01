@@ -30,7 +30,11 @@
     "inkling-small": [{"provider": "OpenRouter", "model_id": "thinkingmachines/inkling-small:free", "url": "https://openrouter.ai/thinkingmachines/inkling-small:free", "note": "Zero-priced hosted base model; free-route limits apply."}],
     "nemotron-3-5-lightning": [{"provider": "OpenRouter", "model_id": "nvidia/nemotron-3.5-lightning:free", "url": "https://openrouter.ai/nvidia/nemotron-3.5-lightning:free", "note": "Zero-priced hosted base model; free-route limits apply."}],
     "lfm2-5-2-6b": [{"provider": "OpenRouter", "model_id": "liquid/lfm-2.5-2.6b:free", "url": "https://openrouter.ai/liquid/lfm-2.5-2.6b:free", "note": "Zero-priced hosted base model; route spelling differs from leaderboard slug."}],
-    "north-mini-code": [{"provider": "OpenRouter", "model_id": "cohere/north-mini-code:free", "url": "https://openrouter.ai/cohere/north-mini-code:free", "note": "Zero-priced hosted base model; free-route limits apply."}]
+    "north-mini-code": [{"provider": "OpenRouter", "model_id": "cohere/north-mini-code:free", "url": "https://openrouter.ai/cohere/north-mini-code:free", "note": "Zero-priced hosted base model; free-route limits apply."}],
+    "gpt-oss-20b-low": [{"provider": "Groq", "model_id": "openai/gpt-oss-20b", "url": "https://console.groq.com/docs/models", "note": "Groq free-tier input and output; low effort is assumed available. Live-verified 2026-10-01."}],
+    "gpt-oss-120b-low": [{"provider": "Groq", "model_id": "openai/gpt-oss-120b", "url": "https://console.groq.com/docs/models", "note": "Groq free-tier input and output; low effort is assumed available. Live-verified 2026-10-01."}],
+    "gemini-2-5-flash": [{"provider": "Google Gemini API", "model_id": "gemini-2.5-flash", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; non-reasoning effort is assumed available."}],
+    "gemini-2-5-flash-reasoning": [{"provider": "Google Gemini API", "model_id": "gemini-2.5-flash", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; reasoning effort is assumed available."}]
   },
   "catalog_url": "https://openrouter.ai/api/v1/models"
 }
