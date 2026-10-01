@@ -48,7 +48,7 @@ LABELS = {
     "price1mOutputTokens": "Price/1M Out ($)",
     "medianCanonicalAnswerOutputSpeed": "Median Out Tok/s",
     "est_cost_per_task_usd": "Est Cost/Task ($)",
-    "est_time_per_task_sec": "Est Time/Task (s)",
+    "est_time_per_task_sec": "Est Time/Task (min)",
     "score_per_cost": "Score/$",
     "score_per_minute": "Score/min",
     "score_per_sec": "Score/sec",
@@ -134,8 +134,8 @@ def main() -> None:
                 "est_cost_per_task_usd": cost,
                 "est_time_per_task_sec": secs,
                 "score_per_cost": _safe_div(idx, cost),
-                "score_per_minute": _safe_div(idx, secs / 60 if secs else None),
-                "score_per_sec": _safe_div(idx, secs),
+                "score_per_minute": _safe_div(idx, secs),
+                "score_per_sec": _safe_div(idx, secs * 60 if secs else None),
             })
     payload = json.loads(SITE.read_text())
     tabs = [t for t in payload.get("tabs", []) if t.get("id") != TAB_ID]
@@ -147,7 +147,7 @@ def main() -> None:
         # template does META.scrape_date.slice(0,10); use the extract's mtime
         # (UTC ISO) since the encrypted dataset carries no timestamp field
         "scrape_date": datetime.fromtimestamp(csv_mtime, tz=timezone.utc).isoformat(),
-        "estimates_note": "est_* are per-task estimates (x~30 rule, see README); "
+        "estimates_note": "est_* follow AA Intelligence Index v4.3.2 weighted minutes-per-task (see docs/specs/est-time-task-fix.md); "
                           "score_per_* ratios derive from them, not AA-measured values",
     }
     tabs.append({"id": TAB_ID, "label": "Full Index",

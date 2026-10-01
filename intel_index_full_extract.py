@@ -27,20 +27,30 @@ def get(url: str) -> bytes:
     return urllib.request.urlopen(req, timeout=60).read()
 
 
-# Public eval suite sizes (tasks per suite). Proprietary AA suites
-# (omniscience, gdpval, lcr, critpt, tau*, terminalbench*, agent gyms)
-# excluded — N unknown, would corrupt the per-task mean.
-KNOWN_SIZES = {"hle": 3000, "gpqa": 448, "ifbench": 500,
-               "mmmuPro": 1730, "scicode": 80}
+# AA Intelligence Index v4.3.2: (weight, tasks excluding repeats).
+# Methodology: artificialanalysis.ai/methodology/intelligence-benchmarking
+# Time per Task = weighted avg decode minutes per task; Cost/Task weighted same way.
+AA_INDEX_V432 = {
+    "briefcase": (0.15, 91),
+    "gdpval": (0.10, 220),
+    "automationBench": (0.05, 657),
+    "terminalBench40": (0.10, 66),  # 66x3 with repeats
+    "scicode": (0.10, 288),  # 288x3 with repeats
+    "omniscience": (0.15, 6000),
+    "gdpPdf": (0.10, 100),  # 100x5 with repeats
+    "lcr": (0.05, 100),  # 100x3 with repeats
+    "hle": (0.10, 2158),
+    "critpt": (0.10, 70),  # 70x5 with repeats
+}
 
 
 def est_metrics(m: dict) -> dict:
     """Per-task cost/time/token estimates from canonical token counts + pricing.
 
-    Mean over KNOWN-SIZE evals of (suite_tokens*price/N).
-    cost = (input*pIn + (answer+reasoning)*pOut)/1e6/N, split into
-    input/output/reasoning parts. time = (answer+reasoning)/speed/N.
-    tokens = (answer+reasoning)/N mean. Rough: ignores prefill speed,
+    Weighted over AA_INDEX_V432 of (suite_tokens*price/N)*weight.
+    cost = sum_w (input*pIn + (answer+reasoning)*pOut)/1e6/N, split into
+    input/output/reasoning parts. time_min = sum_w (answer+reasoning)/speed/N/60.
+    tokens = sum_w (answer+reasoning)/N. Rough: ignores prefill speed,
     retries, infra variance, caching. Empty strings when no data.
     """
     out = {"cost": "", "input": "", "output": "", "reasoning": "", "time": "",
@@ -54,10 +64,11 @@ def est_metrics(m: dict) -> dict:
     if not (pin or pout):
         return out
     tc = m.get("canonicalEvalTokenCounts") or {}
-    costs, ins, outs, reas, times, ots, ats, rts = [], [], [], [], [], [], [], []
-    for ev_name, ev in tc.items():
-        n = KNOWN_SIZES.get(ev_name)
-        if not n or not isinstance(ev, dict):
+    cost = inp = outp = rea = tsec = otok = atok = rtok = 0.0
+    hit = False
+    for ev_name, (w, n) in AA_INDEX_V432.items():
+        ev = tc.get(ev_name)
+        if not isinstance(ev, dict):
             continue
         try:
             i = float(ev.get("input") or 0)
@@ -67,27 +78,28 @@ def est_metrics(m: dict) -> dict:
             continue
         if not (i or a or r):
             continue
-        costs.append((i * pin + (a + r) * pout) / 1e6 / n)
-        ins.append(i * pin / 1e6 / n)
-        outs.append(a * pout / 1e6 / n)
-        reas.append(r * pout / 1e6 / n)
-        ots.append((a + r) / n)
-        ats.append(a / n)
-        rts.append(r / n)
+        hit = True
+        cost += w * (i * pin + (a + r) * pout) / 1e6 / n
+        inp += w * i * pin / 1e6 / n
+        outp += w * a * pout / 1e6 / n
+        rea += w * r * pout / 1e6 / n
+        otok += w * (a + r) / n
+        atok += w * a / n
+        rtok += w * r / n
         if spd > 0 and (a or r):
-            times.append((a + r) / spd / n)
-    if not costs:
+            tsec += w * (a + r) / spd / n
+    if not hit:
         return out
-    mean = lambda xs: sum(xs) / len(xs)
-    out["cost"] = round(mean(costs), 6)
-    out["input"] = round(mean(ins), 6)
-    out["output"] = round(mean(outs), 6)
-    out["reasoning"] = round(mean(reas), 6)
-    out["out_tok"] = round(mean(ots), 1)
-    out["ans_tok"] = round(mean(ats), 1)
-    out["rea_tok"] = round(mean(rts), 1)
-    if times:
-        out["time"] = round(mean(times), 1)
+    out["cost"] = round(cost, 6)
+    out["input"] = round(inp, 6)
+    out["output"] = round(outp, 6)
+    out["reasoning"] = round(rea, 6)
+    out["out_tok"] = round(otok, 1)
+    out["ans_tok"] = round(atok, 1)
+    out["rea_tok"] = round(rtok, 1)
+    if tsec > 0:
+        # ponytail: minutes to match AA Time per Task display (was seconds)
+        out["time"] = round(tsec / 60, 2)
     return out
 
 
