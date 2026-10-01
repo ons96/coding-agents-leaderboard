@@ -134,7 +134,7 @@ def main() -> None:
                 extra.append(k)
     cols += sorted(extra) + [
         "est_cost_per_task_usd", "est_cost_input_usd", "est_cost_output_usd",
-        "est_cost_reasoning_usd", "est_time_per_task_sec",
+        "est_cost_reasoning_usd", "est_time_per_task_min",
         "est_output_tokens_per_task", "est_answer_tokens_per_task",
         "est_reasoning_tokens_per_task",
     ]
@@ -149,7 +149,7 @@ def main() -> None:
             row["est_cost_input_usd"] = est["input"]
             row["est_cost_output_usd"] = est["output"]
             row["est_cost_reasoning_usd"] = est["reasoning"]
-            row["est_time_per_task_sec"] = est["time"]
+            row["est_time_per_task_min"] = est["time"]
             row["est_output_tokens_per_task"] = est["out_tok"]
             row["est_answer_tokens_per_task"] = est["ans_tok"]
             row["est_reasoning_tokens_per_task"] = est["rea_tok"]

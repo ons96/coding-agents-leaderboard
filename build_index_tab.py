@@ -31,7 +31,7 @@ COLUMNS = [
     "score_per_minute",
     "price1mInputTokens", "price1mOutputTokens",
     "medianCanonicalAnswerOutputSpeed",
-    "est_cost_per_task_usd", "est_time_per_task_sec",
+    "est_cost_per_task_usd", "est_time_per_task_min",
     "score_per_cost", "score_per_sec",
 ]
 
@@ -48,7 +48,7 @@ LABELS = {
     "price1mOutputTokens": "Price/1M Out ($)",
     "medianCanonicalAnswerOutputSpeed": "Median Out Tok/s",
     "est_cost_per_task_usd": "Est Cost/Task ($)",
-    "est_time_per_task_sec": "Est Time/Task (min)",
+    "est_time_per_task_min": "Est Time/Task (min)",
     "score_per_cost": "Score/$",
     "score_per_minute": "Score/min",
     "score_per_sec": "Score/sec",
@@ -58,7 +58,7 @@ HIGHLIGHTS = {
     "intelligenceIndex": "higher",
     "medianCanonicalAnswerOutputSpeed": "higher",
     "est_cost_per_task_usd": "lower",
-    "est_time_per_task_sec": "lower",
+    "est_time_per_task_min": "lower",
     "price1mInputTokens": "lower",
     "price1mOutputTokens": "lower",
     "score_per_cost": "higher",
@@ -72,7 +72,7 @@ GROUPS = {
     "core": ["intelligenceIndex", "score_per_minute"],
     "price": ["price1mInputTokens", "price1mOutputTokens",
               "medianCanonicalAnswerOutputSpeed"],
-    "est": ["est_cost_per_task_usd", "est_time_per_task_sec"],
+    "est": ["est_cost_per_task_usd", "est_time_per_task_min"],
     "derived": ["score_per_cost", "score_per_sec"],
 }
 ORDER = ["identity", "core", "price", "est", "derived"]
@@ -115,7 +115,7 @@ def main() -> None:
         for r in csv.DictReader(f):
             idx = num(r.get("intelligenceIndex"))
             cost = num(r.get("est_cost_per_task_usd"))
-            secs = num(r.get("est_time_per_task_sec"))
+            mins = num(r.get("est_time_per_task_min"))
             if idx is not None:
                 scored += 1
             rows_out.append({
@@ -132,10 +132,10 @@ def main() -> None:
                 "medianCanonicalAnswerOutputSpeed":
                     num(r.get("medianCanonicalAnswerOutputSpeed")),
                 "est_cost_per_task_usd": cost,
-                "est_time_per_task_sec": secs,
+                "est_time_per_task_min": mins,
                 "score_per_cost": _safe_div(idx, cost),
-                "score_per_minute": _safe_div(idx, secs),
-                "score_per_sec": _safe_div(idx, secs * 60 if secs else None),
+                "score_per_minute": _safe_div(idx, mins),
+                "score_per_sec": _safe_div(idx, mins * 60 if mins else None),
             })
     payload = json.loads(SITE.read_text())
     tabs = [t for t in payload.get("tabs", []) if t.get("id") != TAB_ID]

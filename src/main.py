@@ -32,7 +32,7 @@ def _backfill_models_from_index(df: pd.DataFrame) -> pd.DataFrame:
         "cost_input_usd": "est_cost_input_usd",
         "cost_output_usd": "est_cost_output_usd",
         "cost_reasoning_usd": "est_cost_reasoning_usd",
-        "avg_execution_time_sec": "est_time_per_task_sec",
+        "avg_execution_time_sec": "est_time_per_task_min",
         "output_tokens": "est_output_tokens_per_task",
         "answer_tokens": "est_answer_tokens_per_task",
         "reasoning_tokens": "est_reasoning_tokens_per_task",
@@ -49,7 +49,9 @@ def _backfill_models_from_index(df: pd.DataFrame) -> pd.DataFrame:
         for col, est_col in est_cols.items():
             v = s.get(est_col)
             if col in filled.columns and pd.notna(v) and v != "":
-                filled.at[i, col] = float(v)
+                f = float(v)
+                # ponytail: intel est is minutes-per-task, models tab expects seconds
+                filled.at[i, col] = f * 60 if col == "avg_execution_time_sec" else f
         matched += 1
     logger.info(f"Backfilled {matched}/{len(filled)} model rows from intelligence-index estimates")
     return filled

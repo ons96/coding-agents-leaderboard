@@ -83,7 +83,7 @@ and deploys `docs/` to GitHub Pages.
 
 ## Estimate calibration
 
-`est_cost_per_task_usd` / `est_time_per_task_sec` in
+`est_cost_per_task_usd` / `est_time_per_task_min` in
 `data/artificial_analysis_intelligence_index_full.csv` are ESTIMATES from
 public suite token totals x list pricing, not AA-measured values (AA ships no
 measured per-task cost/time for these models). Calibrated 2026-09-06 against

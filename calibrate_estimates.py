@@ -58,7 +58,7 @@ for r, m in pairs:
     e = intel[slug]
     try:
         mc, ec = float(r["cost_per_task_usd"]), float(e["est_cost_per_task_usd"])
-        mt, et_min = float(r["avg_execution_time_sec"]), float(e["est_time_per_task_sec"])
+        mt, et_min = float(r["avg_execution_time_sec"]), float(e["est_time_per_task_min"])
         et = et_min * 60  # est column holds AA minutes-per-task; convert to sec
     except (ValueError, TypeError, KeyError):
         continue
