@@ -33,19 +33,23 @@ tbody tr:hover{background:#e7f5ff}
 .paging button{padding:4px 10px;border:1px solid #ced4da;border-radius:4px;background:#fff;cursor:pointer}
 .footer{text-align:center;padding:8px;font-size:11px;color:#868e96;background:#f1f3f5}
 .footer a{color:#1a1a2e}
+.notice{background:#fffbe6;padding:10px 24px;line-height:1.5;border-bottom:1px solid #e6dca6}
+.notice details{margin-top:6px}.notice li{margin:4px 0 4px 20px}.notice a{color:#174d7a}
 </style>
 </head>
 <body>
 <div class="header">
-<div class="nav"><a class="nav-link" href="models.html">Agentic Models</a> | <a class="nav-link" href="models_full.html">Intelligence Index (All)</a></div>
+<div class="nav"><a class="nav-link" href="models.html">Agentic Models</a> | <a class="nav-link" href="models_full.html">Intelligence Index (All)</a> | <a class="nav-link" href="free_models.html">Verified Free Models</a></div>
 <h1>Coding Agents Leaderboard</h1>
 <div class="meta" id="meta-info">Loading...</div>
 </div>
+
 <div class="controls">
 <input type="text" id="search" placeholder="Search harness, model, creator...">
 <select id="harness-filter"><option value="">All</option></select>
 <button id="btn-reset">Reset</button>
 <button id="sb-0" class="sort-btn">Score / min</button><button id="sb-1" class="sort-btn">Cost vs Score</button><button id="sb-2" class="sort-btn">Token Efficiency</button>
+
 <div class="group-toggles" id="group-toggles"></div>
 </div>
 <div class="table-wrap">
@@ -67,6 +71,8 @@ const SORT_ACTIONS=[
 ["sb-1", "score_per_cost"],
 ["sb-2", "token_efficiency"]
 ];
+const IS_FREE_TAB=false;
+let paretoOnly=false;
 
 function init(){
   const scrapeDay=META.scrape_date?META.scrape_date.slice(0,10):"";
@@ -83,6 +89,12 @@ function init(){
   document.getElementById("harness-filter").addEventListener("change",filterAndRender);
   document.getElementById("btn-reset").addEventListener("click",()=>{
     document.getElementById("search").value="";
+    if(IS_FREE_TAB){
+      paretoOnly=false;
+      const toggle=document.getElementById("pareto-toggle");
+      toggle.classList.remove("active");
+      toggle.setAttribute("aria-pressed","false");
+    }
     document.getElementById("harness-filter").value="";
     hiddenGroups.clear();
     document.querySelectorAll(".grp-btn").forEach(b=>b.classList.add("active"));
@@ -93,6 +105,15 @@ function init(){
   SORT_ACTIONS.forEach(([id,col])=>{
     document.getElementById(id).addEventListener("click",()=>sortBy(col,"higher"));
   });
+  if(IS_FREE_TAB){
+    const toggle=document.getElementById("pareto-toggle");
+    toggle.addEventListener("click",()=>{
+      paretoOnly=!paretoOnly;
+      toggle.classList.toggle("active",paretoOnly);
+      toggle.setAttribute("aria-pressed",String(paretoOnly));
+      page=0;filterAndRender();
+    });
+  }
   filterAndRender();
 }
 
@@ -150,6 +171,7 @@ function filterAndRender(){
       if(!h.includes(q))return false;
     }
     if(hF&&r[FILTER_FIELD]!==hF)return false;
+    if(IS_FREE_TAB&&paretoOnly&&!r.pareto)return false;
     return true;
   });
   if(sortCol){

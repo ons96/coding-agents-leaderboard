@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>__TITLE__</title>
+<title>Verified Free Models - Score/min</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:13px;background:#f8f9fa;color:#212529}
@@ -39,17 +39,17 @@ tbody tr:hover{background:#e7f5ff}
 </head>
 <body>
 <div class="header">
-__NAV__
-<h1>__TITLE__</h1>
+<div class="nav"><a class="nav-link" href="index.html">Coding Agents</a> | <a class="nav-link" href="models.html">Agentic Models</a> | <a class="nav-link" href="models_full.html">Intelligence Index (All)</a></div>
+<h1>Verified Free Models - Score/min</h1>
 <div class="meta" id="meta-info">Loading...</div>
 </div>
-__FREE_NOTICE__
+<aside class="notice"><strong>Estimated speed, not measured task runtime.</strong> Score/min uses Artificial Analysis Intelligence Index divided by estimated task time derived from canonical token counts and output speed. It does not measure free-provider latency. Only reviewed exact hosted free variants appear; unknown availability is not paid. Free quotas and availability can change. Provider evidence checked 2026-10-01. Pareto retains a row only when its Index exceeds every faster eligible row's Index.<details><summary>Source routes and variant evidence</summary><ul><li>Gemini 3.6 Flash: <a href="https://ai.google.dev/gemini-api/docs/pricing">Google Gemini API / gemini-3.6-flash</a> - Standard free-tier input and output; leaderboard row has no separate effort suffix. Free-tier rate limits apply.</li><li>Inkling: <a href="https://openrouter.ai/thinkingmachines/inkling:free">OpenRouter / thinkingmachines/inkling:free</a> - Public models catalog lists this exact :free ID with zero prompt and completion price; free-route limits apply.</li><li>Inkling Small: <a href="https://openrouter.ai/thinkingmachines/inkling-small:free">OpenRouter / thinkingmachines/inkling-small:free</a> - Public models catalog lists this exact :free ID with zero prompt and completion price; free-route limits apply.</li><li>Nemotron 3.5 Lightning: <a href="https://openrouter.ai/nvidia/nemotron-3.5-lightning:free">OpenRouter / nvidia/nemotron-3.5-lightning:free</a> - Public models catalog lists this exact :free ID with zero prompt and completion price; free-route limits apply.</li></ul></details></aside>
 <div class="controls">
-<input type="text" id="search" placeholder="__FILTER_PLACEHOLDER__">
-<select id="__FILTER_ID__"><option value="">All</option></select>
+<input type="text" id="search" placeholder="Search models, providers, identifiers...">
+<select id="creator-filter"><option value="">All</option></select>
 <button id="btn-reset">Reset</button>
-__SORT_BUTTONS__
-__FREE_CONTROLS__
+<button id="sb-0" class="sort-btn">Score/min</button><button id="sb-1" class="sort-btn">Score</button>
+<button id="pareto-toggle" aria-pressed="false">Pareto only</button>
 <div class="group-toggles" id="group-toggles"></div>
 </div>
 <div class="table-wrap">
@@ -57,24 +57,27 @@ __FREE_CONTROLS__
 </div>
 <div class="paging" id="paging"></div>
 <div class="footer">
-Data from <a href="__FOOTER_URL__">artificialanalysis.ai</a> |
+Data from <a href="https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index">artificialanalysis.ai</a> |
 Updated: <span id="update-date">-</span>
 </div>
-<script src="__SCRIPT_SRC__"></script>
+<script src="free_models.data.js?v=d6f05a85"></script>
 <script>
 const PS=100;
-let filtered=[...TABLE_DATA],sortCol=DEFAULT_SORT,sortDir=1,hiddenGroups=new Set(),page=0;
-const TXT_COLS=new Set(__TXT_COLS__);
-const FILTER_FIELD=__FILTER_FIELD__;
-const SORT_ACTIONS=__SORT_ACTIONS__;
-const IS_FREE_TAB=__IS_FREE_TAB__;
+let filtered=[...TABLE_DATA],sortCol="score_per_minute",sortDir=1,hiddenGroups=new Set(),page=0;
+const TXT_COLS=new Set(["model", "creator", "slug", "free_access"]);
+const FILTER_FIELD="creator";
+const SORT_ACTIONS=[
+["sb-0", "score_per_minute"],
+["sb-1", "intelligenceIndex"]
+];
+const IS_FREE_TAB=true;
 let paretoOnly=false;
 
 function init(){
   const scrapeDay=META.scrape_date?META.scrape_date.slice(0,10):"";
-  document.getElementById("meta-info").textContent=META.row_count+" "+__ENTITY_LABEL__+" | "+(scrapeDay||"artificialanalysis.ai");
+  document.getElementById("meta-info").textContent=META.row_count+" "+"verified free models"+" | "+(scrapeDay||"artificialanalysis.ai");
   document.getElementById("update-date").textContent=scrapeDay||"—";
-  const hf=document.getElementById("__FILTER_ID__");
+  const hf=document.getElementById("creator-filter");
   [...new Set(TABLE_DATA.map(r=>r[FILTER_FIELD]).filter(Boolean))].sort().forEach(h=>{
     const o=document.createElement("option");o.value=h;o.textContent=h;hf.appendChild(o);
   });
@@ -82,7 +85,7 @@ function init(){
   if(!COLUMNS.includes(sortCol))sortCol=null;
   if(sortCol)sortDir=HIGHLIGHTS[sortCol]==="lower"?1:-1;
   document.getElementById("search").addEventListener("input",debounce(filterAndRender,200));
-  document.getElementById("__FILTER_ID__").addEventListener("change",filterAndRender);
+  document.getElementById("creator-filter").addEventListener("change",filterAndRender);
   document.getElementById("btn-reset").addEventListener("click",()=>{
     document.getElementById("search").value="";
     if(IS_FREE_TAB){
@@ -91,10 +94,10 @@ function init(){
       toggle.classList.remove("active");
       toggle.setAttribute("aria-pressed","false");
     }
-    document.getElementById("__FILTER_ID__").value="";
+    document.getElementById("creator-filter").value="";
     hiddenGroups.clear();
     document.querySelectorAll(".grp-btn").forEach(b=>b.classList.add("active"));
-    sortCol=COLUMNS.includes(DEFAULT_SORT)?DEFAULT_SORT:null;
+    sortCol=COLUMNS.includes("score_per_minute")?"score_per_minute":null;
     sortDir=(sortCol&&HIGHLIGHTS[sortCol]==="lower")?1:-1;
     page=0;filterAndRender();
   });
@@ -160,7 +163,7 @@ function buildHeader(){
 
 function filterAndRender(){
   const q=document.getElementById("search").value.toLowerCase();
-  const hF=document.getElementById("__FILTER_ID__").value;
+  const hF=document.getElementById("creator-filter").value;
   filtered=TABLE_DATA.filter(r=>{
     if(q){
       const h=[...TXT_COLS].map(c=>r[c]).filter(Boolean).join(" ").toLowerCase();
@@ -218,7 +221,7 @@ function renderRows(){
   });
   const pEl=document.getElementById("paging"),total=filtered.length;
   const pages=Math.ceil(total/PS)||1;
-  pEl.innerHTML='<span>'+total+' '+__ENTITY_LABEL__+'</span><span>Page '+(page+1)+'/'+pages+'</span><span>'+
+  pEl.innerHTML='<span>'+total+' '+"verified free models"+'</span><span>Page '+(page+1)+'/'+pages+'</span><span>'+
     '<button onclick="page=Math.max(0,page-1);renderRows()">Prev</button> '+
     '<button onclick="page=Math.min('+(pages-1)+',page+1);renderRows()">Next</button></span>';
 }

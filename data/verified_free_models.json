@@ -1,0 +1,39 @@
+{
+  "checked_date": "2026-10-01",
+  "policy": "Only explicitly reviewed hosted zero-cost API routes matching the leaderboard model and effort variant are included. Unknown is not paid; open weights alone do not qualify. Check linked terms and current availability before use.",
+  "models": {
+    "gemini-3-6-flash": [
+      {
+        "provider": "Google Gemini API",
+        "model_id": "gemini-3.6-flash",
+        "url": "https://ai.google.dev/gemini-api/docs/pricing",
+        "note": "Standard free-tier input and output; leaderboard row has no separate effort suffix. Free-tier rate limits apply."
+      }
+    ],
+    "inkling": [
+      {
+        "provider": "OpenRouter",
+        "model_id": "thinkingmachines/inkling:free",
+        "url": "https://openrouter.ai/thinkingmachines/inkling:free",
+        "note": "Public models catalog lists this exact :free ID with zero prompt and completion price; free-route limits apply."
+      }
+    ],
+    "inkling-small": [
+      {
+        "provider": "OpenRouter",
+        "model_id": "thinkingmachines/inkling-small:free",
+        "url": "https://openrouter.ai/thinkingmachines/inkling-small:free",
+        "note": "Public models catalog lists this exact :free ID with zero prompt and completion price; free-route limits apply."
+      }
+    ],
+    "nemotron-3-5-lightning": [
+      {
+        "provider": "OpenRouter",
+        "model_id": "nvidia/nemotron-3.5-lightning:free",
+        "url": "https://openrouter.ai/nvidia/nemotron-3.5-lightning:free",
+        "note": "Public models catalog lists this exact :free ID with zero prompt and completion price; free-route limits apply."
+      }
+    ]
+  },
+  "catalog_url": "https://openrouter.ai/api/v1/models"
+}

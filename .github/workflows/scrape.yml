@@ -77,7 +77,7 @@ jobs:
         run: |
           python - <<'PY'
           import re, pathlib
-          for f in ("docs/index.html", "docs/models.html", "docs/models_full.html"):
+          for f in ("docs/index.html", "docs/models.html", "docs/models_full.html", "docs/free_models.html"):
               html = pathlib.Path(f).read_text()
               scripts = re.findall(r"<script>(.*?)</script>", html, re.DOTALL)
               if not scripts:

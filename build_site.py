@@ -7,6 +7,7 @@ preserved per dataset. Pages link to each other via a small nav bar.
 """
 
 import hashlib
+from html import escape
 import json
 from pathlib import Path
 
@@ -14,6 +15,7 @@ ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data" / "site_data.json"
 SITE_DIR = ROOT / "docs"
 TEMPLATE = ROOT / "site_template.html"
+FREE_MODELS = ROOT / "data" / "verified_free_models.json"
 
 # Per-tab presentation overrides. Keys are tab ids; values replace template
 # tokens. ``txt_cols`` and ``filter_field`` drive the searchable/text columns.
@@ -66,15 +68,77 @@ TAB_PRESENTATION = {
         ],
         "default_sort": "score_per_minute",
     },
+    "free_models": {
+        "title": "Verified Free Models - Score/min",
+        "nav_label": "Verified Free Models",
+        "entity": "verified free models",
+        "txt_cols": ["model", "creator", "slug", "free_access"],
+        "filter_id": "creator-filter",
+        "filter_field": "creator",
+        "filter_placeholder": "Search models, providers, identifiers...",
+        "footer_url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
+        "sort_buttons": [("Score/min", "score_per_minute"), ("Score", "intelligenceIndex")],
+        "default_sort": "score_per_minute",
+    },
 }
 
 
-def _render(tab_id: str, block: dict) -> Path:
+def free_tab(index_block: dict) -> tuple[dict, str]:
+    inventory = json.loads(FREE_MODELS.read_text())
+    known = {row["slug"]: row for row in index_block["rows"]}
+    rows = []
+    evidence = []
+    for slug, sources in inventory["models"].items():
+        if slug not in known:
+            raise ValueError(f"Verified free model missing from index: {slug}")
+        row = known[slug]
+        if not row.get("score_per_minute") or row.get("intelligenceIndex") is None:
+            continue
+        rows.append({key: row.get(key) for key in
+                     ("slug", "model", "creator", "intelligenceIndex", "score_per_minute",
+                      "est_time_per_task_sec", "medianCanonicalAnswerOutputSpeed")})
+        rows[-1]["free_access"] = ", ".join(source["provider"] for source in sources)
+        for source in sources:
+            evidence.append("<li>" + escape(row["model"]) + ": <a href=\"" +
+                            escape(source["url"], quote=True) + "\">" +
+                            escape(source["provider"] + " / " + source["model_id"]) +
+                            "</a> - " + escape(source["note"]) + "</li>")
+    rows.sort(key=lambda r: (-r["score_per_minute"], r["slug"]))
+    best_index = float("-inf")
+    for row in rows:
+        row["pareto"] = row["intelligenceIndex"] > best_index
+        if row["pareto"]:
+            best_index = row["intelligenceIndex"]
+    columns = ["model", "creator", "score_per_minute", "intelligenceIndex",
+               "est_time_per_task_sec", "medianCanonicalAnswerOutputSpeed", "free_access"]
+    block = {
+        "rows": rows, "columns": columns,
+        "labels": {**index_block["labels"], "free_access": "Verified free API"},
+        "highlights": {"score_per_minute": "higher", "intelligenceIndex": "higher"},
+        "col_groups": {"identity": ["model", "creator", "free_access"],
+                       "derived": ["score_per_minute", "intelligenceIndex",
+                                   "est_time_per_task_sec", "medianCanonicalAnswerOutputSpeed"]},
+        "group_order": ["identity", "derived"],
+        "group_labels": {"identity": "Identity & Access", "derived": "Quality & Speed"},
+        "meta": {"row_count": len(rows), "scrape_date": index_block["meta"]["scrape_date"]},
+    }
+    notice = ("<aside class=\"notice\"><strong>Estimated speed, not measured task runtime.</strong> "
+              "Score/min uses Artificial Analysis Intelligence Index divided by estimated "
+              "task time derived from canonical token counts and output speed. It does not "
+              "measure free-provider latency. Only reviewed exact hosted free variants appear; "
+              "unknown availability is not paid. Free quotas and availability can change. "
+              "Provider evidence checked " + escape(inventory["checked_date"]) + ". "
+              "Pareto retains a row only when its Index exceeds every faster eligible row's Index."
+              "<details><summary>Source routes and variant evidence</summary><ul>" +
+              "".join(evidence) + "</ul></details></aside>")
+    return block, notice
+
+
+def _render(tab_id: str, block: dict, payload: dict, free_notice: str = "") -> Path:
     pres = TAB_PRESENTATION.get(tab_id, TAB_PRESENTATION["models"])
     html = TEMPLATE.read_text()
 
     nav_links = []
-    payload = json.loads(DATA.read_text())
     for other in payload["tabs"]:
         if other["id"] == tab_id:
             continue
@@ -117,6 +181,9 @@ def _render(tab_id: str, block: dict) -> Path:
         "__FOOTER_URL__": pres["footer_url"],
         "__SORT_BUTTONS__": sort_btns_html,
         "__SORT_ACTIONS__": sort_actions,
+        "__FREE_CONTROLS__": '<button id="pareto-toggle" aria-pressed="false">Pareto only</button>' if free_notice else "",
+        "__FREE_NOTICE__": free_notice,
+        "__IS_FREE_TAB__": "true" if free_notice else "false",
         "__SCRIPT_SRC__": f"{tab_id}.data.js?v={js_hash}",
         "DEFAULT_SORT": json.dumps(pres["default_sort"]),
     }
@@ -135,9 +202,12 @@ def _render(tab_id: str, block: dict) -> Path:
 def build():
     SITE_DIR.mkdir(exist_ok=True)
     payload = json.loads(DATA.read_text())
-    built = []
-    for tab in payload["tabs"]:
-        built.append(_render(tab["id"], tab["data"]))
+    index = next(tab["data"] for tab in payload["tabs"] if tab["id"] == "models_full")
+    free_block, free_notice = free_tab(index)
+    payload["tabs"].append({"id": "free_models", "data": free_block})
+    built = [_render(tab["id"], tab["data"], payload,
+                     free_notice if tab["id"] == "free_models" else "")
+             for tab in payload["tabs"]]
     print(f"Site built: {', '.join(str(p) for p in built)}")
 
 
