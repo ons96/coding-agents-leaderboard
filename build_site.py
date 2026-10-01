@@ -69,9 +69,9 @@ TAB_PRESENTATION = {
         "default_sort": "score_per_minute",
     },
     "free_models": {
-        "title": "Verified Free Models - Score/min",
-        "nav_label": "Verified Free Models",
-        "entity": "verified free models",
+        "title": "Free Hosted Base Models - Score/min",
+        "nav_label": "Free Hosted Models",
+        "entity": "free hosted model rows",
         "txt_cols": ["model", "creator", "slug", "free_access"],
         "filter_id": "creator-filter",
         "filter_field": "creator",
@@ -113,7 +113,7 @@ def free_tab(index_block: dict) -> tuple[dict, str]:
                "est_time_per_task_sec", "medianCanonicalAnswerOutputSpeed", "free_access"]
     block = {
         "rows": rows, "columns": columns,
-        "labels": {**index_block["labels"], "free_access": "Verified free API"},
+        "labels": {**index_block["labels"], "free_access": "Free base-model API"},
         "highlights": {"score_per_minute": "higher", "intelligenceIndex": "higher"},
         "col_groups": {"identity": ["model", "creator", "free_access"],
                        "derived": ["score_per_minute", "intelligenceIndex",
@@ -122,15 +122,17 @@ def free_tab(index_block: dict) -> tuple[dict, str]:
         "group_labels": {"identity": "Identity & Access", "derived": "Quality & Speed"},
         "meta": {"row_count": len(rows), "scrape_date": index_block["meta"]["scrape_date"]},
     }
-    notice = ("<aside class=\"notice\"><strong>Estimated speed, not measured task runtime.</strong> "
-              "Score/min uses Artificial Analysis Intelligence Index divided by estimated "
-              "task time derived from canonical token counts and output speed. It does not "
-              "measure free-provider latency. Only reviewed exact hosted free variants appear; "
-              "unknown availability is not paid. Free quotas and availability can change. "
-              "Provider evidence checked " + escape(inventory["checked_date"]) + ". "
-              "Pareto retains a row only when its Index exceeds every faster eligible row's Index."
-              "<details><summary>Source routes and variant evidence</summary><ul>" +
-              "".join(evidence) + "</ul></details></aside>")
+    notice = ("<aside class=\"notice\"><strong>Base-model access verified; reasoning effort assumed.</strong> "
+              "Listed hosted routes have free input and output, but their ability to serve each "
+              "leaderboard reasoning-effort variant is not verified. Score/min uses Artificial "
+              "Analysis Intelligence Index divided by estimated task time derived from canonical "
+              "token counts and output speed; it does not measure free-provider latency. "
+              "Rows without an Index or score/min estimate are omitted. Unknown availability "
+              "is not paid. Free quotas and availability can change. Provider evidence checked "
+              + escape(inventory["checked_date"]) + ". Pareto retains a row only when its "
+              "Index exceeds every faster eligible row's Index."
+              "<details><summary>Source routes and effort assumptions</summary><ul>" +
+              "".join(evidence) + "</ul></details></aside")
     return block, notice
 
 

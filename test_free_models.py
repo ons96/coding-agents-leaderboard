@@ -1,4 +1,4 @@
-"""Behavioral checks for the reviewed free-host dashboard."""
+"""Behavioral checks for the free hosted base-model dashboard."""
 import unittest
 
 import build_site
@@ -41,6 +41,21 @@ class FreeDashboardTests(unittest.TestCase):
         self.assertEqual([row["pareto"] for row in block["rows"]],
                          [True, False, True])
         self.assertIn("estimated", notice.lower())
+        self.assertIn("reasoning effort assumed", notice.lower())
+
+    def test_inventory_expands_scored_effort_variants(self):
+        import json
+        inventory = json.loads(build_site.FREE_MODELS.read_text())
+        index = json.loads(build_site.DATA.read_text())
+        rows = next(tab["data"] for tab in index["tabs"] if tab["id"] == "models_full")
+        block, notice = build_site.free_tab(rows)
+        present = {row["slug"] for row in block["rows"]}
+        self.assertTrue({"gemini-3-7-flash-low", "gemini-3-7-flash-medium",
+                         "gemini-3-7-flash", "qwen3-8-27b-medium",
+                         "qwen3-8-27b-non-reasoning"} <= present)
+        self.assertGreater(len(block["rows"]), 4)
+        self.assertTrue(present <= inventory["models"].keys())
+        self.assertIn("reasoning effort assumed", notice.lower())
 
 
 if __name__ == "__main__":

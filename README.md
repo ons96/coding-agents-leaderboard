@@ -26,11 +26,11 @@ Shared outputs:
 - `docs/` — static GitHub Pages site: `index.html` (agents) + `models.html`
   (models), cross-linked with a nav bar.
 
-### Verified free hosted models
+### Free hosted base models
 
-The [Verified Free Models dashboard](https://ons96.github.io/coding-agents-leaderboard/free_models.html) lists reviewed hosted zero-cost API routes for exact Intelligence Index model variants. The default table shows every eligible row ordered by estimated Score/min; **Pareto only** retains rows whose Intelligence Index is greater than every faster eligible row. Search and sort do not recompute that global frontier.
+The [Free Hosted Models dashboard](https://ons96.github.io/coding-agents-leaderboard/free_models.html) lists Intelligence Index rows whose base models have reviewed hosted zero-cost API routes. **Reasoning effort is assumed available, not verified:** the free provider may not support the exact high, medium, low, minimal, or non-reasoning configuration used in a leaderboard row. Different releases and specialized model variants are not treated as interchangeable. The default table shows every eligible scored row ordered by estimated Score/min; **Pareto only** retains rows whose Intelligence Index is greater than every faster eligible row. Search and sort do not recompute that global frontier.
 
-`data/verified_free_models.json` records exact leaderboard slugs, provider route IDs, evidence URLs, notes, and the last review date. Add a route only after verifying its exact model and effort variant and its hosted free pricing. Unknown availability is not evidence of paid access; open weights alone do not qualify. Run `python build_site.py` to regenerate `docs/` after reviewing the inventory. The scheduled scrape also rebuilds the page from the committed inventory. Free quotas, prices, and availability can change between reviews.
+`data/verified_free_models.json` records leaderboard slugs, provider route IDs, evidence URLs, effort-assumption notes, and the review date. Add a row only after verifying free hosted input/output for the same base model; matching the leaderboard's effort is not required. Rows without an Index or score/min estimate are omitted. Unknown availability is not evidence of paid access; open weights alone do not qualify. Run `python build_site.py` to regenerate `docs/` after reviewing the inventory. The scheduled scrape also rebuilds the page from the committed inventory. Free quotas, prices, and availability can change between reviews.
 
 Score/min uses estimated task duration from Artificial Analysis canonical token counts and output speed, **not measured task runtime or the free host's response speed**. See [Estimate calibration](#estimate-calibration) for the limitations.
 

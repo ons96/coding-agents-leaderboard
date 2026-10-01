@@ -1,39 +1,36 @@
 {
   "checked_date": "2026-10-01",
-  "policy": "Only explicitly reviewed hosted zero-cost API routes matching the leaderboard model and effort variant are included. Unknown is not paid; open weights alone do not qualify. Check linked terms and current availability before use.",
+  "policy": "A listed base model has a reviewed hosted zero-cost route. Leaderboard reasoning-effort variants are included by assumption, not verified as available on that route. Different model releases and specialized variants are not treated as interchangeable. Unknown is not paid; open weights alone do not qualify. Free quotas and availability can change.",
   "models": {
-    "gemini-3-6-flash": [
-      {
-        "provider": "Google Gemini API",
-        "model_id": "gemini-3.6-flash",
-        "url": "https://ai.google.dev/gemini-api/docs/pricing",
-        "note": "Standard free-tier input and output; leaderboard row has no separate effort suffix. Free-tier rate limits apply."
-      }
-    ],
-    "inkling": [
-      {
-        "provider": "OpenRouter",
-        "model_id": "thinkingmachines/inkling:free",
-        "url": "https://openrouter.ai/thinkingmachines/inkling:free",
-        "note": "Public models catalog lists this exact :free ID with zero prompt and completion price; free-route limits apply."
-      }
-    ],
-    "inkling-small": [
-      {
-        "provider": "OpenRouter",
-        "model_id": "thinkingmachines/inkling-small:free",
-        "url": "https://openrouter.ai/thinkingmachines/inkling-small:free",
-        "note": "Public models catalog lists this exact :free ID with zero prompt and completion price; free-route limits apply."
-      }
-    ],
-    "nemotron-3-5-lightning": [
-      {
-        "provider": "OpenRouter",
-        "model_id": "nvidia/nemotron-3.5-lightning:free",
-        "url": "https://openrouter.ai/nvidia/nemotron-3.5-lightning:free",
-        "note": "Public models catalog lists this exact :free ID with zero prompt and completion price; free-route limits apply."
-      }
-    ]
+    "gemini-3-flash": [{"provider": "Google Gemini API", "model_id": "gemini-3-flash-preview", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; non-reasoning effort is assumed available."}],
+    "gemini-3-flash-reasoning": [{"provider": "Google Gemini API", "model_id": "gemini-3-flash-preview", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; reasoning effort is assumed available."}],
+    "gemini-3-5-flash-minimal": [{"provider": "Google Gemini API", "model_id": "gemini-3.5-flash", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; minimal effort is assumed available."}],
+    "gemini-3-5-flash-medium": [{"provider": "Google Gemini API", "model_id": "gemini-3.5-flash", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; medium effort is assumed available."}],
+    "gemini-3-5-flash": [{"provider": "Google Gemini API", "model_id": "gemini-3.5-flash", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; listed effort is assumed available."}],
+    "gemini-3-5-flash-lite": [{"provider": "Google Gemini API", "model_id": "gemini-3.5-flash-lite", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output."}],
+    "gemini-3-6-flash": [{"provider": "Google Gemini API", "model_id": "gemini-3.6-flash", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; free-tier rate limits apply."}],
+    "gemini-3-7-flash-low": [{"provider": "Google Gemini API", "model_id": "gemini-3.7-flash", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; low effort is assumed available."}],
+    "gemini-3-7-flash-medium": [{"provider": "Google Gemini API", "model_id": "gemini-3.7-flash", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; medium effort is assumed available."}],
+    "gemini-3-7-flash": [{"provider": "Google Gemini API", "model_id": "gemini-3.7-flash", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; high effort is assumed available."}],
+    "gemini-3-8-flash-low": [{"provider": "Google Gemini API", "model_id": "gemini-3.8-flash", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; low effort is assumed available."}],
+    "gemini-3-8-flash-medium": [{"provider": "Google Gemini API", "model_id": "gemini-3.8-flash", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; medium effort is assumed available."}],
+    "gemini-3-8-flash": [{"provider": "Google Gemini API", "model_id": "gemini-3.8-flash", "url": "https://ai.google.dev/gemini-api/docs/pricing", "note": "Standard free-tier input and output; high effort is assumed available."}],
+    "qwen3-8-27b": [{"provider": "OpenRouter", "model_id": "qwen/qwen3.8-27b:free", "url": "https://openrouter.ai/qwen/qwen3.8-27b:free", "note": "Zero-priced hosted base model; xhigh effort is assumed available."}],
+    "qwen3-8-27b-medium": [{"provider": "OpenRouter", "model_id": "qwen/qwen3.8-27b:free", "url": "https://openrouter.ai/qwen/qwen3.8-27b:free", "note": "Zero-priced hosted base model; medium effort is assumed available."}],
+    "qwen3-8-27b-low": [{"provider": "OpenRouter", "model_id": "qwen/qwen3.8-27b:free", "url": "https://openrouter.ai/qwen/qwen3.8-27b:free", "note": "Zero-priced hosted base model; low effort is assumed available."}],
+    "qwen3-8-27b-non-reasoning": [{"provider": "OpenRouter", "model_id": "qwen/qwen3.8-27b:free", "url": "https://openrouter.ai/qwen/qwen3.8-27b:free", "note": "Zero-priced hosted base model; non-reasoning effort is assumed available."}],
+    "gemma-4-26b-a4b": [{"provider": "OpenRouter", "model_id": "google/gemma-4-26b-a4b-it:free", "url": "https://openrouter.ai/google/gemma-4-26b-a4b-it:free", "note": "Zero-priced hosted base model; listed effort is assumed available."}],
+    "gemma-4-26b-a4b-non-reasoning": [{"provider": "OpenRouter", "model_id": "google/gemma-4-26b-a4b-it:free", "url": "https://openrouter.ai/google/gemma-4-26b-a4b-it:free", "note": "Zero-priced hosted base model; non-reasoning effort is assumed available."}],
+    "gemma-4-31b": [{"provider": "OpenRouter", "model_id": "google/gemma-4-31b-it:free", "url": "https://openrouter.ai/google/gemma-4-31b-it:free", "note": "Zero-priced hosted base model; listed effort is assumed available."}],
+    "gemma-4-31b-non-reasoning": [{"provider": "OpenRouter", "model_id": "google/gemma-4-31b-it:free", "url": "https://openrouter.ai/google/gemma-4-31b-it:free", "note": "Zero-priced hosted base model; non-reasoning effort is assumed available."}],
+    "nvidia-nemotron-3-ultra-550b-a55b": [{"provider": "OpenRouter", "model_id": "nvidia/nemotron-3-ultra-550b-a55b:free", "url": "https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b:free", "note": "Zero-priced hosted base model; leaderboard effort is assumed available."}],
+    "nvidia-nemotron-3-super-120b-a12b": [{"provider": "OpenRouter", "model_id": "nvidia/nemotron-3-super-120b-a12b:free", "url": "https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b:free", "note": "Zero-priced hosted base model; leaderboard effort is assumed available."}],
+    "nemotron-3-nano-omni-30b-a3b": [{"provider": "OpenRouter", "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free", "url": "https://openrouter.ai/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free", "note": "Zero-priced hosted Omni reasoning route; leaderboard effort is assumed available."}],
+    "inkling": [{"provider": "OpenRouter", "model_id": "thinkingmachines/inkling:free", "url": "https://openrouter.ai/thinkingmachines/inkling:free", "note": "Zero-priced hosted base model; free-route limits apply."}],
+    "inkling-small": [{"provider": "OpenRouter", "model_id": "thinkingmachines/inkling-small:free", "url": "https://openrouter.ai/thinkingmachines/inkling-small:free", "note": "Zero-priced hosted base model; free-route limits apply."}],
+    "nemotron-3-5-lightning": [{"provider": "OpenRouter", "model_id": "nvidia/nemotron-3.5-lightning:free", "url": "https://openrouter.ai/nvidia/nemotron-3.5-lightning:free", "note": "Zero-priced hosted base model; free-route limits apply."}],
+    "lfm2-5-2-6b": [{"provider": "OpenRouter", "model_id": "liquid/lfm-2.5-2.6b:free", "url": "https://openrouter.ai/liquid/lfm-2.5-2.6b:free", "note": "Zero-priced hosted base model; route spelling differs from leaderboard slug."}],
+    "north-mini-code": [{"provider": "OpenRouter", "model_id": "cohere/north-mini-code:free", "url": "https://openrouter.ai/cohere/north-mini-code:free", "note": "Zero-priced hosted base model; free-route limits apply."}]
   },
   "catalog_url": "https://openrouter.ai/api/v1/models"
 }
