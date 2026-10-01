@@ -5,4 +5,4 @@ const HIGHLIGHTS={"score_per_minute": "higher", "intelligenceIndex": "higher"};
 const COL_GROUPS={"identity": ["model", "creator", "free_access"], "derived": ["score_per_minute", "intelligenceIndex", "est_time_per_task_min", "medianCanonicalAnswerOutputSpeed"]};
 const GROUP_ORDER=["identity", "derived"];
 const GROUP_LABELS={"identity": "Identity & Access", "derived": "Quality & Speed"};
-const META={"row_count": 23, "scrape_date": "2026-10-01T21:40:41.957539+00:00"};
+const META={"row_count": 23, "scrape_date": "2026-10-01T21:44:47.375411+00:00"};
