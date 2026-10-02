@@ -64,7 +64,9 @@
     "gpt-5-5": [{"provider": "TryAPI", "model_id": "gpt-5.5", "url": "http://100.80.87.87:9890", "note": "Free route; responses carry branding prefix (fails exact-ok trap). Base effort assumed. Live-verified 2026-10-01."}],
     "gpt-5-5-high": [{"provider": "TryAPI", "model_id": "gpt-5.5", "url": "http://100.80.87.87:9890", "note": "Free route; responses carry branding prefix (fails exact-ok trap). High effort assumed. Live-verified 2026-10-01."}],
     "gpt-5-6-luna": [{"provider": "TryAPI", "model_id": "gpt-5.6-luna", "url": "http://100.80.87.87:9890", "note": "Free route; responses carry branding prefix (fails exact-ok trap). Base effort assumed. Live-verified 2026-10-01."}],
-    "gpt-5-6-luna-xhigh": [{"provider": "TryAPI", "model_id": "gpt-5.6-luna", "url": "http://100.80.87.87:9890", "note": "Free route; responses carry branding prefix (fails exact-ok trap). Xhigh effort assumed. Live-verified 2026-10-01."}]
+    "gpt-5-6-luna-xhigh": [{"provider": "TryAPI", "model_id": "gpt-5.6-luna", "url": "http://100.80.87.87:9890", "note": "Free route; responses carry branding prefix (fails exact-ok trap). Xhigh effort assumed. Live-verified 2026-10-01."}],
+    "glm-4-7-flash": [{"provider": "Hugging Face", "model_id": "zai-org/GLM-4.7-Flash", "url": "https://huggingface.co/zai-org/GLM-4.7-Flash", "note": "Zero-cost inference route; listed effort is assumed available. Live-verified 2026-10-01."}],
+    "glm-4-7-flash-non-reasoning": [{"provider": "Hugging Face", "model_id": "zai-org/GLM-4.7-Flash", "url": "https://huggingface.co/zai-org/GLM-4.7-Flash", "note": "Zero-cost inference route; non-reasoning effort is assumed available. Live-verified 2026-10-01."}]
   },
   "catalog_url": "https://openrouter.ai/api/v1/models"
 }
