@@ -49,7 +49,8 @@ tbody tr:hover{background:#e7f5ff}
 <select id="creator-filter"><option value="">All</option></select>
 <button id="btn-reset">Reset</button>
 <button id="sb-0" class="sort-btn">Score/min</button><button id="sb-1" class="sort-btn">Score/$</button><button id="sb-2" class="sort-btn">Score</button>
-
+<button id="pareto-toggle" aria-pressed="false">Pareto only</button>
+<button id="free-toggle" aria-pressed="false">Free API only</button>
 <div class="group-toggles" id="group-toggles"></div>
 </div>
 <div class="table-wrap">
@@ -60,7 +61,7 @@ tbody tr:hover{background:#e7f5ff}
 Data from <a href="https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index">artificialanalysis.ai</a> |
 Updated: <span id="update-date">-</span>
 </div>
-<script src="models_full.data.js?v=27cbae63"></script>
+<script src="models_full.data.js?v=ffe29204"></script>
 <script>
 const PS=100;
 let filtered=[...TABLE_DATA],sortCol="score_per_minute",sortDir=1,hiddenGroups=new Set(),page=0;
@@ -72,7 +73,7 @@ const SORT_ACTIONS=[
 ["sb-2", "intelligenceIndex"]
 ];
 const IS_FREE_TAB=false;
-let paretoOnly=false;
+let paretoOnly=false,freeOnly=false;
 
 function init(){
   const scrapeDay=META.scrape_date?META.scrape_date.slice(0,10):"";
@@ -89,11 +90,10 @@ function init(){
   document.getElementById("creator-filter").addEventListener("change",filterAndRender);
   document.getElementById("btn-reset").addEventListener("click",()=>{
     document.getElementById("search").value="";
-    if(IS_FREE_TAB){
-      paretoOnly=false;
-      const toggle=document.getElementById("pareto-toggle");
-      toggle.classList.remove("active");
-      toggle.setAttribute("aria-pressed","false");
+    paretoOnly=false;freeOnly=false;
+    for(const id of ["pareto-toggle","free-toggle"]){
+      const toggle=document.getElementById(id);
+      if(toggle){toggle.classList.remove("active");toggle.setAttribute("aria-pressed","false");}
     }
     document.getElementById("creator-filter").value="";
     hiddenGroups.clear();
@@ -105,12 +105,21 @@ function init(){
   SORT_ACTIONS.forEach(([id,col])=>{
     document.getElementById(id).addEventListener("click",()=>sortBy(col,"higher"));
   });
-  if(IS_FREE_TAB){
-    const toggle=document.getElementById("pareto-toggle");
-    toggle.addEventListener("click",()=>{
+  const paretoBtn=document.getElementById("pareto-toggle");
+  if(paretoBtn){
+    paretoBtn.addEventListener("click",()=>{
       paretoOnly=!paretoOnly;
-      toggle.classList.toggle("active",paretoOnly);
-      toggle.setAttribute("aria-pressed",String(paretoOnly));
+      paretoBtn.classList.toggle("active",paretoOnly);
+      paretoBtn.setAttribute("aria-pressed",String(paretoOnly));
+      page=0;filterAndRender();
+    });
+  }
+  const freeBtn=document.getElementById("free-toggle");
+  if(freeBtn){
+    freeBtn.addEventListener("click",()=>{
+      freeOnly=!freeOnly;
+      freeBtn.classList.toggle("active",freeOnly);
+      freeBtn.setAttribute("aria-pressed",String(freeOnly));
       page=0;filterAndRender();
     });
   }
@@ -171,7 +180,8 @@ function filterAndRender(){
       if(!h.includes(q))return false;
     }
     if(hF&&r[FILTER_FIELD]!==hF)return false;
-    if(IS_FREE_TAB&&paretoOnly&&!r.pareto)return false;
+    if(paretoOnly&&!r.pareto)return false;
+    if(freeOnly&&!r.has_free_api)return false;
     return true;
   });
   if(sortCol){
@@ -214,6 +224,7 @@ function renderRows(){
       const g=colGroup(col);if(g)td.classList.add("gp-"+g);
       if(TXT_COLS.has(col))td.classList.add("text-col");
       if(v==null||v==="")td.textContent="";
+      else if(col==="pareto"||col==="has_free_api")td.textContent=v?"Yes":"";
       else if(typeof v==="number")td.textContent=fmtNum(v,col);
       else td.textContent=v;
       tr.appendChild(td);

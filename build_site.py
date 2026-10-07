@@ -10,6 +10,7 @@ import hashlib
 from html import escape
 import json
 from pathlib import Path
+import re
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data" / "site_data.json"
@@ -83,6 +84,143 @@ TAB_PRESENTATION = {
 }
 
 
+# Score field per main tab for the Pareto keep-rule: rows are ordered by
+# score_per_minute desc and a row is kept only when its score exceeds every
+# faster row's score (same rule as the free_models tab).
+PARETO_SCORE_FIELD = {
+    "agents": "index_score",
+    "models": "intelligence_index",
+    "models_full": "intelligenceIndex",
+}
+MAIN_TABS = ("agents", "models", "models_full")
+
+# Effort suffixes that may trail a leaderboard slug without changing the base
+# model identity (e.g. gemini-3-8-flash-high -> gemini-3-8-flash).
+EFFORT_SUFFIXES = ("low", "medium", "high", "xhigh", "max", "minimal", "lite",
+                   "reasoning", "non-reasoning")
+
+
+def _slugify(text: str) -> str:
+    return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", text.lower())).strip("-")
+
+
+def _strip_effort(slug: str) -> str:
+    parts = slug.split("-")
+    while len(parts) > 1 and parts[-1] in EFFORT_SUFFIXES:
+        parts.pop()
+    return "-".join(parts)
+
+
+def _agent_base_slug(model: str) -> str:
+    base = (model or "").split("+")[0]
+    base = re.sub(r"\(.*?\)", "", base)
+    return _slugify(base)
+
+
+def _free_lookup() -> tuple[dict, dict]:
+    """Return (slug -> providers string, base slug -> providers string)."""
+    inventory = json.loads(FREE_MODELS.read_text())
+    slug_providers = {}
+    base_providers: dict[str, set] = {}
+    for slug, sources in inventory.get("models", {}).items():
+        provs = ", ".join(source["provider"] for source in sources)
+        slug_providers[slug] = provs
+        for provider in provs.split(", "):
+            base_providers.setdefault(_strip_effort(slug), set()).add(provider)
+    base_joined = {base: ", ".join(sorted(p)) for base, p in base_providers.items()}
+    return slug_providers, base_joined
+
+
+def _agent_free_match(base_slug: str, slug_providers: dict, base_providers: dict) -> str:
+    """Return provider string for an agents-table model, else ""."""
+    if not base_slug:
+        return ""
+    if base_slug in slug_providers:
+        return slug_providers[base_slug]
+    stripped = _strip_effort(base_slug)
+    if stripped in slug_providers:
+        return slug_providers[stripped]
+    if base_slug in base_providers:
+        return base_providers[base_slug]
+    return base_providers.get(stripped, "")
+
+
+def _pareto_flags(rows: list, score_field: str) -> list:
+    """Keep-rule shared with free_tab: order by score_per_minute desc, keep a
+    row only when its score exceeds every faster row's score."""
+    def key(item):
+        _i, r = item
+        spm = r.get("score_per_minute")
+        tie = str(r.get("slug") or r.get("model") or _i)
+        return (spm is None, -(spm or 0), tie)
+
+    flags: dict = {}
+    best = float("-inf")
+    for i, r in sorted(enumerate(rows), key=key):
+        spm = r.get("score_per_minute")
+        score = r.get(score_field)
+        keep = bool(spm) and score is not None and score > best
+        flags[i] = keep
+        if keep:
+            best = score
+    return [flags[i] for i in range(len(rows))]
+
+
+def enrich_main_tabs(payload: dict) -> dict:
+    """Add pareto / has_free_api / free_access to agents, models, models_full.
+
+    Runs at build time on the in-memory payload (site_data.json on disk is
+    unchanged). The agents tab has no slug, so models are matched by slugified
+    base name against the verified free inventory.
+    """
+    slug_providers, base_providers = _free_lookup()
+    for tab in payload.get("tabs", []):
+        tid = tab.get("id")
+        if tid not in MAIN_TABS:
+            continue
+        block = tab["data"]
+        rows = block["rows"]
+        score_field = PARETO_SCORE_FIELD[tid]
+        flags = _pareto_flags(rows, score_field)
+        for row, pareto in zip(rows, flags):
+            row["pareto"] = pareto
+            if tid == "agents":
+                match = _agent_free_match(_agent_base_slug(row.get("model") or ""),
+                                          slug_providers, base_providers)
+                row["free_access"] = match
+                row["has_free_api"] = bool(match)
+            else:
+                slug = row.get("slug")
+                provs = slug_providers.get(slug, "")
+                row["free_access"] = provs
+                row["has_free_api"] = slug in slug_providers
+        for col in ("pareto", "has_free_api", "free_access"):
+            if col not in block["columns"]:
+                block["columns"].append(col)
+        block["labels"].setdefault("pareto", "Pareto")
+        block["labels"].setdefault("has_free_api", "Free API")
+        block["labels"].setdefault("free_access", "Free base-model API")
+        block["highlights"].setdefault("pareto", "higher")
+        block["highlights"].setdefault("has_free_api", "higher")
+        groups = block.setdefault("col_groups", {})
+        for cols in groups.values():
+            for col in ("pareto", "has_free_api", "free_access"):
+                if col in cols:
+                    cols.remove(col)
+        score_group = next((g for g, cols in groups.items()
+                            if "score_per_minute" in cols), None)
+        if score_group is not None:
+            cols = groups[score_group]
+            cols.insert(cols.index("score_per_minute") + 1, "pareto")
+        elif groups:
+            next(iter(groups.values())).append("pareto")
+        if "identity" in groups:
+            groups["identity"].extend(["has_free_api", "free_access"])
+        else:
+            groups.setdefault("identity", []).extend(["has_free_api", "free_access"])
+    return payload
+
+
 def free_tab(index_block: dict) -> tuple[dict, str]:
     inventory = json.loads(FREE_MODELS.read_text())
     known = {row["slug"]: row for row in index_block["rows"]}
@@ -139,6 +277,8 @@ def free_tab(index_block: dict) -> tuple[dict, str]:
 def _render(tab_id: str, block: dict, payload: dict, free_notice: str = "") -> Path:
     pres = TAB_PRESENTATION.get(tab_id, TAB_PRESENTATION["models"])
     html = TEMPLATE.read_text()
+    has_pareto = "pareto" in block.get("columns", [])
+    has_free = "has_free_api" in block.get("columns", [])
 
     nav_links = []
     for other in payload["tabs"]:
@@ -172,6 +312,16 @@ def _render(tab_id: str, block: dict, payload: dict, free_notice: str = "") -> P
     # reused when the data is unchanged. Prevents stale data.js on mobile.
     js_hash = hashlib.sha1(js_text.encode()).hexdigest()[:8]
 
+    if free_notice:
+        pareto_controls = ""
+        free_controls = ('<button id="pareto-toggle" aria-pressed="false">'
+                         "Pareto only</button>")
+    else:
+        pareto_controls = ('<button id="pareto-toggle" aria-pressed="false">'
+                           "Pareto only</button>") if has_pareto else ""
+        free_controls = ('<button id="free-toggle" aria-pressed="false">'
+                         "Free API only</button>") if has_free else ""
+
     replace = {
         "__TITLE__": pres["title"],
         "__ENTITY_LABEL__": json.dumps(pres["entity"]),
@@ -183,7 +333,8 @@ def _render(tab_id: str, block: dict, payload: dict, free_notice: str = "") -> P
         "__FOOTER_URL__": pres["footer_url"],
         "__SORT_BUTTONS__": sort_btns_html,
         "__SORT_ACTIONS__": sort_actions,
-        "__FREE_CONTROLS__": '<button id="pareto-toggle" aria-pressed="false">Pareto only</button>' if free_notice else "",
+        "__PARETO_CONTROLS__": pareto_controls,
+        "__FREE_CONTROLS__": free_controls,
         "__FREE_NOTICE__": free_notice,
         "__IS_FREE_TAB__": "true" if free_notice else "false",
         "__SCRIPT_SRC__": f"{tab_id}.data.js?v={js_hash}",
@@ -204,6 +355,7 @@ def _render(tab_id: str, block: dict, payload: dict, free_notice: str = "") -> P
 def build():
     SITE_DIR.mkdir(exist_ok=True)
     payload = json.loads(DATA.read_text())
+    payload = enrich_main_tabs(payload)
     index = next(tab["data"] for tab in payload["tabs"] if tab["id"] == "models_full")
     free_block, free_notice = free_tab(index)
     payload["tabs"].append({"id": "free_models", "data": free_block})
