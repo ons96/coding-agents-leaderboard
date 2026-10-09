@@ -31,7 +31,7 @@ TAB_PRESENTATION = {
         "filter_placeholder": "Search harness, model, creator...",
         "footer_url": "https://artificialanalysis.ai/agents/coding-agents",
         "sort_buttons": [
-            ("Score / min", "score_per_minute"),
+            ("Score/min", "score_per_minute"),
             ("Cost vs Score", "score_per_cost"),
             ("Token Efficiency", "token_efficiency"),
         ],
@@ -47,8 +47,8 @@ TAB_PRESENTATION = {
         "filter_placeholder": "Search model, creator...",
         "footer_url": "https://artificialanalysis.ai/models/capabilities/agentic",
         "sort_buttons": [
-            ("Score / min", "score_per_minute"),
-            ("Score / $", "score_per_cost"),
+            ("Score/min", "score_per_minute"),
+            ("Score/$", "score_per_cost"),
             ("Output Tok/s", "tokens_per_sec"),
         ],
         "default_sort": "score_per_minute",
