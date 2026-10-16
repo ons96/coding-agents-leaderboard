@@ -81,6 +81,14 @@ TAB_PRESENTATION = {
         "sort_buttons": [("Score/min", "score_per_minute"), ("Score", "intelligenceIndex")],
         "default_sort": "score_per_minute",
     },
+    "search_apis": {
+        "title": "Search APIs Leaderboard", "nav_label": "Search APIs", "entity": "Search API products",
+        "txt_cols": ["provider"], "filter_id": "provider-filter", "filter_field": "provider",
+        "filter_placeholder": "Search providers and products...",
+        "footer_url": "https://artificialanalysis.ai/agents/search-api",
+        "sort_buttons": [("Search Index", "artificial_analysis_search_index"), ("Time/Task", "time_per_task_seconds"), ("Search Cost", "search_cost_usd_per_1000_tasks")],
+        "default_sort": "artificial_analysis_search_index",
+    },
 }
 
 

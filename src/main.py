@@ -9,6 +9,7 @@ from .agentic_scraper import parse_models
 from .formatter import save_agentic_outputs, save_outputs
 from .logger import setup_logger
 from .scraper import fetch_html, parse_agents
+from .api_scraper import all_provider_url, discover_provider_ids, parse_search_api_page, SEARCH_COLUMNS
 
 logger = setup_logger()
 
@@ -59,6 +60,8 @@ def _backfill_models_from_index(df: pd.DataFrame) -> pd.DataFrame:
 
 def run(config: dict | None = None) -> dict:
     config = config or load_config()
+    site_path = Path(config["output_dir"]) / "site_data.json"
+    prior_search_tab = _load_search_api_tab(site_path)
     url = config["target_url"]
     logger.info(f"Fetching {url}")
     html = fetch_html(
@@ -140,6 +143,34 @@ def run(config: dict | None = None) -> dict:
                 cstr = f" | $/task={c:.2f}" if isinstance(c, (int, float)) else ""
                 tstr = f" | t={t:.0f}s" if isinstance(t, (int, float)) else ""
                 print(f"  {name:42s} | idx={idx:.2f}{cstr}{tstr}")
+    # Search APIs tab: best effort, with strict validation and last-known-good
+    # preservation.  This runs after the normal formatter has written the
+    # unified payload, so a transient source failure cannot blank other tabs.
+    search_url = all_provider_url(config["search_api_target_url"]) if config.get("search_api_target_url") else None
+    if search_url:
+        logger.info(f"Fetching {search_url}")
+        s_html = fetch_html(config["search_api_target_url"], timeout=config["request_timeout_seconds"],
+                            retries=config["request_retries"], backoff=config["request_backoff_seconds"],
+                            user_agent=config["user_agent"])
+        if s_html:
+            try:
+                provider_ids = discover_provider_ids(s_html)
+                if len(provider_ids) > 13:
+                    search_url = all_provider_url(config["search_api_target_url"], provider_ids)
+                    s_html = fetch_html(search_url, timeout=config["request_timeout_seconds"],
+                                        retries=config["request_retries"], backoff=config["request_backoff_seconds"],
+                                        user_agent=config["user_agent"])
+                if not s_html:
+                    raise ValueError("expanded Search API provider fetch failed")
+                parsed = parse_search_api_page(s_html, search_url)
+                _merge_search_api_tab(Path(config["output_dir"]) / "site_data.json", parsed)
+                logger.info("Search APIs tab updated with %d rows", len(parsed["rows"]))
+            except (ValueError, TypeError) as exc:
+                logger.warning("Search APIs scrape rejected; retaining last-known-good data: %s", exc)
+        else:
+            logger.warning("Search APIs fetch failed; retaining last-known-good data")
+    if prior_search_tab and not _load_search_api_tab(site_path):
+        _restore_search_api_tab(site_path, prior_search_tab)
     # Full intelligence index (630 models) extraction
     # This runs the separate intelligence extractor and tab builder
     # to ensure the site includes the full intelligence index dataset.
@@ -158,6 +189,49 @@ def run(config: dict | None = None) -> dict:
     else:
         logger.warning("Full intelligence index scripts not found; skipping full index tab")
     return meta
+
+
+def _merge_search_api_tab(path: Path, parsed: dict) -> None:
+    """Validate and merge a typed Search APIs block into site_data.json."""
+    import json
+    payload = json.loads(path.read_text())
+    rows = parsed["rows"]
+    labels = {"provider": "Provider", "artificial_analysis_search_index": "Search Index",
+              "baseline_lift": "Baseline Lift", "deepsearchqa_f1": "DeepSearchQA F1",
+              "browsecomp_accuracy": "BrowseComp Accuracy", "omniscience_accuracy": "Omniscience Accuracy",
+              "search_cost_usd_per_1000_tasks": "Search $/1k Tasks", "model_cost_usd_per_1000_tasks": "Model $/1k Tasks",
+              "time_per_task_seconds": "Time/Task (s)"}
+    block = {"columns": SEARCH_COLUMNS, "labels": labels,
+             "highlights": {"artificial_analysis_search_index": "higher", "baseline_lift": "higher",
+                            "deepsearchqa_f1": "higher", "browsecomp_accuracy": "higher", "omniscience_accuracy": "higher",
+                            "search_cost_usd_per_1000_tasks": "lower", "model_cost_usd_per_1000_tasks": "lower",
+                            "time_per_task_seconds": "lower"},
+             "col_groups": {"identity": ["provider"], "quality": SEARCH_COLUMNS[1:6], "cost_speed": SEARCH_COLUMNS[6:]},
+             "group_order": ["identity", "quality", "cost_speed"],
+             "group_labels": {"identity": "Provider", "quality": "Quality", "cost_speed": "Cost & Speed"},
+             "meta": {**parsed["meta"], "pricing_evidence": "data/search_api_pricing.json"}, "rows": rows}
+    tabs = [t for t in payload.get("tabs", []) if t.get("id") != "search_apis"]
+    tabs.append({"id": "search_apis", "label": "Search APIs", "data": block})
+    path.write_text(json.dumps({"tabs": tabs}, indent=2))
+
+
+def _load_search_api_tab(path: Path):
+    import json
+    if not path.exists():
+        return None
+    try:
+        return next((t for t in json.loads(path.read_text()).get("tabs", [])
+                     if t.get("id") == "search_apis"), None)
+    except (OSError, ValueError, TypeError):
+        return None
+
+
+def _restore_search_api_tab(path: Path, tab: dict) -> None:
+    import json
+    payload = json.loads(path.read_text())
+    tabs = [t for t in payload.get("tabs", []) if t.get("id") != "search_apis"]
+    tabs.append(tab)
+    path.write_text(json.dumps({"tabs": tabs}, indent=2))
 
 
 if __name__ == "__main__":

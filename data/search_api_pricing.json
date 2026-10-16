@@ -1,0 +1,19 @@
+{
+  "checked_date": "2026-10-16",
+  "notice": "Access labels describe the observed offer at the checked date; no label claims permanent free access.",
+  "providers": {
+    "Brave": {"free_access": "recurring free quota", "url": "https://brave.com/search/api/"},
+    "Exa": {"free_access": "trial credits", "url": "https://exa.ai/pricing"},
+    "Firecrawl": {"free_access": "recurring credits", "url": "https://www.firecrawl.dev/pricing"},
+    "Keenable": {"free_access": "unknown", "url": "https://keenable.ai/"},
+    "Linkup": {"free_access": "trial credits", "url": "https://www.linkup.so/pricing"},
+    "Nimble": {"free_access": "trial credits", "url": "https://www.nimbleway.com/pricing"},
+    "Octen": {"free_access": "unknown", "url": "https://octen.ai/"},
+    "OpenAI": {"free_access": "paid only", "url": "https://openai.com/api/pricing/"},
+    "Parallel": {"free_access": "trial credits", "url": "https://parallel.ai/pricing"},
+    "Perplexity": {"free_access": "paid only", "url": "https://www.perplexity.ai/api"},
+    "Tavily": {"free_access": "recurring free quota", "url": "https://www.tavily.com/pricing"},
+    "TinyFish": {"free_access": "unknown", "url": "https://www.tinyfish.ai/"},
+    "You.com": {"free_access": "trial credits", "url": "https://you.com/platform"}
+  }
+}

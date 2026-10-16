@@ -13,10 +13,11 @@ Modes:
   record - (run AFTER a successful scrape) write current live hashes to
            data/aa_source_hashes.json so the next check has a fresh baseline.
 
-Tracked pages (the 3 scrape inputs):
+Tracked pages (the scrape inputs):
   1. coding agents leaderboard (feeds agents tab)
   2. intelligence-index base page manifest (feeds models_full tab via full extract)
   3. agentic_target_url from config.yaml (feeds models tab; best-effort, may 404)
+  4. Search API leaderboard (feeds search_apis tab)
 
 Stdlib only. Usage:
   python check_aa_change.py --mode check
@@ -38,6 +39,7 @@ UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/1
 
 CODING_AGENTS_URL = "https://artificialanalysis.ai/agents/coding-agents"
 INTEL_INDEX_URL = "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index"
+SEARCH_API_URL = "https://artificialanalysis.ai/agents/search-api"
 
 
 def _agentic_url() -> str | None:
@@ -81,7 +83,7 @@ def _payload_hash(body: bytes) -> str:
 
 
 def live_hashes() -> dict[str, str | None]:
-    urls = [CODING_AGENTS_URL, INTEL_INDEX_URL]
+    urls = [CODING_AGENTS_URL, INTEL_INDEX_URL, SEARCH_API_URL]
     agentic = _agentic_url()
     if agentic and agentic not in urls:
         urls.append(agentic)
