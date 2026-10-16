@@ -31,7 +31,7 @@ TAB_PRESENTATION = {
         "filter_placeholder": "Search harness, model, creator...",
         "footer_url": "https://artificialanalysis.ai/agents/coding-agents",
         "sort_buttons": [
-            ("Score / min", "score_per_minute"),
+            ("Score/min", "score_per_minute"),
             ("Cost vs Score", "score_per_cost"),
             ("Token Efficiency", "token_efficiency"),
         ],
@@ -47,8 +47,8 @@ TAB_PRESENTATION = {
         "filter_placeholder": "Search model, creator...",
         "footer_url": "https://artificialanalysis.ai/models/capabilities/agentic",
         "sort_buttons": [
-            ("Score / min", "score_per_minute"),
-            ("Score / $", "score_per_cost"),
+            ("Score/min", "score_per_minute"),
+            ("Score/$", "score_per_cost"),
             ("Output Tok/s", "tokens_per_sec"),
         ],
         "default_sort": "score_per_minute",
@@ -80,6 +80,14 @@ TAB_PRESENTATION = {
         "footer_url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
         "sort_buttons": [("Score/min", "score_per_minute"), ("Score", "intelligenceIndex")],
         "default_sort": "score_per_minute",
+    },
+    "search_apis": {
+        "title": "Search APIs Leaderboard", "nav_label": "Search APIs", "entity": "Search API products",
+        "txt_cols": ["provider"], "filter_id": "provider-filter", "filter_field": "provider",
+        "filter_placeholder": "Search providers and products...",
+        "footer_url": "https://artificialanalysis.ai/agents/search-api",
+        "sort_buttons": [("Search Index", "artificial_analysis_search_index"), ("Time/Task", "time_per_task_seconds"), ("Search Cost", "search_cost_usd_per_1000_tasks")],
+        "default_sort": "artificial_analysis_search_index",
     },
 }
 

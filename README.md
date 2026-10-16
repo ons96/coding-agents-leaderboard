@@ -24,7 +24,19 @@ Two independent datasets are scraped and exported:
 Shared outputs:
 - `data/scrape_meta.json` / `data/site_data.json` (unified multi-tab payload)
 - `docs/` — static GitHub Pages site: `index.html` (agents) + `models.html`
-  (models), cross-linked with a nav bar.
+  (models), `search_apis.html` (Search API benchmark), cross-linked with a nav bar.
+
+### Search APIs
+
+The Search APIs tab extracts the 26 provider records from the embedded Next.js
+RSC payload, with the semantic public leaderboard table as a validated fallback.
+It rejects missing schemas, duplicate providers, or incomplete provider sets
+before writing. A failed fetch retains the committed
+last-known-good tab. Search/API costs are measured separately from model costs;
+access labels and official pricing evidence are recorded in
+`data/search_api_pricing.json`, with the checked date. Labels such as recurring
+free quota, trial credits, and paid only are observations as of that date, not
+claims that access is permanent.
 
 ### Free hosted base models
 

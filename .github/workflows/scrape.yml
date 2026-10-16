@@ -37,7 +37,7 @@ jobs:
 
   scrape:
     needs: check
-    if: needs.check.outputs.changed == 'true' || inputs.force_full == true
+    if: github.event_name == 'schedule' || needs.check.outputs.changed == 'true' || inputs.force_full == true
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -77,7 +77,7 @@ jobs:
         run: |
           python - <<'PY'
           import re, pathlib
-          for f in ("docs/index.html", "docs/models.html", "docs/models_full.html", "docs/free_models.html"):
+          for f in ("docs/index.html", "docs/models.html", "docs/models_full.html", "docs/free_models.html", "docs/search_apis.html"):
               html = pathlib.Path(f).read_text()
               scripts = re.findall(r"<script>(.*?)</script>", html, re.DOTALL)
               if not scripts:
@@ -86,6 +86,7 @@ jobs:
               print(f"{f}: extracted inline script {len(scripts[-1])} bytes")
           PY
           node --check /tmp/site_check.js
+          for f in docs/*.data.js; do node --check "$f"; done
 
       - name: Check for changes
         id: changes

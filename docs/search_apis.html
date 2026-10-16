@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search APIs Leaderboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:13px;background:#f8f9fa;color:#212529}
+.header{background:#1a1a2e;color:#fff;padding:16px 24px;position:sticky;top:0;z-index:100}
+.header h1{font-size:18px;font-weight:600;display:inline-block}
+.header .meta{font-size:11px;color:#adb5bd;margin-top:4px}
+.nav{float:right;font-size:12px;margin-top:2px}
+.nav a{color:#8ecae6;text-decoration:none;margin-left:12px}
+.nav a:hover{text-decoration:underline}
+.controls{background:#fff;border-bottom:1px solid #dee2e6;padding:8px 24px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;position:sticky;top:56px;z-index:99}
+.controls input{padding:6px 10px;border:1px solid #ced4da;border-radius:4px;font-size:13px;width:280px}
+.controls select{padding:6px 8px;border:1px solid #ced4da;border-radius:4px;font-size:13px}
+.controls button{padding:6px 12px;border:1px solid #ced4da;border-radius:4px;background:#fff;cursor:pointer;font-size:13px}
+.controls button.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+.group-toggles{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+.table-wrap{overflow:auto;max-height:calc(100vh - 110px)}
+table{width:100%;border-collapse:collapse;white-space:nowrap}
+thead th{background:#e9ecef;padding:6px 10px;text-align:right;font-weight:600;font-size:12px;border-bottom:2px solid #dee2e6;cursor:pointer;user-select:none;position:sticky;top:0;z-index:10}
+thead th.asc::after{content:" \25B2";font-size:10px}
+thead th.desc::after{content:" \25BC";font-size:10px}
+thead th.text-col{text-align:left}
+tbody td{padding:4px 10px;text-align:right;border-bottom:1px solid #f1f3f5;font-variant-numeric:tabular-nums}
+tbody td.text-col{text-align:left}
+tbody tr:hover{background:#e7f5ff}
+.gp-identity{background:#e8f4f8}.gp-core{background:#ffe8cc}.gp-cost_time{background:#fff9db}.gp-derived{background:#d3f9d8}
+.paging{padding:8px 24px;background:#fff;border-top:1px solid #dee2e6;display:flex;justify-content:space-between;align-items:center;font-size:12px}
+.paging button{padding:4px 10px;border:1px solid #ced4da;border-radius:4px;background:#fff;cursor:pointer}
+.footer{text-align:center;padding:8px;font-size:11px;color:#868e96;background:#f1f3f5}
+.footer a{color:#1a1a2e}
+.notice{background:#fffbe6;padding:10px 24px;line-height:1.5;border-bottom:1px solid #e6dca6}
+.notice details{margin-top:6px}.notice li{margin:4px 0 4px 20px}.notice a{color:#174d7a}
+</style>
+</head>
+<body>
+<div class="header">
+<div class="nav"><a class="nav-link" href="index.html">Coding Agents</a> | <a class="nav-link" href="models.html">Agentic Models</a> | <a class="nav-link" href="models_full.html">Intelligence Index (All)</a> | <a class="nav-link" href="free_models.html">Free Hosted Models</a></div>
+<h1>Search APIs Leaderboard</h1>
+<div class="meta" id="meta-info">Loading...</div>
+</div>
+
+<div class="controls">
+<input type="text" id="search" placeholder="Search providers and products...">
+<select id="provider-filter"><option value="">All</option></select>
+<button id="btn-reset">Reset</button>
+<button id="sb-0" class="sort-btn">Search Index</button><button id="sb-1" class="sort-btn">Time/Task</button><button id="sb-2" class="sort-btn">Search Cost</button>
+
+
+<div class="group-toggles" id="group-toggles"></div>
+</div>
+<div class="table-wrap">
+<table><thead id="thead"></thead><tbody id="tbody"></tbody></table>
+</div>
+<div class="paging" id="paging"></div>
+<div class="footer">
+Data from <a href="https://artificialanalysis.ai/agents/search-api">artificialanalysis.ai</a> |
+Updated: <span id="update-date">-</span>
+</div>
+<script src="search_apis.data.js?v=88c1b1c8"></script>
+<script>
+const PS=100;
+let filtered=[...TABLE_DATA],sortCol="artificial_analysis_search_index",sortDir=1,hiddenGroups=new Set(),page=0;
+const TXT_COLS=new Set(["provider"]);
+const FILTER_FIELD="provider";
+const SORT_ACTIONS=[
+["sb-0", "artificial_analysis_search_index"],
+["sb-1", "time_per_task_seconds"],
+["sb-2", "search_cost_usd_per_1000_tasks"]
+];
+const IS_FREE_TAB=false;
+let paretoOnly=false,freeOnly=false;
+
+function init(){
+  const scrapeDay=META.scrape_date?META.scrape_date.slice(0,10):"";
+  document.getElementById("meta-info").textContent=META.row_count+" "+"Search API products"+" | "+(scrapeDay||"artificialanalysis.ai");
+  document.getElementById("update-date").textContent=scrapeDay||"—";
+  const hf=document.getElementById("provider-filter");
+  [...new Set(TABLE_DATA.map(r=>r[FILTER_FIELD]).filter(Boolean))].sort().forEach(h=>{
+    const o=document.createElement("option");o.value=h;o.textContent=h;hf.appendChild(o);
+  });
+  buildGroupToggles();
+  if(!COLUMNS.includes(sortCol))sortCol=null;
+  if(sortCol)sortDir=HIGHLIGHTS[sortCol]==="lower"?1:-1;
+  document.getElementById("search").addEventListener("input",debounce(filterAndRender,200));
+  document.getElementById("provider-filter").addEventListener("change",filterAndRender);
+  document.getElementById("btn-reset").addEventListener("click",()=>{
+    document.getElementById("search").value="";
+    paretoOnly=false;freeOnly=false;
+    for(const id of ["pareto-toggle","free-toggle"]){
+      const toggle=document.getElementById(id);
+      if(toggle){toggle.classList.remove("active");toggle.setAttribute("aria-pressed","false");}
+    }
+    document.getElementById("provider-filter").value="";
+    hiddenGroups.clear();
+    document.querySelectorAll(".grp-btn").forEach(b=>b.classList.add("active"));
+    sortCol=COLUMNS.includes("artificial_analysis_search_index")?"artificial_analysis_search_index":null;
+    sortDir=(sortCol&&HIGHLIGHTS[sortCol]==="lower")?1:-1;
+    page=0;filterAndRender();
+  });
+  SORT_ACTIONS.forEach(([id,col])=>{
+    document.getElementById(id).addEventListener("click",()=>sortBy(col,"higher"));
+  });
+  const paretoBtn=document.getElementById("pareto-toggle");
+  if(paretoBtn){
+    paretoBtn.addEventListener("click",()=>{
+      paretoOnly=!paretoOnly;
+      paretoBtn.classList.toggle("active",paretoOnly);
+      paretoBtn.setAttribute("aria-pressed",String(paretoOnly));
+      page=0;filterAndRender();
+    });
+  }
+  const freeBtn=document.getElementById("free-toggle");
+  if(freeBtn){
+    freeBtn.addEventListener("click",()=>{
+      freeOnly=!freeOnly;
+      freeBtn.classList.toggle("active",freeOnly);
+      freeBtn.setAttribute("aria-pressed",String(freeOnly));
+      page=0;filterAndRender();
+    });
+  }
+  filterAndRender();
+}
+
+function debounce(fn,ms){let t;return()=>{clearTimeout(t);t=setTimeout(fn,ms)}}
+function sortBy(col,dir){sortCol=col;sortDir=HIGHLIGHTS[col]==="lower"?1:-1;page=0;filterAndRender();}
+
+function buildGroupToggles(){
+  const el=document.getElementById("group-toggles");
+  GROUP_ORDER.forEach(g=>{
+    const b=document.createElement("button");b.className="grp-btn active";
+    b.textContent=GROUP_LABELS[g];b.dataset.group=g;
+    b.addEventListener("click",()=>{
+      if(hiddenGroups.has(g)){hiddenGroups.delete(g);b.classList.add("active")}
+      else{hiddenGroups.add(g);b.classList.remove("active")}
+      buildHeader();renderRows();
+    });
+    el.appendChild(b);
+  });
+}
+
+
+function visibleCols(){
+  return COLUMNS.filter(c=>{
+    const g=GROUP_ORDER.find(gk=>COL_GROUPS[gk]&&COL_GROUPS[gk].includes(c));
+    return !g||!hiddenGroups.has(g);
+  });
+}
+function colGroup(col){return GROUP_ORDER.find(g=>COL_GROUPS[g]&&COL_GROUPS[g].includes(col))||"";}
+
+function buildHeader(){
+  const thead=document.getElementById("thead");thead.innerHTML="";
+  const tr=document.createElement("tr");
+  visibleCols().forEach(col=>{
+    const th=document.createElement("th");
+    th.textContent=LABELS[col]||col;th.dataset.col=col;
+    const g=colGroup(col);if(g)th.classList.add("gp-"+g);
+    if(TXT_COLS.has(col))th.classList.add("text-col");
+    if(sortCol===col)th.classList.add(sortDir===1?"asc":"desc");
+    th.addEventListener("click",()=>{
+      if(sortCol===col)sortDir*=-1;
+      else{sortCol=col;sortDir=HIGHLIGHTS[col]==="lower"?1:-1}
+      page=0;filterAndRender();
+    });
+    tr.appendChild(th);
+  });
+  thead.appendChild(tr);
+}
+
+function filterAndRender(){
+  const q=document.getElementById("search").value.toLowerCase();
+  const hF=document.getElementById("provider-filter").value;
+  filtered=TABLE_DATA.filter(r=>{
+    if(q){
+      const h=[...TXT_COLS].map(c=>r[c]).filter(Boolean).join(" ").toLowerCase();
+      if(!h.includes(q))return false;
+    }
+    if(hF&&r[FILTER_FIELD]!==hF)return false;
+    if(paretoOnly&&!r.pareto)return false;
+    if(freeOnly&&!r.has_free_api)return false;
+    return true;
+  });
+  if(sortCol){
+    filtered.sort((a,b)=>{
+      let va=a[sortCol],vb=b[sortCol];
+      if(va==null&&vb==null)return 0;if(va==null)return 1;if(vb==null)return-1;
+      if(typeof va==="string")return va.localeCompare(vb)*sortDir;
+      return(va-vb)*sortDir;
+    });
+  }
+  buildHeader();renderRows();
+}
+
+function fmtNum(v,col){
+  if(col==="total_tokens"||col==="input_tokens"||col==="output_tokens"){
+    return v>=1e6?(v/1e6).toFixed(2)+"M":v>=1e3?(v/1e3).toFixed(1)+"k":(""+v);
+  }
+  if(col.includes("cost")||(LABELS[col]||"").includes("$")||col==="cost_per_score"){
+    return v<0.001?v.toFixed(6):v<0.1?v.toFixed(4):v.toFixed(2);
+  }
+  if(col.includes("rate"))return (v*100).toFixed(1)+"%";
+  const a=Math.abs(v);
+  if(a<1){
+    // Tiny ratio/metric values: use adaptive significant figures so values
+    // like score_per_1000_tokens (~1e-5) don't collapse to "0.0000".
+    if(a<1e-4)return "~"+v.toFixed(7);
+    let dec=4;while(a<Math.pow(10,-dec)&&dec<9)dec++;
+    return v.toFixed(dec);
+  }
+  if(a<100)return v.toFixed(3);return v.toFixed(2);
+}
+
+function renderRows(){
+  const cols=visibleCols(),tbody=document.getElementById("tbody");tbody.innerHTML="";
+  const start=page*PS,slice=filtered.slice(start,start+PS);
+  slice.forEach(r=>{
+    const tr=document.createElement("tr");
+    cols.forEach(col=>{
+      const td=document.createElement("td");const v=r[col];
+      const g=colGroup(col);if(g)td.classList.add("gp-"+g);
+      if(TXT_COLS.has(col))td.classList.add("text-col");
+      if(v==null||v==="")td.textContent="";
+      else if(col==="pareto"||col==="has_free_api")td.textContent=v?"Yes":"";
+      else if(typeof v==="number")td.textContent=fmtNum(v,col);
+      else td.textContent=v;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  const pEl=document.getElementById("paging"),total=filtered.length;
+  const pages=Math.ceil(total/PS)||1;
+  pEl.innerHTML='<span>'+total+' '+"Search API products"+'</span><span>Page '+(page+1)+'/'+pages+'</span><span>'+
+    '<button onclick="page=Math.max(0,page-1);renderRows()">Prev</button> '+
+    '<button onclick="page=Math.min('+(pages-1)+',page+1);renderRows()">Next</button></span>';
+}
+init();
+</script>
+</body>
+</html>
