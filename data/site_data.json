@@ -14836,7 +14836,8 @@
           "omniscience_accuracy",
           "search_cost_usd_per_1000_tasks",
           "model_cost_usd_per_1000_tasks",
-          "time_per_task_seconds"
+          "time_per_task_seconds",
+          "search_index_per_second"
         ],
         "labels": {
           "provider": "Provider",
@@ -14847,7 +14848,8 @@
           "omniscience_accuracy": "Omniscience Accuracy",
           "search_cost_usd_per_1000_tasks": "Search $/1k Tasks",
           "model_cost_usd_per_1000_tasks": "Model $/1k Tasks",
-          "time_per_task_seconds": "Time/Task (s)"
+          "time_per_task_seconds": "Time/Task (s)",
+          "search_index_per_second": "Search Index / Time (per s)"
         },
         "highlights": {
           "artificial_analysis_search_index": "higher",
@@ -14857,7 +14859,8 @@
           "omniscience_accuracy": "higher",
           "search_cost_usd_per_1000_tasks": "lower",
           "model_cost_usd_per_1000_tasks": "lower",
-          "time_per_task_seconds": "lower"
+          "time_per_task_seconds": "lower",
+          "search_index_per_second": "higher"
         },
         "col_groups": {
           "identity": [
@@ -14873,7 +14876,8 @@
           "cost_speed": [
             "search_cost_usd_per_1000_tasks",
             "model_cost_usd_per_1000_tasks",
-            "time_per_task_seconds"
+            "time_per_task_seconds",
+            "search_index_per_second"
           ]
         },
         "group_order": [
@@ -14905,7 +14909,8 @@
             "omniscience_accuracy": 72.16666666666667,
             "search_cost_usd_per_1000_tasks": 62.30370370370371,
             "model_cost_usd_per_1000_tasks": 8.039766822222225,
-            "time_per_task_seconds": 26.764743290111085
+            "time_per_task_seconds": 26.764743290111085,
+            "search_index_per_second": 2.988173740668986
           },
           {
             "provider": "perplexity-high-gpt-5-6-luna-medium-search-api",
@@ -14916,7 +14921,8 @@
             "omniscience_accuracy": 70.83333333333334,
             "search_cost_usd_per_1000_tasks": 56.925000000000004,
             "model_cost_usd_per_1000_tasks": 9.715684203703706,
-            "time_per_task_seconds": 27.446511920626154
+            "time_per_task_seconds": 27.446511920626154,
+            "search_index_per_second": 2.876329029946082
           },
           {
             "provider": "octen-web-gpt-5-6-luna-medium-search-api",
@@ -14927,7 +14933,8 @@
             "omniscience_accuracy": 65.66666666666666,
             "search_cost_usd_per_1000_tasks": 9.06962962962963,
             "model_cost_usd_per_1000_tasks": 14.924446974074076,
-            "time_per_task_seconds": 15.14430474540424
+            "time_per_task_seconds": 15.14430474540424,
+            "search_index_per_second": 5.08815945634842
           },
           {
             "provider": "perplexity-low-gpt-5-6-luna-medium-search-api",
@@ -14938,7 +14945,8 @@
             "omniscience_accuracy": 70.16666666666667,
             "search_cost_usd_per_1000_tasks": 77.20281333086008,
             "model_cost_usd_per_1000_tasks": 7.90015834480925,
-            "time_per_task_seconds": 34.55212600925049
+            "time_per_task_seconds": 34.55212600925049,
+            "search_index_per_second": 2.2259016575889485
           },
           {
             "provider": "parallel_advanced-gpt-5-6-luna-medium-search-api",
@@ -14949,7 +14957,8 @@
             "omniscience_accuracy": 67.16666666666666,
             "search_cost_usd_per_1000_tasks": 47.92777777777778,
             "model_cost_usd_per_1000_tasks": 11.29386471851852,
-            "time_per_task_seconds": 40.545240459004944
+            "time_per_task_seconds": 40.545240459004944,
+            "search_index_per_second": 1.8436334213291514
           },
           {
             "provider": "brave-llm-context-gpt-5-6-luna-medium-search-api",
@@ -14960,7 +14969,8 @@
             "omniscience_accuracy": 69.16666666666667,
             "search_cost_usd_per_1000_tasks": 61.9574074074074,
             "model_cost_usd_per_1000_tasks": 17.46245019259259,
-            "time_per_task_seconds": 21.805263473016637
+            "time_per_task_seconds": 21.805263473016637,
+            "search_index_per_second": 3.4213391361984757
           },
           {
             "provider": "openai-native-medium-gpt-5-6-luna-medium-search-api",
@@ -14971,7 +14981,8 @@
             "omniscience_accuracy": 72.0,
             "search_cost_usd_per_1000_tasks": 40.18518518518518,
             "model_cost_usd_per_1000_tasks": 9.402765962962963,
-            "time_per_task_seconds": 29.900318827181167
+            "time_per_task_seconds": 29.900318827181167,
+            "search_index_per_second": 2.488434442989795
           },
           {
             "provider": "you-com-highlights-gpt-5-6-luna-medium-search-api",
@@ -14982,7 +14993,8 @@
             "omniscience_accuracy": 69.0,
             "search_cost_usd_per_1000_tasks": 47.5400416161893,
             "model_cost_usd_per_1000_tasks": 19.578164539023764,
-            "time_per_task_seconds": 18.830979354855987
+            "time_per_task_seconds": 18.830979354855987,
+            "search_index_per_second": 3.9335959185016818
           },
           {
             "provider": "nimble-standard-gpt-5-6-luna-medium-search-api",
@@ -14993,7 +15005,8 @@
             "omniscience_accuracy": 70.83333333333334,
             "search_cost_usd_per_1000_tasks": 46.14259259259259,
             "model_cost_usd_per_1000_tasks": 19.565552018518524,
-            "time_per_task_seconds": 40.303154521185334
+            "time_per_task_seconds": 40.303154521185334,
+            "search_index_per_second": 1.8329637024918806
           },
           {
             "provider": "exa_auto-gpt-5-6-luna-medium-search-api",
@@ -15004,7 +15017,8 @@
             "omniscience_accuracy": 69.66666666666667,
             "search_cost_usd_per_1000_tasks": 65.56925925925925,
             "model_cost_usd_per_1000_tasks": 17.726270300000003,
-            "time_per_task_seconds": 30.896100380303757
+            "time_per_task_seconds": 30.896100380303757,
+            "search_index_per_second": 2.384024627226258
           },
           {
             "provider": "firecrawl_serp-gpt-5-6-luna-medium-search-api",
@@ -15015,7 +15029,8 @@
             "omniscience_accuracy": 72.83333333333334,
             "search_cost_usd_per_1000_tasks": 30.4766,
             "model_cost_usd_per_1000_tasks": 12.0928365,
-            "time_per_task_seconds": 60.46190900931154
+            "time_per_task_seconds": 60.46190900931154,
+            "search_index_per_second": 1.21548612037183
           },
           {
             "provider": "parallel_basic-gpt-5-6-luna-medium-search-api",
@@ -15026,7 +15041,8 @@
             "omniscience_accuracy": 67.5,
             "search_cost_usd_per_1000_tasks": 45.14351851851852,
             "model_cost_usd_per_1000_tasks": 21.64519292592592,
-            "time_per_task_seconds": 25.40561237903332
+            "time_per_task_seconds": 25.40561237903332,
+            "search_index_per_second": 2.8794229206566713
           },
           {
             "provider": "parallel-fast-gpt-5-6-luna-medium-search-api",
@@ -15037,7 +15053,8 @@
             "omniscience_accuracy": 67.5,
             "search_cost_usd_per_1000_tasks": 8.409847338194874,
             "model_cost_usd_per_1000_tasks": 18.960708815971575,
-            "time_per_task_seconds": 17.77681495955146
+            "time_per_task_seconds": 17.77681495955146,
+            "search_index_per_second": 4.111131537904751
           },
           {
             "provider": "tinyfish-web-gpt-5-6-luna-medium-search-api",
@@ -15048,7 +15065,8 @@
             "omniscience_accuracy": 71.33333333333334,
             "search_cost_usd_per_1000_tasks": 0,
             "model_cost_usd_per_1000_tasks": 9.3029002,
-            "time_per_task_seconds": 57.00000261133752
+            "time_per_task_seconds": 57.00000261133752,
+            "search_index_per_second": 1.2485438150910069
           },
           {
             "provider": "exa-instant-gpt-5-6-luna-medium-search-api",
@@ -15059,7 +15077,8 @@
             "omniscience_accuracy": 67.33333333333333,
             "search_cost_usd_per_1000_tasks": 72.2315291060745,
             "model_cost_usd_per_1000_tasks": 21.444644688353822,
-            "time_per_task_seconds": 18.09740702849806
+            "time_per_task_seconds": 18.09740702849806,
+            "search_index_per_second": 3.7820354969567904
           },
           {
             "provider": "exa_fast-gpt-5-6-luna-medium-search-api",
@@ -15070,7 +15089,8 @@
             "omniscience_accuracy": 69.0,
             "search_cost_usd_per_1000_tasks": 78.11222222222221,
             "model_cost_usd_per_1000_tasks": 21.271228218518523,
-            "time_per_task_seconds": 26.074514666815332
+            "time_per_task_seconds": 26.074514666815332,
+            "search_index_per_second": 2.622826628978809
           },
           {
             "provider": "linkup-standard-gpt-5-6-luna-medium-search-api",
@@ -15081,7 +15101,8 @@
             "omniscience_accuracy": 65.33333333333333,
             "search_cost_usd_per_1000_tasks": 61.14984550735385,
             "model_cost_usd_per_1000_tasks": 20.517438462143122,
-            "time_per_task_seconds": 36.77087888802973
+            "time_per_task_seconds": 36.77087888802973,
+            "search_index_per_second": 1.8561975658944925
           },
           {
             "provider": "linkup-fast-gpt-5-6-luna-medium-search-api",
@@ -15092,7 +15113,8 @@
             "omniscience_accuracy": 65.16666666666666,
             "search_cost_usd_per_1000_tasks": 61.321296296296296,
             "model_cost_usd_per_1000_tasks": 21.28405412962963,
-            "time_per_task_seconds": 29.72637107146315
+            "time_per_task_seconds": 29.72637107146315,
+            "search_index_per_second": 2.2885860235691045
           },
           {
             "provider": "you_com-gpt-5-6-luna-medium-search-api",
@@ -15103,7 +15125,8 @@
             "omniscience_accuracy": 65.5,
             "search_cost_usd_per_1000_tasks": 68.93286933927246,
             "model_cost_usd_per_1000_tasks": 15.503240526899287,
-            "time_per_task_seconds": 39.719682840814826
+            "time_per_task_seconds": 39.719682840814826,
+            "search_index_per_second": 1.7028041020556892
           },
           {
             "provider": "parallel_turbo-gpt-5-6-luna-medium-search-api",
@@ -15114,7 +15137,8 @@
             "omniscience_accuracy": 56.49999999999999,
             "search_cost_usd_per_1000_tasks": 13.637037037037038,
             "model_cost_usd_per_1000_tasks": 12.420288607407407,
-            "time_per_task_seconds": 24.295858196531114
+            "time_per_task_seconds": 24.295858196531114,
+            "search_index_per_second": 2.760697761042024
           },
           {
             "provider": "keenable_pro-gpt-5-6-luna-medium-search-api",
@@ -15125,7 +15149,8 @@
             "omniscience_accuracy": 65.33333333333333,
             "search_cost_usd_per_1000_tasks": 23.692222222222227,
             "model_cost_usd_per_1000_tasks": 19.045493707407413,
-            "time_per_task_seconds": 27.782359892126074
+            "time_per_task_seconds": 27.782359892126074,
+            "search_index_per_second": 2.4102044053912377
           },
           {
             "provider": "keenable_realtime-gpt-5-6-luna-medium-search-api",
@@ -15136,7 +15161,8 @@
             "omniscience_accuracy": 65.66666666666666,
             "search_cost_usd_per_1000_tasks": 26.873333333333335,
             "model_cost_usd_per_1000_tasks": 15.943590344444443,
-            "time_per_task_seconds": 19.984559967611418
+            "time_per_task_seconds": 19.984559967611418,
+            "search_index_per_second": 3.3288511212105236
           },
           {
             "provider": "nimble-lite-gpt-5-6-luna-medium-search-api",
@@ -15147,7 +15173,8 @@
             "omniscience_accuracy": 67.16666666666666,
             "search_cost_usd_per_1000_tasks": 20.712388888888892,
             "model_cost_usd_per_1000_tasks": 11.230828940740741,
-            "time_per_task_seconds": 51.55862677359778
+            "time_per_task_seconds": 51.55862677359778,
+            "search_index_per_second": 1.2765586478111401
           },
           {
             "provider": "tavily_basic-gpt-5-6-luna-medium-search-api",
@@ -15158,7 +15185,8 @@
             "omniscience_accuracy": 63.83333333333333,
             "search_cost_usd_per_1000_tasks": 126.44296296296298,
             "model_cost_usd_per_1000_tasks": 16.743088099999998,
-            "time_per_task_seconds": 42.86637114794621
+            "time_per_task_seconds": 42.86637114794621,
+            "search_index_per_second": 1.529582959523481
           },
           {
             "provider": "brave-gpt-5-6-luna-medium-search-api",
@@ -15169,7 +15197,8 @@
             "omniscience_accuracy": 64.5,
             "search_cost_usd_per_1000_tasks": 71.60740740740741,
             "model_cost_usd_per_1000_tasks": 19.109285614814823,
-            "time_per_task_seconds": 32.992373186604496
+            "time_per_task_seconds": 32.992373186604496,
+            "search_index_per_second": 1.957775589330718
           },
           {
             "provider": "linkup-flash-gpt-5-6-luna-medium-search-api",
@@ -15180,7 +15209,8 @@
             "omniscience_accuracy": 51.0,
             "search_cost_usd_per_1000_tasks": 82.8212962962963,
             "model_cost_usd_per_1000_tasks": 38.81186779259259,
-            "time_per_task_seconds": 24.718732670179524
+            "time_per_task_seconds": 24.718732670179524,
+            "search_index_per_second": 1.9017577427153436
           }
         ]
       }

@@ -48,7 +48,7 @@ tbody tr:hover{background:#e7f5ff}
 <input type="text" id="search" placeholder="Search providers and products...">
 <select id="provider-filter"><option value="">All</option></select>
 <button id="btn-reset">Reset</button>
-<button id="sb-0" class="sort-btn">Search Index</button><button id="sb-1" class="sort-btn">Time/Task</button><button id="sb-2" class="sort-btn">Search Cost</button>
+<button id="sb-0" class="sort-btn">Index / Time</button><button id="sb-1" class="sort-btn">Search Index</button><button id="sb-2" class="sort-btn">Time/Task</button><button id="sb-3" class="sort-btn">Search Cost</button>
 
 
 <div class="group-toggles" id="group-toggles"></div>
@@ -61,16 +61,17 @@ tbody tr:hover{background:#e7f5ff}
 Data from <a href="https://artificialanalysis.ai/agents/search-api">artificialanalysis.ai</a> |
 Updated: <span id="update-date">-</span>
 </div>
-<script src="search_apis.data.js?v=88c1b1c8"></script>
+<script src="search_apis.data.js?v=fcd5d6d2"></script>
 <script>
 const PS=100;
-let filtered=[...TABLE_DATA],sortCol="artificial_analysis_search_index",sortDir=1,hiddenGroups=new Set(),page=0;
+let filtered=[...TABLE_DATA],sortCol="search_index_per_second",sortDir=1,hiddenGroups=new Set(),page=0;
 const TXT_COLS=new Set(["provider"]);
 const FILTER_FIELD="provider";
 const SORT_ACTIONS=[
-["sb-0", "artificial_analysis_search_index"],
-["sb-1", "time_per_task_seconds"],
-["sb-2", "search_cost_usd_per_1000_tasks"]
+["sb-0", "search_index_per_second"],
+["sb-1", "artificial_analysis_search_index"],
+["sb-2", "time_per_task_seconds"],
+["sb-3", "search_cost_usd_per_1000_tasks"]
 ];
 const IS_FREE_TAB=false;
 let paretoOnly=false,freeOnly=false;
@@ -98,7 +99,7 @@ function init(){
     document.getElementById("provider-filter").value="";
     hiddenGroups.clear();
     document.querySelectorAll(".grp-btn").forEach(b=>b.classList.add("active"));
-    sortCol=COLUMNS.includes("artificial_analysis_search_index")?"artificial_analysis_search_index":null;
+    sortCol=COLUMNS.includes("search_index_per_second")?"search_index_per_second":null;
     sortDir=(sortCol&&HIGHLIGHTS[sortCol]==="lower")?1:-1;
     page=0;filterAndRender();
   });
