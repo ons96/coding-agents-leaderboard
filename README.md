@@ -38,6 +38,11 @@ access labels and official pricing evidence are recorded in
 free quota, trial credits, and paid only are observations as of that date, not
 claims that access is permanent.
 
+The Search APIs table includes Search Index / Time (per s), calculated as the
+Artificial Analysis Search Index divided by Time/Task in seconds. It is the
+default descending sort so the most quality-efficient products appear first;
+rows without a positive task time remain visible but have no derived value.
+
 ### Free hosted base models
 
 The [Free Hosted Models dashboard](https://ons96.github.io/coding-agents-leaderboard/free_models.html) lists Intelligence Index rows whose base models have reviewed hosted zero-cost API routes. **Reasoning effort is assumed available, not verified:** the free provider may not support the exact high, medium, low, minimal, or non-reasoning configuration used in a leaderboard row. Different releases and specialized model variants are not treated as interchangeable. The default table shows every eligible scored row ordered by estimated Score/min; **Pareto only** retains rows whose Intelligence Index is greater than every faster eligible row. Search and sort do not recompute that global frontier.
