@@ -45,16 +45,27 @@ class FreeDashboardTests(unittest.TestCase):
 
     def test_inventory_expands_scored_effort_variants(self):
         import json
+        import re
         inventory = json.loads(build_site.FREE_MODELS.read_text())
         index = json.loads(build_site.DATA.read_text())
-        rows = next(tab["data"] for tab in index["tabs"] if tab["id"] == "models_full")
-        block, notice = build_site.free_tab(rows)
+        source = next(tab["data"] for tab in index["tabs"] if tab["id"] == "models_full")
+        block, notice = build_site.free_tab(source)
         present = {row["slug"] for row in block["rows"]}
-        self.assertTrue({"gemini-3-7-flash-low", "gemini-3-7-flash-medium",
-                         "gemini-3-7-flash", "qwen3-8-27b-medium",
-                         "qwen3-8-27b-non-reasoning"} <= present)
-        self.assertGreater(len(block["rows"]), 4)
-        self.assertTrue(present <= inventory["models"].keys())
+        # The dashboard documents that inventory entries without an Index or
+        # score/min estimate are omitted, and upstream speed data appears and
+        # disappears over time. Assert the exact rendered set for the current
+        # snapshot rather than pinning slugs that may become unscored.
+        scored = {row["slug"] for row in source["rows"]
+                  if row.get("score_per_minute") and row.get("intelligenceIndex") is not None}
+        self.assertEqual(present, scored & set(inventory["models"]))
+        self.assertGreater(len(present), 4)
+        # Effort variants of a base model must expand into separate rows rather
+        # than collapsing into one base-model entry.
+        families = {}
+        for slug in present:
+            base = re.sub(r"-(low|medium|high|xhigh|max|non-reasoning)$", "", slug)
+            families.setdefault(base, []).append(slug)
+        self.assertTrue(any(len(variants) > 1 for variants in families.values()))
         self.assertIn("reasoning effort assumed", notice.lower())
 
 
