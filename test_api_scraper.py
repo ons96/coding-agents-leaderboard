@@ -19,10 +19,16 @@ class SearchApiParserTests(unittest.TestCase):
         result = parse_search_api_page(html, "https://example.test")
         self.assertEqual(result["rows"][0]["search_cost_usd_per_1000_tasks"], 62.3)
         self.assertEqual(result["rows"][-1]["baseline_lift"], 47)
+        self.assertAlmostEqual(result["rows"][0]["search_index_per_second"], 80 / 26.8)
 
     def test_incomplete_data_rejected(self):
         with self.assertRaises(ValueError):
             parse_search_api_page("<h2>Search API Public Leaderboard</h2><table></table>", "x")
+
+    def test_zero_time_has_no_efficiency_value(self):
+        rows = "".join(f"<tr><td>Provider {i}</td><td>80</td><td>47</td><td>81</td><td>87</td><td>72</td><td>$62.30</td><td>$8.04</td><td>0s</td></tr>" for i in range(MIN_PROVIDER_ROWS))
+        result = parse_search_api_page(HEAD + rows + "</table>", "x")
+        self.assertIsNone(result["rows"][0]["search_index_per_second"])
 
     def test_escaped_rsc_payload_is_preferred_and_normalized(self):
         providers = [{"id": f"provider-{i}-search-api", "aaSearchQualityIndex": .8, "qualityIndexLiftVsModelOnly": .4,
@@ -36,6 +42,7 @@ class SearchApiParserTests(unittest.TestCase):
         self.assertEqual(len(result["rows"]), 26)
         self.assertEqual(result["rows"][0]["artificial_analysis_search_index"], 80)
         self.assertEqual(result["rows"][0]["search_cost_usd_per_1000_tasks"], 62.3)
+        self.assertAlmostEqual(result["rows"][0]["search_index_per_second"], 80 / 26.8)
 
     def test_short_rsc_does_not_fall_back_to_short_table(self):
         html = '<script>self.__next_f.push(' + json.dumps([1, '{"searchProviders":[] }']) + ')</script>' + HEAD + '</table>'

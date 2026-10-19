@@ -86,8 +86,8 @@ TAB_PRESENTATION = {
         "txt_cols": ["provider"], "filter_id": "provider-filter", "filter_field": "provider",
         "filter_placeholder": "Search providers and products...",
         "footer_url": "https://artificialanalysis.ai/agents/search-api",
-        "sort_buttons": [("Search Index", "artificial_analysis_search_index"), ("Time/Task", "time_per_task_seconds"), ("Search Cost", "search_cost_usd_per_1000_tasks")],
-        "default_sort": "artificial_analysis_search_index",
+        "sort_buttons": [("Index / Time", "search_index_per_second"), ("Search Index", "artificial_analysis_search_index"), ("Time/Task", "time_per_task_seconds"), ("Search Cost", "search_cost_usd_per_1000_tasks")],
+        "default_sort": "search_index_per_second",
     },
 }
 

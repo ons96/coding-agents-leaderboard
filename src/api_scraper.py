@@ -9,7 +9,8 @@ from bs4 import BeautifulSoup
 SEARCH_COLUMNS = ["provider", "artificial_analysis_search_index", "baseline_lift",
                   "deepsearchqa_f1", "browsecomp_accuracy", "omniscience_accuracy",
                   "search_cost_usd_per_1000_tasks", "model_cost_usd_per_1000_tasks",
-                  "time_per_task_seconds"]
+                  "time_per_task_seconds", "search_index_per_second"]
+SOURCE_COLUMNS = SEARCH_COLUMNS[:-1]
 HEADER_MAP = {
     "provider": "provider", "artificial analysis search index": "artificial_analysis_search_index",
     "baseline lift": "baseline_lift", "deepsearchqa f1": "deepsearchqa_f1",
@@ -19,6 +20,15 @@ HEADER_MAP = {
     "time per task seconds": "time_per_task_seconds",
 }
 MIN_PROVIDER_ROWS = 10
+
+
+def _add_efficiency(rows: list[dict]) -> list[dict]:
+    """Add the higher-is-better Search Index per second metric safely."""
+    for row in rows:
+        index = row.get("artificial_analysis_search_index")
+        seconds = row.get("time_per_task_seconds")
+        row["search_index_per_second"] = index / seconds if index is not None and seconds else None
+    return rows
 
 RSC_FIELDS = {
     "aaSearchQualityIndex": "artificial_analysis_search_index",
@@ -100,7 +110,7 @@ def parse_search_api_page(html: str, source_url: str, checked_date=None) -> dict
     providers = [r["provider"] for r in rows]
     if len(providers) < MIN_PROVIDER_ROWS or len(set(providers)) != len(providers):
         raise ValueError(f"Suspicious Search API row count or IDs: {len(providers)}")
-    return {"rows": rows, "meta": {"url": source_url, "scrape_date": checked_date or datetime.now(timezone.utc).isoformat(),
+    return {"rows": _add_efficiency(rows), "meta": {"url": source_url, "scrape_date": checked_date or datetime.now(timezone.utc).isoformat(),
         "row_count": len(rows), "provider_row_count": len(providers), "evidence_url": "https://artificialanalysis.ai/methodology/search-api",
         "pricing_checked_date": checked_date or datetime.now(timezone.utc).date().isoformat()}}
 
@@ -114,7 +124,7 @@ def _parse_semantic_table(html: str):
         return None
     headers = [re.sub(r"\s+", " ", c.get_text(" ", strip=True)).lower() for c in table.find_all("th")]
     mapped = [HEADER_MAP.get(h) for h in headers]
-    if any(c not in mapped for c in SEARCH_COLUMNS):
+    if any(c not in mapped for c in SOURCE_COLUMNS):
         return None
     rows = []
     for tr in table.find_all("tr"):

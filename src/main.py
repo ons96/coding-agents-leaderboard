@@ -200,12 +200,12 @@ def _merge_search_api_tab(path: Path, parsed: dict) -> None:
               "baseline_lift": "Baseline Lift", "deepsearchqa_f1": "DeepSearchQA F1",
               "browsecomp_accuracy": "BrowseComp Accuracy", "omniscience_accuracy": "Omniscience Accuracy",
               "search_cost_usd_per_1000_tasks": "Search $/1k Tasks", "model_cost_usd_per_1000_tasks": "Model $/1k Tasks",
-              "time_per_task_seconds": "Time/Task (s)"}
+              "time_per_task_seconds": "Time/Task (s)", "search_index_per_second": "Search Index / Time (per s)"}
     block = {"columns": SEARCH_COLUMNS, "labels": labels,
              "highlights": {"artificial_analysis_search_index": "higher", "baseline_lift": "higher",
                             "deepsearchqa_f1": "higher", "browsecomp_accuracy": "higher", "omniscience_accuracy": "higher",
                             "search_cost_usd_per_1000_tasks": "lower", "model_cost_usd_per_1000_tasks": "lower",
-                            "time_per_task_seconds": "lower"},
+                            "time_per_task_seconds": "lower", "search_index_per_second": "higher"},
              "col_groups": {"identity": ["provider"], "quality": SEARCH_COLUMNS[1:6], "cost_speed": SEARCH_COLUMNS[6:]},
              "group_order": ["identity", "quality", "cost_speed"],
              "group_labels": {"identity": "Provider", "quality": "Quality", "cost_speed": "Cost & Speed"},
