@@ -49,10 +49,9 @@ def _extract_initial_models(html: str) -> list[dict]:
                 except json.JSONDecodeError:
                     continue
                 if isinstance(arr, list) and arr and isinstance(arr[0], dict):
-                    # The intelligence index models might not have 'costPerTask'
-                    # but they will have 'id' and 'slug'.
-                    # We'll accept any array of dicts with 'id' and 'slug'.
-                    if "id" in arr[0] and "slug" in arr[0]:
+                    # Accept arrays of model dicts carrying at least a slug.
+                    # Newer AA pages dropped the 'id' field; slug is enough.
+                    if "slug" in arr[0]:
                         return arr
     return []
 

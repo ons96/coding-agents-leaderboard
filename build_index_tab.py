@@ -30,7 +30,7 @@ COLUMNS = [
     "isReasoning", "isOpenWeights", "intelligenceIndex",
     "score_per_minute",
     "price1mInputTokens", "price1mOutputTokens",
-    "medianCanonicalAnswerOutputSpeed",
+    "outputSpeed",
     "est_cost_per_task_usd", "est_time_per_task_min",
     "score_per_cost", "score_per_sec",
 ]
@@ -46,7 +46,7 @@ LABELS = {
     "intelligenceIndex": "Index",
     "price1mInputTokens": "Price/1M In ($)",
     "price1mOutputTokens": "Price/1M Out ($)",
-    "medianCanonicalAnswerOutputSpeed": "Median Out Tok/s",
+    "outputSpeed": "Median Out Tok/s",
     "est_cost_per_task_usd": "Est Cost/Task ($)",
     "est_time_per_task_min": "Est Time/Task (min)",
     "score_per_cost": "Score/$",
@@ -56,7 +56,7 @@ LABELS = {
 
 HIGHLIGHTS = {
     "intelligenceIndex": "higher",
-    "medianCanonicalAnswerOutputSpeed": "higher",
+    "outputSpeed": "higher",
     "est_cost_per_task_usd": "lower",
     "est_time_per_task_min": "lower",
     "price1mInputTokens": "lower",
@@ -71,7 +71,7 @@ GROUPS = {
                  "isReasoning", "isOpenWeights"],
     "core": ["intelligenceIndex", "score_per_minute"],
     "price": ["price1mInputTokens", "price1mOutputTokens",
-              "medianCanonicalAnswerOutputSpeed"],
+              "outputSpeed"],
     "est": ["est_cost_per_task_usd", "est_time_per_task_min"],
     "derived": ["score_per_cost", "score_per_sec"],
 }
@@ -129,8 +129,8 @@ def main() -> None:
                 "intelligenceIndex": idx,
                 "price1mInputTokens": num(r.get("price1mInputTokens")),
                 "price1mOutputTokens": num(r.get("price1mOutputTokens")),
-                "medianCanonicalAnswerOutputSpeed":
-                    num(r.get("medianCanonicalAnswerOutputSpeed")),
+                "outputSpeed":
+                    num(r.get("outputSpeed")),
                 "est_cost_per_task_usd": cost,
                 "est_time_per_task_min": mins,
                 "score_per_cost": _safe_div(idx, cost),

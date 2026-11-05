@@ -29,6 +29,7 @@ def _backfill_models_from_index(df: pd.DataFrame) -> pd.DataFrame:
         return df
     idx = pd.read_csv(csv_path, low_memory=False)
     est_cols = {
+        "intelligence_index": "intelligenceIndex",
         "cost_per_task_usd": "est_cost_per_task_usd",
         "cost_input_usd": "est_cost_input_usd",
         "cost_output_usd": "est_cost_output_usd",
@@ -41,7 +42,10 @@ def _backfill_models_from_index(df: pd.DataFrame) -> pd.DataFrame:
     filled = df.copy()
     matched = 0
     for i, row in filled.iterrows():
-        if any(pd.notna(row.get(c)) for c in est_cols):
+        # Only treat a row as already having measured cost/time if the
+        # cost-or-time columns are populated; intelligence_index alone does
+        # not imply cost/time data.
+        if any(pd.notna(row.get(c)) for c in ("cost_per_task_usd", "avg_execution_time_sec")):
             continue  # real measured values win over estimates
         src = idx.loc[idx["slug"] == row.get("slug")]
         if src.empty:
@@ -51,8 +55,11 @@ def _backfill_models_from_index(df: pd.DataFrame) -> pd.DataFrame:
             v = s.get(est_col)
             if col in filled.columns and pd.notna(v) and v != "":
                 f = float(v)
-                # ponytail: intel est is minutes-per-task, models tab expects seconds
-                filled.at[i, col] = f * 60 if col == "avg_execution_time_sec" else f
+                if col == "avg_execution_time_sec":
+                    f = f * 60
+                elif col == "intelligence_index":
+                    pass
+                filled.at[i, col] = f
         matched += 1
     logger.info(f"Backfilled {matched}/{len(filled)} model rows from intelligence-index estimates")
     return filled

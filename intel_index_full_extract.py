@@ -27,27 +27,26 @@ def get(url: str) -> bytes:
     return urllib.request.urlopen(req, timeout=60).read()
 
 
-# AA Intelligence Index v4.3.2: (weight, tasks excluding repeats).
+# AA Intelligence Index v5.0.1: (weight, tasks excluding repeats).
 # Methodology: artificialanalysis.ai/methodology/intelligence-benchmarking
 # Time per Task = weighted avg decode minutes per task; Cost/Task weighted same way.
-AA_INDEX_V432 = {
+AA_INDEX_V5 = {
     "briefcase": (0.15, 91),
-    "gdpval": (0.10, 220),
     "automationBench": (0.05, 657),
+    "gdpPdf": (0.05, 100),  # 100x5 with repeats
+    "frontierCode20": (0.15, 132),  # 132x3 with repeats
     "terminalBench40": (0.10, 66),  # 66x3 with repeats
-    "scicode": (0.10, 288),  # 288x3 with repeats
-    "omniscience": (0.15, 6000),
-    "gdpPdf": (0.10, 100),  # 100x5 with repeats
-    "lcr": (0.05, 100),  # 100x3 with repeats
-    "hle": (0.10, 2158),
-    "critpt": (0.10, 70),  # 70x5 with repeats
+    "terminalBenchScience": (0.15, 70),  # 70x3 with repeats
+    "critptAgentic": (0.10, 40),  # 40x5 with repeats (hard subset)
+    "omniscience": (0.15, 3000),
+    "hleDiamond": (0.10, 1000),
 }
 
 
 def est_metrics(m: dict) -> dict:
     """Per-task cost/time/token estimates from canonical token counts + pricing.
 
-    Weighted over AA_INDEX_V432 of (suite_tokens*price/N)*weight.
+    Weighted over AA_INDEX_V5 of (suite_tokens*price/N)*weight.
     cost = sum_w (input*pIn + (answer+reasoning)*pOut)/1e6/N, split into
     input/output/reasoning parts. time_min = sum_w (answer+reasoning)/speed/N/60.
     tokens = sum_w (answer+reasoning)/N. Rough: ignores prefill speed,
@@ -58,7 +57,7 @@ def est_metrics(m: dict) -> dict:
     try:
         pin = float(m.get("price1mInputTokens") or 0)
         pout = float(m.get("price1mOutputTokens") or 0)
-        spd = float(m.get("medianCanonicalAnswerOutputSpeed") or 0)
+        spd = float(m.get("outputSpeed") or 0)
     except (TypeError, ValueError):
         return out
     if not (pin or pout):
@@ -66,7 +65,7 @@ def est_metrics(m: dict) -> dict:
     tc = m.get("canonicalEvalTokenCounts") or {}
     cost = inp = outp = rea = tsec = otok = atok = rtok = 0.0
     hit = False
-    for ev_name, (w, n) in AA_INDEX_V432.items():
+    for ev_name, (w, n) in AA_INDEX_V5.items():
         ev = tc.get(ev_name)
         if not isinstance(ev, dict):
             continue

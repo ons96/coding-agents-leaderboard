@@ -242,7 +242,7 @@ def free_tab(index_block: dict) -> tuple[dict, str]:
             continue
         rows.append({key: row.get(key) for key in
                      ("slug", "model", "creator", "intelligenceIndex", "score_per_minute",
-                      "est_time_per_task_min", "medianCanonicalAnswerOutputSpeed")})
+                      "est_time_per_task_min", "outputSpeed")})
         rows[-1]["free_access"] = ", ".join(source["provider"] for source in sources)
         for source in sources:
             evidence.append("<li>" + escape(row["model"]) + ": <a href=\"" +
@@ -256,14 +256,14 @@ def free_tab(index_block: dict) -> tuple[dict, str]:
         if row["pareto"]:
             best_index = row["intelligenceIndex"]
     columns = ["model", "creator", "score_per_minute", "intelligenceIndex",
-               "est_time_per_task_min", "medianCanonicalAnswerOutputSpeed", "free_access"]
+               "est_time_per_task_min", "outputSpeed", "free_access"]
     block = {
         "rows": rows, "columns": columns,
         "labels": {**index_block["labels"], "free_access": "Free base-model API"},
         "highlights": {"score_per_minute": "higher", "intelligenceIndex": "higher"},
         "col_groups": {"identity": ["model", "creator", "free_access"],
                        "derived": ["score_per_minute", "intelligenceIndex",
-                                   "est_time_per_task_min", "medianCanonicalAnswerOutputSpeed"]},
+                                   "est_time_per_task_min", "outputSpeed"]},
         "group_order": ["identity", "derived"],
         "group_labels": {"identity": "Identity & Access", "derived": "Quality & Speed"},
         "meta": {"row_count": len(rows), "scrape_date": index_block["meta"]["scrape_date"]},
