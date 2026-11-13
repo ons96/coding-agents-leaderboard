@@ -44,8 +44,9 @@ SIZE_TOKEN = re.compile(r"^(?:\d+b|b\d+|a\d+b|\d+x\d+b)$")
 
 # Weakest of these is the answer to "is it smart enough for every task?" The
 # terminal family falls back to the 21-task set when the 40-task set has no run.
-TASK_FAMILIES = (("T", ("terminalBench40", "terminalBench21")),
-                 ("C", ("scicode",)), ("G", ("gpqa",)), ("H", ("hle",)))
+TASK_FAMILIES = (("Terminal", ("terminalBench40", "terminalBench21")),
+                 ("SciCode", ("scicode",)), ("GPQA", ("gpqa",)),
+                 ("HLE", ("hle",)))
 
 
 def norm_slug(raw: str) -> str:
@@ -93,10 +94,10 @@ def load_leaderboard(path: Path) -> tuple[dict, dict]:
             if idx is None or mins is None:
                 continue
             key = norm_slug(row["slug"])
-            weak, profile = task_profile(row)
+            weak, weak_name = task_profile(row)
             by_key.setdefault(key, []).append({
                 "weak": weak,
-                "profile": profile,
+                "weak_name": weak_name,
                 "slug": row["slug"],
                 "key": key,
                 "model": row.get("shortName") or row.get("name"),
@@ -125,21 +126,21 @@ def _pct(value):
     return number * 100 if number <= 1 else number
 
 
-def task_profile(row: dict) -> tuple[str, str]:
-    """(weakest 'T12.0', full 'T12 C43 G82 H17') from the benchmark columns."""
+def task_profile(row: dict) -> tuple:
+    """(weakest percentage, name of that family) from the benchmark columns."""
     # AA writes 0.0 for "not run" on some evals: 68 of the 72 zeros on
     # terminalBench40 sit next to a healthy terminalBench21. A literal zero is
     # therefore treated as no measurement, never as a total failure.
     scores = []
-    for letter, columns in TASK_FAMILIES:
+    for name, columns in TASK_FAMILIES:
         pct = next((p for column in columns
                     if (p := _pct(row.get(column))) is not None and p > 0), None)
         if pct is not None:
-            scores.append((letter, pct))
+            scores.append((name, pct))
     if not scores:
-        return "-", "-"
-    letter, pct = min(scores, key=lambda item: item[1])
-    return f"{letter}{pct:.1f}", " ".join(f"{l}{p:.0f}" for l, p in scores)
+        return None, ""
+    name, pct = min(scores, key=lambda item: item[1])
+    return round(pct, 1), name
 
 
 def frontier(rows: list, with_cost: bool) -> set:
@@ -230,15 +231,16 @@ def main(argv=None) -> int:
     print(f"leaderboard rows reachable from config (Index + time): {len(rows)}"
           f"  base models: {len(matched_bases)}")
     print()
-    print("worst = weakest task-family % (T terminal, C SciCode, G GPQA, H HLE)")
+    print("weak% = lowest measured family score, 'on' names that family")
     print()
-    header = (f"{'min':>7} {'Index':>6} {'worst':>6} {'$/task':>9}  "
+    header = (f"{'min':>7} {'Index':>6} {'weak%':>6} {'on':<9} {'$/task':>9}  "
               f"{'fast':>4} {'cheap':>5}  model | routes")
     print(header)
     print("-" * len(header))
     for r in rows:
         cost = "-" if r["cost"] is None else f"{r['cost']:.3f}"
-        print(f"{r['minutes']:7.2f} {r['index']:6.1f} {r['weak']:>6} {cost:>9}  "
+        weak = "-" if r["weak"] is None else f"{r['weak']:.1f}"
+        print(f"{r['minutes']:7.2f} {r['index']:6.1f} {weak:>6} {r['weak_name']:<9} {cost:>9}  "
               f"{'yes' if r['slug'] in fast else '':>4} "
               f"{'yes' if r['slug'] in cheap else '':>5}  "
               f"{r['model'][:40]} | {', '.join(sorted(routes[r['slug']]))[:70]}")
@@ -246,12 +248,12 @@ def main(argv=None) -> int:
     if args.csv:
         with open(args.csv, "w", newline="", encoding="utf-8") as fh:
             writer = csv.writer(fh)
-            writer.writerow(["model", "slug", "index", "weakest_task", "task_profile",
+            writer.writerow(["model", "slug", "index", "weakest_pct", "weakest_family",
                              "est_time_per_task_min", "est_cost_per_task_usd",
                              "pareto_time", "pareto_cost", "routes"])
             for r in rows:
-                writer.writerow([r["model"], r["slug"], r["index"], r["weak"],
-                                 r["profile"], r["minutes"], r["cost"],
+                writer.writerow([r["model"], r["slug"], r["index"],
+                                 "" if r["weak"] is None else r["weak"], r["weak_name"], r["minutes"], r["cost"],
                                  r["slug"] in fast, r["slug"] in cheap,
                                  "; ".join(sorted(routes[r["slug"]]))])
         print(f"\nwrote {args.csv} ({len(rows)} rows)")
