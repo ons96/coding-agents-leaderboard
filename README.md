@@ -45,13 +45,90 @@ rows without a positive task time remain visible but have no derived value.
 
 ### Free hosted base models
 
-The [Free Hosted Models dashboard](https://ons96.github.io/coding-agents-leaderboard/free_models.html) lists Intelligence Index rows whose base models have reviewed hosted zero-cost API routes. **Reasoning effort is assumed available, not verified:** the free provider may not support the exact high, medium, low, minimal, or non-reasoning configuration used in a leaderboard row. Different releases and specialized model variants are not treated as interchangeable. The default table shows every eligible scored row ordered by estimated Score/min; **Pareto only** retains rows whose Intelligence Index is greater than every faster eligible row. Search and sort do not recompute that global frontier.
+The [Free Hosted Models dashboard](https://ons96.github.io/coding-agents-leaderboard/free_models.html) lists Intelligence Index rows whose base models have reviewed hosted zero-cost API routes. **Reasoning effort is assumed available, not verified:** the free provider may not support the exact high, medium, low, minimal, or non-reasoning configuration used in a leaderboard row. Different releases and specialized model variants are not treated as interchangeable. The default table shows every eligible scored row ordered by estimated Score/min; the row filter's **Pareto: fastest per Index** view keeps only rows no other eligible row beats on both estimated time and Index. Search and sort never recompute that global frontier.
+
+### Which of *my* models are Pareto-optimal
+
+The site's free filter is a curated list and goes stale. `free_frontier.py`
+answers the narrower question: the frontier over models you can actually call.
+It reads an opencode config (provider -> models), matches model IDs to
+leaderboard rows (exact normalized slug first; ids missing a size or effort
+token fall back to a looser match marked `~`), and prints the time/Index and
+time/cost/Index frontiers with the route that serves each row. Rerun it
+whenever providers change.
+
+```bash
+python free_frontier.py                               # ~/CodingProjects/opencode.json
+python free_frontier.py --providers logfare,tokeness   # only the gateways you want
+python free_frontier.py --min-index 30 --csv my_frontier.csv
+```
+
+A model with no AA Index or no time estimate cannot be ranked, so it never
+appears; the script prints how many configured model IDs were unmatched. This
+is availability from your config, not proof of free quota: narrow with
+`--providers` to the gateways you use for zero-cost calls.
 
 `data/verified_free_models.json` records leaderboard slugs, provider route IDs, evidence URLs, effort-assumption notes, and the review date. Add a row only after verifying free hosted input/output for the same base model; matching the leaderboard's effort is not required. Rows without an Index or score/min estimate are omitted. Unknown availability is not evidence of paid access; open weights alone do not qualify. Run `python build_site.py` to regenerate `docs/` after reviewing the inventory. The scheduled scrape also rebuilds the page from the committed inventory. Free quotas, prices, and availability can change between reviews.
 
 Score/min uses estimated task duration from Artificial Analysis canonical token counts and output speed, **not measured task runtime or the free host's response speed**. See [Estimate calibration](#estimate-calibration) for the limitations.
 
+## Pareto frontiers
+
+Ranking by Score/min already divides by time, so comparing those scores again
+double-counts quality and hides the real question: *what is the least model
+that still clears the bar, and how long does it take?* Each leaderboard now
+carries two Pareto flags and a row filter:
+
+| Column | Objectives | Reads as |
+|---|---|---|
+| `Pareto (fast/Index)` (`pareto`) | min estimated time, max Index | fastest row at each quality level |
+| `Pareto (fast+cheap)` (`pareto_cost`) | min time, min cost, max Index | same, but a much cheaper row survives even when something slightly faster exists |
+
+A row is kept only when no other row is at least as good on every objective
+and strictly better on one. Objectives per tab: Coding Agents and Agentic
+Models use Index, `avg_execution_time_sec`, and `cost_per_task_usd`;
+Intelligence Index uses `est_time_per_task_min` and `est_cost_per_task_usd`;
+Search APIs use Search Index, `time_per_task_seconds`, and combined search +
+model cost. Rows missing any objective are never on a frontier and cannot
+dominate anything, so incomplete source data cannot invent a winner.
+
+The controls (`All rows` / `Complete data only` / `Pareto: fastest per Index` /
+`Pareto: fastest + cheapest per Index`) filter rows without recomputing the
+frontier, and selecting a Pareto view also sorts by Time/Task ascending.
+`Complete data only` drops rows lacking the tab's Index or its per-time ratio
+(the Intelligence Index tab has 739 rows but only 126 Scored models and 115
+with a Score/min value). The `Min Index` box hides rows below a capability bar,
+which is the practical "this task needs at least X" cutoff: combine it with
+`Pareto: fastest per Index` to get the fastest sufficient model.
+
+Caveats: estimated time is derived from canonical token counts and output
+speed, not measured task runtime (see [Estimate calibration](#estimate-calibration));
+use the ordering, treat differences under a few percent as ties, and do not
+compare absolute minutes across tabs. The cost axis is list price per task, not
+a free-tier quota or model multiplier; quota-aware frontiers need that data
+added to `data/verified_free_models.json` first.
+
+### Task families (is it smart enough?)
+
+The Index is an average, so a model can rank well and still be weak at one
+kind of task. The Intelligence Index and Free Hosted tables therefore also show
+`Weakest Task` (lowest measured family score, e.g. `T12.0`) and the full
+profile as percentages: T = `terminalBench40` (falling back to
+`terminalBench21` when the 40-task set was not run), C = `scicode`,
+G = `gpqa`, H = `hle`.
+
+Only evals the model actually ran count. The source writes `0.0` for "not run"
+on some columns (66 of the 72 zeros on `terminalBench40` belong to models with
+a healthy `terminalBench21`), so a literal zero is treated as missing; a model
+with no terminal eval gets no T entry rather than a fake 0%. A non-reasoning
+variant still often lands far below its reasoning sibling on the same
+benchmark. Rows with no measured family keep blank cells.
+
 ## Columns
+
+All tabs also expose the `Pareto (fast/Index)` / `Pareto (fast+cheap)` flags,
+the Free API markers (Coding Agents, Agentic Models, Intelligence Index), and
+the row filter described above.
 
 **Coding Agents** — Harness, Model, Creator, Provider, Index Score, DeepSWE,
 Terminal-Bench v2.1, SWE-Atlas-QnA, Cost per Task, Avg Execution Time, Token

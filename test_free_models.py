@@ -9,13 +9,13 @@ class FreeDashboardTests(unittest.TestCase):
         source = {
             "rows": [
                 {"slug": "fast", "model": "Fast", "intelligenceIndex": 10,
-                 "score_per_minute": 100},
+                 "score_per_minute": 100, "est_time_per_task_min": 1.0},
                 {"slug": "dominated", "model": "Dominated", "intelligenceIndex": 9,
-                 "score_per_minute": 90},
+                 "score_per_minute": 90, "est_time_per_task_min": 1.5},
                 {"slug": "smart", "model": "Smart", "intelligenceIndex": 12,
-                 "score_per_minute": 80},
+                 "score_per_minute": 80, "est_time_per_task_min": 2.0},
                 {"slug": "unscored", "model": "Unscored", "intelligenceIndex": None,
-                 "score_per_minute": None},
+                 "score_per_minute": None, "est_time_per_task_min": None},
             ],
             "labels": {}, "meta": {"scrape_date": "2026-10-01"},
         }
@@ -73,13 +73,17 @@ class MainTabsEnrichmentTests(unittest.TestCase):
     def test_pareto_keep_rule_matches_free_tab(self):
         rows = [
             {"slug": "fast", "model": "Fast", "creator": "C",
-             "intelligence_index": 10, "score_per_minute": 100},
+             "intelligence_index": 10, "score_per_minute": 100,
+             "avg_execution_time_sec": 60},
             {"slug": "dominated", "model": "Dominated", "creator": "C",
-             "intelligence_index": 9, "score_per_minute": 90},
+             "intelligence_index": 9, "score_per_minute": 90,
+             "avg_execution_time_sec": 90},
             {"slug": "smart", "model": "Smart", "creator": "C",
-             "intelligence_index": 12, "score_per_minute": 80},
+             "intelligence_index": 12, "score_per_minute": 80,
+             "avg_execution_time_sec": 120},
             {"slug": "unscored", "model": "Unscored", "creator": "C",
-             "intelligence_index": None, "score_per_minute": None},
+             "intelligence_index": None, "score_per_minute": None,
+             "avg_execution_time_sec": None},
         ]
         payload = {"tabs": [{"id": "models", "data": {
             "rows": rows, "columns": ["slug", "model", "creator",
