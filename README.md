@@ -108,21 +108,24 @@ compare absolute minutes across tabs. The cost axis is list price per task, not
 a free-tier quota or model multiplier; quota-aware frontiers need that data
 added to `data/verified_free_models.json` first.
 
-### Task families (is it smart enough?)
+### Weakest family (is it smart enough?)
 
-The Index is an average, so a model can rank well and still be weak at one
-kind of task. The Intelligence Index and Free Hosted tables therefore also show
-`Weakest Task` (lowest measured family score, e.g. `T12.0`) and the full
-profile as percentages: T = `terminalBench40` (falling back to
-`terminalBench21` when the 40-task set was not run), C = `scicode`,
-G = `gpqa`, H = `hle`.
+The Index is an average, so a model can rank well and still be weak at one kind
+of task. Two columns make that visible:
 
-Only evals the model actually ran count. The source writes `0.0` for "not run"
-on some columns (66 of the 72 zeros on `terminalBench40` belong to models with
-a healthy `terminalBench21`), so a literal zero is treated as missing; a model
-with no terminal eval gets no T entry rather than a fake 0%. A non-reasoning
-variant still often lands far below its reasoning sibling on the same
-benchmark. Rows with no measured family keep blank cells.
+- `Weakest family %` — a number (sortable, and its own sort button): the lowest
+  score among the families the model was actually run on.
+- `Weakest family` — which family that is: `Terminal`, `SciCode`, `GPQA`, `HLE`.
+
+So `12.0` + `Terminal` means "solves 12% of terminal-agentic tasks". Sort
+Time/Task ascending and read the pair: fast, plus where it breaks.
+
+Terminal uses `terminalBench40`, falling back to `terminalBench21` when the
+40-task set was not run. Only real runs count: the source writes `0.0` for
+"not run" on some columns (66 of the 72 zeros on `terminalBench40` belong to
+models with a healthy `terminalBench21`), so a literal zero is treated as
+missing and a model with no terminal eval simply has no Terminal score. Rows
+with no measured family keep blank cells.
 
 ## Columns
 

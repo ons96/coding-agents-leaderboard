@@ -25,10 +25,10 @@ INDEX_CSV = ROOT / "data" / "artificial_analysis_intelligence_index_full.csv"
 # kind of task. The weakest measured family is a useful floor, so it gets its
 # own columns; families with no measurement are skipped.
 TASK_FAMILIES = (
-    ("T", ("terminalBench40", "terminalBench21")),
-    ("C", ("scicode",)),
-    ("G", ("gpqa",)),
-    ("H", ("hle",)),
+    ("Terminal", ("terminalBench40", "terminalBench21")),
+    ("SciCode", ("scicode",)),
+    ("GPQA", ("gpqa",)),
+    ("HLE", ("hle",)),
 )
 
 # Per-tab presentation overrides. Keys are tab ids; values replace template
@@ -80,6 +80,7 @@ TAB_PRESENTATION = {
         "sort_buttons": [
             ("Score/min", "score_per_minute"),
             ("Time/Task", "est_time_per_task_min"),
+            ("Weakest family", "weak_task_pct"),
             ("Score/$", "score_per_cost"),
             ("Score", "intelligenceIndex"),
         ],
@@ -94,7 +95,9 @@ TAB_PRESENTATION = {
         "filter_field": "creator",
         "filter_placeholder": "Search models, providers, identifiers...",
         "footer_url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
-        "sort_buttons": [("Score/min", "score_per_minute"), ("Score", "intelligenceIndex")],
+        "sort_buttons": [("Score/min", "score_per_minute"),
+                         ("Weakest family", "weak_task_pct"),
+                         ("Score", "intelligenceIndex")],
         "default_sort": "score_per_minute",
     },
     "search_apis": {
@@ -316,7 +319,7 @@ def _pct(value):
 
 
 def _task_profiles() -> dict:
-    """slug -> (weakest 'T0.5', full 'T0 C43 G82 H17') from the index CSV."""
+    """slug -> (weakest percentage, name of that family) from the index CSV."""
     if not INDEX_CSV.exists():
         return {}
     profiles = {}
@@ -329,21 +332,20 @@ def _task_profiles() -> dict:
             # terminalBench40 sit next to a healthy terminalBench21, so a
             # literal zero is no measurement rather than a total failure.
             scores = []
-            for letter, columns in TASK_FAMILIES:
+            for name, columns in TASK_FAMILIES:
                 pct = next((p for column in columns
                             if (p := _pct(row.get(column))) is not None and p > 0), None)
                 if pct is not None:
-                    scores.append((letter, pct))
+                    scores.append((name, pct))
             if not scores:
                 continue
-            letter, pct = min(scores, key=lambda item: item[1])
-            profiles[slug] = (f"{letter}{pct:.1f}",
-                              " ".join(f"{l}{p:.0f}" for l, p in scores))
+            name, pct = min(scores, key=lambda item: item[1])
+            profiles[slug] = (round(pct, 1), name)
     return profiles
 
 
 def add_task_columns(block: dict) -> None:
-    """Attach weakest-family / per-family scores so blind spots are visible."""
+    """Attach the weakest family as a sortable number plus the family's name."""
     profiles = _task_profiles()
     if not profiles:
         return
@@ -351,12 +353,13 @@ def add_task_columns(block: dict) -> None:
         profile = profiles.get(row.get("slug"))
         if not profile:
             continue
-        row["weakest_task"], row["task_profile"] = profile
-    new_cols = [col for col in ("weakest_task", "task_profile")
+        row["weak_task_pct"], row["weak_task_name"] = profile
+    new_cols = [col for col in ("weak_task_pct", "weak_task_name")
                 if col not in block["columns"]]
     block["columns"].extend(new_cols)
-    block["labels"].setdefault("weakest_task", "Weakest Task")
-    block["labels"].setdefault("task_profile", "Task % (T=term, C=code, G=gpqa, H=hle)")
+    block["labels"].setdefault("weak_task_pct", "Weakest family %")
+    block["labels"].setdefault("weak_task_name", "Weakest family")
+    block["highlights"].setdefault("weak_task_pct", "higher")
     derived = block.setdefault("col_groups", {}).setdefault("derived", [])
     for col in new_cols:
         if col not in derived:
@@ -422,7 +425,7 @@ def free_tab(index_block: dict) -> tuple[dict, str]:
         rows.append({key: row.get(key) for key in
                      ("slug", "model", "creator", "intelligenceIndex", "score_per_minute",
                       "est_time_per_task_min", "outputSpeed",
-                      "weakest_task", "task_profile")})
+                      "weak_task_pct", "weak_task_name")})
         rows[-1]["free_access"] = ", ".join(source["provider"] for source in sources)
         for source in sources:
             evidence.append("<li>" + escape(row["model"]) + ": <a href=\"" +
@@ -431,7 +434,7 @@ def free_tab(index_block: dict) -> tuple[dict, str]:
                             "</a> - " + escape(source["note"]) + "</li>")
     rows.sort(key=lambda r: (-r["score_per_minute"], r["slug"]))
     columns = ["model", "creator", "score_per_minute", "intelligenceIndex",
-               "weakest_task", "task_profile", "est_time_per_task_min", "outputSpeed",
+               "weak_task_pct", "weak_task_name", "est_time_per_task_min", "outputSpeed",
                "free_access"]
     block = {
         "rows": rows, "columns": columns,
@@ -439,7 +442,7 @@ def free_tab(index_block: dict) -> tuple[dict, str]:
         "highlights": {"score_per_minute": "higher", "intelligenceIndex": "higher"},
         "col_groups": {"identity": ["model", "creator", "free_access"],
                        "derived": ["score_per_minute", "intelligenceIndex",
-                                   "weakest_task", "task_profile",
+                                   "weak_task_pct", "weak_task_name",
                                    "est_time_per_task_min", "outputSpeed"]},
         "group_order": ["identity", "derived"],
         "group_labels": {"identity": "Identity & Access", "derived": "Quality & Speed"},

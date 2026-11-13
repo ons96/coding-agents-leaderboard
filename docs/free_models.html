@@ -49,7 +49,7 @@ tbody tr:hover{background:#e7f5ff}
 <input type="text" id="search" placeholder="Search models, providers, identifiers...">
 <select id="creator-filter"><option value="">All</option></select>
 <button id="btn-reset">Reset</button>
-<button id="sb-0" class="sort-btn">Score/min</button><button id="sb-1" class="sort-btn">Score</button>
+<button id="sb-0" class="sort-btn">Score/min</button><button id="sb-1" class="sort-btn">Weakest family</button><button id="sb-2" class="sort-btn">Score</button>
 <select id="frontier" title="Hide incomplete or dominated rows"><option value="all">All rows</option><option value="complete">Complete data only</option><option value="pareto_time">Pareto: fastest per Index</option></select><input type="number" id="min-score" step="any" placeholder="Min Index" title="Hide rows below this Index">
 
 <div class="group-toggles" id="group-toggles"></div>
@@ -62,7 +62,7 @@ tbody tr:hover{background:#e7f5ff}
 Data from <a href="https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index">artificialanalysis.ai</a> |
 Updated: <span id="update-date">-</span>
 </div>
-<script src="free_models.data.js?v=72f62ca1"></script>
+<script src="free_models.data.js?v=2382e798"></script>
 <script>
 const PS=100;
 let filtered=[...TABLE_DATA],sortCol="score_per_minute",sortDir=1,hiddenGroups=new Set(),page=0;
@@ -70,7 +70,8 @@ const TXT_COLS=new Set(["model", "creator", "slug", "free_access"]);
 const FILTER_FIELD="creator";
 const SORT_ACTIONS=[
 ["sb-0", "score_per_minute"],
-["sb-1", "intelligenceIndex"]
+["sb-1", "weak_task_pct"],
+["sb-2", "intelligenceIndex"]
 ];
 const BOOL_COLS=new Set(["pareto","pareto_cost","has_free_api"]);
 let freeOnly=false,frontierMode="all",minScore=null;
