@@ -44,6 +44,12 @@ tbody tr:hover td{background-color:#e7f5ff;background-image:none}
 .gp-identity{background:#e8f4f8}.gp-core{background:#ffe8cc}.gp-cost_time{background:#fff9db}.gp-derived{background:#d3f9d8}
 /* Frozen identity column: pinned to the left edge while the table scrolls sideways. */
 th.sticky-col,td.sticky-col{position:sticky;left:0;z-index:6;max-width:18em;overflow:hidden;text-overflow:ellipsis;border-right:1px solid #adb5bd;box-shadow:2px 0 5px -2px rgba(0,0,0,.3)}
+/* Model names carry a variant in brackets: "Claude Sonnet 5.5 (xhigh)". On a
+   phone the variant drops to a second, smaller line so the column stays narrow. */
+.sticky-col .mn{display:inline}
+.sticky-col .mv{display:inline;font-weight:600}
+.sticky-col .mv::before{content:"("}
+.sticky-col .mv::after{content:")"}
 thead th.sticky-col{z-index:20}
 .paging{flex:none;padding:8px 16px;background:#fff;border-top:1px solid #dee2e6;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px}
 .paging button{padding:4px 10px;border:1px solid #ced4da;border-radius:4px;background:#fff;cursor:pointer}
@@ -62,6 +68,13 @@ thead th.sticky-col{z-index:20}
 .group-toggles{margin-left:0}
 .notice{padding:8px 12px}
 .footer{display:none}
+/* A frozen name column that eats half the screen leaves no room for data:
+   cap it, let it wrap, and tighten the cell padding so more columns fit. */
+th.sticky-col,td.sticky-col{max-width:40vw;white-space:normal;line-height:1.2}
+.sticky-col .mn,.sticky-col .mv{display:block}
+.sticky-col .mv{font-size:10px;color:#495057}
+.sticky-col .mv::before,.sticky-col .mv::after{content:none}
+thead th,tbody td{padding-left:6px;padding-right:6px}
 }
 </style>
 </head>
@@ -173,6 +186,7 @@ function init(){
 }
 
 function debounce(fn,ms){let t;return()=>{clearTimeout(t);t=setTimeout(fn,ms)}}
+function isPhone(){return window.matchMedia("(max-width:700px)").matches}
 function sortBy(col,dir){sortCol=col;sortDir=HIGHLIGHTS[col]==="lower"?1:-1;page=0;filterAndRender();}
 
 function buildGroupToggles(){
@@ -199,6 +213,15 @@ function visibleCols(){
   // that scrolls under it.
   const at=STICKY_COL?cols.indexOf(STICKY_COL):-1;
   if(at>0){cols.splice(at,1);cols.unshift(STICKY_COL);}
+  // On a phone the other identity columns (slug, creator, dates, flags) are
+  // wide and crowd out the numbers next to the frozen name, so measurements
+  // come first there and identity columns go last.
+  if(isPhone()&&STICKY_COL){
+    const rest=cols.filter(c=>c!==STICKY_COL);
+    return [STICKY_COL]
+      .concat(rest.filter(c=>colGroup(c)!=="identity"))
+      .concat(rest.filter(c=>colGroup(c)==="identity"));
+  }
   return cols;
 }
 function colGroup(col){return GROUP_ORDER.find(g=>COL_GROUPS[g]&&COL_GROUPS[g].includes(col))||"";}
@@ -286,6 +309,14 @@ function renderRows(){
       if(v==null||v==="")td.textContent="";
       else if(BOOL_COLS.has(col))td.textContent=v?"Yes":"";
       else if(typeof v==="number")td.textContent=fmtNum(v,col);
+      else if(col===STICKY_COL&&/ \([^()]*\)$/.test(v)){
+        // "Claude Sonnet 5.5 (xhigh)": the variant gets its own small line on
+        // phones (see .mv), so the frozen column stays narrow there.
+        const cut=v.lastIndexOf(" (");
+        const name=document.createElement("span");name.className="mn";name.textContent=v.slice(0,cut);
+        const variant=document.createElement("span");variant.className="mv";variant.textContent=v.slice(cut+2,-1);
+        td.append(name," ",variant);
+      }
       else td.textContent=v;
       tr.appendChild(td);
     });

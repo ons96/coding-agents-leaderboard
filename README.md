@@ -142,6 +142,12 @@ filter controls and pager stay put while the rows scroll sideways or down. That
 also keeps a wide table from widening the page itself, which on phone browsers
 triggers a zoomed-out viewport where sticky positioning stops working.
 
+On a phone the frozen column is capped at 40% of the viewport and the model's
+variant (`Claude Sonnet 5.5` / `xhigh`) drops to a second, smaller line, so the
+name stays readable in a narrow strip. The measured columns then come straight
+after it; the remaining identity columns (slug, creator, release date, flags)
+move to the end. Desktop order is unchanged.
+
 **Coding Agents** — Harness, Model, Creator, Provider, Index Score, DeepSWE,
 Terminal-Bench v2.1, SWE-Atlas-QnA, Cost per Task, Avg Execution Time, Token
 Usage, plus derived value metrics (Score/$, Score/min, $/Score, Tokens/s).
