@@ -39,6 +39,7 @@ TAB_PRESENTATION = {
         "nav_label": "Coding Agents",
         "entity": "agents",
         "txt_cols": ["harness", "model", "creator", "provider"],
+        "sticky_col": "model",
         "filter_id": "harness-filter",
         "filter_field": "harness",
         "filter_placeholder": "Search harness, model, creator...",
@@ -56,6 +57,7 @@ TAB_PRESENTATION = {
         "nav_label": "Agentic Models",
         "entity": "models",
         "txt_cols": ["short_name", "model", "creator"],
+        "sticky_col": "model",
         "filter_id": "creator-filter",
         "filter_field": "creator",
         "filter_placeholder": "Search model, creator...",
@@ -73,6 +75,7 @@ TAB_PRESENTATION = {
         "nav_label": "Intelligence Index (All)",
         "entity": "index models",
         "txt_cols": ["model", "creator", "slug"],
+        "sticky_col": "model",
         "filter_id": "creator-filter",
         "filter_field": "creator",
         "filter_placeholder": "Search model, creator, slug...",
@@ -91,6 +94,7 @@ TAB_PRESENTATION = {
         "nav_label": "Free Hosted Models",
         "entity": "free hosted model rows",
         "txt_cols": ["model", "creator", "slug", "free_access"],
+        "sticky_col": "model",
         "filter_id": "creator-filter",
         "filter_field": "creator",
         "filter_placeholder": "Search models, providers, identifiers...",
@@ -102,7 +106,8 @@ TAB_PRESENTATION = {
     },
     "search_apis": {
         "title": "Search APIs Leaderboard", "nav_label": "Search APIs", "entity": "Search API products",
-        "txt_cols": ["provider"], "filter_id": "provider-filter", "filter_field": "provider",
+        "txt_cols": ["provider"], "sticky_col": "provider",
+        "filter_id": "provider-filter", "filter_field": "provider",
         "filter_placeholder": "Search providers and products...",
         "footer_url": "https://artificialanalysis.ai/agents/search-api",
         "sort_buttons": [("Index / Time", "search_index_per_second"), ("Search Index", "artificial_analysis_search_index"), ("Time/Task", "time_per_task_seconds"), ("Search Cost", "search_cost_usd_per_1000_tasks")],
@@ -120,10 +125,12 @@ TAB_PRESENTATION = {
 # task. Rows missing any objective are never on a frontier and cannot dominate
 # anything, so gaps in the source data never invent a winner.
 #
-# Two frontiers are published per leaderboard:
-#   pareto       time vs Index         -- fastest row at each quality level
-#   pareto_cost  time + cost vs Index  -- keeps a cheaper row alive when it is
-#                                         dominated on time alone
+# Three frontiers are published per leaderboard:
+#   pareto        time vs Index         -- fastest row at each quality level
+#   pareto_cost   time + cost vs Index  -- keeps a cheaper row alive when it is
+#                                          dominated on time alone
+#   pareto_cheap  cost vs Index         -- cheapest row at each quality level,
+#                                          ignoring speed (tabs with cost only)
 # --------------------------------------------------------------------------- #
 FRONTIER_SPEC = {
     "agents": {
@@ -153,7 +160,20 @@ FRONTIER_SPEC = {
 }
 MAIN_TABS = ("agents", "models", "models_full")
 PARETO_LABELS = {"pareto": "Pareto (fast/Index)",
-                 "pareto_cost": "Pareto (fast+cheap)"}
+                 "pareto_cost": "Pareto (fast+cheap)",
+                 "pareto_cheap": "Pareto (cheap/Index)"}
+# Filter values shown in the row-filter select, paired with the flag column
+# each one tests. Only the frontiers a tab actually publishes are listed.
+PARETO_FILTERS = (
+    ("pareto_time", "pareto", "Pareto: fastest per Index", "time"),
+    ("pareto_cost", "pareto_cost", "Pareto: fastest + cheapest per Index", "time"),
+    ("pareto_cheap", "pareto_cheap", "Pareto: cheapest per Index", "cost"),
+)
+PARETO_OBJECTIVES = {
+    "pareto": ("time", "score"),
+    "pareto_cost": ("time", "cost", "score"),
+    "pareto_cheap": ("cost", "score"),
+}
 
 # Effort suffixes that may trail a leaderboard slug without changing the base
 # model identity (e.g. gemini-3-8-flash-high -> gemini-3-8-flash).
@@ -220,28 +240,25 @@ def _cost_value(row: dict, cost):
     return sum(values) if values else None
 
 
-def _objective(row: dict, spec: dict, with_cost: bool):
-    """Minimisation tuple (time, cost, -Index); None when not comparable."""
-    score = _num(row, spec["score"])
-    time = _num(row, spec["time"])
-    if score is None or time is None:
-        return None
-    cost = 0.0
-    if with_cost:
-        cost = _cost_value(row, spec["cost"])
-        if cost is None:
+def _objective(row: dict, spec: dict, dims: tuple):
+    """Minimisation key over the requested objectives; None when incomplete."""
+    key = []
+    for dim in dims:
+        value = _cost_value(row, spec["cost"]) if dim == "cost" else _num(row, spec[dim])
+        if value is None:
             return None
-    return (time, cost, -score)
+        key.append(-value if dim == "score" else value)
+    return tuple(key)
 
 
-def _frontier_flags(rows: list, spec: dict, with_cost: bool) -> list:
+def _frontier_flags(rows: list, spec: dict, dims: tuple) -> list:
     """Flag rows on the Pareto frontier of the tab's objectives.
 
     Only rows complete on every objective are compared. Ordering by the
     minimisation tuple puts any possible dominator first, so a forward pass is
     exact; identical points keep the first in deterministic (slug) order.
     """
-    keys = [_objective(r, spec, with_cost) for r in rows]
+    keys = [_objective(r, spec, dims) for r in rows]
     order = sorted(
         (i for i, key in enumerate(keys) if key is not None),
         key=lambda i: (keys[i], str(rows[i].get("slug") or rows[i].get("model") or i)),
@@ -289,22 +306,32 @@ def _place_columns(block: dict, cols: list, spec: dict) -> None:
     block["highlights"].update({col: "higher" for col in cols})
 
 
+def _sort_field(spec: dict, axis: str) -> str:
+    """Column to sort by when a frontier view is selected (cost may be a pair)."""
+    field = spec[axis]
+    return field[0] if isinstance(field, (tuple, list)) else field
+
+
 def add_frontier_columns(block: dict, spec: dict, with_cost: bool = True) -> dict:
-    """Write pareto/pareto_cost flags plus the frontier UI metadata."""
+    """Write the pareto flag columns plus the frontier UI metadata."""
     rows = block["rows"]
     cols = ["pareto"]
-    for row, keep in zip(rows, _frontier_flags(rows, spec, with_cost=False)):
+    for row, keep in zip(rows, _frontier_flags(rows, spec, PARETO_OBJECTIVES["pareto"])):
         row["pareto"] = keep
     if with_cost and spec.get("cost"):
-        cols.append("pareto_cost")
-        for row, keep in zip(rows, _frontier_flags(rows, spec, with_cost=True)):
-            row["pareto_cost"] = keep
+        for col in ("pareto_cost", "pareto_cheap"):
+            cols.append(col)
+            for row, keep in zip(rows, _frontier_flags(rows, spec, PARETO_OBJECTIVES[col])):
+                row[col] = keep
     _place_columns(block, cols, spec)
     block["frontier"] = {
         "score": spec["score"],
         "time": spec["time"],
         "complete": list(spec["complete"]),
         "cost": len(cols) > 1,
+        "filters": [{"value": value, "col": col, "label": label,
+                     "sort": _sort_field(spec, axis)}
+                    for value, col, label, axis in PARETO_FILTERS if col in cols],
     }
     return block
 
@@ -466,7 +493,7 @@ def free_tab(index_block: dict) -> tuple[dict, str]:
               + escape(inventory["checked_date"]) + ". Pareto (fast/Index) keeps only rows "
               "no other eligible row beats on both estimated time and Index."
               "<details><summary>Source routes and effort assumptions</summary><ul>" +
-              "".join(evidence) + "</ul></details></aside")
+              "".join(evidence) + "</ul></details></aside>")
     return block, notice
 
 
@@ -475,10 +502,8 @@ def _frontier_controls(block: dict) -> str:
     cols = block.get("columns", [])
     options = ['<option value="all">All rows</option>',
                '<option value="complete">Complete data only</option>']
-    if "pareto" in cols:
-        options.append('<option value="pareto_time">Pareto: fastest per Index</option>')
-    if "pareto_cost" in cols:
-        options.append('<option value="pareto_cost">Pareto: fastest + cheapest per Index</option>')
+    options.extend(f'<option value="{value}">{label}</option>'
+                   for value, col, label, _axis in PARETO_FILTERS if col in cols)
     controls = ('<select id="frontier" title="Hide incomplete or dominated rows">'
                 + "".join(options) + "</select>")
     if (block.get("frontier") or {}).get("score"):
@@ -542,6 +567,7 @@ def _render(tab_id: str, block: dict, payload: dict, free_notice: str = "") -> P
         "__SORT_BUTTONS__": sort_btns_html,
         "__SORT_ACTIONS__": sort_actions,
         "__PARETO_CONTROLS__": pareto_controls,
+        "__STICKY_COL__": json.dumps(pres.get("sticky_col")),
         "__FREE_CONTROLS__": free_controls,
         "__FREE_NOTICE__": free_notice,
         "__SCRIPT_SRC__": f"{tab_id}.data.js?v={js_hash}",

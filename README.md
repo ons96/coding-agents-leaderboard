@@ -77,12 +77,13 @@ Score/min uses estimated task duration from Artificial Analysis canonical token 
 Ranking by Score/min already divides by time, so comparing those scores again
 double-counts quality and hides the real question: *what is the least model
 that still clears the bar, and how long does it take?* Each leaderboard now
-carries two Pareto flags and a row filter:
+carries three Pareto flags and a row filter:
 
 | Column | Objectives | Reads as |
 |---|---|---|
 | `Pareto (fast/Index)` (`pareto`) | min estimated time, max Index | fastest row at each quality level |
 | `Pareto (fast+cheap)` (`pareto_cost`) | min time, min cost, max Index | same, but a much cheaper row survives even when something slightly faster exists |
+| `Pareto (cheap/Index)` (`pareto_cheap`) | min cost, max Index | cheapest row at each quality level, trained on budget rather than latency |
 
 A row is kept only when no other row is at least as good on every objective
 and strictly better on one. Objectives per tab: Coding Agents and Agentic
@@ -93,8 +94,11 @@ model cost. Rows missing any objective are never on a frontier and cannot
 dominate anything, so incomplete source data cannot invent a winner.
 
 The controls (`All rows` / `Complete data only` / `Pareto: fastest per Index` /
-`Pareto: fastest + cheapest per Index`) filter rows without recomputing the
-frontier, and selecting a Pareto view also sorts by Time/Task ascending.
+`Pareto: fastest + cheapest per Index` / `Pareto: cheapest per Index`) filter
+rows without recomputing the frontier. Selecting a Pareto view sorts ascending
+on its own axis: Time/Task for the fast views, cost per task for the cost/Index
+view. The cost/Index frontier drops time from the comparison, so a slow, cheap
+model at a given Index is not hidden by a fast, expensive one.
 `Complete data only` drops rows lacking the tab's Index or its per-time ratio
 (the Intelligence Index tab has 739 rows but only 126 Scored models and 115
 with a Score/min value). The `Min Index` box hides rows below a capability bar,
@@ -129,9 +133,12 @@ with no measured family keep blank cells.
 
 ## Columns
 
-All tabs also expose the `Pareto (fast/Index)` / `Pareto (fast+cheap)` flags,
-the Free API markers (Coding Agents, Agentic Models, Intelligence Index), and
-the row filter described above.
+All tabs also expose the `Pareto (fast/Index)` / `Pareto (fast+cheap)` /
+`Pareto (cheap/Index)` flags, the Free API markers (Coding Agents, Agentic
+Models, Intelligence Index), and the row filter described above. Each table
+pins its model (or provider) column to the left edge and its header row to the
+top of the viewport, with grid lines on every cell and a fixed pager, so a wide
+row stays readable while scrolling sideways, especially on a phone.
 
 **Coding Agents** — Harness, Model, Creator, Provider, Index Score, DeepSWE,
 Terminal-Bench v2.1, SWE-Atlas-QnA, Cost per Task, Avg Execution Time, Token
