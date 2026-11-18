@@ -159,10 +159,13 @@ All tabs also expose the `Pareto (fast/Index)` / `Pareto (fast+cheap+Index)` /
 `Pareto (cheap/Index)` flags, the Free API markers (Coding Agents, Agentic
 Models, Intelligence Index), and the row filter described above. Each table
 pins its model (or provider) column to the left edge and its header row to the
-top of the table pane, which is the only scroller on the page: the header,
-filter controls and pager stay put while the rows scroll sideways or down. That
-also keeps a wide table from widening the page itself, which on phone browsers
-triggers a zoomed-out viewport where sticky positioning stops working.
+top of the table pane, which is the only scroller on the page. Scrolling down
+carries the page header and the filter bar away and then stops at the column
+headers; sideways they stay pinned, so panning across a wide row never carries
+the controls off the screen (`.topbar` is `position:sticky;left:0`). The pager
+sits under the table and is always visible. Keeping the table inside the
+scroller also stops a wide table from widening the page itself, which on phone
+browsers triggers a zoomed-out viewport where sticky positioning stops working.
 
 On a phone the frozen column is capped at 40% of the viewport and the model's
 variant (`Claude Sonnet 5.5` / `xhigh`) drops to a second, smaller line, so the
