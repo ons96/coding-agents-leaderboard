@@ -6,23 +6,27 @@
 <title>Free Hosted Base Models - Score/min</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:13px;background:#f8f9fa;color:#212529;padding-bottom:40px}
-.header{background:#1a1a2e;color:#fff;padding:16px 24px}
+html{height:100%}
+/* App shell: the page itself never scrolls, the table pane does. Keeps one
+   scroller only, and wide tables never widen the page (which made phone
+   browsers zoom out and break sticky positioning). */
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:13px;background:#f8f9fa;color:#212529;height:100%;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+.header{flex:none;background:#1a1a2e;color:#fff;padding:16px 24px}
 .header h1{font-size:18px;font-weight:600;display:inline-block}
 .header .meta{font-size:11px;color:#adb5bd;margin-top:4px}
 .nav{float:right;font-size:12px;margin-top:2px}
 .nav a{color:#8ecae6;text-decoration:none;margin-left:12px}
 .nav a:hover{text-decoration:underline}
-.controls{background:#fff;border-bottom:1px solid #dee2e6;padding:8px 24px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.controls{flex:none;background:#fff;border-bottom:1px solid #dee2e6;padding:8px 24px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .controls input{padding:6px 10px;border:1px solid #ced4da;border-radius:4px;font-size:13px;width:280px}
 .controls select{padding:6px 8px;border:1px solid #ced4da;border-radius:4px;font-size:13px}
 .controls input[type=number]{width:96px}
 .controls button{padding:6px 12px;border:1px solid #ced4da;border-radius:4px;background:#fff;cursor:pointer;font-size:13px}
 .controls button.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
 .group-toggles{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
-/* The document is the only scroller: no height-limited inner box, so the
-   header row can pin to the top of the viewport rather than a nested scroller. */
-.table-wrap{position:relative}
+/* The table pane is the only scroller: it fills what the header, controls and
+   pager leave over, and the header row pins to its top. */
+.table-wrap{position:relative;flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain}
 table{width:100%;border-collapse:separate;border-spacing:0;white-space:nowrap}
 thead th{background:#e9ecef;padding:6px 10px;text-align:right;font-weight:600;font-size:12px;border-bottom:2px solid #adb5bd;border-right:1px solid #dee2e6;cursor:pointer;user-select:none;position:sticky;top:0;z-index:10}
 thead th.asc::after{content:" \25B2";font-size:10px}
@@ -36,12 +40,24 @@ tbody tr:hover td{background-color:#e7f5ff;background-image:none}
 /* Frozen identity column: pinned to the left edge while the table scrolls sideways. */
 th.sticky-col,td.sticky-col{position:sticky;left:0;z-index:6;max-width:18em;overflow:hidden;text-overflow:ellipsis;border-right:1px solid #adb5bd;box-shadow:2px 0 5px -2px rgba(0,0,0,.3)}
 thead th.sticky-col{z-index:20}
-.paging{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:8px 16px;background:#fff;border-top:1px solid #dee2e6;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px}
+.paging{flex:none;padding:8px 16px;background:#fff;border-top:1px solid #dee2e6;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px}
 .paging button{padding:4px 10px;border:1px solid #ced4da;border-radius:4px;background:#fff;cursor:pointer}
-.footer{text-align:center;padding:8px;font-size:11px;color:#868e96;background:#f1f3f5}
+.footer{flex:none;text-align:center;padding:8px;font-size:11px;color:#868e96;background:#f1f3f5}
 .footer a{color:#1a1a2e}
-.notice{background:#fffbe6;padding:10px 24px;line-height:1.5;border-bottom:1px solid #e6dca6}
+.notice{flex:none;max-height:35vh;overflow:auto;background:#fffbe6;padding:10px 24px;line-height:1.5;border-bottom:1px solid #e6dca6}
 .notice details{margin-top:6px}.notice li{margin:4px 0 4px 20px}.notice a{color:#174d7a}
+/* Phones: trim the chrome so the table pane keeps a usable height. */
+@media (max-width:700px){
+.header{padding:10px 12px}
+.header h1{font-size:15px}
+.nav{float:none;margin-bottom:4px}
+.nav a{margin:0 12px 0 0}
+.controls{padding:6px 8px;gap:6px}
+.controls input{width:100%}
+.group-toggles{margin-left:0}
+.notice{max-height:25vh;padding:8px 12px}
+.footer{display:none}
+}
 </style>
 </head>
 <body>

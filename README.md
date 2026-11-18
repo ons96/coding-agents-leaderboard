@@ -137,8 +137,10 @@ All tabs also expose the `Pareto (fast/Index)` / `Pareto (fast+cheap)` /
 `Pareto (cheap/Index)` flags, the Free API markers (Coding Agents, Agentic
 Models, Intelligence Index), and the row filter described above. Each table
 pins its model (or provider) column to the left edge and its header row to the
-top of the viewport, with grid lines on every cell and a fixed pager, so a wide
-row stays readable while scrolling sideways, especially on a phone.
+top of the table pane, which is the only scroller on the page: the header,
+filter controls and pager stay put while the rows scroll sideways or down. That
+also keeps a wide table from widening the page itself, which on phone browsers
+triggers a zoomed-out viewport where sticky positioning stops working.
 
 **Coding Agents** — Harness, Model, Creator, Provider, Index Score, DeepSWE,
 Terminal-Bench v2.1, SWE-Atlas-QnA, Cost per Task, Avg Execution Time, Token
