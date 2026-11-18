@@ -136,31 +136,37 @@ FRONTIER_SPEC = {
     "agents": {
         "score": "index_score",
         "time": "avg_execution_time_sec",
+        "time_unit": "sec",
         "cost": "cost_per_task_usd",
         "complete": ("index_score", "score_per_minute"),
     },
     "models": {
         "score": "intelligence_index",
         "time": "avg_execution_time_sec",
+        "time_unit": "sec",
         "cost": "cost_per_task_usd",
         "complete": ("intelligence_index", "score_per_minute"),
     },
     "models_full": {
         "score": "intelligenceIndex",
         "time": "est_time_per_task_min",
+        "time_unit": "min",
         "cost": "est_cost_per_task_usd",
         "complete": ("intelligenceIndex", "score_per_minute"),
     },
     "search_apis": {
         "score": "artificial_analysis_search_index",
         "time": "time_per_task_seconds",
+        "time_unit": "sec",
         "cost": ("search_cost_usd_per_1000_tasks", "model_cost_usd_per_1000_tasks"),
+        # Those cost fields are per 1000 tasks; the site works per task.
+        "cost_scale": 1000,
         "complete": ("artificial_analysis_search_index", "search_index_per_second"),
     },
 }
 MAIN_TABS = ("agents", "models", "models_full")
 PARETO_LABELS = {"pareto": "Pareto (fast/Index)",
-                 "pareto_cost": "Pareto (fast+cheap)",
+                 "pareto_cost": "Pareto (fast+cheap+Index)",
                  "pareto_cheap": "Pareto (cheap/Index)"}
 # Filter values shown in the row-filter select, paired with the flag column
 # each one tests. Only the frontiers a tab actually publishes are listed.
@@ -336,6 +342,65 @@ def add_frontier_columns(block: dict, spec: dict, with_cost: bool = True) -> dic
     return block
 
 
+COMBO_LABELS = {
+    "cost_per_min": "Cost/min ($)",
+    "cost_plus_time": "Cost+time/Task ($)",
+    "score_per_all": "Score per $+time",
+}
+COMBO_HIGHLIGHTS = {"cost_per_min": "lower", "cost_plus_time": "lower",
+                    "score_per_all": "higher"}
+_COMBO_COLS = ("cost_per_min", "cost_plus_time", "score_per_all")
+
+
+def add_combo_columns(block: dict, spec: dict) -> None:
+    """Publish the cost/time combinations; the time rate is set in the browser.
+
+    cost_per_min   -- dollars per minute of agent runtime (cost against time).
+    cost_plus_time -- cost per task plus its minutes, priced at the reader's own
+                      hourly rate: the "what is waiting worth" number, which
+                      needs a rate rather than a fixed guess.
+    score_per_all  -- score divided by that blended cost, the one column that
+                      weighs quality, money and time together. At a rate of 0
+                      it falls back to plain score per dollar.
+    """
+    if not (spec.get("cost") and spec.get("time") and spec.get("score")):
+        return block
+    cols = list(_COMBO_COLS)
+    block["columns"] = [c for c in block["columns"] if c not in cols]
+    anchor = next((a for a in ("score_per_cost", "cost_per_score",
+                               _sort_field(spec, "cost"), _sort_field(spec, "time"),
+                               spec["score"]) if a in block["columns"]), None)
+    if anchor is None:
+        block["columns"].extend(cols)
+    else:
+        at = block["columns"].index(anchor) + 1
+        block["columns"][at:at] = cols
+
+    block["labels"].update(COMBO_LABELS)
+    block["highlights"].update(COMBO_HIGHLIGHTS)
+    groups = block.setdefault("col_groups", {})
+    for members in groups.values():
+        for col in cols:
+            while col in members:
+                members.remove(col)
+    target = next((g for g, m in groups.items()
+                   if "score_per_cost" in m or "cost_per_score" in m), None)
+    if target is None:
+        target = next((g for g, m in groups.items() if spec["score"] in m), None)
+    if target is not None:
+        groups[target].extend(cols)
+
+    cost = spec["cost"] if isinstance(spec["cost"], (tuple, list)) else (spec["cost"],)
+    block["combos"] = {
+        "cost": list(cost),
+        "cost_scale": spec.get("cost_scale", 1),
+        "time": spec["time"],
+        "time_unit": spec.get("time_unit", "sec"),
+        "score": spec["score"],
+    }
+    return block
+
+
 def _pct(value):
     """Benchmark cells are a mix of 0-1 fractions and 0-100 percentages."""
     try:
@@ -408,6 +473,7 @@ def enrich_main_tabs(payload: dict) -> dict:
             continue
         block = tab["data"]
         add_frontier_columns(block, spec, with_cost=bool(spec.get("cost")))
+        add_combo_columns(block, spec)
         if tid == "models_full":
             add_task_columns(block)
         if tid not in MAIN_TABS:
@@ -545,6 +611,7 @@ def _render(tab_id: str, block: dict, payload: dict, free_notice: str = "") -> P
     js.append("const GROUP_LABELS=" + json.dumps(block["group_labels"]) + ";")
     js.append("const META=" + json.dumps(block["meta"]) + ";")
     js.append("const FRONTIER=" + json.dumps(block.get("frontier")) + ";")
+    js.append("const COMBOS=" + json.dumps(block.get("combos")) + ";")
     js_text = "\n".join(js) + "\n"
     # Content-addressed cache bust: the URL changes only when the data changes,
     # so the Pages CDN / browser cache is refreshed on every real update and
@@ -554,6 +621,11 @@ def _render(tab_id: str, block: dict, payload: dict, free_notice: str = "") -> P
     pareto_controls = _frontier_controls(block) if has_pareto else ""
     free_controls = ('<button id="free-toggle" aria-pressed="false">'
                      "Free API only</button>") if has_free else ""
+    combos = block.get("combos")
+    time_rate_control = ('<label class="rate">Time worth'
+                         '<input id="time-rate" type="number" min="0" step="10" '
+                         'value="60" aria-label="Your time in dollars per hour">'
+                         "<span>$/hr</span></label>") if combos else ""
 
     replace = {
         "__TITLE__": pres["title"],
@@ -569,6 +641,7 @@ def _render(tab_id: str, block: dict, payload: dict, free_notice: str = "") -> P
         "__PARETO_CONTROLS__": pareto_controls,
         "__STICKY_COL__": json.dumps(pres.get("sticky_col")),
         "__FREE_CONTROLS__": free_controls,
+        "__TIME_RATE__": time_rate_control,
         "__FREE_NOTICE__": free_notice,
         "__SCRIPT_SRC__": f"{tab_id}.data.js?v={js_hash}",
         "DEFAULT_SORT": json.dumps(pres["default_sort"]),

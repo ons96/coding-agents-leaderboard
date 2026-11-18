@@ -82,7 +82,7 @@ carries three Pareto flags and a row filter:
 | Column | Objectives | Reads as |
 |---|---|---|
 | `Pareto (fast/Index)` (`pareto`) | min estimated time, max Index | fastest row at each quality level |
-| `Pareto (fast+cheap)` (`pareto_cost`) | min time, min cost, max Index | same, but a much cheaper row survives even when something slightly faster exists |
+| `Pareto (fast+cheap+Index)` (`pareto_cost`) | min time, min cost, max Index | same, but a much cheaper row survives even when something slightly faster exists |
 | `Pareto (cheap/Index)` (`pareto_cheap`) | min cost, max Index | cheapest row at each quality level, trained on budget rather than latency |
 
 A row is kept only when no other row is at least as good on every objective
@@ -112,6 +112,28 @@ compare absolute minutes across tabs. The cost axis is list price per task, not
 a free-tier quota or model multiplier; quota-aware frontiers need that data
 added to `data/verified_free_models.json` first.
 
+## Cost, time and score together
+
+Three columns combine the two ratios (they appear on every tab that publishes
+both cost and time, right after Score/$):
+
+| Column | Formula | Reads as |
+|---|---|---|
+| `Cost/min ($)` (`cost_per_min`) | cost per task / minutes per task | what a minute of the model running costs; a cheap-but-slow model shows up here |
+| `Cost+time/Task ($)` (`cost_plus_time`) | cost per task + minutes x `Time worth` / 60 | what a task really costs once waiting is priced in |
+| `Score per $+time` (`score_per_all`) | Index / `Cost+time/Task` | the single number that weighs quality, money and time together |
+
+`Cost/min` needs no assumption. The other two do, so the **Time worth** box in
+the filters carries the rate (dollars per hour, default 60, saved in the
+browser) and both columns recompute as you type. Set it to 0 and
+`Cost+time/Task` equals cost per task, so `Score per $+time` falls back to
+Score/$. Raise it to price a slow model's latency properly: at 60 $/hr a
+40-minute task carries about $40 of waiting on top of its token cost, which is
+usually the reason a cheap model stops looking cheap.
+
+The `Pareto (fast+cheap+Index)` flag is the assumption-free version of the same
+question: it keeps rows no other row beats on cost, time and Index at once.
+
 ### Weakest family (is it smart enough?)
 
 The Index is an average, so a model can rank well and still be weak at one kind
@@ -133,7 +155,7 @@ with no measured family keep blank cells.
 
 ## Columns
 
-All tabs also expose the `Pareto (fast/Index)` / `Pareto (fast+cheap)` /
+All tabs also expose the `Pareto (fast/Index)` / `Pareto (fast+cheap+Index)` /
 `Pareto (cheap/Index)` flags, the Free API markers (Coding Agents, Agentic
 Models, Intelligence Index), and the row filter described above. Each table
 pins its model (or provider) column to the left edge and its header row to the
@@ -150,7 +172,8 @@ move to the end. Desktop order is unchanged.
 
 **Coding Agents** — Harness, Model, Creator, Provider, Index Score, DeepSWE,
 Terminal-Bench v2.1, SWE-Atlas-QnA, Cost per Task, Avg Execution Time, Token
-Usage, plus derived value metrics (Score/$, Score/min, $/Score, Tokens/s).
+Usage, plus derived value metrics (Score/$, Score/min, $/Score, Tokens/s) and
+the cost/time combinations (Cost/min, Cost+time/Task, Score per $+time).
 
 **Agentic Models** — Model, Short Name, Creator, Agentic Index, Headline Value,
 Reasoning flag, Release Date, Size Class, Open Weights flag, Cost per Task /

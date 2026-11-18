@@ -24,6 +24,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;f
 .controls button{padding:6px 12px;border:1px solid #ced4da;border-radius:4px;background:#fff;cursor:pointer;font-size:13px}
 .controls button.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
 .group-toggles{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+.controls .rate{display:flex;align-items:center;gap:4px;font-size:12px;color:#495057;white-space:nowrap}
+.controls .rate input{width:64px;padding:4px 6px}
 /* The table pane is the only scroller: it fills what the header, controls and
    pager leave over, and the header row pins to its top. */
 /* One scroller for everything above the pager: the page header and the filter
@@ -94,6 +96,7 @@ thead th,tbody td{padding-left:6px;padding-right:6px}
 <select id="frontier" title="Hide incomplete or dominated rows"><option value="all">All rows</option><option value="complete">Complete data only</option><option value="pareto_time">Pareto: fastest per Index</option><option value="pareto_cost">Pareto: fastest + cheapest per Index</option><option value="pareto_cheap">Pareto: cheapest per Index</option></select><input type="number" id="min-score" step="any" placeholder="Min Index" title="Hide rows below this Index">
 <button id="free-toggle" aria-pressed="false">Free API only</button>
 <div class="group-toggles" id="group-toggles"></div>
+<label class="rate">Time worth<input id="time-rate" type="number" min="0" step="10" value="60" aria-label="Your time in dollars per hour"><span>$/hr</span></label>
 </div>
 <div class="table-wrap">
 <table><thead id="thead"></thead><tbody id="tbody"></tbody></table>
@@ -104,7 +107,7 @@ thead th,tbody td{padding-left:6px;padding-right:6px}
 Data from <a href="https://artificialanalysis.ai/models/capabilities/agentic">artificialanalysis.ai</a> |
 Updated: <span id="update-date">-</span>
 </div>
-<script src="models.data.js?v=e0dc5b0d"></script>
+<script src="models.data.js?v=b9024bd6"></script>
 <script>
 const PS=100;
 let filtered=[...TABLE_DATA],sortCol="score_per_minute",sortDir=1,hiddenGroups=new Set(),page=0;
@@ -117,8 +120,9 @@ const SORT_ACTIONS=[
 ["sb-3", "tokens_per_sec"]
 ];
 const BOOL_COLS=new Set(["pareto","pareto_cost","pareto_cheap","has_free_api"]);
+const COMBO_COLS=new Set(["cost_per_min","cost_plus_time","score_per_all"]);
 const STICKY_COL="model";
-let freeOnly=false,frontierMode="all",minScore=null;
+let freeOnly=false,frontierMode="all",minScore=null,timeRate=60;
 
 function init(){
   const scrapeDay=META.scrape_date?META.scrape_date.slice(0,10):"";
@@ -183,11 +187,59 @@ function init(){
       page=0;filterAndRender();
     });
   }
+  const rateEl=document.getElementById("time-rate");
+  if(rateEl){
+    try{
+      const saved=localStorage.getItem("timeRate");
+      if(saved!==null&&saved!=="")rateEl.value=saved;
+    }catch(e){}
+    const parseRate=()=>{
+      const v=parseFloat(rateEl.value);
+      timeRate=Number.isFinite(v)&&v>=0?v:0;
+    };
+    parseRate();
+    rateEl.addEventListener("input",debounce(()=>{
+      parseRate();
+      try{localStorage.setItem("timeRate",rateEl.value)}catch(e){}
+      filterAndRender();
+    },250));
+  }
   filterAndRender();
 }
 
 function debounce(fn,ms){let t;return()=>{clearTimeout(t);t=setTimeout(fn,ms)}}
 function isPhone(){return window.matchMedia("(max-width:700px)").matches}
+
+// Cost/time combinations: computed in the browser because cost_plus_time and
+// score_per_all depend on the reader's hourly rate (the "Time worth" field).
+function rowCost(r){
+  if(!COMBOS)return null;
+  let sum=0,seen=false;
+  for(const f of COMBOS.cost){
+    const v=r[f];
+    if(typeof v==="number"&&isFinite(v)){sum+=v;seen=true;}
+  }
+  return seen?sum/COMBOS.cost_scale:null;
+}
+function rowMinutes(r){
+  if(!COMBOS)return null;
+  const v=r[COMBOS.time];
+  if(typeof v!=="number"||!isFinite(v))return null;
+  return COMBOS.time_unit==="min"?v:v/60;
+}
+function comboVal(r,col){
+  if(!COMBOS)return null;
+  const c=rowCost(r),t=rowMinutes(r);
+  if(col==="cost_per_min")return(c!=null&&t>0)?c/t:null;
+  const blended=(c!=null&&t!=null)?c+t*timeRate/60:null;
+  if(col==="cost_plus_time")return blended;
+  if(col==="score_per_all"){
+    const s=r[COMBOS.score];
+    return(typeof s==="number"&&blended!=null&&blended>0)?s/blended:null;
+  }
+  return null;
+}
+function colVal(r,col){return COMBO_COLS.has(col)?comboVal(r,col):r[col];}
 function sortBy(col,dir){sortCol=col;sortDir=HIGHLIGHTS[col]==="lower"?1:-1;page=0;filterAndRender();}
 
 function buildGroupToggles(){
@@ -269,7 +321,7 @@ function filterAndRender(){
   });
   if(sortCol){
     filtered.sort((a,b)=>{
-      let va=a[sortCol],vb=b[sortCol];
+      let va=colVal(a,sortCol),vb=colVal(b,sortCol);
       if(va==null&&vb==null)return 0;if(va==null)return 1;if(vb==null)return-1;
       if(typeof va==="string")return va.localeCompare(vb)*sortDir;
       return(va-vb)*sortDir;
@@ -307,7 +359,11 @@ function renderRows(){
       const g=colGroup(col);if(g)td.classList.add("gp-"+g);
       if(TXT_COLS.has(col))td.classList.add("text-col");
       if(col===STICKY_COL)td.classList.add("sticky-col");
-      if(v==null||v==="")td.textContent="";
+      if(COMBO_COLS.has(col)){
+        const cv=comboVal(r,col);
+        td.textContent=cv==null?"":fmtNum(cv,col);
+      }
+      else if(v==null||v==="")td.textContent="";
       else if(BOOL_COLS.has(col))td.textContent=v?"Yes":"";
       else if(typeof v==="number")td.textContent=fmtNum(v,col);
       else if(col===STICKY_COL&&/ \([^()]*\)$/.test(v)){
