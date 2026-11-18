@@ -7,9 +7,9 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{height:100%}
-/* App shell: the page itself never scrolls, the table pane does. Keeps one
-   scroller only, and wide tables never widen the page (which made phone
-   browsers zoom out and break sticky positioning). */
+/* App shell: the page itself never scrolls; one inner scroller holds the
+   header, filters and table. Wide tables therefore never widen the document,
+   which would make phone browsers zoom out and break sticky positioning. */
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:13px;background:#f8f9fa;color:#212529;height:100%;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
 .header{flex:none;background:#1a1a2e;color:#fff;padding:16px 24px}
 .header h1{font-size:18px;font-weight:600;display:inline-block}
@@ -26,7 +26,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;f
 .group-toggles{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
 /* The table pane is the only scroller: it fills what the header, controls and
    pager leave over, and the header row pins to its top. */
-.table-wrap{position:relative;flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain}
+/* One scroller for everything above the pager: the page header and the filter
+   bar scroll away first, then the table's header row pins to the top of the
+   scroller. The page itself never scrolls, so a wide table cannot widen the
+   document (which makes phone browsers zoom out and break sticky positioning). */
+.scroller{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain}
+.table-wrap{position:relative}
 table{width:100%;border-collapse:separate;border-spacing:0;white-space:nowrap}
 thead th{background:#e9ecef;padding:6px 10px;text-align:right;font-weight:600;font-size:12px;border-bottom:2px solid #adb5bd;border-right:1px solid #dee2e6;cursor:pointer;user-select:none;position:sticky;top:0;z-index:10}
 thead th.asc::after{content:" \25B2";font-size:10px}
@@ -44,9 +49,9 @@ thead th.sticky-col{z-index:20}
 .paging button{padding:4px 10px;border:1px solid #ced4da;border-radius:4px;background:#fff;cursor:pointer}
 .footer{flex:none;text-align:center;padding:8px;font-size:11px;color:#868e96;background:#f1f3f5}
 .footer a{color:#1a1a2e}
-.notice{flex:none;max-height:35vh;overflow:auto;background:#fffbe6;padding:10px 24px;line-height:1.5;border-bottom:1px solid #e6dca6}
+.notice{background:#fffbe6;padding:10px 24px;line-height:1.5;border-bottom:1px solid #e6dca6}
 .notice details{margin-top:6px}.notice li{margin:4px 0 4px 20px}.notice a{color:#174d7a}
-/* Phones: trim the chrome so the table pane keeps a usable height. */
+/* Phones: trim the chrome so more rows fit once the filters scroll away. */
 @media (max-width:700px){
 .header{padding:10px 12px}
 .header h1{font-size:15px}
@@ -55,12 +60,13 @@ thead th.sticky-col{z-index:20}
 .controls{padding:6px 8px;gap:6px}
 .controls input{width:100%}
 .group-toggles{margin-left:0}
-.notice{max-height:25vh;padding:8px 12px}
+.notice{padding:8px 12px}
 .footer{display:none}
 }
 </style>
 </head>
 <body>
+<div class="scroller">
 <div class="header">
 <div class="nav"><a class="nav-link" href="index.html">Coding Agents</a> | <a class="nav-link" href="models.html">Agentic Models</a> | <a class="nav-link" href="models_full.html">Intelligence Index (All)</a> | <a class="nav-link" href="free_models.html">Free Hosted Models</a></div>
 <h1>Search APIs Leaderboard</h1>
@@ -78,6 +84,7 @@ thead th.sticky-col{z-index:20}
 </div>
 <div class="table-wrap">
 <table><thead id="thead"></thead><tbody id="tbody"></tbody></table>
+</div>
 </div>
 <div class="paging" id="paging"></div>
 <div class="footer">
