@@ -6,31 +6,37 @@
 <title>Free Hosted Base Models - Score/min</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:13px;background:#f8f9fa;color:#212529}
-.header{background:#1a1a2e;color:#fff;padding:16px 24px;position:sticky;top:0;z-index:100}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:13px;background:#f8f9fa;color:#212529;padding-bottom:40px}
+.header{background:#1a1a2e;color:#fff;padding:16px 24px}
 .header h1{font-size:18px;font-weight:600;display:inline-block}
 .header .meta{font-size:11px;color:#adb5bd;margin-top:4px}
 .nav{float:right;font-size:12px;margin-top:2px}
 .nav a{color:#8ecae6;text-decoration:none;margin-left:12px}
 .nav a:hover{text-decoration:underline}
-.controls{background:#fff;border-bottom:1px solid #dee2e6;padding:8px 24px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;position:sticky;top:56px;z-index:99}
+.controls{background:#fff;border-bottom:1px solid #dee2e6;padding:8px 24px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .controls input{padding:6px 10px;border:1px solid #ced4da;border-radius:4px;font-size:13px;width:280px}
 .controls select{padding:6px 8px;border:1px solid #ced4da;border-radius:4px;font-size:13px}
 .controls input[type=number]{width:96px}
 .controls button{padding:6px 12px;border:1px solid #ced4da;border-radius:4px;background:#fff;cursor:pointer;font-size:13px}
 .controls button.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
 .group-toggles{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
-.table-wrap{overflow:auto;max-height:calc(100vh - 110px)}
-table{width:100%;border-collapse:collapse;white-space:nowrap}
-thead th{background:#e9ecef;padding:6px 10px;text-align:right;font-weight:600;font-size:12px;border-bottom:2px solid #dee2e6;cursor:pointer;user-select:none;position:sticky;top:0;z-index:10}
+/* The document is the only scroller: no height-limited inner box, so the
+   header row can pin to the top of the viewport rather than a nested scroller. */
+.table-wrap{position:relative}
+table{width:100%;border-collapse:separate;border-spacing:0;white-space:nowrap}
+thead th{background:#e9ecef;padding:6px 10px;text-align:right;font-weight:600;font-size:12px;border-bottom:2px solid #adb5bd;border-right:1px solid #dee2e6;cursor:pointer;user-select:none;position:sticky;top:0;z-index:10}
 thead th.asc::after{content:" \25B2";font-size:10px}
 thead th.desc::after{content:" \25BC";font-size:10px}
 thead th.text-col{text-align:left}
-tbody td{padding:4px 10px;text-align:right;border-bottom:1px solid #f1f3f5;font-variant-numeric:tabular-nums}
+tbody td{padding:4px 10px;text-align:right;border-bottom:1px solid #e9ecef;border-right:1px solid #e9ecef;font-variant-numeric:tabular-nums}
 tbody td.text-col{text-align:left}
-tbody tr:hover{background:#e7f5ff}
+tbody tr:nth-child(even) td{background-image:linear-gradient(rgba(0,0,0,.03),rgba(0,0,0,.03))}
+tbody tr:hover td{background-color:#e7f5ff;background-image:none}
 .gp-identity{background:#e8f4f8}.gp-core{background:#ffe8cc}.gp-cost_time{background:#fff9db}.gp-derived{background:#d3f9d8}
-.paging{padding:8px 24px;background:#fff;border-top:1px solid #dee2e6;display:flex;justify-content:space-between;align-items:center;font-size:12px}
+/* Frozen identity column: pinned to the left edge while the table scrolls sideways. */
+th.sticky-col,td.sticky-col{position:sticky;left:0;z-index:6;max-width:18em;overflow:hidden;text-overflow:ellipsis;border-right:1px solid #adb5bd;box-shadow:2px 0 5px -2px rgba(0,0,0,.3)}
+thead th.sticky-col{z-index:20}
+.paging{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:8px 16px;background:#fff;border-top:1px solid #dee2e6;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px}
 .paging button{padding:4px 10px;border:1px solid #ced4da;border-radius:4px;background:#fff;cursor:pointer}
 .footer{text-align:center;padding:8px;font-size:11px;color:#868e96;background:#f1f3f5}
 .footer a{color:#1a1a2e}
@@ -44,7 +50,7 @@ tbody tr:hover{background:#e7f5ff}
 <h1>Free Hosted Base Models - Score/min</h1>
 <div class="meta" id="meta-info">Loading...</div>
 </div>
-<aside class="notice"><strong>Base-model access verified; reasoning effort assumed.</strong> Listed hosted routes have free input and output, but their ability to serve each leaderboard reasoning-effort variant is not verified. Score/min uses Artificial Analysis Intelligence Index divided by estimated task time derived from canonical token counts and output speed; it does not measure free-provider latency. Rows without an Index or score/min estimate are omitted. Unknown availability is not paid. Free quotas and availability can change. Provider evidence checked 2026-10-01. Pareto (fast/Index) keeps only rows no other eligible row beats on both estimated time and Index.<details><summary>Source routes and effort assumptions</summary><ul><li>Gemini 3.5 Flash-Lite: <a href="https://ai.google.dev/gemini-api/docs/pricing">Google Gemini API / gemini-3.5-flash-lite</a> - Standard free-tier input and output.</li><li>Gemini 3.8 Flash (low): <a href="https://ai.google.dev/gemini-api/docs/pricing">Google Gemini API / gemini-3.8-flash</a> - Standard free-tier input and output; low effort is assumed available.</li><li>Gemini 3.8 Flash (medium): <a href="https://ai.google.dev/gemini-api/docs/pricing">Google Gemini API / gemini-3.8-flash</a> - Standard free-tier input and output; medium effort is assumed available.</li><li>Gemini 3.8 Flash (high): <a href="https://ai.google.dev/gemini-api/docs/pricing">Google Gemini API / gemini-3.8-flash</a> - Standard free-tier input and output; high effort is assumed available.</li><li>Qwen3.8 27B (xhigh): <a href="https://openrouter.ai/qwen/qwen3.8-27b:free">OpenRouter / qwen/qwen3.8-27b:free</a> - Zero-priced hosted base model; xhigh effort is assumed available.</li><li>Qwen3.8 27B (medium): <a href="https://openrouter.ai/qwen/qwen3.8-27b:free">OpenRouter / qwen/qwen3.8-27b:free</a> - Zero-priced hosted base model; medium effort is assumed available.</li><li>Qwen3.8 27B (low): <a href="https://openrouter.ai/qwen/qwen3.8-27b:free">OpenRouter / qwen/qwen3.8-27b:free</a> - Zero-priced hosted base model; low effort is assumed available.</li><li>Qwen3.8 27B (non-reasoning): <a href="https://openrouter.ai/qwen/qwen3.8-27b:free">OpenRouter / qwen/qwen3.8-27b:free</a> - Zero-priced hosted base model; non-reasoning effort is assumed available.</li><li>Nemotron 3 Ultra: <a href="https://api.yjs.im/pricing">Jasper / nemotron-3-ultra-550b-a55b</a> - Zero-cost route; listed effort is assumed available. Live-verified 2026-10-01.</li><li>Inkling (xhigh): <a href="https://openrouter.ai/thinkingmachines/inkling:free">OpenRouter / thinkingmachines/inkling:free</a> - Zero-priced hosted base model; free-route limits apply.</li><li>Inkling Small: <a href="https://openrouter.ai/thinkingmachines/inkling-small:free">OpenRouter / thinkingmachines/inkling-small:free</a> - Zero-priced hosted base model; free-route limits apply.</li><li>Nemotron 3.5 Lightning: <a href="https://openrouter.ai/nvidia/nemotron-3.5-lightning:free">OpenRouter / nvidia/nemotron-3.5-lightning:free</a> - Zero-priced hosted base model; free-route limits apply.</li><li>GLM-5.3 (max): <a href="https://build.nvidia.com/z-ai/glm-53">NVIDIA NIM / z-ai/glm-5.3</a> - NIM free-tier input and output; max effort is assumed available. Live-verified 2026-10-01.</li><li>GLM-5.3-Flash: <a href="https://build.nvidia.com/z-ai/glm-53">NVIDIA NIM / z-ai/glm-5.3</a> - NIM free-tier input and output; flash effort is assumed available. Live-verified 2026-10-01.</li><li>GLM-5.3 (low): <a href="https://build.nvidia.com/z-ai/glm-53">NVIDIA NIM / z-ai/glm-5.3</a> - NIM free-tier input and output; low effort is assumed available. Live-verified 2026-10-01.</li><li>Kimi K3 (low): <a href="https://siliconflow.com/models">SiliconFlow / moonshotai/Kimi-K3</a> - Permanent zero-cost route; low effort is assumed available. Live-verified 2026-10-01.</li><li>Grok 4.7 (xhigh): <a href="https://kiosapi.com">KiosAPI / grok-4.7-free</a> - Zero-cost route; xhigh effort is assumed available. Free-window availability can change. Live-verified 2026-10-01.</li><li>Grok 4.7 (low): <a href="https://kiosapi.com">KiosAPI / grok-4.7-free</a> - Zero-cost route; low effort is assumed available. Free-window availability can change. Live-verified 2026-10-01.</li><li>Muse Spark 1.3 (max): <a href="https://kiosapi.com">KiosAPI / muse-spark-1.3-contributor</a> - Zero-cost route; max effort is assumed available. Live-verified 2026-10-01.</li><li>Muse Glimmer (high): <a href="https://build.nvidia.com/meta/muse-glimmer-30b">NVIDIA NIM / meta/muse-glimmer-30b</a> - NIM free-tier input and output; listed effort is assumed available. Live-verified 2026-10-01.</li><li>GPT-6 Astra (max): <a href="http://100.80.87.87:9890">TryAPI / gpt-6-astra</a> - Free route; responses carry branding prefix (fails exact-ok trap). Base effort assumed. Live-verified 2026-10-01.</li><li>GPT-6 Astra (xhigh): <a href="http://100.80.87.87:9890">TryAPI / gpt-6-astra</a> - Free route; responses carry branding prefix (fails exact-ok trap). Xhigh effort assumed. Live-verified 2026-10-01.</li><li>GPT-6 Astra (high): <a href="http://100.80.87.87:9890">TryAPI / gpt-6-astra</a> - Free route; responses carry branding prefix (fails exact-ok trap). High effort assumed. Live-verified 2026-10-01.</li><li>GPT-6 Astra (medium): <a href="http://100.80.87.87:9890">TryAPI / gpt-6-astra</a> - Free route; responses carry branding prefix (fails exact-ok trap). Medium effort assumed. Live-verified 2026-10-01.</li><li>GPT-5.6 Terra (max): <a href="http://100.80.87.87:9890">TryAPI / gpt-5.6-terra</a> - Free route; responses carry branding prefix (fails exact-ok trap). Base effort assumed. Live-verified 2026-10-01.</li><li>GPT-5.6 Luna (max): <a href="http://100.80.87.87:9890">TryAPI / gpt-5.6-luna</a> - Free route; responses carry branding prefix (fails exact-ok trap). Base effort assumed. Live-verified 2026-10-01.</li><li>MiMo-V2.6-Flash: <a href="https://api.yjs.im/pricing">Jasper / mimo-v2.6-flash</a> - Free route; responses carry request-ID prefix (fails exact-ok trap). Live-verified 2026-10-01.</li></ul></details></aside
+<aside class="notice"><strong>Base-model access verified; reasoning effort assumed.</strong> Listed hosted routes have free input and output, but their ability to serve each leaderboard reasoning-effort variant is not verified. Score/min uses Artificial Analysis Intelligence Index divided by estimated task time derived from canonical token counts and output speed; it does not measure free-provider latency. Rows without an Index or score/min estimate are omitted. Unknown availability is not paid. Free quotas and availability can change. Provider evidence checked 2026-10-01. Pareto (fast/Index) keeps only rows no other eligible row beats on both estimated time and Index.<details><summary>Source routes and effort assumptions</summary><ul><li>Gemini 3.5 Flash-Lite: <a href="https://ai.google.dev/gemini-api/docs/pricing">Google Gemini API / gemini-3.5-flash-lite</a> - Standard free-tier input and output.</li><li>Gemini 3.8 Flash (low): <a href="https://ai.google.dev/gemini-api/docs/pricing">Google Gemini API / gemini-3.8-flash</a> - Standard free-tier input and output; low effort is assumed available.</li><li>Gemini 3.8 Flash (medium): <a href="https://ai.google.dev/gemini-api/docs/pricing">Google Gemini API / gemini-3.8-flash</a> - Standard free-tier input and output; medium effort is assumed available.</li><li>Gemini 3.8 Flash (high): <a href="https://ai.google.dev/gemini-api/docs/pricing">Google Gemini API / gemini-3.8-flash</a> - Standard free-tier input and output; high effort is assumed available.</li><li>Qwen3.8 27B (xhigh): <a href="https://openrouter.ai/qwen/qwen3.8-27b:free">OpenRouter / qwen/qwen3.8-27b:free</a> - Zero-priced hosted base model; xhigh effort is assumed available.</li><li>Qwen3.8 27B (medium): <a href="https://openrouter.ai/qwen/qwen3.8-27b:free">OpenRouter / qwen/qwen3.8-27b:free</a> - Zero-priced hosted base model; medium effort is assumed available.</li><li>Qwen3.8 27B (low): <a href="https://openrouter.ai/qwen/qwen3.8-27b:free">OpenRouter / qwen/qwen3.8-27b:free</a> - Zero-priced hosted base model; low effort is assumed available.</li><li>Qwen3.8 27B (non-reasoning): <a href="https://openrouter.ai/qwen/qwen3.8-27b:free">OpenRouter / qwen/qwen3.8-27b:free</a> - Zero-priced hosted base model; non-reasoning effort is assumed available.</li><li>Nemotron 3 Ultra: <a href="https://api.yjs.im/pricing">Jasper / nemotron-3-ultra-550b-a55b</a> - Zero-cost route; listed effort is assumed available. Live-verified 2026-10-01.</li><li>Inkling (xhigh): <a href="https://openrouter.ai/thinkingmachines/inkling:free">OpenRouter / thinkingmachines/inkling:free</a> - Zero-priced hosted base model; free-route limits apply.</li><li>Inkling Small: <a href="https://openrouter.ai/thinkingmachines/inkling-small:free">OpenRouter / thinkingmachines/inkling-small:free</a> - Zero-priced hosted base model; free-route limits apply.</li><li>Nemotron 3.5 Lightning: <a href="https://openrouter.ai/nvidia/nemotron-3.5-lightning:free">OpenRouter / nvidia/nemotron-3.5-lightning:free</a> - Zero-priced hosted base model; free-route limits apply.</li><li>GLM-5.3 (max): <a href="https://build.nvidia.com/z-ai/glm-53">NVIDIA NIM / z-ai/glm-5.3</a> - NIM free-tier input and output; max effort is assumed available. Live-verified 2026-10-01.</li><li>GLM-5.3-Flash: <a href="https://build.nvidia.com/z-ai/glm-53">NVIDIA NIM / z-ai/glm-5.3</a> - NIM free-tier input and output; flash effort is assumed available. Live-verified 2026-10-01.</li><li>GLM-5.3 (low): <a href="https://build.nvidia.com/z-ai/glm-53">NVIDIA NIM / z-ai/glm-5.3</a> - NIM free-tier input and output; low effort is assumed available. Live-verified 2026-10-01.</li><li>Kimi K3 (low): <a href="https://siliconflow.com/models">SiliconFlow / moonshotai/Kimi-K3</a> - Permanent zero-cost route; low effort is assumed available. Live-verified 2026-10-01.</li><li>Grok 4.7 (xhigh): <a href="https://kiosapi.com">KiosAPI / grok-4.7-free</a> - Zero-cost route; xhigh effort is assumed available. Free-window availability can change. Live-verified 2026-10-01.</li><li>Grok 4.7 (low): <a href="https://kiosapi.com">KiosAPI / grok-4.7-free</a> - Zero-cost route; low effort is assumed available. Free-window availability can change. Live-verified 2026-10-01.</li><li>Muse Spark 1.3 (max): <a href="https://kiosapi.com">KiosAPI / muse-spark-1.3-contributor</a> - Zero-cost route; max effort is assumed available. Live-verified 2026-10-01.</li><li>Muse Glimmer (high): <a href="https://build.nvidia.com/meta/muse-glimmer-30b">NVIDIA NIM / meta/muse-glimmer-30b</a> - NIM free-tier input and output; listed effort is assumed available. Live-verified 2026-10-01.</li><li>GPT-6 Astra (max): <a href="http://100.80.87.87:9890">TryAPI / gpt-6-astra</a> - Free route; responses carry branding prefix (fails exact-ok trap). Base effort assumed. Live-verified 2026-10-01.</li><li>GPT-6 Astra (xhigh): <a href="http://100.80.87.87:9890">TryAPI / gpt-6-astra</a> - Free route; responses carry branding prefix (fails exact-ok trap). Xhigh effort assumed. Live-verified 2026-10-01.</li><li>GPT-6 Astra (high): <a href="http://100.80.87.87:9890">TryAPI / gpt-6-astra</a> - Free route; responses carry branding prefix (fails exact-ok trap). High effort assumed. Live-verified 2026-10-01.</li><li>GPT-6 Astra (medium): <a href="http://100.80.87.87:9890">TryAPI / gpt-6-astra</a> - Free route; responses carry branding prefix (fails exact-ok trap). Medium effort assumed. Live-verified 2026-10-01.</li><li>GPT-5.6 Terra (max): <a href="http://100.80.87.87:9890">TryAPI / gpt-5.6-terra</a> - Free route; responses carry branding prefix (fails exact-ok trap). Base effort assumed. Live-verified 2026-10-01.</li><li>GPT-5.6 Luna (max): <a href="http://100.80.87.87:9890">TryAPI / gpt-5.6-luna</a> - Free route; responses carry branding prefix (fails exact-ok trap). Base effort assumed. Live-verified 2026-10-01.</li><li>MiMo-V2.6-Flash: <a href="https://api.yjs.im/pricing">Jasper / mimo-v2.6-flash</a> - Free route; responses carry request-ID prefix (fails exact-ok trap). Live-verified 2026-10-01.</li></ul></details></aside>
 <div class="controls">
 <input type="text" id="search" placeholder="Search models, providers, identifiers...">
 <select id="creator-filter"><option value="">All</option></select>
@@ -62,7 +68,7 @@ tbody tr:hover{background:#e7f5ff}
 Data from <a href="https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index">artificialanalysis.ai</a> |
 Updated: <span id="update-date">-</span>
 </div>
-<script src="free_models.data.js?v=1169305c"></script>
+<script src="free_models.data.js?v=ae3e2f8c"></script>
 <script>
 const PS=100;
 let filtered=[...TABLE_DATA],sortCol="score_per_minute",sortDir=1,hiddenGroups=new Set(),page=0;
@@ -73,7 +79,8 @@ const SORT_ACTIONS=[
 ["sb-1", "weak_task_pct"],
 ["sb-2", "intelligenceIndex"]
 ];
-const BOOL_COLS=new Set(["pareto","pareto_cost","has_free_api"]);
+const BOOL_COLS=new Set(["pareto","pareto_cost","pareto_cheap","has_free_api"]);
+const STICKY_COL="model";
 let freeOnly=false,frontierMode="all",minScore=null;
 
 function init(){
@@ -114,8 +121,12 @@ function init(){
   if(frontierSel){
     frontierSel.addEventListener("change",()=>{
       frontierMode=frontierSel.value;
-      // A frontier view is a time-ascending shortlist by construction.
-      if(frontierMode.indexOf("pareto")===0&&FRONTIER){sortCol=FRONTIER.time;sortDir=1;}
+      // A frontier view is an ascending shortlist on its own axis: time for the
+      // fast views, cost for the cheap one.
+      const f=FRONTIER&&(FRONTIER.filters||[]).find(x=>x.value===frontierMode);
+      if(frontierMode.indexOf("pareto")===0&&FRONTIER){
+        sortCol=f&&COLUMNS.includes(f.sort)?f.sort:FRONTIER.time;sortDir=1;
+      }
       page=0;filterAndRender();
     });
   }
@@ -157,10 +168,15 @@ function buildGroupToggles(){
 
 
 function visibleCols(){
-  return COLUMNS.filter(c=>{
+  const cols=COLUMNS.filter(c=>{
     const g=GROUP_ORDER.find(gk=>COL_GROUPS[gk]&&COL_GROUPS[gk].includes(c));
     return !g||!hiddenGroups.has(g);
   });
+  // The frozen column has to come first, or pinned left:0 would cover a column
+  // that scrolls under it.
+  const at=STICKY_COL?cols.indexOf(STICKY_COL):-1;
+  if(at>0){cols.splice(at,1);cols.unshift(STICKY_COL);}
+  return cols;
 }
 function colGroup(col){return GROUP_ORDER.find(g=>COL_GROUPS[g]&&COL_GROUPS[g].includes(col))||"";}
 
@@ -172,6 +188,7 @@ function buildHeader(){
     th.textContent=LABELS[col]||col;th.dataset.col=col;
     const g=colGroup(col);if(g)th.classList.add("gp-"+g);
     if(TXT_COLS.has(col))th.classList.add("text-col");
+    if(col===STICKY_COL)th.classList.add("sticky-col");
     if(sortCol===col)th.classList.add(sortDir===1?"asc":"desc");
     th.addEventListener("click",()=>{
       if(sortCol===col)sortDir*=-1;
@@ -195,8 +212,10 @@ function filterAndRender(){
     if(frontierMode==="complete"&&FRONTIER){
       if(!FRONTIER.complete.every(c=>typeof r[c]==="number"&&isFinite(r[c])&&r[c]>0))return false;
     }
-    if(frontierMode==="pareto_time"&&!r.pareto)return false;
-    if(frontierMode==="pareto_cost"&&!r.pareto_cost)return false;
+    if(frontierMode.indexOf("pareto")===0&&FRONTIER){
+      const f=(FRONTIER.filters||[]).find(x=>x.value===frontierMode);
+      if(f&&!r[f.col])return false;
+    }
     if(minScore!==null&&FRONTIER&&!(typeof r[FRONTIER.score]==="number"&&r[FRONTIER.score]>=minScore))return false;
     if(freeOnly&&!r.has_free_api)return false;
     return true;
@@ -240,6 +259,7 @@ function renderRows(){
       const td=document.createElement("td");const v=r[col];
       const g=colGroup(col);if(g)td.classList.add("gp-"+g);
       if(TXT_COLS.has(col))td.classList.add("text-col");
+      if(col===STICKY_COL)td.classList.add("sticky-col");
       if(v==null||v==="")td.textContent="";
       else if(BOOL_COLS.has(col))td.textContent=v?"Yes":"";
       else if(typeof v==="number")td.textContent=fmtNum(v,col);
